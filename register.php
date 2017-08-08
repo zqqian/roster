@@ -41,7 +41,7 @@ else
     	echo"验证码错误！";
     }*/
 	else {
-		$sql = "select username from user where username = '$username'"; //SQL语句  
+		$sql = "select userName from user where userName = '$username'"; //SQL语句  
         $result = mysql_query($sql);    //执行SQL语句  
         $num = mysql_num_rows($result); //统计执行结果影响的行数  
         if($num)    //如果已经存在该用户  
@@ -49,8 +49,8 @@ else
             echo "<script>alert('用户名已存在'); history.go(-1);</script>";  
         }
 		else{
-					
-			$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd1','$email','$school','$academy')";  
+				$pw3=md5(md5($pw1).md5($username));	
+			$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd3','$email','$school','$academy')";  
 
 			$result=mysql_query($sql_insert);
 			if(!$result)
