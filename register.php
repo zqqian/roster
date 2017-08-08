@@ -9,12 +9,29 @@ error_reporting(0);
  * Date: 2017/8/2
  * Time: 22:03
  */
-$username=$_POST['RuserName'];
-$email=$_POST['email'];
-$pwd1=$_POST['Rpassword1'];
-$pwd2=$_POST['Rpassword2'];
-$school=$_POST['Rschool'];
-$academy=$_POST['Racademy'];
+ 
+ 
+ function check_input($value)
+{
+
+if (get_magic_quotes_gpc())
+  {
+  $value = stripslashes($value);
+  }
+
+if (!is_numeric($value))
+  {
+  $value = "'" . mysql_real_escape_string($value) . "'";
+  }
+return $value;
+}
+
+$username=check_input($_POST['RuserName']);
+$email=check_input($_POST['email']);
+$pwd1=check_input($_POST['Rpassword1']);
+$pwd2=check_input($_POST['Rpassword2']);
+$school=check_input($_POST['Rschool']);
+$academy=check_input($_POST['Racademy']);
 
 //echo $username."*".$email."*".$pwd1."*".$pwd2."*".$school."*".$academy;
 

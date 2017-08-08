@@ -13,7 +13,7 @@ error_reporting(0);
 if($_GET['id'])
 {
 	sleep(1);//为了显示等待检测这么一个动态效果，所以这里等待一秒执行
-	include("mysql-connect.php");
+	require_once 'mysql-connect.php';
 	
 	$sql = "select * from user where userName='$_GET[id]'";
 	$result = mysql_query($sql);
@@ -25,7 +25,7 @@ if($_GET['id'])
 	}
 	else
 	{
-		echo " user name is available";
+		echo " 用户名可用";
 	}
 }
 ?>
