@@ -2,6 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 </head>
 <?php
+error_reporting(0);
 /**
  * Created by PhpStorm.
  * User: 卢
@@ -50,7 +51,7 @@ else
         }
 		else{
 				$pw3=md5(md5($pw1).md5($username));	
-			$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd3','$email','$school','$academy')";  
+			$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pw3','$email','$school','$academy')";  
 
 			$result=mysql_query($sql_insert);
 			if(!$result)
