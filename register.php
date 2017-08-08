@@ -13,7 +13,7 @@ error_reporting(0);
  
  function check_input($value)
 {
-
+/*
 if (get_magic_quotes_gpc())
   {
   $value = stripslashes($value);
@@ -22,7 +22,7 @@ if (get_magic_quotes_gpc())
 if (!is_numeric($value))
   {
   $value = "'" . mysql_real_escape_string($value) . "'";
-  }
+  }*/
 return $value;
 }
 
