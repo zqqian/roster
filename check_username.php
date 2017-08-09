@@ -16,11 +16,11 @@ if(isset($_GET['id']))
 	//这里的echo输出的内容便是将要返回给之前byphp()这个函数的值
 	if(mysqli_num_rows($result) > 0)
 	{
-		echo "该用户名已经存在！";
+		echo "0";//该用户名已经存在
 	}
 	else
 	{
-		echo "该用户名可用";
+		echo "1";//该用户名可用
 	}
 	mysqli_close($db);//连接数据库的连接数是有限的,连接过后需要及时关闭掉不需要的连接
 }
