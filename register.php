@@ -21,6 +21,7 @@ $academy=$_POST['Racademy'];
     if(!$result) echo"0";//注册失败
     else         echo"1";
 
+    mysqli_close($db);
 
 
 
