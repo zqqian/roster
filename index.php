@@ -81,10 +81,11 @@
                                         <div class="modal-body" id="modal-body">
                                             <center><h1 id="registerShow">显示注册信息</h1></center>
 
-                                            <div class="input-group">
+                                            <div class="input-group" id="DuserName">
                                                 <input type="text" class="form-control" id="RuserName" name="RuserName" placeholder="请输入用户名">
                                                 <span class="input-group-addon" id="checkUsername">*</span>
-                                            </div><br>
+                                            </div>
+                                            <br>
 
                                             <input type="email" class="form-control" placeholder="请输入邮箱"
                                                    id="email" name="email" style="margin-bottom:20px;">
@@ -239,7 +240,9 @@
     /*点击超链接时清空对应模态框的提示信息*/
     $("#loginA").click(function(){$("#loginSpan").html("");});
     $("#registerA").click(function(){
-        $("#modal-body").children().show();
+        $("#DuserName").show();
+        $("#modal-body").find(":input").show();
+        $("#modal-body").find("span").show();
         $("#registerShow").hide();
         $("#modal-footer").show();
         $("#registerSpan").html("*除学校学院，其余都为必填项");
