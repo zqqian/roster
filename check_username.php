@@ -8,7 +8,7 @@ error_reporting(0);
 
 if(isset($_GET['id']))
 {
-	sleep(1);//为了显示等待检测这么一个动态效果，所以这里等待一秒执行
+	//sleep(1);//为了显示等待检测这么一个动态效果，所以这里等待一秒执行
 	require('mysql-connect.php');
 	$sql="select * from user where userName= '".$_GET['id']."'";
 	$result = mysqli_query($db,$sql);

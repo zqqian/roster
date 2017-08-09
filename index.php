@@ -225,7 +225,7 @@
                 $("#checkUsername").html("该用户名可用").css("color","green");  
                 else $("#checkUsername").html("该用户名已经存在").css("color","red");
             }
-            else { $("#checkUsername").html("checking");}
+            else { $("#checkUsername").html("正在检查");}
 
         };//接受返回值  
         xmlhttp.open("GET","check_username.php?id="+useridValue,true);//这个页面便是你要进行选择查询的PHP页面 
