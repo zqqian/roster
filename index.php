@@ -196,7 +196,7 @@
 
 
 <script>
-    /*测试用户名是否重复的代码*/
+    /*测试用户名是否重复的函数*/
     function checkUserid(){
         var span = $("#checkUsername");
         var useridValue = $("#RuserName").val().trim();
@@ -220,8 +220,10 @@
 
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                var byphp100 = xmlhttp.responseText;//接受PHP的返回值      
-                $("#checkUsername").html(byphp100); //设置span里的内容  
+                var byphp100 = xmlhttp.responseText;//接受PHP的返回值 
+                if(byphp100=="1")//设置span里的内容    
+                $("#checkUsername").html("该用户名可用").css("color","green");  
+                else $("#checkUsername").html("该用户名已经存在").css("color","red");
             }
             else { $("#checkUsername").html("checking");}
 
@@ -259,15 +261,19 @@
 
     $("#registerBtn").click(function(event){
         var flag=false;
-        var username=$("#RuserName").val();
-        var email=$("#email").val();
-        var pwd1=$("#Rpassword1").val();
-        var pwd2=$("#Rpassword2").val();
-        var school=$("#Rschool").val();
-        var academy=$("#Racademy").val();
+        var username=$("#RuserName").val().trim();//删除前后空格，防止用户只输入一个空格的bug
+        var email=$("#email").val().trim();
+        var pwd1=$("#Rpassword1").val().trim();
+        var pwd2=$("#Rpassword2").val().trim();
+        var school=$("#Rschool").val().trim();
+        var academy=$("#Racademy").val().trim();
         //event.preventDefault();alert(username+"*"+email+pwd1+"*"+pwd2+"*"+school+"*"+academy+"*");
+
+        var reg1 = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;//通用邮箱验证
+        //var reg2=/^\d{5,12}@[qQ][qQ]\.(com|cn)$/;//只用于qq邮箱的验证
+        //alert(reg1.test(email)+"*"+reg2.test(email));//邮箱的正则表达式的测试代码
         if(""==username) {event.preventDefault();$("#registerSpan").html("*请输入用户名");$("#RuserName").focus();}
-        else if(""==email){event.preventDefault();$("#registerSpan").html("*请输入邮箱");$("#email").focus();}
+        else if(""==email && reg1.test(email) && reg2.test(email)){event.preventDefault();$("#registerSpan").html("*请输入正确的邮箱");$("#email").focus();}
         else if(""==pwd1) {event.preventDefault();$("#registerSpan").html("*请输入密码");$("#Rpassword1").focus();}
         else if(pwd1.length<6){event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword1").focus();}
         else if(""==pwd2) {event.preventDefault();$("#registerSpan").html("*请重复密码");$("#Rpassword2").focus();}
@@ -277,22 +283,23 @@
 
 
         if(flag){
-            $.post("register.php",{},function(data){
-                // 接收传过来的json转换成js变量 var receive=
+            $.post("register.php",{RuserName:username,email:email,Rpassword1:pwd1,Rpassword2:pwd2,Rschool:school,Racademy:academy},function(data){
+
                 $("#modal-body").find(":input").hide();
                 $("#modal-body").find("span").hide();
                 $("#registerShow").show();
                 $("#modal-footer").hide();
-                $("#registerShow").html(data);
-                // 显示接收的提示信息 $("#registerShow").html(receive);
+                if(data=="1")//注册成功
+                    $("#registerShow").html(username+"注册成功!<br>请返回登录");
+                else
+                    $("#registerShow").html("注册失败<br>请重新注册");
+
             });
         }
 
     });
 
-    document.getElementById("RuserName").onblur=function(){
-        checkUserid();
-    }
+    $("#RuserName").blur(function(){checkUserid();});
 
 
 </script>
