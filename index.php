@@ -11,6 +11,7 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/npm.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
@@ -293,16 +294,23 @@
 
 
         if(flag){
-            $.post("register.php",{RuserName:username,email:email,Rpassword1:pwd1,Rpassword2:pwd2,Rschool:school,Racademy:academy},function(data){
+            $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy},function(data){
 
                 $("#modal-body").find(":input").hide();
                 $("#modal-body").find("span").hide();
                 $("#registerShow").show();
                 $("#modal-footer").hide();
                 if(data=="1")//注册成功
+<<<<<<< HEAD
                     $("#registerShow").html(username+",恭喜您注册成功!<br>请返回登录");
                 else
                     $("#registerShow").html("注册失败<br>请重新注册");
+=======
+                    $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
+                else 
+                    $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
+				
+>>>>>>> 19b4f4a40e46dd66da1a8d61b4812a90fc6a9669
 
             });
         }

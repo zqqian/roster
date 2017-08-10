@@ -10,18 +10,42 @@ $pwd2=$_POST['Rpassword2'];
 $school=$_POST['Rschool'];
 $academy=$_POST['Racademy'];
 
+<<<<<<< HEAD
     require_once 'mysql-connect.php';
 
 
 
     $pw3=substr(md5(md5($pw1).md5($username)),0,20);
     $sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pw3','$email','$school','$academy')";
+=======
+require_once 'mysql-connect.php';
+if($username==""|| $pwd1==""||$pwd2==""||$email==""){
+	echo"2";
+}else if($pwd1!=$pwd2){
+	echo"3";	
+}else{
+	$num=file_get_contents("http://127.0.0.1/roster/check_username.php?id=".$username);
+    if(!$num)    //如果已经存在该用户
+	{
+		echo "4";
+		
+    }else{
+		$pwd3=substr(md5(md5($pwd1).md5($username)),0,20);
+		$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd3','$email','$school','$academy')";
 
-    $result=mysqli_query($db,$sql_insert);
-    if(!$result) echo"0";//注册失败
-    else         echo"1";
+		$result=mysqli_query($db,$sql_insert);
+		if(!$result) echo"0";//注册失败
+		else         echo"1";
+}
+	mysqli_close($db);
+}
+>>>>>>> 19b4f4a40e46dd66da1a8d61b4812a90fc6a9669
 
-    mysqli_close($db);
+	
+	
+	
+
+   
 
 
 
