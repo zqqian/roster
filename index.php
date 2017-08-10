@@ -83,18 +83,23 @@
                                             <center><h1 id="registerShow">显示注册信息</h1></center>
 
                                             <div class="input-group" id="DuserName">
-                                                <input type="text" class="form-control" id="RuserName" name="RuserName" placeholder="请输入用户名">
+                                                <input type="text" class="form-control" id="RuserName" maxlength="20"
+                                                        name="RuserName" placeholder="请输入用户名">
                                                 <span class="input-group-addon" id="checkUsername">*</span>
                                             </div>
                                             <br>
 
-                                            <input type="email" class="form-control" placeholder="请输入邮箱"
+                                            <input type="email" class="form-control" placeholder="请输入邮箱" maxlength="30"
                                                    id="email" name="email" style="margin-bottom:20px;">
 
-                                            <input type="password" class="form-control" id="Rpassword1" name="Rpassword1" placeholder="请输入密码"><br>
-                                            <input type="password" class="form-control" id="Rpassword2" name="Rpassword2" placeholder="请重复密码"><br>
-                                            <input type="text" class="form-control" id="Rschool" name="Rschool" placeholder="请输入所属学校"><br>
-                                            <input type="text" class="form-control" id="Racademy" name="Racademy" placeholder="请输入所属学院">
+                                            <input type="password" class="form-control" id="Rpassword1" maxlength="20"
+                                                   name="Rpassword1" placeholder="请输入密码"><br>
+                                            <input type="password" class="form-control" id="Rpassword2" maxlength="20"
+                                                   name="Rpassword2" placeholder="请重复密码"><br>
+                                            <input type="text" class="form-control" id="Rschool" maxlength="30"
+                                                    name="Rschool" placeholder="请输入所属学校"><br>
+                                            <input type="text" class="form-control" id="Racademy" maxlength="30"
+                                                   name="Racademy" placeholder="请输入所属学院">
                                             <span class="help-block" id="registerSpan" style="color:red;">*除学校学院，其余都为必填项</span>
                                             <!--这里是帮助文本-->
                                         </div>
@@ -224,10 +229,10 @@
             {
                 var byphp100 = xmlhttp.responseText;//接受PHP的返回值 
                 if(byphp100=="1")//设置span里的内容    
-                $("#checkUsername").html("该用户名可用").css("color","green");  
-                else $("#checkUsername").html("该用户名已经存在").css("color","red");
+                $("#checkUsername").text("该用户名可用").css("color","green");  
+                else $("#checkUsername").text("该用户名已经存在").css("color","red");
             }
-            else { $("#checkUsername").html("正在检查");}
+            else { $("#checkUsername").text("正在检查");}
 
         };//接受返回值  
         xmlhttp.open("GET","check_username.php?id="+useridValue,true);//这个页面便是你要进行选择查询的PHP页面 
@@ -265,6 +270,7 @@
 
     $("#registerBtn").click(function(event){
         var flag=false;
+        var nameCheck= $("#checkUsername").text();
         var username=$("#RuserName").val().trim();//删除前后空格，防止用户只输入一个空格的bug
         var email=$("#email").val().trim();
         var pwd1=$("#Rpassword1").val().trim();
@@ -276,14 +282,15 @@
         var reg1 = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;//通用邮箱验证
         //var reg2=/^\d{5,12}@[qQ][qQ]\.(com|cn)$/;//只用于qq邮箱的验证
         //alert(reg1.test(email)+"*"+reg2.test(email));//邮箱的正则表达式的测试代码
-        if(""==username) {event.preventDefault();$("#registerSpan").html("*请输入用户名");$("#RuserName").focus();}
-        else if(""==email && reg1.test(email) && reg2.test(email)){event.preventDefault();$("#registerSpan").html("*请输入正确的邮箱");$("#email").focus();}
-        else if(""==pwd1) {event.preventDefault();$("#registerSpan").html("*请输入密码");$("#Rpassword1").focus();}
-        else if(pwd1.length<6){event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword1").focus();}
-        else if(""==pwd2) {event.preventDefault();$("#registerSpan").html("*请重复密码");$("#Rpassword2").focus();}
-        else if(pwd2.length<6){event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword2").focus();}
-        else if(pwd1!=pwd2){event.preventDefault();$("#registerSpan").html("*两次输入的密码不一致");$("#Rpassword1").focus();}
-        else{ flag=true;}
+        if ("" == username) {event.preventDefault();$("#registerSpan").html("*请输入用户名");$("#RuserName").focus();}
+        else if ("" == email && reg1.test(email)) {event.preventDefault();$("#registerSpan").html("*请输入正确的邮箱");$("#email").focus();}
+        else if ("" == pwd1) {event.preventDefault();$("#registerSpan").html("*请输入密码");$("#Rpassword1").focus();}
+        else if (pwd1.length < 6) {event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword1").focus();}
+        else if ("" == pwd2) {event.preventDefault();$("#registerSpan").html("*请重复密码");$("#Rpassword2").focus();}
+        else if (pwd2.length < 6) {event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword2").focus();}
+        else if (pwd1 != pwd2) {event.preventDefault();$("#registerSpan").html("*两次输入的密码不一致");$("#Rpassword1").focus();}
+        else if ("该用户名可用" != nameCheck) {event.preventDefault();$("#registerSpan").html("*用户名重复，请更换用户名");$("#RuserName").focus();}
+        else { flag=true;}
 
 
         if(flag){
@@ -294,10 +301,16 @@
                 $("#registerShow").show();
                 $("#modal-footer").hide();
                 if(data=="1")//注册成功
+<<<<<<< HEAD
+                    $("#registerShow").html(username+",恭喜您注册成功!<br>请返回登录");
+                else
+                    $("#registerShow").html("注册失败<br>请重新注册");
+=======
                     $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
                 else 
                     $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
 				
+>>>>>>> 19b4f4a40e46dd66da1a8d61b4812a90fc6a9669
 
             });
         }

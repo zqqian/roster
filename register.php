@@ -10,6 +10,14 @@ $pwd2=$_POST['Rpassword2'];
 $school=$_POST['Rschool'];
 $academy=$_POST['Racademy'];
 
+<<<<<<< HEAD
+    require_once 'mysql-connect.php';
+
+
+
+    $pw3=substr(md5(md5($pw1).md5($username)),0,20);
+    $sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pw3','$email','$school','$academy')";
+=======
 require_once 'mysql-connect.php';
 if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	echo"2";
@@ -31,6 +39,7 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 }
 	mysqli_close($db);
 }
+>>>>>>> 19b4f4a40e46dd66da1a8d61b4812a90fc6a9669
 
 	
 	
