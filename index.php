@@ -11,6 +11,7 @@
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/npm.js"></script>
+	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
@@ -286,7 +287,7 @@
 
 
         if(flag){
-            $.post("register.php",{RuserName:username,email:email,Rpassword1:pwd1,Rpassword2:pwd2,Rschool:school,Racademy:academy},function(data){
+            $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy},function(data){
 
                 $("#modal-body").find(":input").hide();
                 $("#modal-body").find("span").hide();
