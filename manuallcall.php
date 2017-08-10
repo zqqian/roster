@@ -1,9 +1,9 @@
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-      xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>手动点名</title>
-    <script type="text/javascript" src="jquery-latest.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 
 </head>
 <style>
@@ -120,13 +120,13 @@
 
     <div  class="name-num">
         <label for="selectl">学生学号</label>
-        <input type="text" disabled></br>
+        <span id="stunum"></span>
     </div>
 
     <div  class="name-num">
         <label for="selectl">学生姓名</label>
-        <input type="text" disabled>
-    </div></p>
+        <span id="stuname"></span>
+    </div>
 
     <table id="submit3">
         <tr>
@@ -184,9 +184,22 @@
         });
 
         function loadXMLDoc() {
-                x=Number($("#tranglenum").text())+1;
+            if($("#tranglenum").text()==$("#selectnum").val()) {
+                alert("点名完成");
+                $("#classok").prop("disabled",false);
+                $("#classlab").html("");
+                $("#selectclass").prop("disabled", false);
+                $("#selectcourse").prop("disabled", false);
+                $("#selectnum").prop("disabled", false);
+                $("#classlab").prop("disabled",false);
+                $("#btn1").prop("disabled",false);
+                $("#hidetrangle").hide();
+            }
+            else {
+                x = Number($("#tranglenum").text()) + 1;
                 $("#tranglenum").html(x);
-               $("#last").prop("disabled", false);
+                $("#last").prop("disabled", false);
+            }
         }
 
         function lastloadXMLDoc() {

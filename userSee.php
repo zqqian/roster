@@ -116,7 +116,7 @@
                                         <a href="#" target="" id="import">自动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="#" target="" id="import">手动点名</a>
+                                        <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>
                                     </div>
                                     <div class="panel-body">
                                         <a href="#" target="" id="export">点名信息查询</a>
