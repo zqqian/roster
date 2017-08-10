@@ -16,8 +16,8 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 }else if($pwd1!=$pwd2){
 	echo"3";	
 }else{
-	$num=file_get_contents("check_username.php?id=".$username);
-    if($num)    //如果已经存在该用户
+	$num=file_get_contents("http://127.0.0.1/roster/check_username.php?id=".$username);
+    if(!$num)    //如果已经存在该用户
 	{
 		echo "4";
 		

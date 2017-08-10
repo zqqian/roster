@@ -28,6 +28,8 @@ if($username==""||$pwd==""){
             {  
                 
                 echo "password confirm successfully"; 
+				// set cookie or session
+				//jump to userSee.php
 				
             }  
             else  
