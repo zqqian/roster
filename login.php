@@ -21,12 +21,11 @@ if($username==""||$pwd==""){
     }else{
 		$pw3=md5(md5($pwd).md5($username));
 		 $sql = "select userName,passWord from user where userName = '$username' and password = '$pw3'";  
-            $result = mysql_query($sql);  
-            $num = mysql_num_rows($result);  
-            if($num)  
+            $result=mysqli_query($db,$sql); 
+            if($result)  
             {  
-                $row = mysql_fetch_array($result);  //将数据以索引方式储存在数组中  
-                echo $row[0];  
+                
+                echo "password confirm successfuly";  
             }  
             else  
             {  
