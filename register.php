@@ -14,7 +14,7 @@ $academy=$_POST['Racademy'];
 
 
 
-    $pw3=md5(md5($pw1).md5($username));
+    $pw3=substr(md5(md5($pw1).md5($username)),0,20);
     $sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pw3','$email','$school','$academy')";
 
     $result=mysqli_query($db,$sql_insert);
