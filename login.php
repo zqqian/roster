@@ -13,23 +13,27 @@ require_once 'mysql-connect.php';
 if($username==""||$pwd==""){
 	echo "用户名和密码不能为空";
 }else{
-	$num=file_get_contents("check_username.php?id=".$username);
-    if($num)    //如果已经存在该用户
+	$num=file_get_contents("http://127.0.0.1/roster/check_username.php?id=".$username);
+    if($num)   
 	{
-		echo $username."该用户不存在!".$num;
+		echo $username."该用户不存在!";
 		
     }else{
-		$pw3=md5(md5($pwd).md5($username));
-		 $sql = "select userName,passWord from user where userName = '$username' and password = '$pw3'";  
-            $result=mysqli_query($db,$sql); 
-            if($result)  
+			$pw3=substr(md5(md5($pwd).md5($username)),0,20);
+		 $sql = "select passWord from user where userName = '$username' ";  
+            $result=mysqli_query($db,$sql);
+			$row = mysqli_fetch_assoc($result);
+			
+            if($row['passWord']==$pw3)  
             {  
                 
-                echo "password confirm successfuly";  
+                echo "password confirm successfully"; 
+				
             }  
             else  
             {  
-                echo "<script>alert('用户名或密码不正确！');history.go(-1);</script>";  
+		
+               echo "<script>alert('用户名或密码不正确！');history.go(-1);</script>";  
 		}
 	mysqli_close($db);
 	

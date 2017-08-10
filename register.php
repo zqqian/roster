@@ -22,8 +22,8 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 		echo "4";
 		
     }else{
-		$pw3=substr(md5(md5($pw1).md5($username)),0,20);
-		$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pw3','$email','$school','$academy')";
+		$pwd3=substr(md5(md5($pwd1).md5($username)),0,20);
+		$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd3','$email','$school','$academy')";
 
 		$result=mysqli_query($db,$sql_insert);
 		if(!$result) echo"0";//注册失败
