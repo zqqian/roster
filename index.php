@@ -293,9 +293,10 @@
                 $("#registerShow").show();
                 $("#modal-footer").hide();
                 if(data=="1")//注册成功
-                    $("#registerShow").html(username+"注册成功!<br>请返回登录");
-                else
-                    $("#registerShow").html("注册失败<br>请重新注册");
+                    $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
+                else 
+                    $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
+				
 
             });
         }
