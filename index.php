@@ -301,16 +301,12 @@
                 $("#registerShow").show();
                 $("#modal-footer").hide();
                 if(data=="1")//注册成功
-<<<<<<< HEAD
-                    $("#registerShow").html(username+",恭喜您注册成功!<br>请返回登录");
-                else
-                    $("#registerShow").html("注册失败<br>请重新注册");
-=======
+
                     $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
                 else 
                     $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
 				
->>>>>>> 19b4f4a40e46dd66da1a8d61b4812a90fc6a9669
+
 
             });
         }
