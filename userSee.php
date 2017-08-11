@@ -96,7 +96,7 @@
                                 </div>
                                 <div id="panel1" class="panel-collapse collapse collapse"><!--panel-collapse collapse in 表示默认面板打开-->
                                     <div class="panel-body">
-                                        <a href="#" target="" id="import">导入学生名单</a>
+                                        <a href="import.php" target="rightShow" id="import">导入学生名单</a>
                                     </div>
                                     <div class="panel-body">
                                         <a href="#" target="" id="export">导出学生成绩</a>
