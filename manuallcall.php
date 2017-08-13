@@ -193,6 +193,7 @@
                 $("#selectnum").prop("disabled", false);
                 $("#classlab").prop("disabled",false);
                 $("#btn1").prop("disabled",false);
+                $("#tranglenum").html(1);
                 $("#hidetrangle").hide();
             }
             else {
@@ -205,6 +206,8 @@
         function lastloadXMLDoc() {
                 $("#last").prop("disabled", false);
                 x = Number($("#tranglenum").text()) - 1;
+                if(x==1)
+                    $("#last").prop("disabled", true);
                 $("#tranglenum").html(x);
         }
 
