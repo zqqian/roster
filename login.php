@@ -31,7 +31,7 @@ if($username==""||$pwd==""){
                 
                 echo "password confirm successfully"; 
 $_SESSION['username']=$username;				 
-				  
+			  
 				// set cookie or session
 				//jump to userSee.php
 				

@@ -1,5 +1,11 @@
 
-<?php?>
+<?php
+ require_once 'get_user_info.php';
+
+if(!$is_login){
+	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
+}
+?>
 <!doctype html>
 
 <html lang="en">
@@ -66,7 +72,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
 
-                            <a href="#" ><?php session_start(); echo $_SESSION['username']; ?></a>
+                            <a href="#" ><?php  echo $username; ?></a>
 
                         </li>
                         <li class="dropdown">
@@ -247,7 +253,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" id="logout" >退出</a>
+                            <a href="#" id="logout" ><?php  echo $username; ?></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right: 50px;">用户设置<strong class="caret"></strong></a>

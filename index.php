@@ -1,3 +1,7 @@
+<?php
+ require_once 'get_user_info.php';
+
+?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
