@@ -5,6 +5,8 @@
  * Date: 2017/8/2
  * Time: 22:03
  */
+session_start();
+$savePath = "./session_save_dir/";
 $username=$_GET['userName'];
 $pwd=$_GET['password'];
 //echo $username."*".$pwd;
@@ -28,6 +30,8 @@ if($username==""||$pwd==""){
             {  
                 
                 echo "password confirm successfully"; 
+$_SESSION['username']=$username;				 
+				  
 				// set cookie or session
 				//jump to userSee.php
 				

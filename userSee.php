@@ -1,3 +1,4 @@
+<?php?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -62,7 +63,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#" >退出</a>
+                            <a href="#" ><?php session_start(); echo $_SESSION['username']; ?></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right: 50px;">用户设置<strong class="caret"></strong></a>
