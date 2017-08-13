@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 <?php?>
 <!doctype html>
-=======
-﻿<!doctype html>
->>>>>>> 2e4de758fdaf6e844d61f51e476f6631b2cc6289
+
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
