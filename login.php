@@ -7,8 +7,8 @@
  */
 session_start();
 $savePath = "./session_save_dir/";
-$username=$_GET['userName'];
-$pwd=$_GET['password'];
+$username=$_POST['userName'];
+$pwd=$_POST['password'];
 //echo $username."*".$pwd;
 require_once 'mysql-connect.php';
 
@@ -29,12 +29,12 @@ if($username==""||$pwd==""){
             if($row['passWord']==$pw3)  
             {  
                 
-                echo "password confirm successfully"; 
+               
 $_SESSION['username']=$username;				 
 			  
 				// set cookie or session
 				//jump to userSee.php
-				
+				echo "<script> alert('Login successfully');parent.location.href='./userSee.php'; </script>"; 
             }  
             else  
             {  

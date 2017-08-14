@@ -1,11 +1,11 @@
 <?php
-/*
+
 //为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
 
 if(!$is_login){
 	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
-}*/
+}
 ?>
 <!doctype html>
 <html lang="en">
