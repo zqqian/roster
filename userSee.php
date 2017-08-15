@@ -1,8 +1,7 @@
 <?php
-
 //为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
-
+//echo "<script>console.log('".session_id()."'); </script>";
 if(!$is_login){
 	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
 }
@@ -192,6 +191,7 @@ if(!$is_login){
 </div>
 <script>
     $("#logout").click(function(){
+        /*
         $.post("logout.php?action=logout",function(msg){
             if(msg==1)
             {
@@ -200,6 +200,11 @@ if(!$is_login){
                 window.location.href='../index/index.html';//首页路径
             }
         })
+        */
+        <?php
+            session_destroy();
+        ?>
+        parent.location.href='index.php';
     })
 
     function auto(){

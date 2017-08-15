@@ -50,7 +50,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
                                             <center> <h4 class="modal-title" id="myModalLabel">登录</h4></center>
                                         </div>
-                                        <form action="login.php" method="post" id="loginForm">
+                                        <form <!--action="userSee.php"--> method="post" id="loginForm" onsubmit="return checkLogin(this);">
                                             <div class="modal-body">
                                                 <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"><br>
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"><br>
@@ -207,6 +207,10 @@
 
 
 <script>
+
+
+
+
     /*测试用户名是否重复的函数*/
     function checkUserid(){
         var span = $("#checkUsername");
@@ -242,6 +246,42 @@
         xmlhttp.open("GET","check_username.php?id="+useridValue,true);//这个页面便是你要进行选择查询的PHP页面 
         xmlhttp.send(null);
     }
+    function  checkLogin(form){
+
+        var Flag=false;//利用后端判断用户名密码是否正确
+        console.log("1"+Flag);
+        var flag=false;//前端判空标记
+        var username=$("#userName").val().trim();
+        var pwd=$("#password").val().trim();
+        if(""==username && ""==pwd) {$("#loginSpan").html("*请输入用户名和密码");}
+        else{
+            if(""==username)	     {$("#loginSpan").html("*请输入用户名");}
+            else if(""==pwd)		 {$("#loginSpan").html("*请输入密码");}
+            else{flag=true;}
+        }
+        console.log("flag"+flag);
+        if(flag){
+
+            $.post("login.php",{userName:username,password:pwd},function(data){
+
+                console.log(data);
+                if(data=="0"){
+                    //登录成功
+                    Flag=true;console.log("Flag"+Flag);location.href="userSee.php";
+                }else if(data=="1"){
+                    $("#loginSpan").html("*密码错误");
+                }else if(data=="2"){
+                    $("#loginSpan").html("*该用户不存在");
+                }else if(data=="3"){
+                    $("#loginSpan").html("*用户名和密码不能为空（后端）");
+                }else{
+                    //console.log(data);
+                }
+            });//post结束
+        }
+
+        return Flag;
+    }
 
 
 
@@ -261,15 +301,35 @@
     });
 
 
-    $("#loginForm").submit(function(event){
-        var username=$("#userName").val();
-        var pwd=$("#password").val();
-        if(""==username && ""==pwd){event.preventDefault();$("#loginSpan").html("*请输入用户名和密码");}
+    /*$("#loginForm").submit(function(event){
+        var flag=false;
+        var username=$("#userName").val().trim();
+        var pwd=$("#password").val().trim();
+        if(""==username && ""==pwd) {event.preventDefault();$("#loginSpan").html("*请输入用户名和密码");}
         else{
-            if(""==username)	{event.preventDefault();$("#loginSpan").html("*请输入用户名");}
-            if(""==pwd)		    {event.preventDefault();$("#loginSpan").html("*请输入密码");}
+            if(""==username)	     {event.preventDefault();$("#loginSpan").html("*请输入用户名");}
+            else if(""==pwd)		 {event.preventDefault();$("#loginSpan").html("*请输入密码");}
+            else{flag=true;}
         }
-    });
+
+        if(flag){
+            $.post("login.php",{userName:username,password:pwd},function(data){
+                console.log(data);
+                if(data=="0"){
+                    //登录成功
+                }else if(data=="1"){
+                    event.preventDefault();$("#loginSpan").html("*密码错误");
+                }else if(data=="2"){
+                    event.preventDefault();$("#loginSpan").html("*该用户不存在");
+                }else if(data=="3"){
+                    event.preventDefault();$("#loginSpan").html("*用户名和密码不能为空（后端）");
+                }else{
+                     //console.log(data);
+                }
+            });//post结束
+        }
+
+    });*/
 
 
     $("#registerBtn").click(function(event){
