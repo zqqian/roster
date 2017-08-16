@@ -1,7 +1,7 @@
 <?php
 //为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
-//echo "<script>console.log('".session_id()."'); </script>";
+//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
 if(!$is_login){
 	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
 }
@@ -111,7 +111,7 @@ if(!$is_login){
                                 </div>
                                 <div id="panel1" class="panel-collapse collapse collapse"><!--panel-collapse collapse in 表示默认面板打开-->
                                     <div class="panel-body">
-                                        <a href="import.php" target="rightShow" id="import">导入学生名单</a>
+                                        <a href="import.php<?php echo "?username=".$username ?>" target="rightShow" id="import">导入学生名单</a>
                                     </div>
                                     <div class="panel-body">
                                         <a href="export.php" target="rightShow" id="export">导出学生成绩</a>
@@ -176,6 +176,16 @@ if(!$is_login){
 
                             </div>
                             <!-- 帮助 -->
+
+                            <!-- 测试界面 -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a  href="daochu.php<?php echo "?username=".$username ?>" class="panel-title"
+                                        data-parent="#menu" target="rightShow">测试界面</a>
+                                </div>
+
+                            </div>
+                            <!-- 测试界面 -->
 
                         </div>
                         <!--手风琴切换结束-->

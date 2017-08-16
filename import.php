@@ -151,6 +151,7 @@
             formData.append('enterYear',year);
             formData.append('course',course);
             formData.append('className',className);
+                formData.append('username',<?php echo $_GET['username'] ?>);
 
             xhr.send(formData);
             xhr.onreadystatechange = function () {
