@@ -111,7 +111,7 @@ if(!$is_login){
                                 </div>
                                 <div id="panel1" class="panel-collapse collapse collapse"><!--panel-collapse collapse in 表示默认面板打开-->
                                     <div class="panel-body">
-                                        <a href="import.php<?php echo "?username=".$username ?>" target="rightShow" id="import">导入学生名单</a>
+                                        <a href="import.php" target="rightShow" id="import">导入学生名单</a>
                                     </div>
                                     <div class="panel-body">
                                         <a href="export.php" target="rightShow" id="export">导出学生成绩</a>
@@ -200,23 +200,14 @@ if(!$is_login){
     </div>
 </div>
 <script>
+
+
     $("#logout").click(function(){
-        /*
-        $.post("logout.php?action=logout",function(msg){
-            if(msg==1)
-            {
-                alert("退出成功!")
-               // 返回到首页
-                window.location.href='../index/index.html';//首页路径
-            }
-        })
-        */
-        <?php
-           session_unset();
-           session_destroy();
-        ?>
-        parent.location.href='index.php';
-    })
+        $.get("logout.php",{},function(){
+            window.location.href = "index.php";//首页路径
+        });
+    });
+
 
     function auto(){
         //container的自适应
@@ -227,12 +218,9 @@ if(!$is_login){
         $("#container").width(bodyWidth);
 
 
-
-
         //left和right的自适应
         var tempH=$("#container").height();
         var tempW=$("#container").width();
-
 
         if(tempH>420){
             $("#left").height(tempH);
