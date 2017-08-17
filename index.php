@@ -14,7 +14,7 @@
     <title>云点名系统主页</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/npm.js"></script>
+
 	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -261,6 +261,10 @@
         }
         console.log("flag"+flag);
         if(flag){
+            $.ajax({
+                async : false,//取消异步
+
+            });
 
             $.post("login.php",{userName:username,password:pwd},function(data){
 

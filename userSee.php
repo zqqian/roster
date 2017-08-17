@@ -18,7 +18,7 @@ if(!$is_login){
     <title>云点名用户界面</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/npm.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
         /*为适应低版本的浏览器而设置的*/
@@ -177,10 +177,10 @@ if(!$is_login){
                             </div>
                             <!-- 帮助 -->
 
-                            <!-- 测试界面 -->
+                            <!-- 测试界面 <?php /*echo "?username=".$username*/ ?>-->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a  href="daochu.php<?php echo "?username=".$username ?>" class="panel-title"
+                                    <a  href="test.php" class="panel-title"
                                         data-parent="#menu" target="rightShow">测试界面</a>
                                 </div>
 
@@ -212,7 +212,8 @@ if(!$is_login){
         })
         */
         <?php
-            session_destroy();
+           session_unset();
+           session_destroy();
         ?>
         parent.location.href='index.php';
     })
