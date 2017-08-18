@@ -26,6 +26,8 @@ if(isset($_SESSION['username'])){
 	$result=mysqli_query($db,$sql);
 			$row = mysqli_fetch_assoc($result);
 	$userid=$row['userId'];
+
+	$_SESSION['userid']=$userid;
 	//mysqli_close($db);
 }else{
 	//header("Location: ./index.php"); 

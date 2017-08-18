@@ -1,6 +1,5 @@
 <?php
- require_once 'get_user_info.php';
-
+// require_once 'get_user_info.php';//主页未登录，无需判断是否登录
 ?>
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -50,7 +49,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
                                             <center> <h4 class="modal-title" id="myModalLabel">登录</h4></center>
                                         </div>
-                                        <form  method="post" id="loginForm" onsubmit="return checkLogin(this);"><!--action="userSee.php"-->
+
                                             <div class="modal-body">
                                                 <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"><br>
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"><br>
@@ -62,11 +61,11 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <center>
-                                                    <button type="submit" class="btn btn-primary"style="width:80px;">登录</button>
+                                                    <button type="button" id="loginBtn"class="btn btn-primary"style="width:80px;">登录</button>
                                                     <button type="button" class="btn btn-default" data-dismiss="modal"style="width:80px;">关闭</button>
                                                 </center>
                                             </div>
-                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -246,46 +245,39 @@
         xmlhttp.open("GET","check_username.php?id="+useridValue,true);//这个页面便是你要进行选择查询的PHP页面 
         xmlhttp.send(null);
     }
-    function  checkLogin(form){
 
-        var Flag=false;//利用后端判断用户名密码是否正确
-        console.log("1"+Flag);
-        var flag=false;//前端判空标记
-        var username=$("#userName").val().trim();
-        var pwd=$("#password").val().trim();
-        if(""==username && ""==pwd) {$("#loginSpan").html("*请输入用户名和密码");}
-        else{
-            if(""==username)	     {$("#loginSpan").html("*请输入用户名");}
-            else if(""==pwd)		 {$("#loginSpan").html("*请输入密码");}
-            else{flag=true;}
-        }
-        console.log("flag"+flag);
-        if(flag){
-            $.ajax({
-                async : false,//取消异步
-
-            });
-
-            $.post("login.php",{userName:username,password:pwd},function(data){
-
-                console.log(data);
-                if(data=="0"){
-                    //登录成功
-                    Flag=true;console.log("Flag"+Flag);location.href="userSee.php";
-                }else if(data=="1"){
-                    $("#loginSpan").html("*密码错误");
-                }else if(data=="2"){
-                    $("#loginSpan").html("*该用户不存在");
-                }else if(data=="3"){
-                    $("#loginSpan").html("*用户名和密码不能为空（后端）");
-                }else{
-                    //console.log(data);
+    $("#loginBtn").click(function(){
+            var username=$("#userName").val().trim();
+            var pwd=$("#password").val().trim();
+            if(""==username && ""==pwd) {$("#loginSpan").html("*请输入用户名和密码");}
+            else {
+                if ("" == username) {
+                    $("#loginSpan").html("*请输入用户名");
                 }
-            });//post结束
-        }
-
-        return Flag;
-    }
+                else if ("" == pwd) {
+                    $("#loginSpan").html("*请输入密码");
+                }
+                else {
+                    $.ajax({
+                        async: false,//取消异步
+                    });
+                    $.post("login.php", {userName: username, password: pwd}, function (data) {
+                        console.log(data);
+                        if (data == "0") {
+                            window.location.href = "userSee.php";//登录成功
+                        } else if (data == "1") {
+                            $("#loginSpan").html("*密码错误");
+                        } else if (data == "2") {
+                            $("#loginSpan").html("*该用户不存在");
+                        } else if (data == "3") {
+                            $("#loginSpan").html("*用户名和密码不能为空（后端）");
+                        } else {
+                            //console.log(data);
+                        }
+                    });
+                }
+            }
+    });
 
 
 
@@ -303,38 +295,6 @@
         $("#checkUsername").html("*");
 
     });
-
-
-    /*$("#loginForm").submit(function(event){
-        var flag=false;
-        var username=$("#userName").val().trim();
-        var pwd=$("#password").val().trim();
-        if(""==username && ""==pwd) {event.preventDefault();$("#loginSpan").html("*请输入用户名和密码");}
-        else{
-            if(""==username)	     {event.preventDefault();$("#loginSpan").html("*请输入用户名");}
-            else if(""==pwd)		 {event.preventDefault();$("#loginSpan").html("*请输入密码");}
-            else{flag=true;}
-        }
-
-        if(flag){
-            $.post("login.php",{userName:username,password:pwd},function(data){
-                console.log(data);
-                if(data=="0"){
-                    //登录成功
-                }else if(data=="1"){
-                    event.preventDefault();$("#loginSpan").html("*密码错误");
-                }else if(data=="2"){
-                    event.preventDefault();$("#loginSpan").html("*该用户不存在");
-                }else if(data=="3"){
-                    event.preventDefault();$("#loginSpan").html("*用户名和密码不能为空（后端）");
-                }else{
-                     //console.log(data);
-                }
-            });//post结束
-        }
-
-    });*/
-
 
     $("#registerBtn").click(function(event){
         var flag=false;

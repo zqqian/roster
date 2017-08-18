@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,7 +64,6 @@
     });
 </script>
 <body>
-
     <form id="importForm" action="#"  method="post" enctype="multipart/form-data">
         <table id="importTable">
             <tr>
@@ -96,10 +96,7 @@
                         <span>*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件<span>
                                 <!--
 
-
                                 这里再加一个有标准格式的Excel文件，加上类似淘宝放大镜的效果用于提示
-
-
 
                                 -->
                     </div>
@@ -147,25 +144,18 @@
             xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
             var formData = new FormData();
-            formData.append('file', fileList[0]);
-            formData.append('enterYear',year);
-            formData.append('course',course);
-            formData.append('className',className);
-                formData.append('username',<?php echo $_GET['username'] ?>);
+                formData.append('file', fileList[0]);
+                formData.append('enterYear',year);
+                formData.append('course',course);
+                formData.append('className',className);
+                formData.append('username',<?php echo $_SESSION['username'] ?>);
+                formData.append('userid',<?php echo $_SESSION['userid'] ?>);
 
             xhr.send(formData);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
                     alert(xhr.responseText);
-                    /*  var flag = xhr.responseText;
-                     console.log(flag);
-                     if (flag == 1) {
-                     //box.innerHTML="上传成功";
-                     alert("上传成功");
-                     }
-                     else{
-                     alert("上传失败<br>错误信息：".flag);
-                     }*/
+
                 }
             };
             }
