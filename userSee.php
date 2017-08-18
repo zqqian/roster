@@ -201,20 +201,15 @@ if(!$is_login){
 </div>
 <script>
     $("#logout").click(function(){
-        /*
-        $.post("logout.php?action=logout",function(msg){
-            if(msg==1)
-            {
-                alert("退出成功!")
-               // 返回到首页
-                window.location.href='../index/index.html';//首页路径
-            }
+        
+        $.post("logout.php",function(msg){
+          parent.location.href='index.php';
         })
-        */
-        <?php
+        
+       /* <?php
            session_unset();
            session_destroy();
-        ?>
+        ?>*/
         parent.location.href='index.php';
     })
 
