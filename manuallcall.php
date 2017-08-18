@@ -1,3 +1,12 @@
+<?php
+//为方便本页面测试 暂时屏蔽
+require_once 'get_user_info.php';
+//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
+if(!$is_login){
+	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
+}
+?>
+
 <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
       xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -68,11 +77,21 @@
                 <div>
                     <label for="selectl">选择班级：</label>
                     <select id="selectclass" name="classes">
-                        <option name="" value=""></option>
-                        <option name="计科一班" value="计科一班">计科一班</option>
-                        <option name="saab"value="saab">Saab</option>
-                        <option name="opel"value="opel">Opel</option>
-                        <option name="audi"value="audi">Audi</option>
+                        <option name="" value=""></option><?php
+						$sql = "select classId from class_course_user where userId = '$userid' ";
+						$result=mysqli_query($db,$sql);
+						while($row = mysqli_fetch_assoc($result)){
+							$classid=$row['classId'];
+							$sql2 = "select className from class where classId = '$classid' ";
+						$result2=mysqli_query($db,$sql2);
+						$row2 = mysqli_fetch_assoc($result2);
+						echo "<option name=".$row2['className']." value=".$row2['className'].">".$row2['className']."</option>";
+							
+							
+						}
+						
+						?>
+                        
                     </select>
                     <button id="classok">确定</button>
                     </br>
