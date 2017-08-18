@@ -1,7 +1,7 @@
 <?php
 //为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
-//echo "<script>console.log('".session_id()."'); </script>";
+//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
 if(!$is_login){
 	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
 }
@@ -18,7 +18,7 @@ if(!$is_login){
     <title>云点名用户界面</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/npm.js"></script>
+
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
         /*为适应低版本的浏览器而设置的*/
@@ -175,6 +175,16 @@ if(!$is_login){
                             </div>
                             <!-- 帮助 -->
 
+                            <!-- 测试界面 <?php /*echo "?username=".$username*/ ?>-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a  href="test.php" class="panel-title"
+                                        data-parent="#menu" target="rightShow">测试界面</a>
+                                </div>
+
+                            </div>
+                            <!-- 测试界面 -->
+
                         </div>
                         <!--手风琴切换结束-->
 
@@ -188,22 +198,15 @@ if(!$is_login){
     </div>
 </div>
 <script>
+
+
     $("#logout").click(function(){
-        /*
-        $.post("logout.php?action=logout",function(msg){
-            if(msg==1)
-            {
-                alert("退出成功!")
-               // 返回到首页
-                window.location.href='../index/index.html';//首页路径
-            }
-        })
-        */
-        <?php
-            session_destroy();
-        ?>
-        parent.location.href='index.php';
-    })
+
+        $.get("logout.php",{},function(){
+            window.location.href = "index.php";//首页路径
+        });
+    });
+
 
     function auto(){
         //container的自适应
@@ -214,12 +217,9 @@ if(!$is_login){
         $("#container").width(bodyWidth);
 
 
-
-
         //left和right的自适应
         var tempH=$("#container").height();
         var tempW=$("#container").width();
-
 
         if(tempH>420){
             $("#left").height(tempH);

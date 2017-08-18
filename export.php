@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,31 +22,33 @@
 </script>
 <body>
     <form  id="exportForm" name="exportForm"  method="post">
-        选择班级：<select id="Class" name="Class">
+        选择班级：<select id="Class" name="Class" style="width: 150px;">
             <option value="" selected></option>
-            <option value="15计科一">15计科一</option>
             <?php
-            echo "<option value='15计科二'>15计科二</option>";
-             /*
-              * 1.从session取出用户信息，根据用户信息提取
-              * 2.需要用jQuery绑定change事件，然后利用AJAX刷新课程下拉列表的内容 （默认是空值，非空值才判断） 内容 入学年份+班级名
-              *
-
-
-            */
+            $userid = $_SESSION['userid'];
+            $find_class = "SELECT a.classId,className FROM class as a,class_course_user as b where a.classId=b.classId and b.userId=".$userid;
+            require "mysql-connect.php";
+            $set=mysqli_query($db,$find_class);
+            while($row=mysqli_fetch_assoc($set)){
+                echo "<option value='".$row['classId']."'>".$row['className']."</option>";
+            }
+            /*
+             * 1.从session取出用户信息，根据用户信息提取
+             * 2.需要用jQuery绑定change事件，然后利用AJAX刷新课程下拉列表的内容 （默认是空值，非空值才判断） 内容 入学年份+班级名
+             *
+           */
             ?>
         </select>
         <br>
-        选择课程：<select  id="course" name="course">
+        选择课程：<select  id="course" name="course" style="width: 150px;">
             <option value="" selected></option>
-            <option value="大学英语">大学英语</option>
+
             <?php
-            echo "<option value='数据库'>数据库</option>";
+
+            //echo "<option value='数据库'>数据库</option>";
             /*
              * 1.从session取出用户信息，根据 用户信息 和 班级信息 提取
-
-
-           */
+            */
             ?>
         </select>
         <br>
@@ -61,12 +64,18 @@
     $(function(){
         $("#Class").change(function(){
             var value=$(this).val();
-            alert(value);
-            if ("" == value){
-                /*$.get("#",{},function(){
 
+            if ("" != value){
 
-                });*/
+                var classId=$("#course").val();
+
+                var str="<option value='"+value+"'>"+value+"</option>";
+                $("#course").append(str+str);
+
+            }
+            else{
+                $("#course").empty();
+                $("#course").append("<option value='' selected></option>");
             }
         });
 
@@ -100,6 +109,5 @@
 </script>
 </body>
 </html>
-
 
 
