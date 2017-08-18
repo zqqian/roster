@@ -74,7 +74,6 @@ if(!$is_login){
                     </button>
                     <a class="navbar-brand" href="userSee.php">云点名系统</a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -98,7 +97,6 @@ if(!$is_login){
                 </div>
             </nav>
             <!--导航栏结束-->
-
              <!-- <div class="row clearfix" id="mainContainer"></div>-->
                     <div class="col-md-6 column" id="left">
                         <!--手风琴切换开始-->
