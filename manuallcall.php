@@ -77,7 +77,7 @@ if(!$is_login){
                 <div>
                     <label for="selectl">选择班级：</label>
                     <select id="selectclass" name="classes">
-                        <option name="" value=""></option><?php
+                        <option name="" value="" selected></option><?php
 						$sql = "select classId from class_course_user where userId = '$userid' ";
 						$result=mysqli_query($db,$sql);
 						while($row = mysqli_fetch_assoc($result)){
@@ -105,11 +105,22 @@ if(!$is_login){
                 <div>
                     <label for="selectl" >选择课程：</label>
                     <select id="selectcourse" name="course">
-                        <option name="" value=""></option>
-                        <option name="link" value="线性代数">线性代数</option>
-                        <option name="saab" value="saab">Saab</option>
-                        <option name="opel" value="opel">Opel</option>
-                        <option name="audi" value="audi">Audi</option>
+                        <option name="" value="" selected></option>
+                        <?php
+                        $sql = "select courseId from class_course_user where userId = '$userid' ";
+                        $result=mysqli_query($db,$sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            $courseid=$row['courseId'];
+                            $sql2 = "select courseName from course where courseId = '$courseid' ";
+                            $result2=mysqli_query($db,$sql2);
+                            $row2 = mysqli_fetch_assoc($result2);
+                            echo "<option name=".$row2['courseName']." value=".$row2['courseName'].">".$row2['courseName']."</option>";
+
+
+                        }
+
+                        ?>
+
                     </select>
                 </div>
 
@@ -195,7 +206,12 @@ if(!$is_login){
                    $("#btn1").prop("disabled",true);
                    $("#hidetrangle").show();
                     $("#last").prop("disabled",true);
+
+                    $.post("manualcall_info.php",{classlab:classs, courseName:course, num:number },function(data){
+                            console.log(data);
+                    });
                 }
+
           });
 
 
