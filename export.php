@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php require_once 'get_user_info.php';?>
 <!doctype html>
 <html lang="en">
 <head>

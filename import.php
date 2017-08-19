@@ -1,4 +1,4 @@
-<?php session_start();?>
+<?php require_once 'get_user_info.php';?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -148,8 +148,8 @@
                 formData.append('enterYear',year);
                 formData.append('course',course);
                 formData.append('className',className);
-                formData.append('username',<?php echo $_SESSION['username'] ?>);
-                formData.append('userid',<?php echo $_SESSION['userid'] ?>);
+                formData.append('username',"<?php echo $username; ?>");
+                formData.append('userid',"<?php echo $userid;?>");
 
             xhr.send(formData);
             xhr.onreadystatechange = function () {
