@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 header("Content-Type:text/html;charset=UTF-8");
 $Class = $_POST['Class'];
 $course = $_POST['course'];
@@ -57,12 +57,18 @@ group by student.stuId";
        }
         $i++;
     }
-
 } else {
     //一般情况下不会出现的情况
     exit('error!');
 }
+mysqli_close($db);
 
 $objWriter=PHPExcel_IOFactory::createWriter($objPHPExcel,"Excel5");
 $objWriter->save($dir."/tempExcel/".$Class.$course.$gradeType.".xls");
-mysqli_close($db);
+//由以上代码得到用户所需的Excel文件
+
+//把用户在服务器上产生的文件的路径保存到session的一个数组里 （$_SESSION['excel']）等待用户退出清空session之前把文件路径取出，然后删除掉文件
+$temp=$_SESSION['excel'];
+array_push($temp,"tempExcel/".$Class.$course.$gradeType.".xls");
+$_SESSION['excel']=$temp;
+
