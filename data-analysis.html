@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title>数据分析</title>
 </head>
-<script src="js/Echarts/echarts.js"></script>
-<script src="js/jquery-3.2.1.js"></script>
+<script src="../js/Echarts/echarts.js"></script>
+<script src="../js/jquery-3.2.1.js"></script>
 <style type="text/css">
     body,html {
         margin: 0;
@@ -289,7 +289,7 @@
                 $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
             }
         }
-        var check_class_name=new Array();
+        var select_class=new Array();
         function show(){
             var j=0;
              var select_checkbox=document.getElementsByName("box");
@@ -297,7 +297,7 @@
              {
                 if(select_checkbox.checked==true)
                 {
-                    check_class_name[j]=select_checkbox.value;
+                    select_class[j]=select_checkbox.value;
                     j++;
                 }
              }
@@ -306,127 +306,105 @@
                 alert("请选择班级！");
             }
             else {
-                $.ajax({
+                var selected_course=$('#select_course_name option:selected').value;
+                $.ajax({         //返回给后台选中的课程名和班级名返回数据
                     type:"POST",
                     url:"analysis.php",
-                    data:{check_class_name:check_class_name},
+                    data:{selected_course:selected_course,check_class_name: select_class},
                     dataType:"json",
                     success:function(data){
-                        if(data.status==1)            //返回课程名，以json数组的形式返回，class_name及对应的班级名
+                        var numi=0;
+                        var x=0;
+                        var centerx=0.1;
+                        var centery=0.3;
+                        var positiony=0;
+                        var series_score_section=[];
+                        var series_pass_rate=[];
+                        for(var i=0;i<data.length;i++)
                         {
-                            for(var i=0;i<data.length;i++)
+                            numi++;
+                            centerx+=0.2;
+                            x+=0.2;
+                            if(numi%6==0)
                             {
-                                class_name_array[i]=data[i].course_name;
-                                class_name_array[i]=new Array();
-                                for(var j=0;j<data[i].class_name.length;j++)
-                                {
-                                    class_name_array[i][j]=data[i].class_name[j].name;
-                                }
+                                centery+=0.4;
+                                positiony=0.55;
+                                x=0;
+                                centerx=0.1;
                             }
-                        }
-                    }
-                })
-            }
-        }
-//      根据返给后台的课程名和班级名返回数据
-        $.ajax({
-            type:"POST",
-            url:"analysis.php",
-            data:{selected_course_name:selected_course_name},
-            dataType:"json",
-            success:function(data){
-                var numi=0;
-                var x=0;
-                var centerx=0.1;
-                var centery=0.3;
-                var positiony=0;
-                var series_score_section=[];
-                var series_pass_rate=[];
-                for(var i=0;i<data.length;i++)
-                {
-                    numi++;
-                    centerx+=0.2;
-                    x+=0.2;
-                    if(numi%6==0)
-                    {
-                        centery+=0.4;
-                        positiony=0.55;
-                        x=0;
-                        centerx=0.1;
-                    }
-                    series_score_section.push({
-                                    name:check_class_name[i],
-                                    data:data[i].score_percent,
-                                    type:'bar',
-                                    markPoint : {
-                                        data : [
-                                            {type : 'max', name: '最大值'},
-                                            {type : 'min', name: '最小值'}
-                                        ]
-                                    },
-                                    markLine : {
-                                        data : [
-                                            {type : 'average', name: '平均值'}
-                                        ]
-                                    }
-                                });
-
-                    series_pass_rate.push({
-                                  type : 'pie',
-                                  radius : radius,
-                                  itemStyle : labelFromatter,
-                                  center : [centerx, centery],
-                                  x: x, // for funnel
-                                  y:positiony,
-                                  data : [
-                                      {name:'other', value:100-data[i].score_pass_rate, itemStyle : labelBottom},
-                                      {name:check_class_name[i], value:data[i].score_pass_rate,itemStyle : labelTop}
-                                    ]
-                        })
-                }
-                Chart_score_section.setOption({
-                    series: series_score_section
-                });
-                Chart_pass_rate.setOption({ series: series_pass_rate});
-                Chart_pass_rate.showLoading();
-                if(data.length==1) //出勤率是折线图
-                {
-                    Chart_attendance_rate.setOption({
-                        title : {
-                            text: '点名出勤率',
-                            subtext: '本学期'
-                        },
-                        xAxis : [
-                            {
-                              data :data.attendance_date,
-                            }
-                        ],
-                        series : [
-                            {
-                                name: check_class_name[0],
-                                data: data[i].attendance_rate,
-                                type: 'line',
-                                markPoint: {
-                                    data: [
-                                        {type: 'max', name: '最大值'},
-                                        {type: 'min', name: '最小值'}
+                            series_score_section.push({
+                                name:select_class[i],
+                                data:data[i].score_percent,
+                                type:'bar',
+                                markPoint : {
+                                    data : [
+                                        {type : 'max', name: '最大值'},
+                                        {type : 'min', name: '最小值'}
                                     ]
                                 },
-                                markLine: {
-                                    data: [
-                                        {type: 'average', name: '平均值'}
+                                markLine : {
+                                    data : [
+                                        {type : 'average', name: '平均值'}
                                     ]
                                 }
-                            }
-                        ]
-                    })
-                    Chart_attendance_rate.showLoading();
-                }
-                else {
-                    var series_attendance_rate=[];
-                    var xAxis_attendance_rate=[];
-                    for(var i=0;i<data.length;i++) {
-                        series_attendance_rate.push({
+                            });
+
+                            series_pass_rate.push({
+                                type : 'pie',
+                                radius : radius,
+                                itemStyle : labelFromatter,
+                                center : [centerx, centery],
+                                x: x, // for funnel
+                                y:positiony,
+                                data : [
+                                    {name:'other', value:100-data[i].score_pass_rate, itemStyle : labelBottom},
+                                    {name:select_class[i], value:data[i].score_pass_rate,itemStyle : labelTop}
+                                ]
+                            })
+                        }
+                        Chart_score_section.setOption({
+                            series: series_score_section
+                        });
+                        Chart_pass_rate.setOption({ series: series_pass_rate});
+                        Chart_pass_rate.showLoading();
+                        if(data.length==1) //出勤率是折线图
+                        {
+                            Chart_attendance_rate.setOption({
+                                title : {
+                                    text: '点名出勤率',
+                                    subtext: '本学期'
+                                },
+                                xAxis : [
+                                    {
+                                        data :data.attendance_date,
+                                    }
+                                ],
+                                series : [
+                                    {
+                                        name: check_class_name[0],
+                                        data: data[i].attendance_rate,
+                                        type: 'line',
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: '最大值'},
+                                                {type: 'min', name: '最小值'}
+                                            ]
+                                        },
+                                        markLine: {
+                                            data: [
+                                                {type: 'average', name: '平均值'}
+                                            ]
+                                        }
+                                    }
+                                ]
+                            })
+                            Chart_attendance_rate.showLoading();
+                        }
+                        else {
+                            var series_attendance_rate=[];
+                            var xAxis_attendance_rate=[];
+                            for(var i=0;i<data.length;i++) {
+                                series_attendance_rate.push({
                                     name: check_class_name[i],
                                     data: data[i].attendance_rate,
                                     type: 'bar',
@@ -441,24 +419,20 @@
                                             {type: 'average', name: '平均值'}
                                         ]
                                     }
+                                })
+                                xAxis_attendance_rate.push({
+                                    data: data[i].attendance_rate,
+                                })
+                            }
+                        }
+                        Chart_attendance_rate.setOption({
+                            series:series_attendance_rate,
+                            xAxis:xAxis_attendance_rate
                         })
-                        xAxis_attendance_rate.push({
-                                data: data[i].attendance_rate,
-                        })
+                        Chart_attendance_rate.showLoading();
                     }
-                }
-                    Chart_attendance_rate.setOption({
-                        series:series_attendance_rate,
-                        xAxis:xAxis_attendance_rate
-                    })
-                    Chart_attendance_rate.showLoading();
+                })
             }
-        })
-        //获取老师勾选的班级名，发送给后台，然后后台以字符串的形
-        // 式返回各班的成绩，各班之间以逗号分开，班内成绩以空格分开。
-        //核算出每个分数段各班所占比例
-    });
-
 //    图表随容器自适应
     var worldMapContainer1 = document.getElementById('score_section');
     var worldMapContainer2 = document.getElementById('pass_rate');
