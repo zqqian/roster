@@ -1,4 +1,5 @@
 <?php require_once 'get_user_info.php';?>
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,17 +22,18 @@
 
 </script>
 <body>
-    <form  id="exportForm" name="exportForm"  method="post">
+    <form  id="exportForm" name="exportForm" >
         选择班级：<select id="Class" name="Class" style="width: 150px;">
             <option value="" selected></option>
             <?php
             $userid = $_SESSION['userid'];
-            $find_class = "SELECT a.classId,className FROM class as a,class_course_user as b where a.classId=b.classId and b.userId=".$userid;
+            $find_class = "SELECT DISTINCT a.classId,className,enterYear FROM class as a,class_course_user as b where a.classId=b.classId and b.userId=".$userid;
             require "mysql-connect.php";
             $set=mysqli_query($db,$find_class);
             while($row=mysqli_fetch_assoc($set)){
-                echo "<option value='".$row['classId']."'>".$row['className']."</option>";
+                echo "<option value='".$row['classId']."'>".$row['enterYear'].$row['className']."</option>";
             }
+            mysqli_close($db);
             /*
              * 1.从session取出用户信息，根据用户信息提取
              * 2.需要用jQuery绑定change事件，然后利用AJAX刷新课程下拉列表的内容 （默认是空值，非空值才判断） 内容 入学年份+班级名
@@ -42,7 +44,6 @@
         <br>
         选择课程：<select  id="course" name="course" style="width: 150px;">
             <option value="" selected></option>
-
             <?php
 
             //echo "<option value='数据库'>数据库</option>";
@@ -56,7 +57,7 @@
         <input type="radio" name="gradeType" value="final">期末成绩
         <input type="radio" name="gradeType" value="roster">点名情况
         <br>
-        <button id="downloadBtn">下载</button>
+        <input type="button" id="downloadBtn" value="下载">
     </form>
 
 
@@ -66,11 +67,13 @@
             var value=$(this).val();
 
             if ("" != value){
-
+                $("#course").empty();
+                $("#course").append("<option value='' selected></option>");
                 var classId=$("#course").val();
-
-                var str="<option value='"+value+"'>"+value+"</option>";
-                $("#course").append(str+str);
+                $.post("return_courses.php",{classId:value,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                    /*console.log(data);*/
+                    $("#course").append(data);
+                });
 
             }
             else{
@@ -84,18 +87,17 @@
             var course = $("#course").val();
             var gradeType = $(":radio:checked").val();
 
-            alert(Class+" "+course+" "+gradeType);
-
             if("" == Class || "" == course || undefined == gradeType){
                 alert("请填写完信息再下载！")
             }else{
+               console.log(Class+" "+course+" "+gradeType+"qqqqqqqqqq");
+                $.post("export_download.php",{Class:Class,course:course,gradeType:gradeType,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                    //设计三种表格所对应的数据库视图，根据视图填充Excel表格，访问生成Excel表格的地址
 
-                //$.get("",{Class:Class,course:course,gradeType:gradeType},function(data){});
-                //设计三种表格所对应的数据库视图，根据视图填充Excel表格，访问生成Excel表格的地址
+                    window.location.href = "tempExcel/"+Class+course+gradeType+".xls";
+                });
+
             }
-
-
-
         });
 
 

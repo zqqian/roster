@@ -1,4 +1,5 @@
 <?php require_once 'get_user_info.php';?>
+<?php session_start();?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -148,12 +149,20 @@
                 formData.append('enterYear',year);
                 formData.append('course',course);
                 formData.append('className',className);
-                formData.append('username',"<?php echo $username; ?>");
-                formData.append('userid',"<?php echo $userid;?>");
+                formData.append('username',"<?php echo $_SESSION['username'] ?>");
+                formData.append('userid',"<?php echo $_SESSION['userid'] ?>");
 
             xhr.send(formData);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4 && xhr.status == 200) {
+                    /*
+                    *
+                    *
+                    * 这里根据返回错误代码提示信息，后端返回字符串，若数据库连接有问题则不能及时反映
+                    *
+                    *
+                    *
+                    * */
                     alert(xhr.responseText);
 
                 }

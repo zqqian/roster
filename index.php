@@ -291,7 +291,7 @@
         $("#modal-body").find("span").show();
         $("#registerShow").hide();
         $("#modal-footer").show();
-        $("#registerSpan").html("*除学校学院，其余都为必填项");
+        $("#registerSpan").html("*除学院，其余都为必填项");
         $("#checkUsername").html("*");
 
     });
@@ -318,6 +318,7 @@
         else if (pwd2.length < 6) {event.preventDefault();$("#registerSpan").html("*密码不能低于6位");$("#Rpassword2").focus();}
         else if (pwd1 != pwd2) {event.preventDefault();$("#registerSpan").html("*两次输入的密码不一致");$("#Rpassword1").focus();}
         else if ("该用户名可用" != nameCheck) {event.preventDefault();$("#registerSpan").html("*用户名重复，请更换用户名");$("#RuserName").focus();}
+        else if ("" == school) {event.preventDefault();$("#registerSpan").html("*请输入学校");$("#Rschool").focus();}
         else { flag=true;}
 
 

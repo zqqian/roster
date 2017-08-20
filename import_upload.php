@@ -59,71 +59,114 @@ else{
         if(move_uploaded_file($_FILES['file']['tmp_name'], $path."/".$name) ){
             //连接数据库，并存入文件信息
             require_once 'mysql-connect.php';
-            /*$sql = "select userId from user where userName = '$username' ";
-            $result=mysqli_query($db,$sql);
-            $row = mysqli_fetch_assoc($result);
-            $userId=$row['userId'];*/
+
 
             $db = mysqli_connect("localhost","roster","roster666","roster") or die("连接数据库失败！");
 
-            $class_insert = "insert into class (className,enterYear) values('$className',$year)";
-            $r=mysqli_query($db,$class_insert);
-            $classId=mysqli_insert_id($db);
-            //if($r) echo "class insert success+$classId<br>";
+            $find_class_inf="select college,academy from user where userId=".$userId;
+            //echo  $find_class_inf;
+            $set=mysqli_query($db,$find_class_inf);
+            $row=mysqli_fetch_assoc($set);
+            $classCollege=$row['college'];
 
-            $course_insert = "insert into course (courseName) values('$course')";
-            $r=mysqli_query($db,$course_insert);
-            $courseId=mysqli_insert_id($db);
-            //if($r) echo "course insert success+$courseId<br>";
+            //如果已经存在该班级，就使用此班级的id,否则插入一条班级信息以及这个班所有的学生的信息
+            $class_is_new="select * from class where className='$className' and enterYear=$year and classCollege='$classCollege'";
+            //echo $class_is_new;
+            $set=mysqli_query($db,$class_is_new);
+            if(mysqli_num_rows($set)<1){//不存在该班级
+                $class_insert = "insert into class (className,enterYear,classCollege) values('$className',$year,'$classCollege')";
+                $r=mysqli_query($db,$class_insert);
 
-            $id_insert = "insert into class_course_user (userId,classId,courseId) values($userId,$classId,$courseId)";
-            $r=mysqli_query($db,$id_insert);
-            $Id=mysqli_insert_id($db);
+
+
+                if(!$r) exit("插入新班级失败");
+                else
+                $classId=mysqli_insert_id($db);
+
+
+
+                //插入该班全部学生信息
+                date_default_timezone_set("PRC");
+                $dir=dirname(__FILE__);//找到当前脚本所在路径
+                require $dir."/PHPExcel/PHPExcel/IOFactory.php";
+                $filename=$dir."/tempExcel/".$name;
+
+                $objPHPExecl=PHPExcel_IOFactory::load($filename);//全部加载
+                $objSheet=$objPHPExecl->getActiveSheet();
+
+                $stu_insert="INSERT INTO student(stuCode ,stuName ,classId) VALUES ";
+                $data=$objSheet->toArray();//读取每个sheet里的数据 全部放到数组中
+                //  var_dump($data);
+                $stu_num=count($data)-1;
+                for($i=1;$i<count($data);$i++)
+                {
+                    $temp1=$data[$i][0];
+                    $temp2=$data[$i][1];
+                    if($i!=count($data)-1)
+                        $stu_insert=$stu_insert."('$temp1', '$temp2', $classId),";
+                    else  $stu_insert=$stu_insert."('$temp1', '$temp2', $classId)";
+                    //echo "<br>".$data[$i][0]."*".$data[$i][1]."<br>";
+                }
+                //    echo $stu_insert;
+
+                $r=mysqli_query($db,$stu_insert);
+                if(!$r) exit("插入班级学生失败");
+                //if($r) echo "stu insert success<br>";
+
+                $s="update class set classSize=$stu_num where classId=".$classId;
+                //echo $s;
+                $r=mysqli_query($db,$s);
+                if(!$r) exit("更新班级人数失败");
+
+                //if($r) echo "stu_num insert success<br>";
+            }
+            else {
+                $row=mysqli_fetch_assoc($set);
+                $classId=$row['classId'];
+            }
+
+            //如果已经存在该课程，就使用此课程的id,否则插入一条课程信息
+            $course_is_new="select * from course where courseName='$course'";
+            $set=mysqli_query($db,$course_is_new);
+            if(mysqli_num_rows($set)<1){
+                $course_insert = "insert into course (courseName) values('$course')";
+                $r=mysqli_query($db,$course_insert);
+                if(!$r) exit("插入班级失败");
+                $courseId=mysqli_insert_id($db);
+            }
+            else {
+                $row=mysqli_fetch_assoc($set);
+                $courseId=$row['courseId'];
+            }
+            //测试班级及课程信息是否已经存在，已经存在属于重复填写信息，提示用户该信息
+            $id_is_new="select * from class_course_user where courseId=$courseId and classId=$classId and userId=$userId";
+            $set=mysqli_query($db,$id_is_new);
+            if(mysqli_num_rows($set)<1){
+                $id_insert = "insert into class_course_user (userId,classId,courseId) values($userId,$classId,$courseId)";
+                $r=mysqli_query($db,$id_insert);
+                if(!$r) echo $id_insert."fail";
+                $Id=mysqli_insert_id($db);
+            }
+            else {
+                $row=mysqli_fetch_assoc($set);
+                $Id=$row['Id'];
+                exit('该班级及课程信息已存在！');
+            }
+
             //if($r) echo "Id insert success+$Id<br>";
             //echo $class_insert."<br>".$course_insert."<br>".$id_insert.'<br>';
 
-            date_default_timezone_set("PRC");
-            $dir=dirname(__FILE__);//找到当前脚本所在路径
-            require $dir."/PHPExcel/PHPExcel/IOFactory.php";
-            $filename=$dir."/tempExcel/".$name;
 
+            //更新班级的人数
 
-            $objPHPExecl=PHPExcel_IOFactory::load($filename);//全部加载
-            $objSheet=$objPHPExecl->getActiveSheet();
-
-            $stu_insert="INSERT INTO student(stuCode,stuName,Id) VALUES ";
-            $data=$objSheet->toArray();//读取每个sheet里的数据 全部放到数组中
-            //  var_dump($data);
-            $stu_num=count($data)-1;
-            for($i=1;$i<count($data);$i++)
-            {
-                $temp1=$data[$i][0];
-                $temp2=$data[$i][1];
-                if($i!=count($data)-1)
-                    $stu_insert=$stu_insert."('$temp1', '$temp2', $Id),";
-                else  $stu_insert=$stu_insert."('$temp1', '$temp2', $Id)";
-                //echo "<br>".$data[$i][0]."*".$data[$i][1]."<br>";
-            }
-            //    echo $stu_insert;
-
-            $r=mysqli_query($db,$stu_insert);
-
-            //if($r) echo "stu insert success<br>";
-
-            $s="update class set classSize=$stu_num where classId=".$classId;
-
-            //echo $s;
-            $r=mysqli_query($db,$s);
-            $classId=mysqli_insert_id($db);
-            //if($r) echo "stu_num insert success<br>";
             mysqli_close($db);
 
             $delete_file="tempExcel/".$name;
             @unlink($delete_file);
 
-            echo  '上传成功';
+            echo "上传成功";
         }else{
-            echo '文件移动失败';
+            exit('文件移动失败！');
         }
     }else{
         exit('不是上传文件');
