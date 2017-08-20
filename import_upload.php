@@ -91,7 +91,7 @@ else{
             $objPHPExecl=PHPExcel_IOFactory::load($filename);//全部加载
             $objSheet=$objPHPExecl->getActiveSheet();
 
-            $stu_insert="INSERT INTO student(stuName ,stuCode ,Id) VALUES ";
+            $stu_insert="INSERT INTO student(stuCode,stuName,Id) VALUES ";
             $data=$objSheet->toArray();//读取每个sheet里的数据 全部放到数组中
             //  var_dump($data);
             $stu_num=count($data)-1;
