@@ -11,7 +11,7 @@ $userId = $_POST['userId'];
 
 $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userId and classId=$classId";
 //echo $find_course;
-require "mysql-connect.php";
+require "../mysql-connect.php";
 $set=mysqli_query($db,$find_course);
 
 while($row=mysqli_fetch_assoc($set)){
