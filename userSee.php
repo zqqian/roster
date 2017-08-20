@@ -126,7 +126,7 @@ if(!$is_login){
                                 </div>
                                 <div id="panel2" class="panel-collapse collapse collapse">
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="import">自动点名</a>
+                                        <a href="automaticcall.php" target="rightShow" id="import">自动点名</a>
                                     </div>
                                     <div class="panel-body">
                                         <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>签到</title>
-    <script type="text/javascript" src="jquery-latest.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 </head>
 
 <style>

@@ -3,7 +3,7 @@
 
     <meta charset="utf-8">
     <title>补签</title>
-    <script type="text/javascript" src="jquery-latest.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
 
 </head>
 
