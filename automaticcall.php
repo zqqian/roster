@@ -3,10 +3,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>二维码扫描</title>
-    <script type="text/javascript" src="jquery-latest.js"></script>
-    <script type="text/javascript" src="jquery-1.8.0.js"></script>
-    <script type="text/javascript" src="utf.js"></script>
-    <script type="text/javascript" src="jquery.qrcode.js"></script>
+    <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="js/utf.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("#qrcodeCanvas").qrcode({
@@ -16,7 +16,7 @@
                 height : "200",              //二维码的高度
                 background : "#ffffff",       //二维码的后景色
                 foreground : "#000000",        //二维码的前景色
-                src: 'logo.jpg'             //二维码中间的图片
+                src: 'img/logo.jpg'             //二维码中间的图片
             });
         });
     </script>
