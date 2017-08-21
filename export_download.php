@@ -4,7 +4,8 @@ $Class = $_POST['Class'];
 $course = $_POST['course'];
 $gradeType = $_POST['gradeType'];
 $userId = $_POST['userId'];
-
+$dateStart = $_POST['start'];
+$dataEnd = $_POST['end'];
 require "mysql-connect.php";
 $find_id="select * from basic_relation where userId=$userId and courseId=$course and classId=$Class";
 $result=mysqli_query($db,$find_id);
@@ -41,7 +42,9 @@ if ( "nomal" == $gradeType ){//平时成绩
     $objSheet->setCellValue("E1","到课次数");
 
     $sql_roster="SELECT Id,stuCode,stuName,count(*) as 'sum',count(*)-sum(attendance)  as 'arrive', (count(*)-sum(attendance))/count(*) as 'rate'
-FROM student left outer join sturoster  on(student.stuId=sturoster.stuId  and Id=$Id)
+FROM student left outer join sturoster
+on(student.stuId=sturoster.stuId  and Id=$Id and rosterDate between '$dateStart' and
+'$dataEnd')
 where classId=$Class
 group by student.stuId";
     $set=mysqli_query($db,$sql_roster);

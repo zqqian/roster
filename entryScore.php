@@ -45,10 +45,6 @@
         <option value="" selected></option>
         <?php
 
-        //echo "<option value='数据库'>数据库</option>";
-        /*
-         * 1.从session取出用户信息，根据 用户信息 和 班级信息 提取
-        */
         ?>
 
     </select> <br>
