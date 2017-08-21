@@ -85,14 +85,14 @@
                         var h = "<table id=tb>";
                         for (var i = 0; i < data.length; i++) {
                             h += "<tr>";
-                            h += "<td>" + data[i].class_name + "</td>" + "<td>" + data[i].call_time + "</td>" + "<td>" + data[i].attendance_rate_ave + "</td>";
+                            h += "<td>" + data[i].class_name + "</td>" + "<td>" + data[i].call_time + "</td>" +
+                                    "<td>" + data[i].attendance_rate_ave + "</td>";
                             h += "</tr>"
                         }
                         h += "</table>";
                         document.getElementById("showdata").innerHTML = h;
                     }
                 })
-
             }
         }
         else if (search = "选择班级") {
@@ -125,6 +125,5 @@
         else {
         }
     }
-
 </script>
 </html>
