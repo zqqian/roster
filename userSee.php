@@ -3,7 +3,7 @@
 require_once 'get_user_info.php';
 //echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
 if(!$is_login){
-	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
+	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
 }
 ?>
 <!doctype html>
@@ -149,7 +149,7 @@ if(!$is_login){
                                         <a href="#" target="rightShow" id="import">成绩录入</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="import">成绩查询</a>
+                                        <a href="entryScore.php" target="rightShow" id="import">成绩查询</a>
                                     </div>
 
                                 </div>
