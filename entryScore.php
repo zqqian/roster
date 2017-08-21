@@ -5,24 +5,25 @@
     <meta charset="UTF-8">
     <title>成绩查询</title>
     <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
-        #entryForm{
+        body,th{text-align: center;}
+       /* #entryForm{
             display: block;
             width:450px;
-            height: 150px;
+            height: 180px;
             text-align: center;
             line-height: 50px;
             border: pink solid 3px;
             margin: 0 auto;
-        }
+        }*/
     </style>
 </head>
-<script>
 
-</script>
 <body>
 <form  id="entryForm" name="entryForm" >
-    选择班级：<select id="showClass" name="showClass" style="width: 200px;">
+    <label for="showClass">选择班级：</label><select id="showClass" name="showClass" style="width: 200px;">
         <option value="" selected></option>
         <?php
         $userid = $_SESSION['userid'];
@@ -32,28 +33,39 @@
         while($row=mysqli_fetch_assoc($set)){
             echo "<option value='".$row['classId']."'>".$row['enterYear'].$row['className']."</option>";
         }
-        mysqli_close($db);
-        /*
-         * 1.从session取出用户信息，根据用户信息提取
-         * 2.需要用jQuery绑定change事件，然后利用AJAX刷新课程下拉列表的内容 （默认是空值，非空值才判断） 内容 入学年份+班级名
-         *
-       */
-        ?>
+        mysqli_close($db);?>
+
     </select>
     <br>
-    选择课程：<select  id="showCourse" name="showCourse" style="width: 200px;">
+    <label for="showCourse">选择课程：</label><select  id="showCourse" name="showCourse" style="width: 200px;">
         <option value="" selected></option>
-        <?php
+    </select> <br>
 
-        ?>
+    <label for="check">查询项目：</label><select  id="check" name="check" style="width: 200px;">
+        <option value="" selected></option>
 
     </select> <br>
+
     <input type="button" id="showBtn" value="查询">
 </form>
+
+
 <hr>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered table-hover table-condensed" id="showTable">
+
+
+            </table>
+
+        </div>
+    </div>
+</div>
 
 <script>
     $(function(){
+        //班级变动后，课程随之改变
         $("#showClass").change(function(){
             var value=$(this).val();
 
@@ -65,26 +77,52 @@
                     /*console.log(data);*/
                     $("#showCourse").append(data);
                 });
-
             }
             else{
                 $("#showCourse").empty();
                 $("#showCourse").append("<option value='' selected></option>");
             }
         });
+        //课程变动后，查询内容随之改变
+        $("#showCourse").change(function(){
 
+            var courseId=$(this).val();
+
+            if ("" != courseId){
+                $("#check").empty();
+                $("#check").append("<option value='' selected></option>");
+                $("#check").append("<option value='Fgrade' >期末成绩</option>");
+                var classId=$("#showClass").val();
+
+                $.post("phpData/return_check.php",{classId:classId,courseId:courseId,userId:<?php echo $_SESSION['userid'];?>,},function(data){
+                    /*console.log(data);*/
+                    $("#check").append(data);
+                });
+            }
+            else{
+                $("#check").empty();
+                $("#check").append("<option value='' selected></option>");
+            }
+        });
+
+        //点击查询按钮
         $("#showBtn").click(function(){
-            var showClass = $("#showClass").val();
-            var showCourse = $("#showCourse").val();
+
+            var check = $("#check").val();
+            var classId = $("#showClass").val();
+            var courseId = $("#showCourse").val();
 
 
-            if("" == showClass || "" == showCourse){
+            if("" == showClass || "" == showCourse || "" == check){
                 alert("请先填写完信息再查询！")
             }else{
-                console.log(showClass+" "+showCourse);
-                $.post("phpData/return_strgrade.php",{showClass:showClass,showCourse:showCourse,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                console.log(classId+" "+courseId+" "+check);
+                $.post("phpData/return_strgrade.php",{classId:classId,courseId:courseId,check:check,userId:<?php echo $_SESSION['userid'];?>},function(data){
                     //处理并显示返回来的学生成绩
-                        alert(data);
+                    console.log(data);
+                    $("#showTable").empty();
+                    $("#showTable").append(data);
+
 
                 });
 
