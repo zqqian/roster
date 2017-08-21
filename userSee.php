@@ -132,7 +132,7 @@ if(!$is_login){
                                         <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="export">点名信息查询</a>
+                                        <a href="attendance.php" target="rightShow" id="export">点名信息查询</a>
                                     </div>
                                 </div>
                             </div>
