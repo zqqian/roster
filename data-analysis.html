@@ -32,7 +32,7 @@
     <!--课程名及班级容器-->
     <div id="select">
         <span>选择课程名</span>
-        <select id="select_course_name">
+        <select id="select_course_name" onChange = "getclass()">
             <option>c++</option>
             <option>图形学</option>
         </select>
@@ -122,6 +122,7 @@
         var labelFromatter = {
             normal: {
                 label: {
+
                     formatter: function (params) {
                         return 100 - params.value + '%'
                     },
@@ -240,46 +241,45 @@
         var id_number = 1;
         var course_name = "course-name";
         var class_name_array = new Array();
-        $.ajax({
-            type: "POST",
-            url: "analysis.php",
-            data: {userId: userId},
-            dataType: "json",
-            success: function (data) {
-                if (data.status == 1)             //返回课程名，以json数组的形式返回，class_name及对应的班级名
-                {
-                    for (var i = 0; i < data.length; i++) {
-                        class_name_array[i] = data[i].course_name;
-                        class_name_array[i] = new Array();
-                        for (var j = 0; j < data[i].class_name.length; j++) {
-                            class_name_array[i][j] = data[i].class_name[j].name;
+        $("document").ready({
+
+        })
+
+        $(document).ready(function() {
+            $.ajax({
+                type: "POST",
+                url: "analysis.php",
+                data: {userId: userId},
+                dataType: "json",
+                success: function (data) {
+                    if (data.status == 1)             //返回课程名，以json数组的形式返回，class_name及对应的班级名
+                    {
+                        for (var i = 0; i < data.length; i++) {
+                            class_name_array[i] = data[i].course_name;
+                            class_name_array[i] = new Array();
+                            for (var j = 0; j < data[i].class_name.length; j++) {
+                                class_name_array[i][j] = data[i].class_name[j].name;
+                            }
                         }
+                        for (var i = 0; i < class_name_array.length; i++) {
+                            $("#select_course_name").append("<opotion value='" + class_name_array[i] + "'>" + class_name_array[i] + "</opotion>");
+                        }
+                        $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
                     }
                 }
-            }
+            })
         })
-        function load_course_name() {
-            for (var i = 0; i < class_name_array.length; i++) {
-                $("#select_course_name").append("<opotion value='" + class_name_array[i] + "'>" + class_name_array[i] + "</opotion>");
-            }
-            $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
-            $("#select_course_name").change(function () {
+        function getclass(){
                 var obj = document.getElementById("select_course_name");
                 var index = obj.selectedIndex;
                 if (obj.options[index].value != -1) {
-                    $("#select_class_name").html("");
-                    load_class_name(index);
+                    if ($("#select_class_name") != "") {
+                        $("#select_class_name").html("");
+                    }
+                    for (var i = 0; i < class_name_array[index].length; i++) {
+                        $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
+                    }
                 }
-            })
-        }
-
-        function load_class_name(index) {
-            if ($("#select_class_name") != "") {
-                $("#select_class_name").html("");
-            }
-            for (var i = 0; i < class_name_array[index].length; i++) {
-                $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
-            }
         }
         var select_class = new Array();
         function show() {
