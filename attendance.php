@@ -77,6 +77,7 @@ if(!$is_login){
                 alert("rer");
             }
         })
+            alert(" ");
     }
     }
     function searchdate()

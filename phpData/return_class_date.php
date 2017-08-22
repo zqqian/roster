@@ -3,16 +3,8 @@ header("Content-Type:text/html;charset=UTF-8");
 //测试数据
 //$courseName = "数据库";
 //$userId = 18;
-<<<<<<< HEAD
 $courseName = $_POST['selected_course'];
 $userId = $_POST['userId'];
-=======
-
-$courseName = $_POST['selected_course'];
-$userId = $_POST['userId'];
-
-
->>>>>>> 749bb001991f72154afd45041203a7c22e5ad035
 
 require "../mysql-connect.php";
 //找班级
@@ -47,13 +39,11 @@ while($row=mysqli_fetch_assoc($set)){
 //echo json_encode($date_arr);
 
 mysqli_close($db);
-$sum=array('search_class'=>$class_arr,'search_date'=>$date_arr);
-<<<<<<< HEAD
-var_dump($sum);
-=======
 
-//var_dump($sum);
->>>>>>> 749bb001991f72154afd45041203a7c22e5ad035
+
+$sum=array('search_class'=>$class_arr,'search_date'=>$date_arr);
+
+var_dump($sum);
 echo json_encode($sum);
 
 /*json格式样例
