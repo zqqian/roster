@@ -34,7 +34,6 @@ echo "<script>console.log('$email.$college.$academy')</script>";
         var email = $("#email").val();
         var school = $("#school").val();
         var academy = $("#academy").val();
-        alert(email+school+academy);
         $.post("phpData/update_inf.php",{userId:<?php echo $userid;?>,email:email,school:school,academy:academy},function(data){
             if(data == "1") {alert('修改成功');window.location.reload();}
             else alert('修改失败');
@@ -43,7 +42,7 @@ echo "<script>console.log('$email.$college.$academy')</script>";
   /*  alert("");
 $(document).ready(function()
 {
-    $.post("reset-information.php", {userId:<?php echo $_SESSION['userid'];?>}}, function (data) {
+    $.post("reset-information.php", {userId:<?php /*echo $_SESSION['userid'];*/?>}}, function (data) {
             $("#username").val(data.username);
             $("#email").val(data.email);
             $("#school").val(data.college);

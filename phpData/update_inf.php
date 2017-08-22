@@ -11,6 +11,9 @@ $Newschool=$_POST['school'];
 $Newacademy=$_POST['academy'];
 //echo $userId.$Newacademy.$Newschool.$Newemail;
 
+
+require "../mysql-connect.php";
+
 $sql_update="UPDATE user SET email='$Newemail',academy='$Newacademy' WHERE userId=$userId";
 //echo $sql_update;
 $r=mysqli_query($db,$sql_update);
