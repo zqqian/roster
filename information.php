@@ -23,8 +23,8 @@ echo "<script>console.log('$email.$college.$academy')</script>";
 </style>
 <body>
     <label for="email">邮箱</label><input type="text" id="email" value="<?php echo $email;?>"><br>
-    <label for="school">学校</label><input type="text" id="school" value="<?php echo $college;?>"><br>
-    <label for="academy">学院</label><input type="text" id="academy" value="<?php echo $academy;?>">
+    <label for="school">学校</label><input type="text" id="school" value="<?php echo $college;?>" disabled><br>
+    <label for="academy">学院</label><input type="text" id="academy" value="<?php echo $academy;?>"><br>
     <input type="button" id="tijiao" value="保存">
 <script>
     $("#tijiao").click(function(){

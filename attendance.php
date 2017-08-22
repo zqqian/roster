@@ -25,6 +25,11 @@ if(!$is_login){
     #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
     #menusure span{font-size:18px;}
     #select-class{margin:10px;}
+
+/*    #showdata{margin:0 auto;}
+    table{margin:0 auto;}
+    table td{width:200px;}*/
+
 </style>
 <body>
 <div id="course_name">
@@ -72,52 +77,59 @@ if(!$is_login){
             success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
                 date_array=data.search_date;
                 class_array=data.search_class;
-                alert(date_array);
-                alert(class_array);
+//                alert(date_array);
+//                alert(class_array);
+                searchdate();
             }
-        })
-    }
+        });
+    }else{
+            window.location.reload();
+        }
+
     }
     function searchdate()
     {
         $("#menusure span").html("");
         $("#menusure span").html("选择日期");
         $("#select-class").html("");
-        alert(date_array.length);
+//        alert(date_array.length);
+        $("#select-class").append("<option value=\"请选择\" selected>选择日期</option>");
         for(var i=0;i<date_array.length;i++)
         {
             $("#select-class").append("<option value='"+date_array[i]+"'>"+date_array[i]+"</option>");
         }
-        $("#select-class").append("<option value=\"请选择\" selected>选择日期</option>");
+
     }
     function searchclass(){
         $("#menusure span").html("");
         $("#menusure span").html("选择班级");
         $("#select-class").html("");
-        alert(class_array.length);
+//        alert(class_array.length);
+        $("#select-class").append("<option value=\"请选择\" selected>选择班级</option>");
         for(var i=0;i<class_array.length;i++)
         {
             $("#select-class").append("<option value='"+class_array[i]+"'>"+class_array[i]+"</option>");
         }
-        $("#select-class").append("<option value=\"请选择\" selected>选择班级</option>");
+
     }
     function attendance_data() {
         var search = $("#menusure span").html();  //获取当前标签值
-        alert("search"+search);
+//        alert("search"+search);
         var obj = document.getElementById("select-class");
         var index = obj.selectedIndex;
-        alert(index);
+//        alert(obj.options[index].value);
         if (search == "选择日期") {
-            alert("begin");
-            alert(obj.options[index].value);
+//            alert("begin");
+//            alert(obj.options[index].value);
             if (obj.options[index].value!="请选择") {
-                alert("选择班级");
+//                alert("选择班级");
                 $.ajax({
                     type: "POST",
                     url: "phpData/return_rosterDate.php",
-                    data: {search: search, select_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
+                    data: {search: search, selected_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {   //返回数据为班级名、其具体点名时间和缺勤绿
+
                         var h = "<table id=tb>";
                         for (var i = 0; i < data.length; i++) {
                             h += "<tr>";
@@ -126,28 +138,30 @@ if(!$is_login){
                         }
                         h += "</table>";
                         document.getElementById("showdata").innerHTML = h;
-                        alert(h);
+//                        alert(h);
                     }
-                })
+                });
             }
         }
         else if (search == "选择班级") {
-            alert(obj.options[index].value);
+//            alert(obj.options[index].value);
             if (obj.options[index].value != -1) {
-                alert("选择班级");
+//                alert("选择班级");
                 var h="";
+//                alert("111111"+search+obj.options[index].value+18+obj.options[index].value);
                 $.ajax({
                     type: "POST",
                     url: "phpData/return_rosterDate.php",
-                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_date:obj.options[index].value},
+                    data: {search: search, selected_course:$("#select_course").val(),userId:<?php echo $_SESSION['userid'];?>,select_class:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {    //返回数据为学号，学生，点名几次，实到几次，总缺勤率
+                        console.log(data);
                         if(data.length>0) {
-                            h+= "<table id=tb>";
+                            h+= "<table id='tb'>";
                             for (var i = 0; i < data.length; i++) {
                                 h += "<tr>";
-                                h += "<td>" + data[i].student_number + "</td>" + "<td>" + data[i].student_name + "</td>" + "<td>" + data[i].call_number + "</td>" +
-                                    "<td>" + data[i].come_number + "</td>" + data[i].attendance_rate_sum + "</td>";
+                                h += "<td>" + data[i].student_number + "</td><td>" + data[i].student_name + "</td><td>" + data[i].call_number + "</td>" +
+                                    "<td>" + data[i].come_number + "</td><td>" + data[i].attendance_rate_sum + "</td>";
                                 h += "</tr>"
                             }
                             h += "</table>";
@@ -156,10 +170,10 @@ if(!$is_login){
                             h="<span>+该班该课程未点过名</span>";
                         }
                         document.getElementById("showdata").innerHTML = h;
-                        alert(h);
+//                        alert(h);
                     }
-                })
-                alert();
+                });
+//                alert();
             }
         }
         else {

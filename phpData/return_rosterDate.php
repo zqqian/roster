@@ -24,7 +24,7 @@ require "../mysql-connect.php";
 
 if("选择班级" == $search){
 
-    /* $className = "2015 计算机科学与技术1";*/
+   /* $className = "2015 计算机科学与技术1";*/
     $className = $_POST['select_class'];
 
     $class_split= explode(' ',$className);//字符串按字符分割
@@ -54,6 +54,8 @@ group by student.stuId";
 
     $class_return_sum=array();
     while($row=mysqli_fetch_assoc($set)){
+        if( null == $row['Id'])
+            $row['sum'] = null;
         $temp=array(
             'student_number'=>$row['stuCode'],
             'student_name'=>$row['stuName'],
@@ -69,8 +71,8 @@ group by student.stuId";
 
 
 }else if("选择日期" == $search){
-    $date = $_POST['select_date'];
-    // $date = "2017-08-01";
+    $date = $_POST['selected_date'];
+   // $date = "2017-08-01";
     $data_con = $date."%";
 
     $find_date = "SELECT enterYear,className,concat(enterYear,className),rosterDate,realStu,shouldStu,attendanceRate,classSize

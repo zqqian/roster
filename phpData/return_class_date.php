@@ -1,7 +1,5 @@
 <?php
 header("Content-Type:text/html;charset=UTF-8");
-
-
 //测试数据
 //$courseName = "数据库";
 //$userId = 18;
@@ -22,7 +20,6 @@ $result=mysqli_query($db,$find_id);
 $row = mysqli_fetch_assoc($result);
 $Id=$row['Id'];
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
 $find_date = "SELECT rosterDate
 FROM classroster as a
 left outer join basic_relation as b on
@@ -31,8 +28,6 @@ where courseName='$courseName' and userId=$userId
 order by rosterDate asc";
 $set=mysqli_query($db,$find_date);
 $date_arr=array();
-
-
 while($row=mysqli_fetch_assoc($set)){
     array_push($date_arr,substr($row['rosterDate'],0,10));
 
