@@ -74,7 +74,6 @@ if(!$is_login){
         //班级变动后，课程随之改变
         $("#showClass").change(function(){
             var value=$(this).val();
-
             if ("" != value){
                 $("#showCourse").empty();
                 $("#showCourse").append("<option value='' selected></option>");
@@ -91,7 +90,6 @@ if(!$is_login){
         });
         //课程变动后，查询内容随之改变
         $("#showCourse").change(function(){
-
             var courseId=$(this).val();
 
             if ("" != courseId){

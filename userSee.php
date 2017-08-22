@@ -82,10 +82,10 @@ if(!$is_login){
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="margin-right: 50px;">用户设置<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="information.html" target="rightShow">修改用户信息</a>
+                                    <a href="information.php" target="rightShow">修改用户信息</a>
                                 </li>
                                 <li>
-                                    <a href="repassword.html" target="rightShow">修改用户密码</a>
+                                    <a href="repassword.php" target="rightShow">修改用户密码</a>
                                 </li>
                                 <li>
                                     <a href="#" id="logout">退出</a>
