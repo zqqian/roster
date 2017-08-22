@@ -28,6 +28,7 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     <input type="button" id="tijiao" value="保存">
 <script>
     $("#tijiao").click(function(){
+
         var email = $("#email").val();
         var school = $("#school").val();
         var academy = $("#academy").val();

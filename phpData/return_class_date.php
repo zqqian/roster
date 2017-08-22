@@ -1,5 +1,7 @@
 <?php
 header("Content-Type:text/html;charset=UTF-8");
+
+
 //测试数据
 //$courseName = "数据库";
 //$userId = 18;
@@ -19,6 +21,7 @@ $find_id="select * from basic_relation where userId=$userId and courseName='$cou
 $result=mysqli_query($db,$find_id);
 $row = mysqli_fetch_assoc($result);
 $Id=$row['Id'];
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 $find_date = "SELECT rosterDate
 FROM classroster as a
@@ -28,6 +31,8 @@ where courseName='$courseName' and userId=$userId
 order by rosterDate asc";
 $set=mysqli_query($db,$find_date);
 $date_arr=array();
+
+
 while($row=mysqli_fetch_assoc($set)){
     array_push($date_arr,substr($row['rosterDate'],0,10));
 
@@ -43,7 +48,7 @@ mysqli_close($db);
 
 $sum=array('search_class'=>$class_arr,'search_date'=>$date_arr);
 
-var_dump($sum);
+//var_dump($sum);
 echo json_encode($sum);
 
 /*json格式样例

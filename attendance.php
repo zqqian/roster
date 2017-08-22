@@ -34,7 +34,6 @@ if(!$is_login){
         <?php
         $userid = $_SESSION['userid'];
         $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userid";
-
         $set=mysqli_query($db,$find_course);
         while($row=mysqli_fetch_assoc($set)){
             echo "<option value='".$row['courseName']."'>".$row['courseName']."</option>";
@@ -65,7 +64,6 @@ if(!$is_login){
         var obj = document.getElementById("select_course");
         var index = obj.selectedIndex;
         if (obj.options[index].value != "请选择") {
-          alert("");
         $.ajax({
             type:"POST",
             url:"phpData/return_class_date.php",
@@ -74,10 +72,10 @@ if(!$is_login){
             success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
                 date_array=data.search_date;
                 class_array=data.search_class;
-                alert("rer");
+                alert(date_array);
+                alert(class_array);
             }
         })
-            alert(" ");
     }
     }
     function searchdate()
@@ -85,28 +83,35 @@ if(!$is_login){
         $("#menusure span").html("");
         $("#menusure span").html("选择日期");
         $("#select-class").html("");
+        alert(date_array.length);
         for(var i=0;i<date_array.length;i++)
         {
-            $("#select-class").append("<opotion value='"+date_array[i]+"'>"+date_array[i]+"</opotion>");
+            $("#select-class").append("<option value='"+date_array[i]+"'>"+date_array[i]+"</option>");
         }
-        $("#select-class").append("<opotion value=\"请选择\" selected>选择日期</opotion>");
+        $("#select-class").append("<option value=\"请选择\" selected>选择日期</option>");
     }
     function searchclass(){
         $("#menusure span").html("");
         $("#menusure span").html("选择班级");
         $("#select-class").html("");
+        alert(class_array.length);
         for(var i=0;i<class_array.length;i++)
         {
-            $("#select-class").append("<opotion value='"+class_array[i]+"'>"+class_array[i]+"</opotion>");
+            $("#select-class").append("<option value='"+class_array[i]+"'>"+class_array[i]+"</option>");
         }
-        $("#select-class").append("<opotion value=\"请选择\" selected>选择班级</opotion>");
+        $("#select-class").append("<option value=\"请选择\" selected>选择班级</option>");
     }
     function attendance_data() {
         var search = $("#menusure span").html();  //获取当前标签值
-        var obj = document.getElementById("select_class");
+        alert("search"+search);
+        var obj = document.getElementById("select-class");
         var index = obj.selectedIndex;
+        alert(index);
         if (search == "选择日期") {
-            if (obj.options[index].value !="请选择") {
+            alert("begin");
+            alert(obj.options[index].value);
+            if (obj.options[index].value!="请选择") {
+                alert("选择班级");
                 $.ajax({
                     type: "POST",
                     url: "phpData/return_rosterDate.php",
@@ -121,19 +126,22 @@ if(!$is_login){
                         }
                         h += "</table>";
                         document.getElementById("showdata").innerHTML = h;
+                        alert(h);
                     }
                 })
             }
         }
         else if (search == "选择班级") {
+            alert(obj.options[index].value);
             if (obj.options[index].value != -1) {
+                alert("选择班级");
+                var h="";
                 $.ajax({
                     type: "POST",
                     url: "phpData/return_rosterDate.php",
-                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
+                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_date:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {    //返回数据为学号，学生，点名几次，实到几次，总缺勤率
-                        var h="";
                         if(data.length>0) {
                             h+= "<table id=tb>";
                             for (var i = 0; i < data.length; i++) {
@@ -148,8 +156,10 @@ if(!$is_login){
                             h="<span>+该班该课程未点过名</span>";
                         }
                         document.getElementById("showdata").innerHTML = h;
+                        alert(h);
                     }
                 })
+                alert();
             }
         }
         else {
