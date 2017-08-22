@@ -16,7 +16,7 @@ $result=mysqli_query($db,$find_id);
 $row = mysqli_fetch_assoc($result);
 $Id=$row['Id'];
 
-$find_start_end = "SELECT Id,min(rosterDate) as min,max(rosterDate) as max FROM `classroster`  group by Id having Id=51";
+$find_start_end = "SELECT Id,min(rosterDate) as min,max(rosterDate) as max FROM `classroster`  group by Id having Id=$userId";
 $result=mysqli_query($db,$find_start_end);
 $row = mysqli_fetch_assoc($result);
 

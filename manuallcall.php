@@ -7,8 +7,7 @@ if(!$is_login){
 }
 ?>
 
-<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
-      xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>手动点名</title>
@@ -21,11 +20,9 @@ if(!$is_login){
         text-align: center;
         font-size:100%;
     }
-    #selectl
+    #selectclass
     {
-        font-size: 1.0em;
-        font-height:30px;
-        font-style:normal;
+        width:130px;
     }
     #tablel
     {
@@ -75,27 +72,21 @@ if(!$is_login){
 
             <th>
                 <div>
-                    <label for="selectl">选择班级：</label>
-                    <select id="selectclass" name="classes">
-                        <option name="" value="" selected></option><?php
-						$sql = "select classId from class_course_user where userId = '$userid' ";
-						$result=mysqli_query($db,$sql);
-						while($row = mysqli_fetch_assoc($result)){
-							$classid=$row['classId'];
-							$sql2 = "select className from class where classId = '$classid' ";
-						$result2=mysqli_query($db,$sql2);
-						$row2 = mysqli_fetch_assoc($result2);
-						echo "<option name=".$row2['className']." value=".$row2['className'].">".$row2['className']."</option>";
-							
-							
-						}
-						
-						?>
-                        
+                    <label for="selectcourse" >选择课程：</label>
+                    <select id="selectcourse" name="course">
+                        <option  value="" selected></option>
+                        <?php
+                        $sql = "select distinct(courseId) from class_course_user where userId = '$userid' ";
+                        $result=mysqli_query($db,$sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            $courseid=$row['courseId'];
+                            $sql2 = "select courseName from course where courseId = '$courseid' ";
+                            $result2=mysqli_query($db,$sql2);
+                            $row2 = mysqli_fetch_assoc($result2);
+                            echo "<option value=".$row2['courseName'].">".$row2['courseName']."</option>";
+                        }
+                        ?>
                     </select>
-                    <button id="classok">确定</button>
-                    </br>
-                    <label id="classlab"></label>
                 </div>
 
             </th>
@@ -103,25 +94,14 @@ if(!$is_login){
             <th  style="vertical-align:top;">
 
                 <div>
-                    <label for="selectl" >选择课程：</label>
-                    <select id="selectcourse" name="course">
-                        <option name="" value="" selected></option>
-                        <?php
-                        $sql = "select courseId from class_course_user where userId = '$userid' ";
-                        $result=mysqli_query($db,$sql);
-                        while($row = mysqli_fetch_assoc($result)){
-                            $courseid=$row['courseId'];
-                            $sql2 = "select courseName from course where courseId = '$courseid' ";
-                            $result2=mysqli_query($db,$sql2);
-                            $row2 = mysqli_fetch_assoc($result2);
-                            echo "<option name=".$row2['courseName']." value=".$row2['courseName'].">".$row2['courseName']."</option>";
-
-
-                        }
-
-                        ?>
-
+                    <label for="selectclass">选择班级：</label>
+                    <select id="selectclass" >
+                        <option  value="" selected></option>
                     </select>
+
+                    <button id="classok">确定</button>
+                    <br>
+                    <label id="classlab"></label>
                 </div>
 
             </th>
@@ -129,7 +109,7 @@ if(!$is_login){
             <th style="vertical-align:top;">
 
                 <div>
-                    <label for="selectl">点名人数：</label>
+                    <label for="selectnum">点名人数：</label>
                     <input type="text"  style="display:inline-block;width:100px;"id="selectnum" name="callnum" placeholder="点名人数">
                 </div>
 
@@ -138,7 +118,7 @@ if(!$is_login){
         </tr>
 
     </table>
-    </br>
+    <br>
     <button id="btn1">开始点名</button>
 
 <div id="hidetrangle" class="trangle">
@@ -179,13 +159,56 @@ if(!$is_login){
 
 <script>
 
-        $(function(){
+    function loadXMLDoc() {
+        if($("#tranglenum").text()==$("#selectnum").val()) {
+            alert("点名完成");
+            window.location.reload();
+        }
+        else {
+            x = Number($("#tranglenum").text()) + 1;
+            $("#tranglenum").html(x);
+            $("#last").prop("disabled", false);
+        }
+    }
+
+    function lastloadXMLDoc() {
+        $("#last").prop("disabled", false);
+        x = Number($("#tranglenum").text()) - 1;
+        if(x==1)
+            $("#last").prop("disabled", true);
+        $("#tranglenum").html(x);
+    }
+
+    function isContains(str,substr){
+        return str.indexOf(substr)>=0;
+    }
+
+
+    $(function(){
 
             $("#hidetrangle").hide();
 
+
+            $("#selectcourse").change(function(){
+                var courseName = $(this).val();
+                if("" == courseName){
+                    $("#selectclass").empty();
+                    $("#selectclass").append("<option value='' selected></option>");
+                }else{
+
+                    $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                        $("#selectclass").empty();
+                        $("#selectclass").append("<option value='' selected></option>");
+                        $("#selectclass").append(data);
+                    });
+
+                }
+            });//end change
+
             $("#classok").click(function(){
                 var classs=$("#selectclass").val();
-                if(""!=classs)
+                var labelclass=$("#classlab").text();
+                if(""!=classs && !isContains(labelclass,classs))
                      $("#classlab").append("+"+classs);
             });
 
@@ -193,8 +216,8 @@ if(!$is_login){
                 var classs=$("#classlab").text();
               var course=$("#selectcourse").val();
               var number=$("#selectnum").val();
-                if(""==classs) alert("请选择班级");
-                else  if(""==course) alert("请选择课程");
+                if(""==course) alert("请选择课程");
+                else  if(""==classs) alert("请选择班级");
                 else if(""==number)alert("请输入点名数字")
                 else if(number<=0 ||isNaN(number)) alert("请输入有效点名数字");
                 else {
@@ -207,7 +230,7 @@ if(!$is_login){
                    $("#hidetrangle").show();
                     $("#last").prop("disabled",true);
 
-                    $.post("manualcall_info.php",{classlab:classs, courseName:course, num:number },function(data){
+                    $.getJSON("manualcall_info.php",{ courseName:course,classlab:classs, num:number,userId:<?php echo $_SESSION['userid'];?> },function(data){
                             console.log(data);
                     });
                 }
@@ -215,64 +238,8 @@ if(!$is_login){
           });
 
 
-
         });
 
-        function loadXMLDoc() {
-            if($("#tranglenum").text()==$("#selectnum").val()) {
-                alert("点名完成");
-                $("#classok").prop("disabled",false);
-                $("#classlab").html("");
-                $("#selectclass").prop("disabled", false);
-                $("#selectcourse").prop("disabled", false);
-                $("#selectnum").prop("disabled", false);
-                $("#classlab").prop("disabled",false);
-                $("#btn1").prop("disabled",false);
-                $("#tranglenum").html(1);
-                $("#hidetrangle").hide();
-            }
-            else {
-                x = Number($("#tranglenum").text()) + 1;
-                $("#tranglenum").html(x);
-                $("#last").prop("disabled", false);
-            }
-        }
-
-        function lastloadXMLDoc() {
-                $("#last").prop("disabled", false);
-                x = Number($("#tranglenum").text()) - 1;
-                if(x==1)
-                    $("#last").prop("disabled", true);
-                $("#tranglenum").html(x);
-        }
-
-       /* function loadXMLDoc() {
-            $.get("re.php",{name:"lu"},function(data){
-
-                x=Number($("#tranglenum").text())+Number(data);
-                $("#tranglenum").html(x);
-            })
-        }*/
-        /*function loadXMLDoc() {
-            var xmlhttp;
-            var x;
-            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            }
-            else {// code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    x=Number($("#tranglenum").text())+Number(xmlhttp.responseText);
-
-                    alert(x);
-                    $("#tranglenum").html(x);
-                }
-            }
-            xmlhttp.open("GET", "re.php", true);
-            xmlhttp.send();
-        };*/
     </script>
 </body>
 </html>

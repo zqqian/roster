@@ -1,16 +1,16 @@
 <?php
 require_once 'get_user_info.php';
 //用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
-if(!$is_login){
+/*if(!$is_login){
     echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
-}
+}*/
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>点名信息查询</title>
-    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="js/jquery-3.2.1.js"></script>
 </head>
 <style>
     html,body{margin:0px;padding:0px;}
@@ -33,11 +33,11 @@ if(!$is_login){
         <option value="请选择" selected></option>
         <?php
         $userid = $_SESSION['userid'];
-        $find_class = "SELECT DISTINCT a.classId,className,enterYear FROM class as a,class_course_user as b where a.classId=b.classId and b.userId=".$userid;
-        require "mysql-connect.php";
-        $set=mysqli_query($db,$find_class);
+        $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userid";
+
+        $set=mysqli_query($db,$find_course);
         while($row=mysqli_fetch_assoc($set)){
-            echo "<option value='".$row['course_name']."</option>";
+            echo "<option value='".$row['courseName']."'>".$row['courseName']."</option>";
         }
         mysqli_close($db);?>
     </select>
@@ -70,7 +70,7 @@ if(!$is_login){
         $.ajax({
             type:"POST",
             url:"attendance.php",
-            data:{userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value}
+            data:{userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
             dataType:"json",
             success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
                 date_array=data.search_date;
@@ -104,12 +104,12 @@ if(!$is_login){
         var search = $("#menusure span").html();  //获取当前标签值
         var obj = document.getElementById("select_class");
         var index = obj.selectedIndex;
-        if (search = "选择日期") {
+        if (search == "选择日期") {
             if (obj.options[index].value !="请选择") {
                 $.ajax({
                     type: "POST",
                     url: "attendance.php",
-                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
+                    data: {search: search, select_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {   //返回数据为班级名、其具体点名时间和缺勤绿
                         var h = "<table id=tb>";
@@ -125,7 +125,7 @@ if(!$is_login){
 
             }
         }
-        else if (search = "选择班级") {
+        else if (search == "选择班级") {
             if (obj.options[index].value != -1) {
                 $.ajax({
                     type: "POST",
