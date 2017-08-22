@@ -3,11 +3,11 @@ header("Content-Type:text/html;charset=UTF-8");
 
 
 //测试数据
-$courseName = "数据库";
-$userId = 18;
+//$courseName = "数据库";
+//$userId = 18;
 
-//$courseName = $_POST['selected_course'];
-//$userId = $_POST['userId'];
+$courseName = $_POST['selected_course'];
+$userId = $_POST['userId'];
 
 
 
@@ -64,8 +64,8 @@ mysqli_close($db);
 
 $sum=array('search_class'=>$class_arr,'search_date'=>$date_arr);
 
-var_dump($sum);
-echo "<br>".json_encode($sum);
+//var_dump($sum);
+echo json_encode($sum);
 
 /*json格式样例
  * $exam1=array(1,2,3,4);

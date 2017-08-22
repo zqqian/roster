@@ -25,7 +25,7 @@ require "../mysql-connect.php";
 if("选择班级" == $search){
 
    /* $className = "2015 计算机科学与技术1";*/
-    $className = $_POST['selected_course'];
+    $className = $_POST['select_class'];
 
     $class_split= explode(' ',$className);//字符串按字符分割
     $enterYear = $class_split[0];
