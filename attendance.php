@@ -1,9 +1,9 @@
 <?php
 require_once 'get_user_info.php';
 //用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
-/*if(!$is_login){
+if(!$is_login){
     echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
-}*/
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -30,7 +30,7 @@ require_once 'get_user_info.php';
 <div id="course_name">
     <span>选择课程</span>
     <select id="select_course" onChange = "getcourse()">
-        <option value="请选择" selected></option>
+        <option value="请选择" selected>请选择</option>
         <?php
         $userid = $_SESSION['userid'];
         $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userid";
@@ -51,30 +51,30 @@ require_once 'get_user_info.php';
 <div id="menusure">
     <span>选择日期</span>
     <select id="select-class" onChange = "attendance_data()">
-        <option>国贸</option>
-        <option>计科</option>
+<!--        <option>国贸</option>-->
+<!--        <option>计科</option>-->
     </select>
 </div>
 <div id="showdata">
-
 </div>
 </body>
 <script>
-    var userId=session.getAttribute("userID").toString(); //返回班级名称字符串，以,隔开
     var date_array=new Array();
     var class_array=new Array();
     function getcourse(){
         var obj = document.getElementById("select_course");
         var index = obj.selectedIndex;
         if (obj.options[index].value != "请选择") {
+          alert("");
         $.ajax({
             type:"POST",
-            url:"attendance.php",
-            data:{userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
+            url:"phpData/return_class_date.php",
+            data:{userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
             dataType:"json",
             success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
                 date_array=data.search_date;
                 class_array=data.search_class;
+                alert("rer");
             }
         })
     }
@@ -108,8 +108,8 @@ require_once 'get_user_info.php';
             if (obj.options[index].value !="请选择") {
                 $.ajax({
                     type: "POST",
-                    url: "attendance.php",
-                    data: {search: search, select_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
+                    url: "phpData/return_rosterDate.php",
+                    data: {search: search, select_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {   //返回数据为班级名、其具体点名时间和缺勤绿
                         var h = "<table id=tb>";
@@ -122,15 +122,14 @@ require_once 'get_user_info.php';
                         document.getElementById("showdata").innerHTML = h;
                     }
                 })
-
             }
         }
         else if (search == "选择班级") {
             if (obj.options[index].value != -1) {
                 $.ajax({
                     type: "POST",
-                    url: "attendance.php",
-                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>},selected_course:obj.options[index].value},
+                    url: "phpData/return_rosterDate.php",
+                    data: {search: search, select_class: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
                     dataType: "json",
                     success: function (data) {    //返回数据为学号，学生，点名几次，实到几次，总缺勤率
                         var h="";

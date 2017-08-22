@@ -9,15 +9,12 @@
     <meta name="description" content="云点名系统">
     <meta name="author" content="创意武装H5团队">
     <!--每30秒中刷新当前页面:<meta http-equiv="refresh" content="30">-->
-
     <title>云点名系统主页</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
 	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
     <style>
         /*为适应低版本的浏览器而设置的*/
         header, section, footer, aside, nav, main, article, figure {display: block;}
