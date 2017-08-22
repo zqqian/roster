@@ -1,9 +1,8 @@
 <?php
-//为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
-//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
+//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
 if(!$is_login){
-	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
 }
 ?>
 <!doctype html>
