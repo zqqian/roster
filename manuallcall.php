@@ -230,7 +230,7 @@ if(!$is_login){
                    $("#hidetrangle").show();
                     $("#last").prop("disabled",true);
 
-                    $.post("manualcall_info.php",{ courseName:course,classlab:classs, num:number },function(data){
+                    $.getJSON("manualcall_info.php",{ courseName:course,classlab:classs, num:number },function(data){
                             console.log(data);
                     });
                 }
