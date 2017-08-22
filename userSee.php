@@ -1,9 +1,8 @@
 <?php
-//为方便本页面测试 暂时屏蔽
 require_once 'get_user_info.php';
-//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
+//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
 if(!$is_login){
-	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
 }
 ?>
 <!doctype html>
@@ -132,7 +131,7 @@ if(!$is_login){
                                         <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="export">点名信息查询</a>
+                                        <a href="attendance.php" target="rightShow" id="export">点名信息查询</a>
                                     </div>
                                 </div>
                             </div>

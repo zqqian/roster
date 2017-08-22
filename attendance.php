@@ -6,20 +6,20 @@
     <script src="../js/jquery-3.2.1.js"></script>
 </head>
 <style>
-   html,body{margin:0px;}
+    html,body{margin:0px;}
     #menuselect{display:block;width:100%;height:50px;background-color:#212121;
-      text-align:center;margin: 0px;padding:0px;line-height:75px;}
+        text-align:center;margin: 0px;padding:0px;line-height:75px;}
     .showa{font-size: 20px;color: #fffdfc;}
     ul li{list-style-type:none;display:inline;margin:7%;}
     #menusure{display:block;width:100%;height:100px;background-color:#E6F5FF;text-align:center;line-height:100px;}
-     span{font-size:18px;}
+    span{font-size:18px;}
     select{margin:10px;}
 </style>
 <body>
 <div id="menuselect">
     <ul>
-    <li> <a href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
-    <li> <a href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
+        <li> <a href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
+        <li> <a href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
     </ul>
 </div>
 <div id="menusure">
@@ -38,28 +38,28 @@
     var date_array=new Array();
     var class_array=new Array();
     $(document).ready(function(){
-    $.ajax({
-        type:"POST",
-        url:"attendance.php",
-        data:{userId:userId},
-        dataType:"json",
-        success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
-            date_array=data.search_date;
-            class_array=data.search_class;
-        }
+        $.ajax({
+            type:"POST",
+            url:"attendance.php",
+            data:{userId:userId},
+            dataType:"json",
+            success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
+                date_array=data.search_date;
+                class_array=data.search_class;
+            }
         })
     })
-   function searchdate()
-   {
-       $("span").html("");
-       $("span").html("选择日期");
-       $("#select-class").html("");
-       for(var i=0;i<date_array.length;i++)
-       {
-           $("#select-class").append("<opotion value='"+date_array[i]+"'>"+date_array[i]+"</opotion>");
-       }
-       $("#select-class").append("<opotion value=\"-1\">选择日期</opotion>");
-   }
+    function searchdate()
+    {
+        $("span").html("");
+        $("span").html("选择日期");
+        $("#select-class").html("");
+        for(var i=0;i<date_array.length;i++)
+        {
+            $("#select-class").append("<opotion value='"+date_array[i]+"'>"+date_array[i]+"</opotion>");
+        }
+        $("#select-class").append("<opotion value=\"-1\">选择日期</opotion>");
+    }
     function searchclass(){
         $("span").html("");
         $("span").html("选择班级");
@@ -103,6 +103,7 @@
                     data: {search: search, select_class: obj.options[index].value},
                     dataType: "json",
                     success: function (data) {    //返回数据为学号，学生，点名几次，实到几次，总缺勤率
+<<<<<<< HEAD:attendance.html
                         var h="";
                         if(data.length>0) {
                             h+= "<table id=tb>";
@@ -116,6 +117,14 @@
                         }
                         else{
                               h="<span>+该班未点过名</span>";
+=======
+                        var h = "<table id=tb>";
+                        for (var i = 0; i < data.length; i++) {
+                            h += "<tr>";
+                            h += "<td>" + data[i].student_number + "</td>" + "<td>" + data[i].student_name + "</td>" + "<td>" + data[i].call_number + "</td>" +
+                                "<td>" + data[i].come_number + "</td>" + data[i].attendance_rate_sum + "</td>";
+                            h += "</tr>"
+>>>>>>> c7a7f11b8a84ed563b9355388833dcc3c45851dd:attendance.php
                         }
                         document.getElementById("showdata").innerHTML = h;
                     }
