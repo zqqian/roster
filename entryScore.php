@@ -54,21 +54,15 @@ if(!$is_login){
 
     <input type="button" id="showBtn" value="查询">
 </form>
-
-
 <hr>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
             <table class="table table-bordered table-hover table-condensed" id="showTable">
-
-
             </table>
-
         </div>
     </div>
 </div>
-
 <script>
     $(function(){
         //班级变动后，课程随之改变
@@ -97,7 +91,6 @@ if(!$is_login){
                 $("#check").append("<option value='' selected></option>");
                 $("#check").append("<option value='Fgrade' >期末成绩</option>");
                 var classId=$("#showClass").val();
-
                 $.post("phpData/return_check.php",{classId:classId,courseId:courseId,userId:<?php echo $_SESSION['userid'];?>,},function(data){
                     /*console.log(data);*/
                     $("#check").append(data);
@@ -115,8 +108,6 @@ if(!$is_login){
             var check = $("#check").val();
             var classId = $("#showClass").val();
             var courseId = $("#showCourse").val();
-
-
             if("" == showClass || "" == showCourse || "" == check){
                 alert("请先填写完信息再查询！")
             }else{
@@ -126,21 +117,11 @@ if(!$is_login){
                     console.log(data);
                     $("#showTable").empty();
                     $("#showTable").append(data);
-
-
                 });
 
             }
         });
-
-
-
-
-
-
-
     });//document.onload
-
 </script>
 </body>
 </html>

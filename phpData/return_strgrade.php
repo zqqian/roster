@@ -12,9 +12,7 @@ $row = mysqli_fetch_assoc($result);
 $Id=$row['Id'];
 //$inf=$row['enterYear'].$row['className'].$row['courseName'];
 
-
 //接下来写sql语句返回该门班级该门课程的学生成绩列表
-
 $str="<thead><tr><th>学号</th><th>姓名</th><th>成绩</th></tr></thead><tbody>";
 echo $str;
 
@@ -24,7 +22,6 @@ from student as s
 left outer join grade as g
 on(s.stuId=g.stuId and g.Id=$Id)
 where s.classId=$classId order by s.stuId";
-
     $set=mysqli_query($db,$find_Fgrade);
     $i=0;
     while($row=mysqli_fetch_assoc($set)){
@@ -52,7 +49,6 @@ where s.classId=$classId and definegrade.userdefineId=$check order by s.stuId";
     while($row=mysqli_fetch_assoc($set)){
         if( $i % 2 == 1)echo "<tr><td>";
         else echo "<tr class='success'><td>";
-
         echo $row['stuCode']."</td><td>".$row['stuName']."</td><td>";
         if(null == $row['fieldGrade'])
             echo "暂未录入</td></tr>";

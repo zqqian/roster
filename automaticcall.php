@@ -20,9 +20,7 @@
             });
         });
     </script>
-
 </head>
-
 <style>
     .body
     {
