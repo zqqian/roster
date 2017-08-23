@@ -28,9 +28,7 @@ if(!$is_login){
             });
         });
     </script>
-
 </head>
-
 <style>
     #twocode
     {
