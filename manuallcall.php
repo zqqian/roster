@@ -191,6 +191,7 @@ if(!$is_login){
 
             $("#selectcourse").change(function(){
                 var courseName = $(this).val();
+                $("#classlab").html("");
                 if("" == courseName){
                     $("#selectclass").empty();
                     $("#selectclass").append("<option value='' selected></option>");

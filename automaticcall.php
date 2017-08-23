@@ -1,3 +1,11 @@
+<?php
+//为方便本页面测试 暂时屏蔽
+require_once 'get_user_info.php';
+//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
+if(!$is_login){
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,7 +32,7 @@
 </head>
 
 <style>
-    .body
+    #twocode
     {
         text-align:center;
     }
@@ -33,39 +41,92 @@
         float:left;
         margin-left:42%;
     }
+    #tablel
+    {
+        border: 0;
+        vertical-align: top;
+       /* background-color: red;*/
+        width: 195%;
+        float: left;
+        margin-left: -240px;
+    }
+    #selectclass{
+        width:130px;
+    }
 </style>
 
-<body class="body">
+<body>
 
 <div class="select2">
-    <label for="selectl">选择班级：</label>
-    <select id="selectclass" name="classes">
-        <option name="" value="" selected></option>
-        <option name="计科一班" value="计科一班">计科一班</option>
-        <option name="saab"value="saab">Saab</option>
-        <option name="opel"value="opel">Opel</option>
-        <option name="audi"value="audi">Audi</option>
-    </select>
-    <button id="classok">选定</button>
-    </br>
-    <label id="classlab"></label>
-    </br>
-    <button id="classsure">确定</button>
+
+                <div>
+                    <label for="selectcourse" >选择课程：</label>
+                    <select id="selectcourse" name="course">
+                        <option  value="" selected></option>
+                        <?php
+                        $sql = "select distinct(courseId) from class_course_user where userId = '$userid' ";
+                        $result=mysqli_query($db,$sql);
+                        while($row = mysqli_fetch_assoc($result)){
+                            $courseid=$row['courseId'];
+                            $sql2 = "select courseName from course where courseId = '$courseid' ";
+                            $result2=mysqli_query($db,$sql2);
+                            $row2 = mysqli_fetch_assoc($result2);
+                            echo "<option value=".$row2['courseName'].">".$row2['courseName']."</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="selectclass">选择班级：</label>
+                    <select id="selectclass" >
+                        <option  value="" selected></option>
+                    </select>
+
+                    <button id="classok">选定</button>
+                    <br>
+                    <label id="classlab"></label>
+                    </br>
+                    <button id="classsure"style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;float: left;margin-left: 94px;'>确定</button>
+                </div>
+
 </div>
 </br>
 </br>
 <div id="twocode">
-    </br>
-    <center>
+    <br>
+    <br>
+    <center >
          <h2>该请扫描该二维码</h2>
          <div id="qrcodeCanvas"></div>
     </center>
-    </br>
-    <h2>已有<span id="havenumtc"></span>人扫描</h2>
+    <br>
+
+    <h2 style="text-align: center;">已有<span id="havenumtc"></span>人扫描</h2>
     <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>
 </div>
 
 <script>
+
+    function isContains(str,substr){
+        return str.indexOf(substr)>=0;
+    }
+
+    $("#selectcourse").change(function(){
+        var courseName = $(this).val();
+        $("#classlab").html("");
+        if("" == courseName){
+            $("#selectclass").empty();
+            $("#selectclass").append("<option value='' selected></option>");
+        }else{
+            $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                $("#selectclass").empty();
+                $("#selectclass").append("<option value='' selected></option>");
+                $("#selectclass").append(data);
+            });
+
+        }
+    });//end change
 
     $(function(){
 
@@ -73,11 +134,13 @@
 
         $("#classok").click(function(){
             var classs=$("#selectclass").val();
-            if(""!=classs)
+            var labelclass=$("#classlab").text();
+            if(""!=classs && !isContains(labelclass,classs))
                 $("#classlab").append("+"+classs);
         });
 
         $("#classsure").click(function(){
+            $("#selectcourse").prop("disabled",true);
             $("#selectclass").prop("disabled",true);
             $("#classok").prop("disabled",true);
             $("#classsure").prop("disabled",true);
