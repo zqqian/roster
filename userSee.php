@@ -136,7 +136,6 @@ if(!$is_login){
                                 </div>
                             </div>
                             <!-- 点名 -->
-
                             <!-- 成绩 -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">

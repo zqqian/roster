@@ -13,11 +13,7 @@ $userId = $_POST['userId'];
 /*$search = "选择日期";
 $courseName = "数据库";
 $userId = 18;*/
-
 require "../mysql-connect.php";
-
-
-
 
 
 
@@ -39,8 +35,7 @@ if("选择班级" == $search){
     $classId=$row['classId'];
 
     //echo $Id.$classId;
-    $str="<thead><tr><th>学号</th><th>姓名</th><th>点名次数</th><th>实到次数</th><th>平均出勤率</th></tr></thead><tbody>";
-    echo $str;
+
     //找班级点名信息
     $find_class = "SELECT Id,stuCode,stuName,count(*) as 'sum',count(*)-sum(attendance)  as 'arrive', (count(*)-sum(attendance))/count(*) as 'rate'
 FROM student left outer join sturoster
@@ -48,6 +43,13 @@ on(student.stuId=sturoster.stuId  and Id=$Id )
 where classId=$classId
 group by student.stuId";
     $set=mysqli_query($db,$find_class);
+
+    $str="<thead><tr><th>学号</th><th>姓名</th><th>点名次数</th><th>实到次数</th><th>平均出勤率</th></tr></thead><tbody>";
+    if(mysqli_num_rows($set)<1) exit("1");
+    else echo $str;
+
+
+
 
     $class_return_sum=array();
     $i=0;

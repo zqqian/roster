@@ -22,20 +22,45 @@ echo "<script>console.log('$email.$college.$academy')</script>";
 <style>
 </style>
 <body>
-    <label for="email">邮箱</label><input type="text" id="email" value="<?php echo $email;?>"><br>
-    <label for="school">学校</label><input type="text" id="school" value="<?php echo $college;?>" disabled><br>
-    <label for="academy">学院</label><input type="text" id="academy" value="<?php echo $academy;?>"><br>
-    <input type="button" id="tijiao" value="保存">
+    <label for="username">用户名</label><input type="text" class="myinput" id="username" value="<?php echo $username;?>" disabled><br>
+    <label for="email">邮箱</label><input type="text"  class="myinput" id="email" value="<?php echo $email;?>" disabled><br>
+    <label for="school">学校</label><input type="text" class="myinput"  id="school" value="<?php echo $college;?>" disabled><br>
+    <label for="academy">学院</label><input type="text" class="myinput" id="academy" value="<?php echo $academy;?>" disabled><br>
+    <input type="button" id="bianji" value="编辑">
+    <input type="button" id="tijiao" value="保存" disabled="disabled">
 <script>
-    $("#tijiao").click(function(){
+    $("#bianji").click(function(){
+        $("#email").removeAttr("disabled");
+        $("#academy").removeAttr("disabled");
+//        $("#tijiao").removeAttr("disabled");
+        $(".myinput").on('input',function(e) {
+            $("#tijiao").removeAttr("disabled");
+        });
+    })
 
+    $("#tijiao").click(function(){
         var email = $("#email").val();
         var school = $("#school").val();
         var academy = $("#academy").val();
-        $.post("phpData/update_inf.php",{userId:<?php echo $userid;?>,email:email,school:school,academy:academy},function(data){
-            if(data == "1") {alert('修改成功');window.location.reload();}
-            else alert('修改失败');
-        });
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if ( !reg.test(email)) {
+            alert("邮箱格式不正确，请重新输入");
+            document.getElementById("email").focus();
+        }
+        else {
+            $.post("phpData/update_inf.php", {
+                userId:<?php echo $userid;?>,
+                email: email,
+                school: school,
+                academy: academy
+            }, function (data) {
+                if (data == "1") {
+                    alert('修改成功');
+                    window.location.reload();
+                }
+                else alert('修改失败');
+            });
+        }
     });
   /*  alert("");
 $(document).ready(function()
