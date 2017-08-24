@@ -88,10 +88,8 @@
                                                 <span class="input-group-addon" id="checkUsername">*</span>
                                             </div>
                                             <br>
-
                                             <input type="email" class="form-control" placeholder="请输入邮箱" maxlength="30"
                                                    id="email" name="email" style="margin-bottom:20px;">
-
                                             <input type="password" class="form-control" id="Rpassword1" maxlength="20"
                                                    name="Rpassword1" placeholder="请输入密码"><br>
                                             <input type="password" class="form-control" id="Rpassword2" maxlength="20"
