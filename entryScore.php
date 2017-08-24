@@ -42,6 +42,8 @@ if(!$is_login){
         <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal"/>
         <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         <hr>
+        <span>30</span>
+        <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
         <div id="normal" class="kuang">
 
         </div>
@@ -75,6 +77,11 @@ if(!$is_login){
         });
         $("#entryFinal").click(function(){
             alert("final");
+        });
+
+        $("#range").change(function(){
+            var temp = $("#range").val();
+            $("#rangeSpan").text(temp);
         });
 
 

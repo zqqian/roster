@@ -18,18 +18,22 @@ if(!$is_login){
     html,body{margin:0px;padding:0px;}
     #course_name{display:block;width:100%;height:50px;background-color:#000000;text-align:center;line-height:80px;}
     #course_name span{font-size:25px;color:#f9f9f9;margin-right:25%;position:absolute;}
-    #select_course{margin:20px;height:25px;text-align:center;margin-top:20px;margin-left:160px;}
+    #select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}
     #menuselect{display:block;width:100%;height:60px;margin: 0px;background-color:#000000;
         text-align:center;padding:0px;line-height:85px;}
     #menuselect ul{background-color:#000000;margin:0px;display:block;padding:0px;}
-    .showa{font-size: 20px;color: #fffdfc;}
+    .showa{font-size: 20px;color: white;}
     ul li{list-style-type:none;display:inline;margin:7%;}
     #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
     #menusure span{font-size:18px;}
     #select-class{margin:10px;}
-    /*    #showdata{margin:0 auto;}
-        table{margin:0 auto;}
-        table td{width:200px;}*/
+    th,tr{text-align: center;}
+    select{width:auto;min-width: 100px;text-align: center;}
+    /*清掉默认设置的样式*/
+    a:hover{color: white;}
+    a:active{color: white;}
+    a:visited{color: white;}
+    a:link{color: white;}
 
 </style>
 <body>
@@ -91,6 +95,7 @@ if(!$is_login){
     }
     function searchdate()
     {
+        $("#showTable").empty();
         $("#menusure span").html("");
         $("#menusure span").html("选择日期");
         $("#select-class").html("");
@@ -103,6 +108,7 @@ if(!$is_login){
         $("#select-class").append(str);
     }
     function searchclass(){
+        $("#showTable").empty();
         $("#menusure span").html("");
         $("#menusure span").html("选择班级");
         $("#select-class").html("");
