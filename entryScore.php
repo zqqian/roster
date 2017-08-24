@@ -16,7 +16,13 @@ if(!$is_login){
     <style>
         body{text-align: center;}
         select{width:200px;}
-        .kuang{width: 500px;height:500px;float:left;border:pink solid 1px;}
+        .kuang{width: 500px;height:400px;float:left;border:pink solid 1px;margin: 50px;}
+        .xiang{
+            width:400px;
+            height: 50px;
+            border:red solid 1px;
+        }
+        #normalAdd{float: right;font-size: 18px;display: block;}
     </style>
 
 </head>
@@ -44,13 +50,29 @@ if(!$is_login){
         <hr>
         <span>30</span>
         <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
+        <hr>
         <div id="normal" class="kuang">
+            <span id="normalAdd">+</span>
+         <!--   <div class="xiang">-->
+                <table>
+                    <tr>
+                        <td>是否勾选</td>
+                        <td>考核项目名称</td>
+                        <td>占平时分数的比例</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="check0" disabled checked/></td>
+                        <td><input type="text" name="field0" value="出勤率" disabled/></td>
+                        <td><input type="text" name="percent0"/></td>
+                    </tr>
+                </table>
+          <!--  </div>-->
 
         </div>
 
-        <div id="final" class="kuang">
+       <!-- <div id="final" class="kuang">
 
-        </div>
+        </div>-->
 
         <script>
     $(function(){
@@ -84,6 +106,10 @@ if(!$is_login){
             $("#rangeSpan").text(temp);
         });
 
+        $("#normalAdd").click(function(){
+            $("normal").append();
+
+        });
 
 
 
