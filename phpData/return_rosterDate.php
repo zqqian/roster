@@ -13,7 +13,11 @@ $userId = $_POST['userId'];
 /*$search = "选择日期";
 $courseName = "数据库";
 $userId = 18;*/
+
 require "../mysql-connect.php";
+
+
+
 
 
 
@@ -44,20 +48,22 @@ where classId=$classId
 group by student.stuId";
     $set=mysqli_query($db,$find_class);
 
-    $str="<thead><tr><th>学号</th><th>姓名</th><th>点名次数</th><th>实到次数</th><th>平均出勤率</th></tr></thead><tbody>";
-    if(mysqli_num_rows($set)<1) exit("1");
-    else echo $str;
-
-
-
+    $str = "<thead><tr><th>学号</th><th>姓名</th><th>点名次数</th><th>实到次数</th><th>平均出勤率</th></tr></thead><tbody>";
+    if(mysqli_num_rows($set)<1) exit("<h3 style='text-align: center;'>该班级暂无点名信息</h3>");
+    else
+    echo $str;
 
     $class_return_sum=array();
     $i=0;
     while($row=mysqli_fetch_assoc($set)){
         if( null == $row['Id'])
             $row['sum'] = null;
-        if($i % 2 == 1) echo "<tr><td>";
-        else echo "<tr class='success'><td>";
+
+        if($i % 2 == 1)
+            echo "<tr><td>";
+        else
+            echo "<tr class='success'><td>";
+
         echo $row['stuCode']."</td><td>".$row['stuName']."</td><td>";
         if(null == $row['sum'])
             echo "0</td><td>";
@@ -67,10 +73,11 @@ group by student.stuId";
             echo "0</td><td>";
         else
             echo $row['arrive']."</td><td>";
-        if(null == $row['sum'])
+
+        if(null == $row['rate'])
             echo "100%</td></tr>";
         else
-            echo ($row['arrive']*100)."%"."</td></tr>";
+            echo ($row['rate']*100)."%"."</td></tr>";
         $i++;
     }
     echo "</tbody>";
@@ -104,25 +111,27 @@ order by rosterDate asc";
 //            'attendance_rate_ave'=>$row['attendanceRate'],
 //            'classSize'=>$row['classSize']);
 //        array_push($date_return_sum,$temp);
-        if( $i % 2 == 1)echo "<tr><td>";
-        else echo "<tr class='success'><td>";
-        echo $row['concat(enterYear,className)']."</td><td>".$row['rosterDate']."</td><td>";
-        $row['classSize']."</td><td>";
-        if(null == $row['classSize'])
-            echo "0</td><td>";
+        if( $i % 2 == 1)
+            echo "<tr><td>";
         else
+            echo "<tr class='success'><td>";
+
+        echo $row['concat(enterYear,className)']."</td><td>".$row['rosterDate']."</td><td>".$row['classSize']."</td><td>";
+//        if(null == $row['classSize'])
+//            echo "0</td><td>";
+//        else
             echo  $row['classSize']."</td><td>";
-         if(null ==   $row['shouldStu'])
-            echo "0</td><td>";
-        else
+//         if(null ==   $row['shouldStu'])
+//            echo "0</td><td>";
+//        else
             echo  $row['shouldStu']."</td><td>";
-         if(null ==  $row['realStu'])
-            echo "0</td><td>";
-        else
+//         if(null ==  $row['realStu'])
+//            echo "0</td><td>";
+//        else
             echo $row['realStu']."</td><td>";
-        if(null == $row['shouldStu'])
-            echo "100%</td></tr>";
-        else
+//        if(null == $row['shouldStu'])
+//            echo "100%</td></tr>";
+//        else
             echo ($row['attendanceRate']*100)."%"."</td></tr>";
         $i++;
     }

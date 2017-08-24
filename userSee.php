@@ -125,17 +125,18 @@ if(!$is_login){
                                 </div>
                                 <div id="panel2" class="panel-collapse collapse collapse">
                                     <div class="panel-body">
-                                        <a href="automaticcall.php" target="rightShow" id="import">自动点名</a>
+                                        <a href="automaticcall.php" target="rightShow" >自动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>
+                                        <a href="manuallcall.php" target="rightShow" >手动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="attendance.php" target="rightShow" id="export">点名信息查询</a>
+                                        <a href="attendance.php" target="rightShow" >点名信息查询</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- 点名 -->
+
                             <!-- 成绩 -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -144,10 +145,10 @@ if(!$is_login){
                                 </div>
                                 <div id="panel3" class="panel-collapse collapse collapse">
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="import">成绩录入</a>
+                                        <a href="entryScore.php" target="rightShow" >成绩录入</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="entryScore.php" target="rightShow" id="import">成绩查询</a>
+                                        <a href="searchScore.php" target="rightShow" >成绩查询</a>
                                     </div>
 
                                 </div>
