@@ -27,16 +27,16 @@ if(!$is_login){
     #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
     #menusure span{font-size:18px;}
     #select-class{margin:10px;}
-/*    #showdata{margin:0 auto;}
-    table{margin:0 auto;}
-    table td{width:200px;}*/
+    /*    #showdata{margin:0 auto;}
+        table{margin:0 auto;}
+        table td{width:200px;}*/
 
 </style>
 <body>
 <div id="course_name">
     <span>选择课程</span>
     <select id="select_course" onChange = "getcourse()">
-        <option value="请选择" selected>请选择</option>
+        <option value="请选择" selected>选择课程</option>
         <?php
         $userid = $_SESSION['userid'];
         $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userid";
@@ -56,13 +56,13 @@ if(!$is_login){
 <div id="menusure">
     <span>选择查询方式</span>
     <select id="select-class" onChange = "attendance_data()">
-<!--        <option>国贸</option>-->
-<!--        <option>计科</option>-->
+        <!--        <option>国贸</option>-->
+        <!--        <option>计科</option>-->
     </select>
 </div>
 <div id="showdata">
     <table class="table table-bordered table-hover table-condensed" id="showTable">
-        </table>
+    </table>
 </div>
 </body>
 <script>
@@ -70,21 +70,21 @@ if(!$is_login){
     var class_array=new Array();
     function getcourse(){
         $("#menusure span").html("请选择查询方式");
-        $("#select-class").html("");
-        var obj = document.getElementById("select_course");
-        var index = obj.selectedIndex;
-        if (obj.options[index].value != "请选择") {
-        $.ajax({
-            type:"POST",
-            url:"phpData/return_class_date.php",
-            data:{userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},
-            dataType:"json",
-            success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
-                date_array=data.search_date;
-                class_array=data.search_class;
-            }
-        });
-    }else{
+        $("#select-class").empty();
+        var selected_course=$("#select_course").val();
+        if ( selected_course != "请选择") {
+            $.ajax({
+                type:"POST",
+                url:"phpData/return_class_date.php",
+                data:{userId:<?php echo $_SESSION['userid'];?>,selected_course: selected_course},
+                dataType:"json",
+                success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
+                    date_array=data.search_date;
+                    class_array=data.search_class;
+                    //  searchdate();
+                }
+            });
+        }else{
             window.location.reload();
         }
     }
@@ -92,41 +92,59 @@ if(!$is_login){
     {
         $("#menusure span").html("");
         $("#menusure span").html("选择日期");
-        $("#select-class").html("");
-        $("#select-class").append("<option value=\"请选择\" selected>选择日期</option>");
+        $("#select-class").empty();
+        var h;
+        h+="<option value=\"请选择\" selected>选择日期</option>";
         for(var i=0;i<date_array.length;i++)
         {
-            $("#select-class").append("<option value='"+date_array[i]+"'>"+date_array[i]+"</option>");
+            h+="<option value='"+date_array[i]+"'>"+date_array[i]+"</option>";
         }
+        $("#select-class").append(h);
     }
     function searchclass(){
         $("#menusure span").html("");
         $("#menusure span").html("选择班级");
-        $("#select-class").html("");
-        $("#select-class").append("<option value=\"请选择\" selected>选择班级</option>");
+        $("#select-class").empty();
+        var h="<option value=\"请选择\" selected>选择班级</option>";
         for(var i=0;i<class_array.length;i++)
         {
-            $("#select-class").append("<option value='"+class_array[i]+"'>"+class_array[i]+"</option>");
+            h+="<option value='"+class_array[i]+"'>"+class_array[i]+"</option>";
         }
+        $("#select-class").append(h);
     }
     function attendance_data() {
         var search = $("#menusure span").html();  //获取当前标签值
-        var obj = document.getElementById("select-class");
-        var index = obj.selectedIndex;
+        var selected_class=$("select-class").val();
         if (search == "选择日期") {
-            if (obj.options[index].value!="请选择") {
-      $.post("phpData/return_rosterDate.php",{search: search, selected_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},function(data){
-                  $("#showTable").empty();
-                  $("#showTable").append(data);
+            if (selected_class!="请选择") {
+                $.post("phpData/return_rosterDate.php",{search: search, selected_date: selected_class,userId:<?php echo $_SESSION['userid'];?>,selected_course:$("#select_course").val()},function(data){
+                    if(data=="1")
+                    {
+                        $("#showTable").empty();
+                        $("#showdata").append("<h1>该班级未点名，没点名信息</h1>");
+                    }
+                    else  {
+                        $("#showTable").empty();
+                        $("#showTable").append(data);
+                    }
                 });
             }
         }
         else if (search == "选择班级") {
-            if (obj.options[index].value != -1) {
-                $.post("phpData/return_rosterDate.php",{search: search, selected_course:$("#select_course").val(),userId:<?php echo $_SESSION['userid'];?>,select_class:obj.options[index].value},function(data){
-                    //处理并显示返回来的学生成绩
-                       $("#showTable").empty();
-                       $("#showTable").append(data);
+            if (selected_class!="请选择") {
+                alert("");
+                $.post("phpData/return_rosterDate.php",{search: search, selected_course:$("#select_course").val(),userId:<?php echo $_SESSION['userid'];?>,select_class:selected_class},function(data){
+                    if(data=="1")
+                    {
+                        $("#showTable").empty();
+                        $("#showdata").append("<h1>该班级未点名，没点名信息</h1>");
+                    }
+                    else
+                    {
+                        $("#showTable").empty();
+                        //处理并显示返回来的学生成绩
+                        $("#showTable").append(data);
+                    }
                 });
             }
         }
