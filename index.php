@@ -81,7 +81,6 @@
 
                                         <div class="modal-body" id="modal-body">
                                             <center><h1 id="registerShow">显示注册信息</h1></center>
-
                                             <div class="input-group" id="DuserName">
                                                 <input type="text" class="form-control" id="RuserName" maxlength="20"
                                                         name="RuserName" placeholder="请输入用户名">
@@ -315,8 +314,6 @@
         else if ("该用户名可用" != nameCheck) {event.preventDefault();$("#registerSpan").html("*用户名重复，请更换用户名");$("#RuserName").focus();}
         else if ("" == school) {event.preventDefault();$("#registerSpan").html("*请输入学校");$("#Rschool").focus();}
         else { flag=true;}
-
-
         if(flag){
             $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy},function(data){
 
