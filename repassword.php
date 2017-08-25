@@ -7,7 +7,8 @@ $newpassword=$_POST['newpassword'];
 $newpassword2=$_POST['newpassword2'];
 
 $pw3=substr(md5(md5(md5($oldpassword)).md5($username)),0,20);
-		    $sql = "select passWord from user where userName = '$username' ";
+if($oldpassword!=""&&$username!=""){
+	$sql = "select passWord from user where userName = '$username' ";
             $result=mysqli_query($db,$sql);
 			$row = mysqli_fetch_assoc($result);
 			
@@ -30,4 +31,11 @@ $pw3=substr(md5(md5(md5($oldpassword)).md5($username)),0,20);
 		
                echo "0";/*"wrong password !";*/
 		}
+	
+	
+}else{
+	echo "0";
+}
+
+		    
 ?>
