@@ -15,11 +15,12 @@ $pw3=substr(md5(md5(md5($oldpassword)).md5($username)),0,20);
             {
 				if($newpassword==""||$newpassword2==""||$newpassword!=$newpassword2){
 					echo "0";
-				}else{
+				}
+                else{
 					$npw=substr(md5(md5(md5($$oldpassword)).md5($username)),0,20);
 					$sql = "UPDATE `roster`.`user` SET `passWord` = $npw' WHERE `user`.`userId` = $userid";
 					$result=mysqli_query($db,$sql_insert);
-					if(!$result) echo"0";//Ê§°Ü
+					if(!$result) echo"0";//Ê§ï¿½ï¿½
 					else         echo"1";
 				}
 
@@ -28,6 +29,6 @@ $pw3=substr(md5(md5(md5($oldpassword)).md5($username)),0,20);
             else  
             {  
 		
-               echo "0";/*"wrong password !";*/
+               echo "2";/*"wrong password !";*/
 		}
 ?>
