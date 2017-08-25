@@ -85,7 +85,7 @@ if(!$is_login){
                                     <a href="information.php" target="rightShow">修改用户信息</a>
                                 </li>
                                 <li>
-                                    <a href="repassword.php" target="rightShow">修改用户密码</a>
+                                    <a href="reset-password.php" target="rightShow">修改用户密码</a>
                                 </li>
                                 <li>
                                     <a href="#" id="logout">退出</a>
