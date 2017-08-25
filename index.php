@@ -97,6 +97,10 @@
                                                     name="Rschool" placeholder="请输入所属学校"><br>
                                             <input type="text" class="form-control" id="Racademy" maxlength="30"
                                                    name="Racademy" placeholder="请输入所属学院">
+                                            <div class="modal-auth-code" id="modal-auth-code">
+                                            <input type="text"  class="form-control" id="auth-code" maxlength="10" name="auth-code"  placeholder="请输入验证码">
+                                            <input type="button" id="auth-code-bu" value="发送邮箱验证码">
+                                            </div>
                                             <span class="help-block" id="registerSpan" style="color:red;">*除学校学院，其余都为必填项</span>
                                             <!--这里是帮助文本-->
                                         </div>
@@ -114,7 +118,6 @@
                     </ul>
                 </div>
             </nav>
-
             <div class="jumbotron well">
                 <h2>云点名 让点名更便捷</h2>
             </div>
@@ -197,13 +200,9 @@
 
 
 
-
-
 <script>
 
-
-
-
+     $("#modal-auth-code").hide();
     /*测试用户名是否重复的函数*/
     function checkUserid(){
         var span = $("#checkUsername");
@@ -239,7 +238,6 @@
         xmlhttp.open("GET","check_username.php?id="+useridValue,true);//这个页面便是你要进行选择查询的PHP页面 
         xmlhttp.send(null);
     }
-
     $("#loginBtn").click(function(){
             var username=$("#userName").val().trim();
             var pwd=$("#password").val().trim();
@@ -273,10 +271,6 @@
             }
     });
 
-
-
-
-
     /*点击超链接时清空对应模态框的提示信息*/
     $("#loginA").click(function(){$("#loginSpan").html("");});
     $("#registerA").click(function(){
@@ -299,8 +293,9 @@
         var pwd2=$("#Rpassword2").val().trim();
         var school=$("#Rschool").val().trim();
         var academy=$("#Racademy").val().trim();
+        var auth_code=$("#auth-code").val().trim();
         //event.preventDefault();alert(username+"*"+email+pwd1+"*"+pwd2+"*"+school+"*"+academy+"*");
-
+//        alert(auth_code);
         var reg1 = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;//通用邮箱验证
         //var reg2=/^\d{5,12}@[qQ][qQ]\.(com|cn)$/;//只用于qq邮箱的验证
         //alert(reg1.test(email)+"*"+reg2.test(email));//邮箱的正则表达式的测试代码
@@ -315,28 +310,49 @@
         else if ("" == school) {event.preventDefault();$("#registerSpan").html("*请输入学校");$("#Rschool").focus();}
         else { flag=true;}
         if(flag){
-            $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy},function(data){
-
-                $("#modal-body").find(":input").hide();
-                $("#modal-body").find("span").hide();
-                $("#registerShow").show();
-                $("#modal-footer").hide();
-                if(data=="1")//注册成功
-
-                    $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
-                else 
-                    $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
-				
-
-
-            });
+            $("#modal-auth-code").show();
+           if(""==auth_code){event.preventDefault();$("#registerSpan").html("*请输入验证码");$("#auth-code").focus();}
+           else {
+                $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy,Auth_code:auth_code},function(data){
+                   alert(data);
+                    if(data=="5")
+                    {
+                        $("#registerSpan").html("*验证码错误，请重新发送激活");
+                        document.getElementById('auth-code-bu').value='重新发送';
+                    }
+                    else {
+                            $("#modal-body").find(":input").hide();
+                            $("#modal-body").find("span").hide();
+                            $("#registerShow").show();
+                            $("#modal-footer").hide();
+                     if(data=="1")//注册成功
+                        {
+                            $("#registerShow").html(username + " 已注册成功!<br>请返回登录");
+                        }
+                        else{
+                            $("#registerShow").html("注册失败<br>请重新注册,错误代码 " + data);
+                        }
+                    }
+                });
+           }
         }
 
-    });
+    })
 
     $("#RuserName").blur(function(){checkUserid();});
+//  发送验证码
+          $("#auth-code-bu").click(function(){
+              $.post("sendmail.php",{RuserName:$("#RuserName").val().trim(),email:$("#email").val().trim(),Auth_code:$("#auth-code").val().trim()},function(data){
 
-
+                   if(data=="1")
+                   {
+                       document.getElementById('auth-code-bu').value='发送成功';
+                   }
+                  else {
+                       document.getElementById('auth-code-bu').value='重新发送';
+                   }
+              })
+              })
 </script>
 </body>
 </html>
