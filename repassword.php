@@ -18,9 +18,9 @@ if($oldpassword!=""&&$username!=""&&&&$userid!=""){
 					echo "0";
 				}else{
 					$npw=substr(md5(md5(md5($newpassword)).md5($username)),0,20);
-					$sql = "UPDATE `roster`.`user` SET `passWord` = $npw' WHERE `user`.`userId` = $userid";
+					$sql = "UPDATE `roster`.`user` SET `passWord` = $npw WHERE `user`.`userId` = `$userid`";
 					$result=mysqli_query($db,$sql_insert);
-					if(!$result) echo"0";//Ê§°Ü
+					echo "0";
 					else         echo"1";
 				}
 
