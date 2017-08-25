@@ -16,7 +16,7 @@ if($username==""||$pwd==""){
 		echo"2" /*$username."该用户不存在!"*/;
 		
     }else{
-			$pw3=substr(md5(md5(md5($pwd)).md5($username)),0,20);
+			$pw3=substr(md5(md5($pwd).md5($username)),0,20);
 		    $sql = "select passWord from user where userName = '$username' ";
             $result=mysqli_query($db,$sql);
 			$row = mysqli_fetch_assoc($result);

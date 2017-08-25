@@ -253,7 +253,7 @@
                     $.ajax({
                         async: false,//取消异步
                     });
-                    $.post("login.php", {userName: username, password: pwd}, function (data) {
+                    $.post("login.php", {userName: username, password: hex_md5(pwd)}, function (data) {
                         console.log(data);
                         if (data == "0") {
                             window.location.href = "userSee.php";//登录成功
