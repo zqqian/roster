@@ -12,6 +12,6 @@ require "../mysql-connect.php";
 $set=mysqli_query($db,$find_class);
 
 while($row=mysqli_fetch_assoc($set)){
-    echo "<option value='".$row['enterYear'].$row['className']."'>".$row['enterYear'].$row['className']."</option>";
+    echo "<option value='".$row['classId']."'>".$row['enterYear'].$row['className']."</option>";
 }
 mysqli_close($db);

@@ -125,17 +125,18 @@ if(!$is_login){
                                 </div>
                                 <div id="panel2" class="panel-collapse collapse collapse">
                                     <div class="panel-body">
-                                        <a href="automaticcall.php" target="rightShow" id="import">自动点名</a>
+                                        <a href="automaticcall.php" target="rightShow" >自动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="manuallcall.php" target="rightShow" id="import">手动点名</a>
+                                        <a href="manuallcall.php" target="rightShow" >手动点名</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="attendance.php" target="rightShow" id="export">点名信息查询</a>
+                                        <a href="attendance.php" target="rightShow" >点名信息查询</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- 点名 -->
+
                             <!-- 成绩 -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -144,10 +145,10 @@ if(!$is_login){
                                 </div>
                                 <div id="panel3" class="panel-collapse collapse collapse">
                                     <div class="panel-body">
-                                        <a href="#" target="rightShow" id="import">成绩录入</a>
+                                        <a href="entryScore.php" target="rightShow" >成绩录入</a>
                                     </div>
                                     <div class="panel-body">
-                                        <a href="entryScore.php" target="rightShow" id="import">成绩查询</a>
+                                        <a href="searchScore.php" target="rightShow" >成绩查询</a>
                                     </div>
 
                                 </div>
@@ -173,7 +174,7 @@ if(!$is_login){
                             </div>
                             <!-- 帮助 -->
 
-                            <!-- 测试界面 <?php /*echo "?username=".$username*/ ?>-->
+                            <!-- 测试界面1-->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <a  href="test.php" class="panel-title"
@@ -181,7 +182,17 @@ if(!$is_login){
                                 </div>
 
                             </div>
-                            <!-- 测试界面 -->
+                            <!-- 测试界面1 -->
+
+                            <!-- 测试界面2-->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <a  href="test2.php" class="panel-title"
+                                        data-parent="#menu" target="rightShow">前端页面测试区</a>
+                                </div>
+
+                            </div>
+                            <!-- 测试界面2 -->
 
                         </div>
                         <!--手风琴切换结束-->

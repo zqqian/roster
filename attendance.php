@@ -18,18 +18,22 @@ if(!$is_login){
     html,body{margin:0px;padding:0px;}
     #course_name{display:block;width:100%;height:50px;background-color:#000000;text-align:center;line-height:80px;}
     #course_name span{font-size:25px;color:#f9f9f9;margin-right:25%;position:absolute;}
-    #select_course{margin:20px;height:25px;text-align:center;margin-top:20px;margin-left:160px;}
+    #select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}
     #menuselect{display:block;width:100%;height:60px;margin: 0px;background-color:#000000;
         text-align:center;padding:0px;line-height:85px;}
     #menuselect ul{background-color:#000000;margin:0px;display:block;padding:0px;}
-    .showa{font-size: 20px;color: #fffdfc;}
+    .showa{font-size: 20px;color: white;}
     ul li{list-style-type:none;display:inline;margin:7%;}
     #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
     #menusure span{font-size:18px;}
     #select-class{margin:10px;}
-    /*    #showdata{margin:0 auto;}
-        table{margin:0 auto;}
-        table td{width:200px;}*/
+    th,tr{text-align: center;}
+    select{width:auto;min-width: 100px;text-align: center;}
+    /*清掉默认设置的样式*/
+    a:hover{color: white;}
+    a:active{color: white;}
+    a:visited{color: white;}
+    a:link{color: white;}
 
 </style>
 <body>
@@ -39,7 +43,7 @@ if(!$is_login){
         <option value="请选择" selected>选择课程</option>
         <?php
         $userid = $_SESSION['userid'];
-        $find_course = "SELECT courseId,courseName FROM basic_relation WHERE userId=$userid";
+        $find_course = "SELECT distinct courseId,courseName FROM basic_relation WHERE userId=$userid";
         $set=mysqli_query($db,$find_course);
         while($row=mysqli_fetch_assoc($set)){
             echo "<option value='".$row['courseName']."'>".$row['courseName']."</option>";
@@ -69,19 +73,20 @@ if(!$is_login){
     var date_array=new Array();
     var class_array=new Array();
     function getcourse(){
-        $("#menusure span").html("请选择查询方式");
-        $("#select-class").empty();
-        var selected_course=$("#select_course").val();
-        if ( selected_course != "请选择") {
+        $("#menusure span").html("选择查询方式");
+        $("#select-class").html("");
+        var obj = $("#select_course");
+        var index = obj.selectedIndex;
+        $("#showTable").empty();
+        if ("请选择" != obj.val()) {
             $.ajax({
                 type:"POST",
                 url:"phpData/return_class_date.php",
-                data:{userId:<?php echo $_SESSION['userid'];?>,selected_course: selected_course},
+                data:{userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.val()},
                 dataType:"json",
                 success:function(data) {   //返回一个json数组，数组中分别包含班级和日期两个数组
                     date_array=data.search_date;
                     class_array=data.search_class;
-                    //  searchdate();
                 }
             });
         }else{
@@ -90,63 +95,54 @@ if(!$is_login){
     }
     function searchdate()
     {
+        $("#showTable").empty();
         $("#menusure span").html("");
         $("#menusure span").html("选择日期");
-        $("#select-class").empty();
-        var h;
-        h+="<option value=\"请选择\" selected>选择日期</option>";
+        $("#select-class").html("");
+        $("#select-class").append("<option value='请选择' selected>选择日期</option>");
+        var str="";
         for(var i=0;i<date_array.length;i++)
         {
-            h+="<option value='"+date_array[i]+"'>"+date_array[i]+"</option>";
+            str += "<option value='"+date_array[i]+"'>"+date_array[i]+"</option>";
         }
-        $("#select-class").append(h);
+        $("#select-class").append(str);
     }
     function searchclass(){
+        $("#showTable").empty();
         $("#menusure span").html("");
         $("#menusure span").html("选择班级");
-        $("#select-class").empty();
-        var h="<option value=\"请选择\" selected>选择班级</option>";
+        $("#select-class").html("");
+        $("#select-class").append("<option value='请选择' selected>选择班级</option>");
+
+        var str="";
         for(var i=0;i<class_array.length;i++)
         {
-            h+="<option value='"+class_array[i]+"'>"+class_array[i]+"</option>";
+            str += "<option value='"+class_array[i]+"'>"+class_array[i]+"</option>";
         }
-        $("#select-class").append(h);
+        $("#select-class").append(str);
     }
     function attendance_data() {
         var search = $("#menusure span").html();  //获取当前标签值
-        var selected_class=$("select-class").val();
+        var obj = document.getElementById("select-class");
+        var index = obj.selectedIndex;
         if (search == "选择日期") {
-            if (selected_class!="请选择") {
-                $.post("phpData/return_rosterDate.php",{search: search, selected_date: selected_class,userId:<?php echo $_SESSION['userid'];?>,selected_course:$("#select_course").val()},function(data){
-                    if(data=="1")
-                    {
-                        $("#showTable").empty();
-                        $("#showdata").append("<h1>该班级未点名，没点名信息</h1>");
-                    }
-                    else  {
-                        $("#showTable").empty();
-                        $("#showTable").append(data);
-                    }
+            if (obj.options[index].value!="请选择") {
+                $.post("phpData/return_rosterDate.php",{search: search, selected_date: obj.options[index].value,userId:<?php echo $_SESSION['userid'];?>,selected_course:obj.options[index].value},function(data){
+                    $("#showTable").empty();
+                    $("#showTable").append(data);
                 });
             }
+            else{$("#showTable").empty();}
         }
         else if (search == "选择班级") {
-            if (selected_class!="请选择") {
-                alert("");
-                $.post("phpData/return_rosterDate.php",{search: search, selected_course:$("#select_course").val(),userId:<?php echo $_SESSION['userid'];?>,select_class:selected_class},function(data){
-                    if(data=="1")
-                    {
-                        $("#showTable").empty();
-                        $("#showdata").append("<h1>该班级未点名，没点名信息</h1>");
-                    }
-                    else
-                    {
-                        $("#showTable").empty();
-                        //处理并显示返回来的学生成绩
-                        $("#showTable").append(data);
-                    }
+            if (obj.options[index].value != "请选择") {
+                $.post("phpData/return_rosterDate.php",{search: search, selected_course:$("#select_course").val(),userId:<?php echo $_SESSION['userid'];?>,select_class:obj.options[index].value},function(data){
+                    //处理并显示返回来的学生成绩
+                    $("#showTable").empty();
+                    $("#showTable").append(data);
                 });
             }
+            else{$("#showTable").empty();}
         }
         else {
         }
