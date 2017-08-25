@@ -20,12 +20,12 @@ if(!$is_login){
     </style>
 </head>
 <body>
-<lable>输入原密码</lable><input type="password" id="oldpassword" >
-<lable>输入新密码</lable><input type="password" id="newpassword">
-<lable>重新输入新密码</lable><input type="password"  id="renewpassword">
+<lable>输入原密码</lable><input type="password" id="oldpassword" ></br>
+<lable>输入新密码</lable><input type="password" id="newpassword"></br>
+<lable>重新输入新密码</lable><input type="password"  id="renewpassword"></br>
 <span id="repasswordspan"></span>
-<input type="button" id="tijiao" value="提交">
-<input type="reset" id="chongzhi" value="提交">
+<button type="button" id="tijiao" value="提交">提交</button>
+<button type="reset" id="chongzhi" value="重置">重置</button>
 <script>
     $(function(){
         $("#tijiao").click(function() {
@@ -53,6 +53,7 @@ if(!$is_login){
             }
             else {
                 $.post("repassword.php", {oldpassword: oldpassword,newpassword: newpassword,newpassword2:newpassword2}, function (data) {
+                  alert(data);
                     if (data == "1") {
                         $("#repasswordspan").html("");
                         alert("重置成功");
