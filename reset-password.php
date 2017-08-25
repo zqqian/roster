@@ -20,21 +20,22 @@ if(!$is_login){
     </style>
 </head>
 <body>
-<lable>输入原密码</lable><input type="text" id="oldpassword" >
-<lable>输入新密码</lable><input type="text" id="newpassword">
-<lable>重新输入新密码</lable><input type="text"  id="renewpassword">
+<lable>输入原密码</lable><input type="password" id="oldpassword" >
+<lable>输入新密码</lable><input type="password" id="newpassword">
+<lable>重新输入新密码</lable><input type="password"  id="renewpassword">
 <span id="repasswordspan"></span>
-<button type="button" id="tijiao">提交</button>
-<button type="reset" id="chongzhi">重置</button>
+<input type="button" id="tijiao" value="提交">
+<input type="reset" id="chongzhi" value="提交">
 <script>
     $(function(){
         $("#tijiao").click(function() {
+            $("#repasswordspan").html();
             var newpassword=$("#newpassword").val();
             var oldpassword=$("#oldpassword").val();
             var newpassword2=$("#renewpassword").val();
-            alert(oldpassword);
-            alert(newpassword);
-            alert(newpassword2);
+//            alert(oldpassword);
+//            alert(newpassword);
+//            alert(newpassword2);
             if (newpassword == "") {
                 $("#repasswordspan").html();
                 $("#repasswordspan").html("*新密码不能为空");
@@ -51,25 +52,19 @@ if(!$is_login){
                 $("#newpassword").focus();
             }
             else {
-                $.post("repassword.php", { userId:<?php echo $userid;?>,oldpassword: oldpassword,newpassword: newpassword}, function (data) {
-                    if (data == "0") {
-                        $("#repasswordspan").html();
-                        $("#repasswordspan").html("*原密码输入错误");
-                    }
-                    else if (data == "2") {
-                        $("#repasswordspan").html();
-                        $("#repasswordspan").html("*新密码和旧密码一致，请重新设置密码");
-                    }
-                    else if (data == "1") {
-
+                $.post("repassword.php", {oldpassword: oldpassword,newpassword: newpassword,newpassword2:newpassword2}, function (data) {
+                    if (data == "1") {
                         $("#repasswordspan").html("");
                         alert("重置成功");
                     }
-                    else if(data=="3"){
-                        $("#repasswordspan").html();
-                        $("#repasswordspan").html("重置失败请稍后再试");
+                    else {
+                        if (data == "2") {
+                            $("#repasswordspan").html();
+                            $("#repasswordspan").html("*原密码输入错误");
+                        }
+                        else {
+                        }
                     }
-                    else{}
                 })
             }
         })

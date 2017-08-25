@@ -1,6 +1,8 @@
 <?php
+session_start();
 error_reporting(0);
 header("Content-Type:text/html;charset=utf-8");//设置页面显示中文
+
 
 //接收注册信息
 $username=$_POST['RuserName'];
@@ -9,9 +11,11 @@ $pwd1=$_POST['Rpassword1'];
 $pwd2=$_POST['Rpassword2'];
 $school=$_POST['Rschool'];
 $academy=$_POST['Racademy'];
-
-
+$auth_code=$_POST['Auth_code'];
+require_once 'sendmail.php';
 require_once 'mysql-connect.php';
+$randpwd=$_SESSION['randpwd'];
+//console.log('register',$randpwd);
 if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	echo"2";
 }else if($pwd1!=$pwd2){
@@ -22,13 +26,21 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	{
 		echo "4";
 		
-    }else{
+    }
+	else if($randpwd!=$auth_code)
+	{
+		echo $randpwd;
+	}
+	else{
 		$pwd3=substr(md5(md5($pwd1).md5($username)),0,20);
 		$sql_insert = "insert into user (userName,passWord,email,college,academy) values('$username','$pwd3','$email','$school','$academy')";
 
 		$result=mysqli_query($db,$sql_insert);
 		if(!$result) echo"0";//注册失败
-		else         echo"1";
+		else {
+			unset($_SESSION['randpwd']);
+			echo "1";
+		}
 }
 	mysqli_close($db);
 }
@@ -38,9 +50,6 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	
 
    
-
-
-
 
 
 /* function check_input($value)
