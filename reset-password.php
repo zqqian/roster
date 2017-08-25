@@ -51,7 +51,7 @@ if(!$is_login){
                 $("#newpassword").focus();
             }
             else {
-                $.post("repassword.php", { userId:<?php echo $userid;?>,oldpassword: oldpassword, newpassword: newpassword}, function (data) {
+                $.post("repassword.php", { userId:<?php echo $userid;?>,oldpassword: oldpassword,newpassword: newpassword}, function (data) {
                     if (data == "0") {
                         $("#repasswordspan").html();
                         $("#repasswordspan").html("*原密码输入错误");
