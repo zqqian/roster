@@ -5,7 +5,7 @@ $courseName = $_POST['courseName'];
 $userId = $_POST['userId'];
 
 $find_class = "SELECT classId,enterYear,className FROM basic_relation WHERE userId=$userId and courseName='$courseName'";
-echo $userId.$courseName.$find_class;
+//echo $userId.$courseName.$find_class;
 
 require "../mysql-connect.php";
 
