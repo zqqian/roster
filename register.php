@@ -3,7 +3,6 @@ session_start();
 error_reporting(0);
 header("Content-Type:text/html;charset=utf-8");//设置页面显示中文
 
-
 //接收注册信息
 $username=$_POST['RuserName'];
 $email=$_POST['email'];
@@ -12,24 +11,22 @@ $pwd2=$_POST['Rpassword2'];
 $school=$_POST['Rschool'];
 $academy=$_POST['Racademy'];
 $auth_code=$_POST['Auth_code'];
-require_once 'sendmail.php';
+$auth_code1=$_SESSION['randpwd'];
 require_once 'mysql-connect.php';
-$randpwd=$_SESSION['randpwd'];
-//console.log('register',$randpwd);
 if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	echo"2";
 }else if($pwd1!=$pwd2){
-	echo"3";	
+	echo"3";
 }else{
 	$num=file_get_contents("http://127.0.0.1/roster/check_username.php?id=".$username);
-    if(!$num)    //如果已经存在该用户
+	if(!$num)    //如果已经存在该用户
 	{
 		echo "4";
-		
-    }
-	else if($randpwd!=$auth_code)
+
+	}
+	else if($auth_code1!=$auth_code)
 	{
-		echo $randpwd;
+		echo"5";
 	}
 	else{
 		$pwd3=substr(md5(md5($pwd1).md5($username)),0,20);
@@ -37,19 +34,20 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 
 		$result=mysqli_query($db,$sql_insert);
 		if(!$result) echo"0";//注册失败
-		else {
-			unset($_SESSION['randpwd']);
-			echo "1";
-		}
-}
+		else         echo"1";
+	}
+
 	mysqli_close($db);
 }
 
-	
-	
-	
 
-   
+
+
+
+
+
+
+
 
 
 /* function check_input($value)

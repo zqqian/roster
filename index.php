@@ -314,25 +314,24 @@
            if(""==auth_code){event.preventDefault();$("#registerSpan").html("*请输入验证码");$("#auth-code").focus();}
            else {
                 $.post("register.php",{RuserName:username,email:email,Rpassword1:hex_md5(pwd1),Rpassword2:hex_md5(pwd2),Rschool:school,Racademy:academy,Auth_code:auth_code},function(data){
-                   alert(data);
-                    if(data=="5")
-                    {
-                        $("#registerSpan").html("*验证码错误，请重新发送激活");
-                        document.getElementById('auth-code-bu').value='重新发送';
-                    }
+                   if(data=="5")
+                   {
+                       document.getElementById('auth-code-bu').value='重新发送';
+                       $("#registerSpan").html("");
+                       $("#registerSpan").html("*验证码错误，请检查输入验证码或重新发送");
+                   }
                     else {
-                            $("#modal-body").find(":input").hide();
-                            $("#modal-body").find("span").hide();
-                            $("#registerShow").show();
-                            $("#modal-footer").hide();
-                     if(data=="1")//注册成功
-                        {
-                            $("#registerShow").html(username + " 已注册成功!<br>请返回登录");
-                        }
-                        else{
-                            $("#registerShow").html("注册失败<br>请重新注册,错误代码 " + data);
-                        }
-                    }
+                       $("#modal-body").find(":input").hide();
+                       $("#modal-body").find("span").hide();
+                       $("#registerShow").show();
+                       $("#modal-footer").hide();
+                       if(data=="1")
+                       //注册成功
+                           $("#registerShow").html(username+" 已注册成功!<br>请返回登录");
+                       else
+                           $("#registerShow").html("注册失败<br>请重新注册,错误代码 "+data);
+                   }
+
                 });
            }
         }
@@ -342,14 +341,16 @@
     $("#RuserName").blur(function(){checkUserid();});
 //  发送验证码
           $("#auth-code-bu").click(function(){
-              $.post("sendmail.php",{RuserName:$("#RuserName").val().trim(),email:$("#email").val().trim(),Auth_code:$("#auth-code").val().trim()},function(data){
-
+              $.post("send-email.php",{RuserName:$("#RuserName").val().trim(),email:$("#email").val().trim()},function(data){
                    if(data=="1")
                    {
-                       document.getElementById('auth-code-bu').value='发送成功';
+                       $("#registerSpan").html("");
+                       $("#registerSpan").html("*发送成功，请输入邮箱中的验证码");
                    }
                   else {
                        document.getElementById('auth-code-bu').value='重新发送';
+                       $("#registerSpan").html("");
+                       $("#registerSpan").html("*请检查邮箱是否填写正确，重新发送");
                    }
               })
               })
