@@ -19,7 +19,7 @@ while(strlen($randpwd)<$pw_length) {
 $_SESSION['randpwd']=$randpwd;
 $title="云点名注册激活";
 $content= "亲爱的".$username.":<br/>感谢您在云点名注册了新帐号。<br/>本次注册的验证码为:".$randpwd."<br/>注:验证码仅在本次注册有效
-，请在登录页面填入验证码激活您的账号。<a href='http://localhost/roster/index.php' style='color:blue'>点此返回</a><br/><p style='text-align:right'>--------云点名</p>";
+，请在登录页面填入验证码激活您的账号。<br/><p style='text-align:right'>--------云点名</p>";
 $flag = sendMail($email,$title,$content);
 if($flag){
     echo "1";

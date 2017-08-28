@@ -46,7 +46,7 @@ function sendMail($to,$title,$content){
     $mail->isHTML(true);
 
 //设置收件人邮箱地址
-    $mail->addAddress($to,'尊敬的客户');
+    $mail->addAddress($to,'尊敬的用户');
 
 //添加多个收件人 则多次调用方法即可
 // $mail->addAddress('xxx@163.com','尊敬的客户');

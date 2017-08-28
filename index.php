@@ -53,7 +53,7 @@
                                                 <span class="help-block" id="loginSpan" style="color:red;"></span><!--这里是帮助文本-->
                                                 <center>
                                                     <label><input type="checkbox" id="rememberPwd" name="rememberPwd"> 记住密码</label>
-                                                    <a href="#" name="forgetPwd">忘记密码</a>
+                                                    <a href="find-password.php" name="forgetPwd">忘记密码</a>
                                                 </center>
                                             </div>
                                             <div class="modal-footer">

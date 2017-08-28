@@ -37,7 +37,6 @@ echo "<script>console.log('$email.$college.$academy')</script>";
             $("#tijiao").removeAttr("disabled");
         });
     })
-
     $("#tijiao").click(function(){
         var email = $("#email").val();
         var school = $("#school").val();

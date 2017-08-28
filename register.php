@@ -22,7 +22,6 @@ if($username==""|| $pwd1==""||$pwd2==""||$email==""){
 	if(!$num)    //如果已经存在该用户
 	{
 		echo "4";
-
 	}
 	else if($auth_code1!=$auth_code)
 	{

@@ -28,6 +28,11 @@ if(!$is_login){
 <button type="reset" id="chongzhi" value="重置">重置</button>
 <script>
     $(function(){
+        $("#chongzhi").click(function(){
+            $('#oldpassword').val("");
+            $('#newpassword').val("");
+            $('#renewpassword').val("");
+        });
         $("#tijiao").click(function() {
             $("#repasswordspan").html();
             var newpassword=$("#newpassword").val();
@@ -53,7 +58,6 @@ if(!$is_login){
             }
             else {
                 $.post("repassword.php", {oldpassword: oldpassword,newpassword: newpassword,newpassword2:newpassword2}, function (data) {
-                  alert(data);
                     if (data == "1") {
                         $("#repasswordspan").html("");
                         alert("重置成功");
