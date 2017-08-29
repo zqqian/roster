@@ -11,7 +11,6 @@ for ($i = 0; $i < count($temp); $i++)
     } else {
         echo "<script>console.log('The file $filename does not exist.');</script>";
     }
-
 }
 session_unset();
 session_destroy();
