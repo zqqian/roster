@@ -18,8 +18,8 @@ while(strlen($email_code)<$pw_length) {
 }
 $_SESSION['email_code']= $email_code;
 $title="云点名邮箱验证";
-$content= "亲爱的".$username.":<br/>&nbsp;&nbsp;本次找回密码的邮箱验证码为:".$email_code."<br/>注:验证码仅在本次有效
-，请在找回密码页面填入验证码验证您的邮箱。<br/><p style='text-align:right'>--------云点名</p>";
+$content= "亲爱的".$username.":<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;本次找回密码的邮箱验证码为:".$email_code."<br/><br/>注:验证码仅在本次有效
+，请在找回密码页面填入验证码验证您的邮箱。<br/><br/><p style='text-align:right'>--------云点名</p>";
 $flag = sendMail($email,$title,$content);
 if($flag){
     echo "1";
