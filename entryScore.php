@@ -121,6 +121,7 @@ if(!$is_login){
         <script>
             var re_percentInf = new Array();
             var field = null;
+            var re_stuInf = new Array();
            // var re_field = new Array();
             //var re_percentInf = new Array();
 
@@ -310,6 +311,7 @@ if(!$is_login){
                     $("#inputFen").empty();
                     var str="";
                     var num=0;
+                    var find_field="";
                     alert(field.length);
                     for(var j=0;j<field.length;j++)
                     {
@@ -317,12 +319,32 @@ if(!$is_login){
                         {
                             var temp = field[j].filedName;
                             str += "<label for='"+temp+"'>"+temp+"：</label><input type='text' id='"+temp+"' name='"+temp+"'><br>";
+                            find_field += temp+"-";
                             num++;
                         }
                     }
                     if(num>0){
+
+
+                        //发送post请求得到学生的信息和自定义字段对应的分数
+                        $.post("phpData/entryScore2.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val(),field:find_field},
+                            function(data){
+                                var json = JSON.parse(data);
+                               console.log(json);
+                                re_stuInf = json;
+                            });
                         $("#inputFen").append(str);
-                        console.log("*"+str);
+                        console.log("*"+str+"*"+find_field);
+
+                        var t =new Array();
+                        t=find_field.split("-");
+                        for(var q=0;q< t.length-1;q++)
+                        {
+                            $("#"+t[q]).val(re_stuInf[0].t[q]);
+                        }
+
+
+
                         $("#Grade").css("display","block");
                         $("#normal").css("display","none");
                     }else{
