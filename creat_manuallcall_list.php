@@ -41,13 +41,9 @@ $sql = "SELECT DISTINCT `student`.`stuId` \n"
 $result=mysqli_query($db,$sql);
 $i=0;
 while($row[$i++] = mysqli_fetch_assoc($result));
-// random algorithm
-$remain_i=$i;
-$a[$i];
-while($remain_i--){
-$randnum=rand(0,$remain_i-1);
 
-}
+
+// random algorithm
 $remain_i=$i;
 $a[$i];
 $b[$i];
@@ -81,14 +77,13 @@ $b[$iii++]=$nowii;
 
 
 }
+//
 
 
-
-$randstuid=$row[$randnum]['stuId'];
-
-
-
-
+for($iiii=0;$iiii<$i;$iiii++){
+	$radstu[$iiii]=$row[$b[$iiii]]['stuId'];
+}
+echo json_encode($radstu);
 
 	
 }

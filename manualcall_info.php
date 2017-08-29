@@ -54,7 +54,7 @@ $result=mysqli_query($db,$sql);
 	$result=mysqli_query($db,$sql);
 
 	}
-}
+}/*
 if($remainnum){
 
 $sql = "SELECT DISTINCT `student`.`stuId` \n"
@@ -80,5 +80,5 @@ $randstuid=$row[$randnum]['stuId'];
 }
 
 echo $randstuid;
-
+*/
 ?>
