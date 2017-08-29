@@ -32,9 +32,7 @@ if(!$is_login){
         #table td{border:pink solid 1px;margin: 25px auto;}
         #table td input{text-align: center;}
 
-
-
-        #Grade{border: red solid 1px;width: 300px;height: 300px;left:500px;text-align: center;margin: 10px auto;
+        #Grade{border: red solid 1px;width: 350px;height: 300px;left:500px;text-align: center;margin: 10px auto;
                 display: none;}
 
         #percent{width:500px;height:80px;border:red solid 1px;margin:10px auto;line-height: 80px;display: none;}
@@ -52,7 +50,7 @@ if(!$is_login){
         <select id="selectcourse" name="course">
             <option  value="" selected></option>
             <?php
-            $sql = "SELECT courseName FROM `basic_relation` WHERE userId=$userid";
+            $sql = "SELECT distinct courseName FROM `basic_relation` WHERE userId=$userid";
             $result=mysqli_query($db,$sql);
             while($row = mysqli_fetch_assoc($result)){
                 echo "<option value=".$row['courseName'].">".$row['courseName']."</option>";
@@ -92,12 +90,11 @@ if(!$is_login){
                     <tr>
                         <td><input type="checkbox" name="check" disabled/></td>
                         <td><input type="text" name="field" value="出勤率" disabled/></td>
-                        <td><input type="text" name="percent"/></td>
+                        <td><input type="text" name="percent" id="attendance" value=""/></td>
 
                     </tr>
                 </table>
             <input type="button" id="yes" value="保存并开始录入"/>
-
 
         </div>
 <!--<div id="nomalGrade" class="enterGrade">
@@ -122,6 +119,11 @@ if(!$is_login){
 <!--<button id="btn">yang</button>-->
         </div>
         <script>
+            var re_percentInf = new Array();
+            var field = null;
+           // var re_field = new Array();
+            //var re_percentInf = new Array();
+
 
             function formFiled(isChecked,filedName,filedPer){
                 this.isChecked=isChecked;
@@ -144,16 +146,16 @@ if(!$is_login){
 
         });
 
-//        $("#btn").click(function(){
-//
-//        });
+
 
         $("#selectcourse").change(function(){
-            var courseName = $(this).val();
+            var courseName = $("#selectcourse").val();
             $("#classlab").html("");
             if("" == courseName){
                 $("#selectclass").empty();
                 $("#selectclass").append("<option value='' selected></option>");
+                $("#percent").css("display","none");
+                $("#anniu").css("display","none");
             }else{
 
                 $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
@@ -166,13 +168,54 @@ if(!$is_login){
         });//end change
 
         $("#selectclass").change(function(){
+            var courseName = $("#selectcourse").val();
             var classid = $("#selectclass").val();
             if("" == classid){
-                //
+                $("#percent").css("display","none");
+                $("#anniu").css("display","none");
+                $("#normal").css("display","none");
+                $("#Grade").css("display","none");
             }
             else {
-                $("#percent").css("display","block");
                 //发送post请求得出期末与平时的比例和平时成绩中分布（名字和比例）
+                $.post("phpData/entryScore1.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>,classId:classid},function(data){
+                    var json = JSON.parse(data);
+                    //console.log(json);
+
+
+                    re_percentInf = json.percentInf;
+
+                    $("#range").val((1-re_percentInf.finalPer)*100);
+                   var tempPer = $("#range").val();
+                    $("#norPer").text("("+tempPer+"%)");
+                    $("#finPer").text("("+(100-tempPer)+"%)");
+                    console.log(tempPer);
+
+                    $("#attendance").val(re_percentInf.attendancePer*100);
+
+
+                    field = json.field;console.log(field);
+                    var str="";
+                    for(var j=0;j<field.length;j++)
+                    {
+                        var tempNum = field[j].userDefineId;
+                        str +=
+                        "<tr id='tr"+tempNum+"'>"+
+                        "<td><input type='checkbox' name='check"+tempNum+"' /></td>"+
+                        "<td><input type='text' name='field"+tempNum+"'  value='"+field[j].userDefineName+"'/></td>"+
+                        "<td><input type='text' name='percent"+tempNum+"' value='"+(field[j].userDefinePer*100)+"'/></td>"+
+                        "<td><button class='deleteBtn' onclick='Delete()' title='删除该考核项目'>X</button></td>"+
+                        "</tr>";
+                        //console.log(field[j].filedName+field[j].filedPer*100);
+                    }
+                   // $("#table").empty();
+                    $("#table tr:gt(1)").remove();
+                    $("#table").append(str);
+
+
+                });
+                $("#percent").css("display","block");
+
                 $("#anniu").css("display","block");
             }
 
@@ -180,10 +223,20 @@ if(!$is_login){
 
         $("#entryNormal").click(function(){
             $("#normal").css("display","block");
+            $("#Grade").css("display","none");
         });
+
         $("#entryFinal").click(function(){
             $("#Grade").css("display","block");
             $("#normal").css("display","none");
+        });
+
+        $("#prev").click(function(){
+          alert('prev');
+        });
+
+        $("#next").click(function(){
+            alert('next');
         });
 
         $("#range").change(function(){
@@ -198,9 +251,9 @@ if(!$is_login){
 
             var str =
                 "<tr>"+
-                "<td><input type='checkbox' name='check"+rowNum+"' /></td>"+
-                "<td><input type='text' name='field"+rowNum+"'  /></td>"+
-                "<td><input type='text' name='percent"+rowNum+"'/></td>"+
+                "<td><input type='checkbox' name='check' /></td>"+
+                "<td><input type='text' name='field'  /></td>"+
+                "<td><input type='text' name='percent'/></td>"+
                 "<td><button class='deleteBtn' onclick='Delete()' title='删除该考核项目'>X</button></td>"+
                 "</tr>";
             $("#table").append(str);
@@ -256,16 +309,26 @@ if(!$is_login){
                     //把选中的字段
                     $("#inputFen").empty();
                     var str="";
+                    var num=0;
                     alert(field.length);
                     for(var j=0;j<field.length;j++)
                     {
                         if(true == field[j].isChecked)
                         {
                             var temp = field[j].filedName;
-                            str += "<label for='"+temp+"'>"+temp+"：</label><input type='text' id='"+temp+"' name='"+temp+"'><br>";}
+                            str += "<label for='"+temp+"'>"+temp+"：</label><input type='text' id='"+temp+"' name='"+temp+"'><br>";
+                            num++;
+                        }
                     }
-                    $("#inputFen").append(str);
-                    console.log("*"+str);
+                    if(num>0){
+                        $("#inputFen").append(str);
+                        console.log("*"+str);
+                        $("#Grade").css("display","block");
+                        $("#normal").css("display","none");
+                    }else{
+                        alert('请至少选择一项需要录入的考核项目！');
+                    }
+
                 }
                 else{
                     alert("平时成绩占比百分率和不为1！");
@@ -274,17 +337,7 @@ if(!$is_login){
             else{
                 alert("请填写完信息再开始录入！");
             }
-
-
-
-
-
-
         });
-
-
-
-
 
     });//document.onload
 </script>
