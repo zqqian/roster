@@ -18,16 +18,22 @@ echo "<script>console.log('$email.$college.$academy')</script>";
   <meta charset="UTF-8">
   <title>个人信息</title>
   <script src="js/jquery-3.2.1.js"></script>
+  <script src="js/layer/layer.js"></script>
 </head>
 <style>
+    #information{display:block;}
 </style>
 <body>
+<center>
+    <div id="information">
     <label for="username">用户名</label><input type="text" class="myinput" id="username" value="<?php echo $username;?>" disabled><br>
     <label for="email">邮箱</label><input type="text"  class="myinput" id="email" value="<?php echo $email;?>" disabled><br>
     <label for="school">学校</label><input type="text" class="myinput"  id="school" value="<?php echo $college;?>" disabled><br>
     <label for="academy">学院</label><input type="text" class="myinput" id="academy" value="<?php echo $academy;?>" disabled><br>
     <input type="button" id="bianji" value="编辑">
     <input type="button" id="tijiao" value="保存" disabled="disabled">
+    </div>
+</center>
 <script>
     $("#bianji").click(function(){
         $("#email").removeAttr("disabled");
@@ -54,7 +60,11 @@ echo "<script>console.log('$email.$college.$academy')</script>";
                 academy: academy
             }, function (data) {
                 if (data == "1") {
-                    alert('修改成功');
+//                    alert('修改成功');
+                    layer.alert('修改成功', {
+                        icon: 6,
+                        skin: 'layer-ext-moon'
+                    })
                     window.location.reload();
                 }
                 else alert('修改失败');

@@ -20,12 +20,17 @@ if(!$is_login){
     </style>
 </head>
 <body>
+
+<center>
+    <div id="repassword">
 <lable>输入原密码</lable><input type="password" id="oldpassword" ></br>
 <lable>输入新密码</lable><input type="password" id="newpassword"></br>
 <lable>重新输入新密码</lable><input type="password"  id="renewpassword"></br>
 <span id="repasswordspan"></span>
 <button type="button" id="tijiao" value="提交">提交</button>
 <button type="reset" id="chongzhi" value="重置">重置</button>
+    </div>
+</center>
 <script>
     $(function(){
         $("#chongzhi").click(function(){
