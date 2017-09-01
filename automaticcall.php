@@ -19,7 +19,7 @@ if(!$is_login){
         $(document).ready(function() {
             $("#qrcodeCanvas").qrcode({
                 render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                text : "http://www.baidu.com",   //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
+                text :'http://www.baidu.com',   //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
                 width : "200",               //二维码的宽度
                 height : "200",              //二维码的高度
                 background : "#ffffff",       //二维码的后景色
@@ -143,6 +143,10 @@ if(!$is_login){
             $("#classok").prop("disabled",true);
             $("#classsure").prop("disabled",true);
             $("#twocode").show();
+            var twocodedata="twocode_sucessfully";
+            $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php echo $_SESSION['userid'];?>},function(data){
+
+            });
         });
 
         $("#twocodestart").click(function(){

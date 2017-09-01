@@ -141,16 +141,16 @@ if(!$is_login){
     <table id="submit3">
         <tr>
             <th>
-                <button id="last" onclick="lastloadXMLDoc()">上一个</button>
+                <button id="last" >上一个</button>
             </th>
             <th>
-                <button id="haveto" onclick="loadXMLDoc()">已到</button>
+                <button id="haveto" >已到</button>
             </th>
             <th>
-                <button id="skip" onclick="loadXMLDoc()">跳过</button>
+                <button id="skip" >跳过</button>
             </th>
             <th>
-                <button id="absence" onclick="loadXMLDoc()">缺勤</button>
+                <button id="absence">缺勤</button>
             </th>
         </tr>
     </table>
@@ -159,32 +159,15 @@ if(!$is_login){
 
 <script>
 
-    function loadXMLDoc() {
-        if($("#tranglenum").text()==$("#selectnum").val()) {
-            alert("点名完成");
-            window.location.reload();
-        }
-        else {
-            x = Number($("#tranglenum").text()) + 1;
-            $("#tranglenum").html(x);
-            $("#last").prop("disabled", false);
-        }
-    }
-
-    function lastloadXMLDoc() {
-        $("#last").prop("disabled", false);
-        x = Number($("#tranglenum").text()) - 1;
-        if(x==1)
-            $("#last").prop("disabled", true);
-        $("#tranglenum").html(x);
-    }
-
     function isContains(str,substr){
         return str.indexOf(substr)>=0;
     }
 
 
     $(function(){
+
+        var arr;
+        var classids=[];
 
             $("#hidetrangle").hide();
 
@@ -207,10 +190,14 @@ if(!$is_login){
             });//end change
 
             $("#classok").click(function(){
-                var classs=$("#selectclass").val();
-                var labelclass=$("#classlab").text();
-                if(""!=classs && !isContains(labelclass,classs))
-                     $("#classlab").append("+"+classs);
+                var classid=$("#selectclass").val();
+                if(classids.indexOf(classid)<0){
+                    classids.push(classid);
+//                    jQuery("#select1  option:selected").text();
+                    var classs=$("#selectclass option:selected").text();
+                    $("#classlab").append(classs + "  ");
+                };
+
             });
 
             $("#btn1").click(function(){
@@ -231,12 +218,87 @@ if(!$is_login){
                    $("#hidetrangle").show();
                     $("#last").prop("disabled",true);
 
-                    $.getJSON("manualcall_info.php",{ courseName:course,classlab:classs, num:number,userId:<?php echo $_SESSION['userid'];?> },function(data){
-                            console.log(data);
-                    });
+                $.getJSON("phpData/creat_manuallcall_list.php",{ classids:classids, num:number,userId:<?php echo $_SESSION['userid'];?> },function(data){
+
+                    console.log(data);
+                     arr=eval(data);
+
+                    $("#stunum").html(arr[0][0]);
+                    $("#stuname").html(arr[0][1]);
+                     });
                 }
 
           });
+
+             $("#last").click(function(){
+                 $("#last").prop("disabled", false);
+                 x = Number($("#tranglenum").text()) - 1;
+                 if(x==1)
+                     $("#last").prop("disabled", true);
+                 $("#tranglenum").html(x);
+                 $("#stunum").html(arr[x-1][0]);
+                 $("#stuname").html(arr[x-1][1]);
+                 });
+
+            $("#haveto").click(function(){
+                arr[$("#tranglenum").text()-1][2]=0;
+                if($("#tranglenum").text()==$("#selectnum").val()) {
+                    var number=$("#selectnum").val();
+                    $.post("phpData/manualcall_info.php",{classids:classids, num:number,arr:arr,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>},function(data){
+                        console.log(data);
+                    });
+
+                    alert("点名完成");
+                    window.location.reload();
+
+                }
+                else {
+                    x = Number($("#tranglenum").text()) + 1;
+                    $("#stunum").html(arr[x-1][0]);
+                    $("#stuname").html(arr[x-1][1]);
+                    $("#tranglenum").html(x);
+                    $("#last").prop("disabled", false);
+                }
+            });
+
+            $("#skip").click(function(){
+                arr[$("#tranglenum").text()-1][2]=2;
+                if($("#tranglenum").text()==$("#selectnum").val()) {
+                    var number=$("#selectnum").val();
+                    $.post("phpData/manualcall_info.php",{classids:classids, num:number,arr:arr,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>},function(data){
+                        console.log(data);
+                    });
+
+                    alert("点名完成");
+                    window.location.reload();
+                }
+                else {
+                    x = Number($("#tranglenum").text()) + 1;
+                    $("#stunum").html(arr[x-1][0]);
+                    $("#stuname").html(arr[x-1][1]);
+                    $("#tranglenum").html(x);
+                    $("#last").prop("disabled", false);
+                }
+            });
+
+            $("#absence").click(function(){
+                if($("#tranglenum").text()==$("#selectnum").val()) {
+                    var number=$("#selectnum").val();
+                    $.post("phpData/manualcall_info.php",{classids:classids, num:number,arr:arr,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>},function(data){
+                        console.log(data);
+                    });
+
+                    alert("点名完成");
+                    window.location.reload();
+                }
+                else {
+                    x = Number($("#tranglenum").text()) + 1;
+                    $("#stunum").html(arr[x-1][0]);
+                    $("#stuname").html(arr[x-1][1]);
+                    $("#tranglenum").html(x);
+                    $("#last").prop("disabled", false);
+                }
+            });
 
 
         });
