@@ -49,9 +49,9 @@ group by p.stuId";
 
 for($i=0;$i<count($field_split)-1;$i++) {
     if($i != count($field_split)-2)
-        $sql2 = $sql2."max(case p.userDefineName when '$field_split[$i]' then p.fieldGrade else -1 end) '$field_split[$i]',";
+        $sql2 = $sql2."max(case p.userDefineName when '$field_split[$i]' then p.fieldGrade else null end) '$field_split[$i]',";
     else
-        $sql2 = $sql2."max(case p.userDefineName when '$field_split[$i]' then p.fieldGrade else -1 end) '$field_split[$i]'";
+        $sql2 = $sql2."max(case p.userDefineName when '$field_split[$i]' then p.fieldGrade else null end) '$field_split[$i]'";
 }
 
 $sql = $sql1.$sql2.$sql3;
