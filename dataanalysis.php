@@ -270,16 +270,16 @@
             })
         })
         function getclass(){
-                var obj = document.getElementById("select_course_name");
-                var index = obj.selectedIndex;
-                if (obj.options[index].value != -1) {
-                    if ($("#select_class_name") != "") {
-                        $("#select_class_name").html("");
-                    }
-                    for (var i = 0; i < class_name_array[index].length; i++) {
-                        $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
-                    }
+            var obj = document.getElementById("select_course_name");
+            var index = obj.selectedIndex;
+            if (obj.options[index].value != -1) {
+                if ($("#select_class_name") != "") {
+                    $("#select_class_name").html("");
                 }
+                for (var i = 0; i < class_name_array[index].length; i++) {
+                    $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
+                }
+            }
         }
         var select_class = new Array();
         function show() {

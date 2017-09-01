@@ -33,7 +33,6 @@
                         <span class="icon-bar"></span>
                     </button> <a class="navbar-brand" href="index.php">云点名系统</a>
                 </div>
-
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -46,7 +45,6 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
                                             <center> <h4 class="modal-title" id="myModalLabel">登录</h4></center>
                                         </div>
-
                                             <div class="modal-body">
                                                 <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"><br>
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"><br>

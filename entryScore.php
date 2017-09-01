@@ -62,16 +62,12 @@ if(!$is_login){
         <select id="selectclass" >
             <option  value="" selected></option>
         </select>
-
-
         <div id="show">
-
             <div id="percent">
         <span>平时成绩<span id="norPer">(30%)</span></span>
         <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
         <span>期末成绩<span id="finPer">(70%)</span></span>
         </div>
-
         <div id="anniu">
         <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal"/>
         <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>

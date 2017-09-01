@@ -9,16 +9,20 @@ if(!$is_login){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>点名信息查询</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style5.css" />
+    <script src="modernizr.custom.63321.js"></script>
+    <script type="text/javascript" src="jquery.dropdown.js"></script>
 </head>
 <style>
     html,body{margin:0px;padding:0px;}
     #course_name{display:block;width:100%;height:50px;background-color:#000000;text-align:center;line-height:80px;}
     #course_name span{font-size:25px;color:#f9f9f9;margin-right:25%;position:absolute;}
-    #select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}
+    /*#select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}*/
     #menuselect{display:block;width:100%;height:60px;margin: 0px;background-color:#000000;
         text-align:center;padding:0px;line-height:85px;}
     #menuselect ul{background-color:#000000;margin:0px;display:block;padding:0px;}
@@ -26,19 +30,18 @@ if(!$is_login){
     ul li{list-style-type:none;display:inline;margin:7%;}
     #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
     #menusure span{font-size:18px;}
-    #select-class{margin:10px;}
+    /*#select-class{margin:10px;}*/
     th,tr{text-align: center;}
-    select{width:auto;min-width: 100px;text-align: center;}
+    /*select{width:auto;min-width: 100px;text-align: center;}*/
     /*清掉默认设置的样式*/
     a:hover{color: white;}
     a:active{color: white;}
     a:visited{color: white;}
     a:link{color: white;}
-
 </style>
 <body>
 <div id="course_name">
-    <span>选择课程</span>
+<!--    <span>选择课程</span>-->
     <select id="select_course" onChange = "getcourse()">
         <option value="请选择" selected>选择课程</option>
         <?php
@@ -72,6 +75,16 @@ if(!$is_login){
 <script>
     var date_array=new Array();
     var class_array=new Array();
+    $( '#select_course' ).dropdown( {
+        gutter : 2,
+        stack : false,
+        slidingIn : 100
+    } );
+    $( '#select-class' ).dropdown( {
+        gutter : 2,
+        stack : false,
+        slidingIn : 100
+    } );
     function getcourse(){
         $("#menusure span").html("选择查询方式");
         $("#select-class").html("");
@@ -113,7 +126,6 @@ if(!$is_login){
         $("#menusure span").html("选择班级");
         $("#select-class").html("");
         $("#select-class").append("<option value='请选择' selected>选择班级</option>");
-
         var str="";
         for(var i=0;i<class_array.length;i++)
         {
