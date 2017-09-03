@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+    <link rel="stylesheet" type="text/css" href="css/jquery.restable.min.css" />
+    <script type="text/javascript" src="path/to/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.restable.min.js"></script>
+</head>
+<style>
+</style>
+<body>
+<table id="table-no-resize">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Height</th>;
+        <th>Province</th>
+        <th>Sport</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Jill Smith</td>
+        <td>25</td>
+        <td>Female</td>
+        <td>54</td>
+        <td>British Columbia</td>
+        <td>Volleyball</td>
+    </tr>
+    </tbody>
+</table>
+<script>
+    $('#table-no-resize').basictable({
+        tableWrapper: true
+    });
+</script>
+</body>
+</html>

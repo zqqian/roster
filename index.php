@@ -8,7 +8,6 @@
     <meta name="keywords" content="云点名系统">
     <meta name="description" content="云点名系统">
     <meta name="author" content="创意武装H5团队">
-    <!--每30秒中刷新当前页面:<meta http-equiv="refresh" content="30">-->
     <title>云点名系统主页</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>

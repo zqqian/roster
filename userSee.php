@@ -38,7 +38,6 @@ if(!$is_login){
             position: absolute;
             left: 0;
         }
-
         #right {
             height: 100%;
             padding: 0;
@@ -47,7 +46,6 @@ if(!$is_login){
             position: absolute;
             left: 180px;
         }
-
         iframe{
             width:99.9%;
             height:99%;
