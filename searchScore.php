@@ -12,6 +12,7 @@ if(!$is_login){
     <title>成绩查询</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
         body,th{text-align: center;}

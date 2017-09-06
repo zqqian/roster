@@ -10,6 +10,7 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>导出学生成绩</title>
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <script src="js/jquery-3.2.1.js"></script>
     <style>
         #exportForm{
@@ -63,7 +64,7 @@ if(!$is_login){
         <label for="end" >结束日期：</label><input id="end"  type="date" value="2014-01-13"/>
         </div>
 
-        <input type="button" id="downloadBtn" value="下载">
+        <input type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
     </form>
 
 

@@ -10,37 +10,83 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>成绩录入</title>
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
+    
     <script src="js/jquery-3.2.1.js"></script>
-   <!-- <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
     <style>
         body{text-align: center;}
         select{width:200px;}
 
         #show{width: 100%;height:auto;background: rgba(255, 192, 203, 0.48);}
 
-        #normal{width: 500px;height:400px;border:pink solid 1px;margin: 10px auto;display:none;}
+        #normal{width: 600px;height:auto;border:pink solid 1px;margin: 10px auto;/*display:none;*/}
         .xiang{
             width:400px;
             height: 50px;
             border:red solid 1px;
 
         }
-        #normalAdd{float: right;font-size: 18px;display: block;border-radius: 5px;}
-        .deleteBtn{color:red;}
+        #normalAdd{
+            float: right;font-size: 18px;display: block;border-radius: 5px;width:30px !important;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;}
+
+        #normalAdd:active {
+            -webkit-box-shadow:none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+
+
+        .deleteBtn{
+            width: 40px;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .deleteBtn:active {
+            -webkit-box-shadow:none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+        }
+
         #table{margin: 25px auto;clear: both;}
-        #table td{border:pink solid 1px;margin: 25px auto;}
+        #table td{background:greenyellow;margin: 25px auto;}
         #table td input{text-align: center;}
 
-        #Grade{border: red solid 1px;width: 350px;height: 300px;left:500px;text-align: center;margin: 10px auto;
-                display: none;}
+        #Grade{border: red solid 1px;width: 350px;height: 300px;left:500px;text-align: center;margin: 10px auto; display: none;}
 
-        #percent{width:500px;height:80px;border:red solid 1px;margin:10px auto;line-height: 80px;display: none;}
+        #percent{width:100%;height:80px;border:red solid 1px;margin:10px auto;line-height: 80px;display: none;}
 
-        #anniu{width:500px;height:30px;border:red solid 1px;margin:10px auto;line-height: 30px;display: none;}
+        #anniu{width:100%;height:50px;border:red solid 1px;margin:10px auto;line-height: 50px;display: none;}
+        #anniu input[type="button"]{display: inline;}
 
-        #inputFen{width:300px;height:auto;border: 1px solid red;margin: 10px auto;
+        #inputFen{width:100%;height:auto;border: 1px solid red;margin: 10px auto;
             line-height: 40px;}
+
+        #yes{margin: 20px auto !important;}
+
+        #prev, #next {
+            display: inline;
+            width: 80px;
+            margin: 20px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </style>
 
 </head>
@@ -73,7 +119,7 @@ if(!$is_login){
         </div>
 
         <div id="anniu">
-        <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal"/>
+        <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
         <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         </div>
 
@@ -85,7 +131,6 @@ if(!$is_login){
                         <th>是否勾选</th>
                         <th>考核项目名称</th>
                         <th colspan="2">平时成绩占比（%）</th>
-
                     </tr>
                     <tr>
                         <td><input type="checkbox" name="check" disabled/></td>
@@ -97,15 +142,7 @@ if(!$is_login){
             <input type="button" id="yes" value="保存并开始录入"/>
 
         </div>
-<!--<div id="nomalGrade" class="enterGrade">
-    <p id="NstuCode">学号</p>
-    <p id="NstuName">姓名</p>
-    <div id="Ninput">
-        <!--<label for="">   </label><input type="text" id="   " name="   ">
-    </div>
-    <input type="button" value="上一个" id="Nprev" name="Nprev">
-    <input type="button" value="下一个" id="Nnext" name="Nnext">
-</div>-->
+
 
         <div id="Grade">
             <p id="stuCode">学号</p>
@@ -118,9 +155,15 @@ if(!$is_login){
         </div>
 
 
-<!--<button id="btn">yang</button>-->
+
         </div>
         <script>
+
+
+
+
+
+
             var flagtype = "final";
             var re_percentInf = new Array();
             var field = null;
@@ -136,357 +179,410 @@ if(!$is_login){
                 this.filedName=filedName;
                 this.filedPer=Number(filedPer)/100;
             }
-            function  Delete(){
-//                alert("t");
-                var temp = ($(this).parent().prevAll().length + 1) + 1;
-                $("#table tr:eq("+temp+")").remove();
 
+            //删除字段按钮的js代码
+            function  Delete(obj){
+                var temp = $(obj).parent().parent().prevAll().length;//DOM元素转化成jQuery对象
+                //alert(temp);
+                var deleteTr =  $("#table tr:eq("+temp+")");
+
+                var reg=/\d+/;//.match(reg);
+                var trId = deleteTr.attr("id");
+
+                if(trId != undefined){
+                 $.post(
+                     "phpData/entryScore6.php",
+                     {trId:trId.match(reg)[0]},
+                     function(data){
+                        //输出结果正常情况下为1
+                        // alert(data);
+                     });
+                }else{
+                    //
+                }
+                deleteTr.remove();
             }
-    $(function(){
-        $("#range").change(function(){
-            var temp = Number($("#range").val());
-            $("#norPer").text("("+temp+"%)");
-            $("#finPer").text("("+(100-temp)+"%)");
-        });
 
-        $("#selectcourse").change(function(){
-            var courseName = $("#selectcourse").val();
-            $("#classlab").html("");
-            if("" == courseName){
-                $("#selectclass").empty();
-                $("#selectclass").append("<option value='' selected></option>");
-                $("#percent").css("display","none");
-                $("#anniu").css("display","none");
-            }else{
+             $(function(){
 
-                $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
-                    $("#selectclass").empty();
-                    $("#selectclass").append("<option value='' selected></option>");
-                    $("#selectclass").append(data);
-                    console.log(data);
+                $("#range").change(function(){
+                    var temp = Number($("#range").val());
+                    $("#norPer").text("("+temp+"%)");
+                    $("#finPer").text("("+(100-temp)+"%)");
                 });
-            }
-        });//end change
 
-        $("#selectclass").change(function(){
-            var courseName = $("#selectcourse").val();
-            var classid = $("#selectclass").val();
-            if("" == classid){
-                $("#percent").css("display","none");
-                $("#anniu").css("display","none");
-                $("#normal").css("display","none");
-                $("#Grade").css("display","none");
-            }
-            else {
-                //发送post请求得出期末与平时的比例和平时成绩中分布（名字和比例）
-                $.post("phpData/entryScore1.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>,classId:classid},function(data){
-                    var json = JSON.parse(data);
-                    //console.log(json);
+                $("#selectcourse").change(function(){
+                    var courseName = $("#selectcourse").val();
+                    $("#classlab").html("");
+                    if("" == courseName){
+                        $("#selectclass").empty();
+                        $("#selectclass").append("<option value='' selected></option>");
+                        $("#percent").css("display","none");
+                        $("#anniu").css("display","none");
+                    }else{
 
-
-                    re_percentInf = json.percentInf;
-
-                    $("#range").val((1-re_percentInf.finalPer)*100);
-                   var tempPer = $("#range").val();
-                    $("#norPer").text("("+tempPer+"%)");
-                    $("#finPer").text("("+(100-tempPer)+"%)");
-                    console.log(tempPer);
-
-                    $("#attendance").val(re_percentInf.attendancePer*100);
-
-
-                    field = json.field;console.log(field);
-                    var str="";
-                    for(var j=0;j<field.length;j++)
-                    {
-                        var tempNum = field[j].userDefineId;
-                        str +=
-                        "<tr id='tr"+tempNum+"'>"+
-                        "<td><input type='checkbox' name='check"+tempNum+"' /></td>"+
-                        "<td><input type='text' name='field"+tempNum+"'  value='"+field[j].userDefineName+"'/></td>"+
-                        "<td><input type='text' name='percent"+tempNum+"' value='"+(field[j].userDefinePer*100)+"'/></td>"+
-                        "<td><button class='deleteBtn' onclick='Delete()' title='删除该考核项目'>X</button></td>"+
-                        "</tr>";
-                        //console.log(field[j].filedName+field[j].filedPer*100);
+                        $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                            $("#selectclass").empty();
+                            $("#selectclass").append("<option value='' selected></option>");
+                            $("#selectclass").append(data);
+                            console.log(data);
+                        });
                     }
-                   // $("#table").empty();
-                    $("#table tr:gt(1)").remove();
-                    $("#table").append(str);
+                });//end change
 
+                $("#selectclass").change(function(){
+                    var courseName = $("#selectcourse").val();
+                    var classid = $("#selectclass").val();
+                    if("" == classid){
+                        $("#percent").css("display","none");
+                        $("#anniu").css("display","none");
+                        $("#normal").css("display","none");
+                        $("#Grade").css("display","none");
+                    }
+                    else {
+                        //发送post请求得出期末与平时的比例和平时成绩中分布（名字和比例）
+                        $.post("phpData/entryScore1.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>,classId:classid},function(data){
+                            var json = JSON.parse(data);
+                            //console.log(json);
+
+
+                            re_percentInf = json.percentInf;
+
+                            $("#range").val((1-re_percentInf.finalPer)*100);
+                           var tempPer = $("#range").val();
+                            $("#norPer").text("("+tempPer+"%)");
+                            $("#finPer").text("("+(100-tempPer)+"%)");
+                            console.log(tempPer);
+
+                            $("#attendance").val(re_percentInf.attendancePer*100);
+
+                            //根据Id返回来的自定义字段信息
+                            field = json.field;
+                            console.log(field);
+                            var str="";
+                            for(var j=0;j<field.length;j++)
+                            {
+                                var tempNum = field[j].userDefineId;
+                                str +=
+                                "<tr id='tr"+tempNum+"'>"+
+                                "<td><input type='checkbox' name='check"+tempNum+"' /></td>"+
+                                "<td><input type='text' name='field"+tempNum+"'  value='"+field[j].userDefineName+"'/></td>"+
+                                "<td><input type='text' name='percent"+tempNum+"' value='"+(field[j].userDefinePer*100)+"'/></td>"+
+                                "<td><button class='deleteBtn' onclick='Delete(this)'name='delete"+tempNum+"' title='删除该考核项目'>X</button></td>"+
+                                "</tr>";
+                                //console.log(field[j].filedName+field[j].filedPer*100);
+                            }
+                           // $("#table").empty();
+                            $("#table tr:gt(1)").remove();
+                            $("#table").append(str);
+
+
+                        });
+                        $("#percent").css("display","block");
+
+                        $("#anniu").css("display","block");
+                    }
 
                 });
-                $("#percent").css("display","block");
 
-                $("#anniu").css("display","block");
-            }
+                $("#entryNormal").click(function(){//录入平时成绩按钮
+                    flagtype = "normal";
+                    $("#normal").css("display","block");
+                    $("#selectcourse").attr('disabled', true);
+                    $("#selectclass").attr('disabled', true);
+                    $("#range").attr('disabled', true);
+                    $(this).attr('disabled', true);
+                    $("#entryFinal").attr('disabled', true);
+                });
 
-        });
-
-        $("#entryNormal").click(function(){//录入平时成绩按钮
-            flagtype = "normal";
-            $("#normal").css("display","block");
-            $("#selectcourse").attr('disabled', true);
-            $("#selectclass").attr('disabled', true);
-            $("#range").attr('disabled', true);
-            $(this).attr('disabled', true);
-            $("#entryFinal").attr('disabled', true);
-        });
-
-        $("#entryFinal").click(function(){//录入期末成绩按钮
-            flagtype = "final";
-            $("#Grade").css("display","block");
-            $("#normal").css("display","none");
-            $("#selectcourse").attr('disabled', true);
-            $("#selectclass").attr('disabled', true);
-            $("#range").attr('disabled', true);
-            $(this).attr('disabled', true);
-            $("#entryNormal").attr('disabled', true);
-
-            $.post("phpData/entryScore3.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
-                function(data){
-                    var json = JSON.parse(data);
-
-                    console.log(json);
-                    re_stuInf = json;
-                    re_stuInf_sum=re_stuInf.length-1;
-
-
-                    $("#inputFen").empty().append("<label for='grade'>期末成绩：</label><input type='text' id='grade' name='grade'>");
-
-
-                    //填充学生信息
-                    $("#stuCode").html(re_stuInf[0]["stuCode"]);
-                    $("#stuName").html(re_stuInf[0]["stuName"]);
-                    $("#grade").val(re_stuInf[0]["finalGrade"]);
-
-
+                $("#entryFinal").click(function(){//录入期末成绩按钮
+                    flagtype = "final";
                     $("#Grade").css("display","block");
                     $("#normal").css("display","none");
+                    $("#selectcourse").attr('disabled', true);
+                    $("#selectclass").attr('disabled', true);
+                    $("#range").attr('disabled', true);
+                    $(this).attr('disabled', true);
+                    $("#entryNormal").attr('disabled', true);
+                    $("#inputFen input:eq(0)").focus();
+
+                    $.post("phpData/entryScore3.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
+                        function(data){
+                            var json = JSON.parse(data);
+
+                            console.log(json);
+                            re_stuInf = json;
+                            re_stuInf_sum=re_stuInf.length-1;
+
+                            $("#inputFen").empty().append("<label for='grade'>期末成绩：</label><input type='text' id='grade' name='grade'>");
+
+                            //填充学生信息
+                            $("#stuCode").html(re_stuInf[0]["stuCode"]);
+                            $("#stuName").html(re_stuInf[0]["stuName"]);
+                            $("#grade").val(re_stuInf[0]["finalGrade"]);
+
+                            $("#Grade").css("display","block");
+                            $("#normal").css("display","none");
+
+                        });
 
                 });
 
+                $("#prev").click(function(){
+                    if(flagtype == "normal"){
+                    var tt = find_field.split("-");
+                    if(--re_stuInf_index >= 0){
 
-        });
-
-        $("#prev").click(function(){
-            if(flagtype == "normal"){
-            var tt = find_field.split("-");
-            if(--re_stuInf_index >= 0){
-
-                //填充学生信息
-                $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
-                $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
-                for(var q=0;q< tt.length-1;q++)//填充
-                {
-                    //填充分数
-                    var s = tt[q];
-                    $("#"+s).val(re_stuInf[re_stuInf_index][s]);
-                }
-                }
-            else {
-                alert("当前学生已为该班第一个！");
-                re_stuInf_index = 0;
-                $(this).attr('disabled', true);
-            }}else{
-                if(--re_stuInf_index >= 0){
-
-                    //填充学生信息
-                    $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
-                    $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
-                    $("#grade").val(re_stuInf[re_stuInf_index]["finalGrade"]);
-                }
-                else {
-                    alert("当前学生已为该班第一个！");
-                    re_stuInf_index = 0;
-                    $(this).attr('disabled', true);
-                }
-            }
-
-        });
-
-        $("#next").click(function(){
-            $("#prev").attr('disabled',false);
-            //录入平时成绩
-            if(flagtype == "normal"){
-                var tt = find_field.split("-");
-
-                    //处理当前数据
-                    for(var q=0;q< tt.length-1;q++)//填充
-                    {
-                        var s = tt[q];
-                        re_stuInf[re_stuInf_index][s]=$("#"+s).val();
-                    }
-
-                    //填充下一个学生信息
-                    if(++re_stuInf_index <= re_stuInf_sum){
-
-                    $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
-                    $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
+                        //填充学生信息
+                        $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
+                        $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
                         for(var q=0;q< tt.length-1;q++)//填充
                         {
                             //填充分数
                             var s = tt[q];
                             $("#"+s).val(re_stuInf[re_stuInf_index][s]);
                         }
-                    }
-                else{
-                        //保存录入的平时成绩到数据库
-                        $.post("phpData/entryScore4.php",{},function(){});
-                        //提示录入完成，刷新本页面
-                        alert("录入平时成绩完毕,信息已保存！");
-                        window.location.reload();
-                }
-            }else{
+                        }
+                    else {
+                        alert("当前学生已为该班第一个！");
+                        re_stuInf_index = 0;
+                        $(this).attr('disabled', true);
+                    }}else{
+                        if(--re_stuInf_index >= 0){
 
-                //处理当前数据
-                re_stuInf[re_stuInf_index]["finalGrade"]=$("#grade").val();
-
-                if(++re_stuInf_index <= re_stuInf_sum){
-                    //填充学生信息
-                    $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
-                    $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
-                    $("#grade").val(re_stuInf[re_stuInf_index]["finalGrade"]);
-                }
-                else{
-                    //保存录入的期末成绩到数据库
-                    $.post("phpData/entryScore4.php",{},function(){});
-                    //提示录入完成，刷新本页面
-                    alert("录入期末成绩完毕,信息已保存！");
-                    window.location.reload();
-                }
-
-        }
-            console.log(re_stuInf_sum+" "+re_stuInf_index);
-        });
-
-        $("#range").change(function(){
-//            var temp = $("#range").val();
-//            $("#rangeSpan").text(temp);
-        });
-
-        $("#normalAdd").click(function(){
-
-            var rowNum = $("#table").find("tr").length ;
-            var fieldNum = rowNum - 1 ;
-
-            var str =
-                "<tr>"+
-                "<td><input type='checkbox' name='check' /></td>"+
-                "<td><input type='text' name='field'  /></td>"+
-                "<td><input type='text' name='percent'/></td>"+
-                "<td><button class='deleteBtn' onclick='Delete()' title='删除该考核项目'>X</button></td>"+
-                "</tr>";
-            $("#table").append(str);
-            alert(str);
-            alert($("#table").find("tr").length);
-        });
-
-
-
-        $("#yes").click(function(){
-            var field = new Array();
-            //判断是否有空值
-            var flag = true;
-            ////判断百分比和是否为100%
-            var seePer = 0.0;
-
-
-            var rowNum = $("#table").find("tr").length ;//table的总行数
-            var index = rowNum - 1;//table除去首行的行数
-//            alert(rowNum+" "+index);
-
-//            var hang = $("#table tr:eq("+1+")");
-//            var lie1 = hang.find(":checkbox").is(':checked');
-//            var lie2 = hang.find(":text").eq(0).val();
-//            var lie3 = hang.find(":text").eq(1).val();
-
-
-            for ( var i = 1;i <= index; i++)
-            {
-                var hang = $("#table tr:eq("+i+")");
-                var lie1 = hang.find(":checkbox").is(':checked');
-                var lie2 = hang.find(":text").eq(0).val();
-                var lie3 = hang.find(":text").eq(1).val();
-                if("" == lie2 || "" == lie3) {flag=false;break;}//如果考勤项目名称或者其比例为空，则不能进行录入
-                else{
-                    var f = new formFiled(lie1,lie2,lie3);
-//                    alert(f.isChecked+" "+ f.filedName+" "+ f.filedPer);
-                    field.push(f);
-                    seePer += f.filedPer;
-                }
-            }
-
-            if(flag){
-                if(seePer == 1.0){//判断百分比和是否为100%
-                    alert("yes");
-                    //将用户写入的字段及百分比插入数据库（第一次为insert，往后都是update）
-
-                    //把选中的字段
-                    $("#inputFen").empty();
-                    var str="";
-                    var num=0;
-
-                    alert(field.length);
-                    for(var j=0;j<field.length;j++)
-                    {
-                        if(true == field[j].isChecked)
-                        {
-                            var temp = field[j].filedName;
-                            str += "<label for='"+temp+"'>"+temp+"：</label><input type='text' id='"+temp+"' name='"+temp+"'><br>";
-                            find_field += temp+"-";
-                            num++;
+                            //填充学生信息
+                            $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
+                            $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
+                            $("#grade").val(re_stuInf[re_stuInf_index]["finalGrade"]);
+                        }
+                        else {
+                            alert("当前学生已为该班第一个！");
+                            re_stuInf_index = 0;
+                            $(this).attr('disabled', true);
                         }
                     }
-                    if(num>0){
-                        //发送post请求得到学生的信息和自定义字段对应的分数
-                        $.post("phpData/entryScore2.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val(),field:find_field},
-                            function(data){
-                                var json = JSON.parse(data);
-                               console.log(data);
-                                console.log(json);
-                                re_stuInf = json;
-                                re_stuInf_sum=re_stuInf.length-1;
+                    $("#inputFen input:eq(0)").focus();
+                });
 
+                $("#next").click(function(){
+                    $("#prev").attr('disabled',false);
+                    //录入平时成绩
+                    if(flagtype == "normal"){
+                        var tt = find_field.split("-");
 
-                                $("#inputFen").append(str);
-                                console.log("*"+str+"*"+find_field);
+                            //处理当前数据
+                            for(var q=0;q< tt.length-1;q++)//填充
+                            {
+                                var s = tt[q];
+                                re_stuInf[re_stuInf_index][s]=$("#"+s).val();
+                            }
 
-                                var tt = find_field.split("-");
+                            //填充下一个学生信息
+                            if(++re_stuInf_index <= re_stuInf_sum){
 
-                                //填充学生信息
-                                $("#stuCode").html(re_stuInf[0]["stuCode"]);
-                                $("#stuName").html(re_stuInf[0]["stuName"]);
-                                 for(var q=0;q< tt.length-1;q++)
-                                 {
-                                     //填充分数
+                            $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
+                            $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
+                                for(var q=0;q< tt.length-1;q++)//填充
+                                {
+                                    //填充分数
                                     var s = tt[q];
-                                    $("#"+s).val(re_stuInf[0][s]);
-                                 }
-
-
-
-                                $("#Grade").css("display","block");
-                                $("#normal").css("display","none");
-
-                            });
-
-
-
+                                    $("#"+s).val(re_stuInf[re_stuInf_index][s]);
+                                }
+                            }
+                        else{
+                                console.log(re_stuInf);
+                                //保存录入的平时成绩到数据库
+                                $.post(
+                                    "phpData/entryScore4.php",
+                                    {flag:"normal",student_inf:re_stuInf,courseName:$("#selectcourse").val(),find_field:find_field,
+                                        userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
+                                    function(data){console.log(data);});
+                                //提示录入完成，刷新本页面
+                                alert("录入平时成绩完毕,信息已保存！");
+                                window.location.reload();
+                        }
                     }else{
-                        alert('请至少选择一项需要录入成绩的考核项目！');
+
+                        //处理当前数据
+                        re_stuInf[re_stuInf_index]["finalGrade"]=$("#grade").val();
+
+                        if(++re_stuInf_index <= re_stuInf_sum){
+                            //填充学生信息
+                            $("#stuCode").html(re_stuInf[re_stuInf_index]["stuCode"]);
+                            $("#stuName").html(re_stuInf[re_stuInf_index]["stuName"]);
+                            $("#grade").val(re_stuInf[re_stuInf_index]["finalGrade"]);
+                        }
+                        else{
+                            //保存录入的期末成绩到数据库
+                            $.post(
+                                "phpData/entryScore4.php",
+                                {flag:"final",student_inf:re_stuInf,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
+                                function(){});
+                            //提示录入完成，刷新本页面
+                            alert("录入期末成绩完毕,信息已保存！");
+                            window.location.reload();
+                        }
+
+                }
+                    $("#inputFen input:eq(0)").focus();
+                    console.log(re_stuInf_sum+" "+re_stuInf_index);
+                });
+
+
+                $("#normalAdd").click(function(){
+
+                    var rowNum = $("#table").find("tr").length ;
+                    var fieldNum = rowNum - 1 ;
+
+                    var str =
+                        "<tr>"+
+                        "<td><input type='checkbox' name='check' /></td>"+
+                        "<td><input type='text' name='field'  /></td>"+
+                        "<td><input type='text' name='percent'/></td>"+
+                        "<td><button class='deleteBtn' onclick='Delete(this)' title='删除该考核项目'>X</button></td>"+
+                        "</tr>";
+                    $("#table").append(str);
+                    alert(str);
+                    alert($("#table").find("tr").length);
+                });
+
+
+
+                $("#yes").click(function(){//点击保存并开始录入
+                    var field = new Array();
+                    //判断是否有空值
+                    var flag = true;
+                    //判断百分比和是否为100%
+                    var seePer = 0.0;
+
+
+                    var rowNum = $("#table").find("tr").length ;//table的总行数
+                    var index = rowNum - 1;//table除去首行的行数
+        //            alert(rowNum+" "+index);
+
+        //            var hang = $("#table tr:eq("+1+")");
+        //            var lie1 = hang.find(":checkbox").is(':checked');
+        //            var lie2 = hang.find(":text").eq(0).val();
+        //            var lie3 = hang.find(":text").eq(1).val();
+
+
+                    //取信息并填充
+                    for ( var i = 1;i <= index; i++)
+                    {
+                        var hang = $("#table tr:eq("+i+")");
+                        var lie1 = hang.find(":checkbox").is(':checked');
+                        var lie2 = hang.find(":text").eq(0).val();
+                        var lie3 = hang.find(":text").eq(1).val();
+                        if("" == lie2 || "" == lie3) {flag=false;break;}//如果考勤项目名称或者其比例为空，则不能进行录入
+                        else{
+                            var f = new formFiled(lie1,lie2,lie3);
+        //                    alert(f.isChecked+" "+ f.filedName+" "+ f.filedPer);
+                            field.push(f);
+                            seePer += f.filedPer;
+                        }
                     }
 
-                }
-                else{
-                    alert("平时成绩占比百分率和不为100%！");
-                }
-            }
-            else{
-                alert("请填写完信息再开始录入！");
-            }
-        });
+                    if(flag){
+                        if(seePer.toFixed(2) == 1.00){//判断百分比和是否为100%
+                            alert("yes");
 
-    });//document.onload
+                            //把选中的字段
+                            $("#inputFen").empty();
+                            var str="";
+                            var num=0;
+
+                            alert(field.length);
+                            for(var j=0;j<field.length;j++)
+                            {
+                                if(true == field[j].isChecked)
+                                {
+                                    var temp = field[j].filedName;
+                                    str += "<label for='"+temp+"'>"+temp+"：</label><input type='text' id='"+temp+"' name='"+temp+"'><br>";
+                                    find_field += temp+"-";
+                                    num++;
+                                }
+                            }
+                            if(num>0){
+                                //将出勤率百分比，用户自定义字段字段及百分比插入数据库（第一次为insert，往后都是update）
+                                var reg=/\d+/;//.match(reg);
+                                var fullField = new Array();
+                                for ( var a = 1;a <= index; a++)
+                                {
+                                    if(a == 1){
+                                        var full = {Per:$("#attendance").val()};
+                                    }
+                                    else{
+                                        var hangTr = $("#table tr:eq("+a+")");//$("div").eq(0).attr('id')
+                                        alert(hangTr.attr("id"));
+                                        var trId = hangTr.attr("id");
+
+                                        var name = hangTr.find(":text").eq(0).val();
+                                        var ppp = hangTr.find(":text").eq(1).val();
+
+                                        if(trId == undefined){
+                                            var full = {fId:null,fName:name,fPer:ppp};
+                                        }else{//update
+                                            var full = {fId:trId.match(reg)[0],fName:name,fPer:ppp};
+                                        }
+                                    }
+                                    fullField.push(full);
+
+                                }
+                                console.log(fullField);
+                                $.post(
+                                    "phpData/entryScore5.php",
+                                    {fullField:fullField,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
+                                    function(data){
+                                        console.log("phpData/entryScore5.php"+data);
+                                        //输出结果正常情况下为11
+                                    });
+
+
+
+                               //发送post请求得到学生的信息和自定义字段对应的分数
+                                $.post("phpData/entryScore2.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val(),field:find_field},
+                                    function(data){
+                                        var json = JSON.parse(data);
+                                       console.log(data);
+                                        console.log(json);
+                                        re_stuInf = json;
+                                        re_stuInf_sum=re_stuInf.length-1;
+
+
+                                        $("#inputFen").append(str);
+                                        console.log("*"+str+"*"+find_field);
+
+                                        var tt = find_field.split("-");
+
+                                        //填充学生信息
+                                        $("#stuCode").html(re_stuInf[0]["stuCode"]);
+                                        $("#stuName").html(re_stuInf[0]["stuName"]);
+                                         for(var q=0;q< tt.length-1;q++)
+                                         {
+                                             //填充分数
+                                            var s = tt[q];
+                                            $("#"+s).val(re_stuInf[0][s]);
+                                         }
+                                        $("#Grade").css("display","block");
+                                        $("#normal").css("display","none");
+
+                                    });
+
+                            }else{
+                                alert('请至少选择一项需要录入成绩的考核项目！');
+                            }
+
+                        }
+                        else{
+                            alert("平时成绩占比百分率和不为100%！");
+                        }
+                    }
+                    else{
+                        alert("请填写完信息再开始录入！");
+                    }
+                });
+
+            });//document.onload
 </script>
 </body>
 </html>

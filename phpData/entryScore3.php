@@ -38,3 +38,4 @@ while($row=mysqli_fetch_assoc($set)){
 }
 
 echo json_encode($stu_final);
+mysqli_close($db);
