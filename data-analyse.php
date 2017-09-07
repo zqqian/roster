@@ -3,7 +3,7 @@
 require_once 'get_user_info.php';
 $kc=$_POST['select_course'];
 $bj=$_POST['select_class'];
-
+error_reporting(0);
 //$userid=18;
 if($kc==""&&$bj==""){
 	$sql = "SELECT distinct `courseId`\n"
