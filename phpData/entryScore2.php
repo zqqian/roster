@@ -1,4 +1,5 @@
 <?php
+//用于提供学生的自定义字段分数信息
 header("Content-Type:text/html;charset=UTF-8");
 //根据课程和班级名,userId 找到finalPer,   用户自定义字段的分布，    该班级的所有学生信息
 
@@ -40,7 +41,7 @@ $sql3 ="FROM
 from userdefine as u join basic_relation as b on(u.Id=b.Id)
 join student as s on(b.classId=s.classId)
 left outer join definegrade as d on(u.userDefineId=d.userDefineId and s.stuId=d.stuId)
-where u.Id=51
+where u.Id=$Id
 )as p
 group by p.stuId";
 
@@ -63,14 +64,14 @@ while($row=mysqli_fetch_assoc($set)){
     $temp=array('stuId'=>$row['stuId'],'stuName'=>$row['stuName'],'stuCode'=>$row['stuCode']);
     for($i=0;$i<count($field_split)-1;$i++) {
         $t = $row[$field_split[$i]];
-        $temp[$field_split[$i]]=$t;//如果没有录入成绩的话返回-1
+        $temp[$field_split[$i]]=$t;//如果没有录入成绩的话返回null
     }
     array_push($stuArr,$temp);
 }
 
 echo json_encode($stuArr);
 
-
+mysqli_close($db);
 
 
 

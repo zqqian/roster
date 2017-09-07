@@ -1,4 +1,5 @@
 <?php
+//用于返回某Id的自定义字段信息
 header("Content-Type:text/html;charset=UTF-8");
 //根据课程和班级名,userId 找到finalPer,   用户自定义字段的分布，    该班级的所有学生信息
 
@@ -48,3 +49,5 @@ $sumArr=array('percentInf'=>$infArr,'field'=>$fieldArr/*,'stuInf'=>$stuArr*/);
 
 //echo var_dump($sumArr);
 echo json_encode($sumArr);
+
+mysqli_close($db);

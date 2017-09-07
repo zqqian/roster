@@ -10,6 +10,7 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>导入学生信息</title>
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
 	<script src="js/jquery-3.2.1.js"></script>
 	<style>
         span{
