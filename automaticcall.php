@@ -5,6 +5,8 @@ require_once 'get_user_info.php';
 if(!$is_login){
     echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
 }
+
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -128,13 +130,19 @@ if(!$is_login){
 
     $(function(){
 
+        var classids=[];
+
         $("#twocode").hide();
 
         $("#classok").click(function(){
-            var classs=$("#selectclass").val();
-            var labelclass=$("#classlab").text();
-            if(""!=classs && !isContains(labelclass,classs))
-                $("#classlab").append("+"+classs);
+            var classid=$("#selectclass").val();
+            if(classids.indexOf(classid)<0){
+                classids.push(classid);
+//                    jQuery("#select1  option:selected").text();
+                var classs=$("#selectclass option:selected").text();
+                $("#classlab").append(classs + "  ");
+            };
+
         });
 
         $("#classsure").click(function(){
@@ -143,14 +151,33 @@ if(!$is_login){
             $("#classok").prop("disabled",true);
             $("#classsure").prop("disabled",true);
             $("#twocode").show();
-            var twocodedata="twocode_sucessfully";
-            $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php echo $_SESSION['userid'];?>},function(data){
 
+            var flag=1;
+            var classs=$("#classlab").text();
+            var course=$("#selectcourse").val();
+            $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                console.log(data);
             });
+
+            /*var twocodedata="twocode_sucessfully";
+            $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php /*echo $_SESSION['userid'];*/?>},function(data){
+
+            });*/
         });
 
         $("#twocodestart").click(function(){
-            window.location.href = "identifycode.php";//进入生成验证码界面
+
+
+            var classs=$("#classlab").text();
+            var course=$("#selectcourse").val();
+
+             var flag=0;
+            $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                console.log(data);
+            });
+
+
+            window.location.href = "identifycode.php ? classids="+classids+"&courseName="+course +"&userId="+<?php echo $_SESSION['userid'];?>";//进入生成验证码界面
 
         });
 

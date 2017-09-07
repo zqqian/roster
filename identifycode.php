@@ -19,6 +19,8 @@
 </style>
 <body class="body1">
 
+
+
 <div class="form1">
 
          <p><h1>验证码:</h1> <img id="captcha_img" border='1' src='captcha.php?r=echo rand(); ?>' style="width:300px; height:90px" />
