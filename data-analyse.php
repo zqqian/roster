@@ -43,26 +43,27 @@ if($result){
 echo json_encode($data);
 	
 }else{
-$sql = "SELECT * FROM `grade_statistics` WHERE `userId` = '$userid' AND `classId` = ¡¯$bj¡® AND `courseId` = '$kc' LIMIT 0, 30 ";
+$sql = "SELECT * FROM `grade_statistics` WHERE `userId` = '$userid' AND `className` = \"$bj\" AND `courseName` = \"$kc\" LIMIT 0, 30 ";
 $result=mysqli_query($db,$sql);
 if($result){
 	$row = mysqli_fetch_assoc($result);
-	$data2['score_percent'][0]=row['0-59'];
-	$data2['score_percent'][1]=row['60-69'];
-	$data2['score_percent'][2]=row['70-79'];
-	$data2['score_percent'][3]=row['80-89'];
-	$data2['score_percent'][4]=row['90-100'];
-	$data2['score_pass_rate']=row['passRate'];
-	$sql = "SELECT * FROM `class_course_user` WHERE `classId` = '$bj' AND `courseId` = '$kc' AND `userId` = '$userid' LIMIT 0, 30 ";
-	$result=mysqli_query($db,$sql);
-	$row = mysqli_fetch_assoc($result);
+	//var_dump($row);
+	$data2['score_percent'][0]=$row['0-59'];
+	$data2['score_percent'][1]=$row['60-69'];
+	$data2['score_percent'][2]=$row['70-79'];
+	$data2['score_percent'][3]=$row['80-89'];
+	$data2['score_percent'][4]=$row['90-100'];
+	$data2['score_pass_rate']=$row['passRate'];
 	$id=$row['Id'];
-	$sql = "SELECT * FROM `classroster` WHERE `Id` = 51 LIMIT 0, 30 ";
+	
+	
+	//var_dump($id);
+	$sql = "SELECT * FROM `classroster` WHERE `Id` = '$id' LIMIT 0, 30 ";
 	$result=mysqli_query($db,$sql);
 	$i=0;
 	while($row = mysqli_fetch_assoc($result)){
-		$data2['attendance_date'][$i]=row['rosterDate'];
-		$data2['attendance_rate'][$i++]=row['attendanceRate'];
+		$data2['attendance_date'][$i]=$row['rosterDate'];
+		$data2['attendance_rate'][$i++]=$row['attendanceRate'];
 	}
 }	
 	
