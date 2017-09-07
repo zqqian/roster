@@ -59,7 +59,6 @@
                                                     <button type="button" class="btn btn-default" data-dismiss="modal"style="width:80px;">关闭</button>
                                                 </center>
                                             </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -195,8 +194,6 @@
     </div>
 </div>
 
-
-
 <script>
 
      $("#modal-auth-code").hide();
@@ -278,9 +275,7 @@
         $("#modal-footer").show();
         $("#registerSpan").html("*除学院，其余都为必填项");
         $("#checkUsername").html("*");
-
     });
-
     $("#registerBtn").click(function(event){
         var flag=false;
         var nameCheck= $("#checkUsername").text();
@@ -334,7 +329,6 @@
         }
 
     })
-
     $("#RuserName").blur(function(){checkUserid();});
 //  发送验证码
           $("#auth-code-bu").click(function(){

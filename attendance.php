@@ -14,9 +14,9 @@ if(!$is_login){
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style5.css" />
-    <script src="modernizr.custom.63321.js"></script>
-    <script type="text/javascript" src="jquery.dropdown.js"></script>
+<!--    <link rel="stylesheet" type="text/css" href="css/style5.css" />-->
+<!--    <script src="modernizr.custom.63321.js"></script>-->
+<!--    <script type="text/javascript" src="jquery.dropdown.js"></script>-->
 </head>
 <style>
     html,body{margin:0px;padding:0px;}

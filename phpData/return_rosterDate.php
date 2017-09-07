@@ -116,7 +116,7 @@ order by rosterDate asc";
         else
             echo "<tr class='success'><td>";
 
-        echo $row['concat(enterYear,className)']."</td><td>".$row['rosterDate']."</td><td>".$row['classSize']."</td><td>";
+        echo $row['concat(enterYear,className)']."</td><td>".$row['rosterDate']."</td><td>";
 //        if(null == $row['classSize'])
 //            echo "0</td><td>";
 //        else

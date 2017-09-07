@@ -10,6 +10,7 @@ if(!$is_login){
     <meta charset="utf-8">
     <title>重置密码</title>
     <script src="js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="style/button_one.css">
     <style>
         /*为适应低版本的浏览器而设置*/
 
@@ -17,18 +18,65 @@ if(!$is_login){
         {display:block;}
         .password{border-left-color:#000;margin:30%;
         }
+       #newpassword,#renewpassword,#oldpassword::-ms-input-placeholder{text-align: center; font-size:16px;}
+       #newpassword,#renewpassword,#oldpassword::-webkit-input-placeholder{text-align: center;font-size:16px;}
     </style>
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
 </head>
+<style>
+    #repassword{
+        margin-top:20%;
+    }
+    #newpassword,#oldpassword,#renewpassword{
+        display:block;
+        transition:all 0.30s ease-in-out;
+        -webkit-transition: all 0.30s ease-in-out;
+        -moz-transition: all 0.30s ease-in-out;
+        border:#35a5e5 1px solid;
+        border-radius:15px;
+        outline:none;
+        width:400px;
+        height:50px;
+        margin-top:5px;
+    }
+    #newpassword:focus{
+        box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        width:400px;
+        height:55px;
+    }
+    #oldpassword:focus{
+        box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        width:400px;
+        height:55px;
+    }
+    #renewpassword:focus{
+        box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
+        width:400px;
+        height:55px;
+    }
+    #tijiao,#chongzhi{
+        margin-top:90px;
+        margin-left:20px;
+    }
+    #tijiao{margin-left:-20px;}
+</style>
 <body>
-
 <center>
     <div id="repassword">
-<lable>输入原密码</lable><input type="password" id="oldpassword" ></br>
-<lable>输入新密码</lable><input type="password" id="newpassword"></br>
-<lable>重新输入新密码</lable><input type="password"  id="renewpassword"></br>
+<input type="password" id="oldpassword" placeholder="请输入旧密码"></br>
+<input type="password" id="newpassword"  placeholder="请输入新密码"></br>
+<input type="password"  id="renewpassword"  placeholder="请重新输入新密码"></br>
 <span id="repasswordspan"></span>
-<button type="button" id="tijiao" value="提交">提交</button>
-<button type="reset" id="chongzhi" value="重置">重置</button>
+<!--<button type="button" id="tijiao" value="提交">提交</button>-->
+ <input class="button_one white"  id="tijiao" type="button" value="提交" />
+<!--<button type="reset" id="chongzhi" value="重置">重置</button>-->
+<input class="button_one white" id="chongzhi" type="button"  value="重置"/>
     </div>
 </center>
 <script>
