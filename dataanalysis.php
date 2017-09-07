@@ -1,9 +1,5 @@
 <?php
 require_once 'get_user_info.php';
-//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
-//if(!$is_login){
-//    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +10,7 @@ require_once 'get_user_info.php';
 <script src="js/Echarts/echarts.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="style/button_one.css">
+<script type="text/javascript" src="checkbox.js"></script>
 <style type="text/css">
     body,html {
         margin: 0;
@@ -33,7 +30,98 @@ require_once 'get_user_info.php';
     #spand span{display:block;font-size:17px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}
     ul li{color:#E6F5FF;list-style-type:none;display:inline;margin:4px;}
     #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
+    *,
+    *:after,
+    *::before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .ac-custom {
+        padding: 0 3em;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .ac-custom tr {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 800px;
+    }
+    .ac-custom td {
+        margin: 0 auto;
+        padding: 1em 0;
+        position: relative;
+    }
+    .ac-custom label {
+        display: inline-block;
+        position: relative;
+        font-size: 2em;
+        padding: 0 0 0 80px;
+        vertical-align: top;
+        color: rgba(0,0,0,0.2);
+        cursor: pointer;
+        -webkit-transition: color 0.3s;
+        transition: color 0.3s;
+    }
+    .ac-custom input[type="checkbox"],
+    .ac-custom input[type="radio"],
+    .ac-custom label::before {
+        width: 30px;
+        height: 30px;
+        top: 50%;
+        left: 0;
+        margin-top: -25px;
+        position: absolute;
+        cursor: pointer;
+    }
+    .ac-custom input[type="checkbox"],
+    .ac-custom input[type="radio"] {
+        opacity: 0;
+        -webkit-appearance: none;
+        display: inline-block;
+        vertical-align: middle;
+        z-index: 100;
+    }
+    .ac-custom label::before {
+        content: '';
+        border: 4px solid #40AFFE;
+        /*对勾边框*/
+        -webkit-transition: opacity 0.3s;
+        transition: opacity 0.3s;
+    }
+    .ac-radio label::before {
+        border-radius: 50%;
+    }
+    .ac-custom input[type="checkbox"]:checked + label,
+    .ac-custom input[type="radio"]:checked + label {
+        color: #000000;
+        /*label标签颜色*/
+    }
+    .ac-custom input[type="checkbox"]:checked + label::before,
+    .ac-custom input[type="radio"]:checked + label::before {
+        opacity: 0.8;
+    }
+    .ac-custom svg {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        top: 50%;
+        margin-top: -30px;
+        /*对勾相对复选框的位置*/
+        left: 5px;
+        pointer-events: none;
+    }
+    .ac-custom svg path {
+        stroke: #40AFFE;
+        /*对勾颜色*/
+        stroke-width: 13px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        fill: none;
+    }
 </style>
+<script type="text/javascript" src="checkbox.js"></script>
 </head>
 <body>
 <div class="up">
@@ -50,17 +138,16 @@ require_once 'get_user_info.php';
             <span>选择班级</span>
         </div>
         <div id="select_class_name">
-            <ul>
-                <li><input type="checkbox" value="hdw">弧度无</li>
-                <li><input type="checkbox" value="hdw">觉得</li>
-                <li><input type="checkbox" value="hdw">euyyd</li>
-            </ul>
+                        <ul>
+                            <li><input type="checkbox" value="hdw">弧度无</li>
+                            <li><input type="checkbox" value="hdw">觉得</li>
+                            <li><input type="checkbox" value="hdw">euyyd</li>
+                        </ul>
         </div>
         <div id="buttonsure">
             <input class="button_one white" type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
         </div>
     </div>
-
 </div>
 <div class="down" id="canvasDiv">
     <!--画布-->
@@ -257,6 +344,7 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {},
                 dataType: "json",
+                async: false,
                 success: function (data) {
                     alert("请求成功");
                     if (data.status == 1)             //返回课程名，以json数组的形式返回，class_name及对应的班级名
@@ -315,6 +403,7 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {selected_course: selected_course, select_class: select_class},
                 dataType: "json",
+                async: false,
                 success: function (data) {
                     var numi = 0;
                     var x = 0;
