@@ -19,7 +19,7 @@ if (!file_exists($path)){
 }*/
 if($flag==1) {
     $dir = dirname(__FILE__);//找到当前脚本所在路径
-    $filepath = $dir . "/validation/" . $userId;
+    $filepath = $dir . "/validation/" . $userId."/".$userId;
 
 
     if (!file_exists($filepath)) {//判断文件夹是否存在，不存在的话就创建这么一个文件夹
@@ -29,6 +29,8 @@ if($flag==1) {
 }
 else if($flag==0){
     $dir = dirname(__FILE__);//找到当前脚本所在路径
-    $delete_file = $dir . "/validation/" . $userId;
+    $delete_file = $dir . "/validation/" . $userId."/".$userId;
     rmdir($delete_file);
+    echo "fjdsskjf";
+    $_SESSION['lastauthcode']="lwx";
 }
