@@ -4,8 +4,7 @@ require_once 'get_user_info.php';
 $kc=$_POST['select_course'];
 $bj=$_POST['select_class'];
 
-
-
+//$userid=18;
 if($kc==""&&$bj==""){
 $sql = "SELECT distinct `courseId`\n"
 . " FROM `class_course_user` WHERE `userId` = '$userid' LIMIT 0, 30 ";
@@ -38,7 +37,9 @@ $data[$coursename][$i++]=$row3['className'];
 }else{
 
 }
+
 //var_dump($data);
+
 echo json_encode($data);
 
 }else{

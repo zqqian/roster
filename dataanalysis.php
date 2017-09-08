@@ -17,7 +17,7 @@ require_once 'get_user_info.php';
         padding: 0;
     }
     .up{
-        height:130px;width:100%;background-color:#000000;
+        height:130px;width:100%;background-color:#953b39;
     }
     #select{width:100%;height:70px;}
     #select span{color:#fbf9ee;font-size:20px;margin-left:40%;}
@@ -31,6 +31,154 @@ require_once 'get_user_info.php';
     ul li{color:#E6F5FF;list-style-type:none;display:inline;margin:4px;}
     #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
     #verify-bu1{width:57px;height:30px;}
+    @-moz-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height: 30px;
+        }
+    }
+    @-webkit-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height: 30px;
+        }
+    }
+    @keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height:17px;
+            /*第一条对勾长度*/
+        }
+    }
+    @keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+
+        100% {
+            height: 25px;
+            /*另一条对勾的长度*/
+        }
+    }
+    @-webkit-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+
+        100% {
+            height: 60px;
+        }
+    }
+    @-moz-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+        100% {
+            height: 60px;
+        }
+    }
+    input[type=checkbox] {
+        display: none;
+    }
+
+    .check-box {
+        height: 20px;
+        width: 20px;
+        background-color: transparent;
+        border: 1px solid black;
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -moz-transition: border-color ease 0.2s;
+        -o-transition: border-color ease 0.2s;
+        -webkit-transition: border-color ease 0.2s;
+        transition: border-color ease 0.2s;
+        cursor: pointer;
+    }
+    .check-box::before, .check-box::after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        position: absolute;
+        height: 0;
+        width: 2px;
+        background-color: #34b93d;
+        display: inline-block;
+        -moz-transform-origin: left top;
+        -ms-transform-origin: left top;
+        -o-transform-origin: left top;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        border-radius: 5px;
+        content: ' ';
+        -webkit-transition: opacity ease .5;
+        -moz-transition: opacity ease .5;
+        transition: opacity ease .5;
+    }
+    .check-box::before {
+        top: 17px;
+        left: 12px;
+        /*另一条对勾相对第一条的距离*/
+        -moz-transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg);
+        -o-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+    .check-box::after {
+        top:5px;
+        left: 0px;
+        /*第一条对勾相对方框的距离*/
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    input[type=checkbox]:checked + .check-box,
+    .check-box.checked {
+        border-color: #34b93d;
+    }
+    input[type=checkbox]:checked + .check-box::after,
+    .check-box.checked::after {
+        height: 0px;
+        -moz-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -o-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
+        animation: dothabottomcheck 0.2s ease 0s forwards;
+    }
+    input[type=checkbox]:checked + .check-box::before,
+    .check-box.checked::before {
+        height: 50px;
+        -moz-animation: dothatopcheck 0.4s ease 0s forwards;
+        -o-animation: dothatopcheck 0.4s ease 0s forwards;
+        -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
+        animation: dothatopcheck 0.4s ease 0s forwards;
+    }
 </style>
 <script type="text/javascript" src="checkbox.js"></script>
 </head>
@@ -40,8 +188,7 @@ require_once 'get_user_info.php';
     <div id="select">
         <span>选择课程名</span>
         <select id="select_course_name" onChange = "getclass()">
-            <input type="checkbox" id="r" />
-            <label for="r" class="check-box"></label>
+
 
         </select>
     </div>
@@ -50,11 +197,19 @@ require_once 'get_user_info.php';
             <span>选择班级</span>
         </div>
         <div id="select_class_name">
-                        <ul>
-                            <li><input type="checkbox" value="hdw">弧度无</li>
-                            <li><input type="checkbox" value="hdw">觉得</li>
-                            <li><input type="checkbox" value="hdw">euyyd</li>
-                        </ul>
+<!--                        <ul>-->
+<!--                            <li><input type="checkbox" value="hdw">弧度无</li>-->
+<!--                            <li><input type="checkbox" value="hdw">觉得</li>-->
+<!--                            <li><input type="checkbox" value="hdw">euyyd</li>-->
+<!--                        </ul>-->
+            <ul>
+            <li>计科<input type="checkbox" id="classname_two" />
+            <label for="classname_two" class="check-box"></label>
+            </li>
+            <li>树莓<input type="checkbox" id="classname_one" />
+                    <label for="classname_one" class="check-box"></label>
+             </li>
+            </ul>
         </div>
         <div id="buttonsure">
             <input class="button_one white" type="button" id="verify-bu1"  value="确定"  onclick="show()"/>

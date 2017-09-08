@@ -30,7 +30,7 @@ if(isset($_SESSION['username'])){
 	$_SESSION['userid']=$userid;
 	//mysqli_close($db);
 }else{
-	//header("Location: ./index.php"); 
+echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
 }
 
 ?>
