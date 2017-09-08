@@ -3,9 +3,10 @@
     outline: none;
     cursor: pointer;
     text-align: center;
+    vertical-align:middle;
     text-decoration: none;
-    font: 16px/100% 'Microsoft yahei',Arial, Helvetica, sans-serif;
-    padding: .5em 2em .55em;
+    font: 14px/100% 'Microsoft yahei',Arial, Helvetica, sans-serif;
+    padding: .1em 1em .20em;
     text-shadow: 0 1px 1px rgba(0,0,0,.3);
     -webkit-border-radius: .5em;
     -moz-border-radius: .5em;

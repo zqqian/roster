@@ -156,7 +156,7 @@ if(!$is_login){
                             <!-- 数据分析 -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a class="panel-title" href="#"
+                                    <a class="panel-title" href="dataanalysis.php"
                                        data-parent="#menu" target="rightShow">数据分析</a>
                                 </div>
                             </div>

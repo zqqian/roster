@@ -30,96 +30,7 @@ require_once 'get_user_info.php';
     #spand span{display:block;font-size:17px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}
     ul li{color:#E6F5FF;list-style-type:none;display:inline;margin:4px;}
     #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
-    *,
-    *:after,
-    *::before {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-    .ac-custom {
-        padding: 0 3em;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    .ac-custom tr {
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        max-width: 800px;
-    }
-    .ac-custom td {
-        margin: 0 auto;
-        padding: 1em 0;
-        position: relative;
-    }
-    .ac-custom label {
-        display: inline-block;
-        position: relative;
-        font-size: 2em;
-        padding: 0 0 0 80px;
-        vertical-align: top;
-        color: rgba(0,0,0,0.2);
-        cursor: pointer;
-        -webkit-transition: color 0.3s;
-        transition: color 0.3s;
-    }
-    .ac-custom input[type="checkbox"],
-    .ac-custom input[type="radio"],
-    .ac-custom label::before {
-        width: 30px;
-        height: 30px;
-        top: 50%;
-        left: 0;
-        margin-top: -25px;
-        position: absolute;
-        cursor: pointer;
-    }
-    .ac-custom input[type="checkbox"],
-    .ac-custom input[type="radio"] {
-        opacity: 0;
-        -webkit-appearance: none;
-        display: inline-block;
-        vertical-align: middle;
-        z-index: 100;
-    }
-    .ac-custom label::before {
-        content: '';
-        border: 4px solid #40AFFE;
-        /*对勾边框*/
-        -webkit-transition: opacity 0.3s;
-        transition: opacity 0.3s;
-    }
-    .ac-radio label::before {
-        border-radius: 50%;
-    }
-    .ac-custom input[type="checkbox"]:checked + label,
-    .ac-custom input[type="radio"]:checked + label {
-        color: #000000;
-        /*label标签颜色*/
-    }
-    .ac-custom input[type="checkbox"]:checked + label::before,
-    .ac-custom input[type="radio"]:checked + label::before {
-        opacity: 0.8;
-    }
-    .ac-custom svg {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        top: 50%;
-        margin-top: -30px;
-        /*对勾相对复选框的位置*/
-        left: 5px;
-        pointer-events: none;
-    }
-    .ac-custom svg path {
-        stroke: #40AFFE;
-        /*对勾颜色*/
-        stroke-width: 13px;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        fill: none;
-    }
+    #verify-bu1{width:57px;height:30px;}
 </style>
 <script type="text/javascript" src="checkbox.js"></script>
 </head>
@@ -129,8 +40,9 @@ require_once 'get_user_info.php';
     <div id="select">
         <span>选择课程名</span>
         <select id="select_course_name" onChange = "getclass()">
-<!--            <option>c++</option>-->
-<!--            <option>图形学</option>-->
+            <input type="checkbox" id="r" />
+            <label for="r" class="check-box"></label>
+
         </select>
     </div>
     <div id="class">
@@ -344,23 +256,24 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {},
                 dataType: "json",
-                async: false,
-                success: function (data) {
-                    alert("请求成功");
-                    if (data.status == 1)             //返回课程名，以json数组的形式返回，class_name及对应的班级名
-                    {
+//                async: false,
+                success: function (t) {
+                  alert("请求成功1111");
+                  var data=JSON.parse(t);
+//                    alert(data);
+                    console.log(data);
                         for (var i = 0; i < data.length; i++) {
                             class_name_array[i] = data[i];
                             class_name_array[i] = new Array();
                             for (var j = 0; j < data[i].length; j++) {
-                                class_name_array[i][j] = data[i][j].name;
+                                class_name_array[i][j] = data[i][j];
                             }
                         }
+                    alert("显示数据");
                         for (var i = 0; i < class_name_array.length; i++) {
                             $("#select_course_name").append("<opotion value='" + class_name_array[i] + "'>" + class_name_array[i] + "</opotion>");
                         }
                         $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
-                    }
                 }
             })
         })
@@ -382,6 +295,7 @@ require_once 'get_user_info.php';
     function show(){
         alert("显示数据");
         var selected_course = $('#select_course_name option:selected').value;
+        alert(selected_course);
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
         for (var i = 0; i < select_checkbox.length; i++) {
@@ -398,13 +312,15 @@ require_once 'get_user_info.php';
             alert("请选择班级！");
         }
         else {
+            alert("请求数据");
             $.ajax({         //返回给后台选中的课程名和班级名返回数据
                 type: "POST",
                 url: "data-analyse.php",
                 data: {selected_course: selected_course, select_class: select_class},
                 dataType: "json",
-                async: false,
+//                async: false,
                 success: function (data) {
+                    alert("数据请求成功");
                     var numi = 0;
                     var x = 0;
                     var centerx = 0.1;
