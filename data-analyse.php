@@ -1,9 +1,8 @@
 <?php
-<<<<<<< HEAD
 
-=======
+
 error_reporting(0);
->>>>>>> c15eedd494145a249f15a16debe0eca32218a242
+
 require_once 'get_user_info.php';
 $kc=$_POST['select_course'];
 $bj=$_POST['select_class'];
