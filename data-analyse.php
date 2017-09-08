@@ -40,7 +40,7 @@ if($result){
 
 //var_dump($data);
 
-echo json_encode($data);
+echo json_encode($data, JSON_UNESCAPED_UNICODE);
 	
 }else{
 $sql = "SELECT * FROM `grade_statistics` WHERE `userId` = '$userid' AND `className` = \"$bj\" AND `courseName` = \"$kc\" LIMIT 0, 30 ";
@@ -67,7 +67,7 @@ if($result){
 	}
 }	
 	
-	echo json_encode($data2);
+	echo json_encode($data2, JSON_UNESCAPED_UNICODE);
 }
 
 
