@@ -14,6 +14,8 @@
     #find_password_one{display:block;margin-top:15%;}
     #username,#email,#email_code{display:block;width:450px;height:50px;}
     #verify-bu{display:block;width:180px;height:35px;}
+    #verify-bu1{display:block;width:180px;height:35px;}
+    #find_three{display:block;width:180px;height:35px;}
     #verify_one{display:block;}
     #verify,#verify2{display:block;margin-top:-10px;margin-right:260px;color:#2E2D3C;}
     #verify1{display:block;margin-top:-10px;margin-right:80px;color:#2E2D3C;}
@@ -144,7 +146,7 @@
         <span id="verify2_star">*</span> <span id="verify2"></span>
     </div></br>
 <!--    <input type="button" id="find_three" value="确定">-->
-    <input class="555button_one white" type="button" id="find_three"  value="确定" />
+    <input class="button_one white" type="button" id="find_three"  value="确定" />
     <!--    <input type="button" id="find_one" value="下一步"  disabled="disabled">-->
     </div>
 </center>

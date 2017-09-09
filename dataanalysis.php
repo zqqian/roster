@@ -141,7 +141,7 @@ require_once 'get_user_info.php';
     }
     .check-box::before {
         top: 17px;
-        left: 12px;
+        left: 7px;
         /*另一条对勾相对第一条的距离*/
         -moz-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
@@ -151,7 +151,7 @@ require_once 'get_user_info.php';
     }
     .check-box::after {
         top:5px;
-        left: 0px;
+        left: -5px;
         /*第一条对勾相对方框的距离*/
         -moz-transform: rotate(-45deg);
         -ms-transform: rotate(-45deg);
@@ -179,8 +179,24 @@ require_once 'get_user_info.php';
         -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
         animation: dothatopcheck 0.4s ease 0s forwards;
     }
+    #select span {
+        color: #999;
+        font-size: 20px;
+        margin-left: 40%;
+        width: 219px;
+        height: 54px;
+        text-align: center;
+        padding-left: 22px;
+        line-height: 54px;
+        position: relative;
+        left: -33px;
+    }
 </style>
 <script type="text/javascript" src="checkbox.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style1.css" />
+<script src="js/modernizr.custom.63321.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.dropdown.js"></script>
 </head>
 <body>
 <div class="up">
@@ -189,8 +205,13 @@ require_once 'get_user_info.php';
         <span>选择课程名</span>
         <select id="select_course_name" onChange = "getclass()">
 
-
         </select>
+<!--        <select id="cd-dropdown" name="cd-dropdown" class="cd-select" onChange = "getclass()" >-->
+<!--            <option value="-1" selected>树莓</option>-->
+<!--            <option value="1" >计科</option>-->
+<!--            <option value="2">国贸</option>-->
+<!--            <option value="3" >体育</option>-->
+<!--        </select>-->
     </div>
     <div id="class">
         <div id="spand">
@@ -226,6 +247,9 @@ require_once 'get_user_info.php';
 <!--<script>-->
 <!--</script>-->
 <script>
+    $( '#cd-dropdown' ).dropdown( {
+        gutter : 5
+    } );
 //        图表，for循环中重新设置
 //        成绩段
         var option_score_section = {
@@ -411,25 +435,23 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {},
                 dataType: "json",
-//                async: false,
-                success: function (t) {
-                  alert("请求成功1111");
-                  var data=JSON.parse(t);
-//                    alert(data);
-                    console.log(data);
-                        for (var i = 0; i < data.length; i++) {
-                            class_name_array[i] = data[i];
+                success: function (data) {
+                      for (var i = 0; i < data.length; i++) {
+                            class_name_array[i] = data[i].course_name;
                             class_name_array[i] = new Array();
-                            for (var j = 0; j < data[i].length; j++) {
-                                class_name_array[i][j] = data[i][j];
+                            for (var j = 0; j < data[i].class-name.length; j++) {
+                                class_name_array[i][j] = data[i].class_name[j];
                             }
                         }
                     alert("显示数据");
+                    alert(class_name_array.length);
+                    alert(class_name_array[0].length);
                         for (var i = 0; i < class_name_array.length; i++) {
-                            $("#select_course_name").append("<opotion value='" + class_name_array[i] + "'>" + class_name_array[i] + "</opotion>");
-                        }
+                        var appendstr="<option value='"+class_name_array[i] +"'>"+class_name_array[i]+"</option>";}
+
+                        $("#select_course_name").append(appendstr);
                         $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
-                }
+        }
             })
         })
         alert("末尾");
@@ -450,7 +472,7 @@ require_once 'get_user_info.php';
     function show(){
         alert("显示数据");
         var selected_course = $('#select_course_name option:selected').value;
-        alert(selected_course);
+        alert(sxelected_course);
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
         for (var i = 0; i < select_checkbox.length; i++) {
