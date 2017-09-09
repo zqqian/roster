@@ -10,7 +10,6 @@ require_once 'get_user_info.php';
 <script src="js/Echarts/echarts.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="style/button_one.css">
-<script type="text/javascript" src="checkbox.js"></script>
 <style type="text/css">
     body,html {
         margin: 0;
@@ -21,16 +20,40 @@ require_once 'get_user_info.php';
     }
     #select{width:100%;height:70px;}
     #select span{color:#fbf9ee;font-size:20px;margin-left:40%;}
-    #select_course_name{margin-left:50px;height:23px;position:absolute;margin-top:25px;}
+    /*#select_course_name{}*/
     #select{border-bottom:1px solid #fbf9ee;width:100%;height:70px;line-height:70px;}
     #class{float:left;}
     #spand{float:left;width:15%;position:absolute;}
     #select_class_name{float:left;width:70%;position:absolute;margin-left:15%;text-align:center;line-height:30px;}
     #buttonsure{float:left;width:15%;position:absolute;margin-left:85%;text-align:center;}
     #spand span{display:block;font-size:17px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}
-    ul li{color:#E6F5FF;list-style-type:none;display:inline;margin:4px;}
     #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
     #verify-bu1{width:57px;height:30px;}
+    #select_course_name{
+        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+        border: solid 2px #40AFFE;
+        /*很关键：将默认的select选择框样式清除*/
+        appearance:none;
+        -moz-appearance:none;
+        /*清除箭头*/
+        -webkit-appearance:none;
+        /*在选择框的最右侧中间显示小箭头图片*/
+        background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+        padding-right: 14px;
+        position: relative;
+        min-width: 200px;
+        width: auto;
+        font-size:15px;
+        margin: 0 auto;
+        padding: 10px 15px;
+        padding-left:30px;;
+        background-color: #4cbeff;
+        border-left: 5px solid deepskyblue;
+        cursor: pointer;
+        outline: none;
+    }
+    .li-style{list-style-type:none;display:inline;margin:4px;}
     @-moz-keyframes dothabottomcheck {
         0% {
             height: 0;
@@ -101,7 +124,6 @@ require_once 'get_user_info.php';
     input[type=checkbox] {
         display: none;
     }
-
     .check-box {
         height: 20px;
         width: 20px;
@@ -179,41 +201,18 @@ require_once 'get_user_info.php';
         -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
         animation: dothatopcheck 0.4s ease 0s forwards;
     }
-    #select span {
-        color: #999;
-        font-size: 20px;
-        margin-left: 40%;
-        width: 219px;
-        height: 54px;
-        text-align: center;
-        padding-left: 22px;
-        line-height: 54px;
-        position: relative;
-        left: -33px;
-    }
+    #select_course_name option{text-align:center;}
 </style>
-<script type="text/javascript" src="checkbox.js"></script>
-<link rel="stylesheet" type="text/css" href="css/style1.css" />
-<script src="js/modernizr.custom.63321.js"></script>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.dropdown.js"></script>
 </head>
 <body>
 <div class="up">
     <!--课程名及班级容器-->
     <div id="select">
         <span>选择课程名</span>
-<!--        <select id="select_course_name" onChange = "getclass()">-->
-<!---->
-<!--        </select>-->
-        <select class="dropkick" id="select_course_name" onChange = "getclass()">
-            <option value="">您的职业</option>
-            <option value="A1">前端开发工程师</option>
-            <option value="A2">视觉设计师</option>
-            <option value="A3">UI设计师</option>
-            <option value="A4">交互设计师</option>
-            <option value="A5">网页设计师</option>
-            <option value="A6">数据库工程师</option>
+        <select  id="select_course_name" onchange="getclass()">
+<!--            <option value="网工">网工</option>-->
+<!--            <option value="计科">计科</option>-->
+<!--            <option value="树莓">树莓</option>-->
         </select>
     </div>
     <div id="class">
@@ -221,18 +220,10 @@ require_once 'get_user_info.php';
             <span>选择班级</span>
         </div>
         <div id="select_class_name">
-<!--                        <ul>-->
-<!--                            <li><input type="checkbox" value="hdw">弧度无</li>-->
-<!--                            <li><input type="checkbox" value="hdw">觉得</li>-->
-<!--                            <li><input type="checkbox" value="hdw">euyyd</li>-->
-<!--                        </ul>-->
             <ul>
-            <li>计科<input type="checkbox" id="classname_two" />
-            <label for="classname_two" class="check-box"></label>
-            </li>
-            <li>树莓<input type="checkbox" id="classname_one" />
-                    <label for="classname_one" class="check-box"></label>
-             </li>
+<!--            <li>计科<input type="checkbox" id="1" />-->
+<!--            <label for="1" class="check-box"></label>-->
+<!--            </li>-->
             </ul>
         </div>
         <div id="buttonsure">
@@ -247,14 +238,7 @@ require_once 'get_user_info.php';
     <div id="attendance_rate"  style="width:700px;height:400px;"></div>
 </div>
 </body>
-<!--<script>-->
-<!--</script>-->
 <script>
-    $('.dropkick').dropkick({
-        change: function(value, label) {
-            alert('您选择了：' + label + '\n\nvalue为：' + value);
-        }
-    });
         var option_score_section = {
             title: {
                 text: '班级成绩段占百分比',
@@ -429,6 +413,7 @@ require_once 'get_user_info.php';
 //        var userId = session.getAttribute("userID").toString(); //取出后台存入session的值用户Idvar
         var id_number = 1;
         var course_name = "course-name";
+        var course_name_array = new Array();
         var class_name_array = new Array();
         alert("请求前");
         $(document).ready(function() {
@@ -439,25 +424,24 @@ require_once 'get_user_info.php';
                 data: {},
                 dataType: "json",
                 success: function (data) {
+                    console.log(data);
                       for (var i = 0; i < data.length; i++) {
-                            class_name_array[i] = data[i].course_name;
-                            class_name_array[i] = new Array();
-                            for (var j = 0; j < data[i].class-name.length; j++) {
-                                class_name_array[i][j] = data[i].class_name[j];
+                            course_name_array[i] = data[i].coursename;
+                            class_name_array[i]=new Array();
+                            for (var j = 0; j < data[i].classname.length; j++) {
+                                class_name_array[i][j] = data[i].classname[j];
                             }
                         }
-                    alert("显示数据");
-                    alert(class_name_array.length);
-                    alert(class_name_array[0].length);
-                        for (var i = 0; i < class_name_array.length; i++) {
-                        var appendstr="<option value='"+class_name_array[i] +"'>"+class_name_array[i]+"</option>";}
-
+                    var appendstr="";
+                       $("#select_course_name").append("<option value=\"-1\">选择课程</option>");
+                        for (var i = 0; i < course_name_array.length; i++) {
+                         appendstr +="<option value='"+course_name_array[i] +"'>"+course_name_array[i]+"</option>";
+                        }
+                        alert(appendstr);
                         $("#select_course_name").append(appendstr);
-                        $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
-        }
+                }
             })
         })
-        alert("末尾");
     function getclass(){
         var obj = document.getElementById("select_course_name");
         var index = obj.selectedIndex;
@@ -465,25 +449,40 @@ require_once 'get_user_info.php';
             if ($("#select_class_name") != "") {
                 $("#select_class_name").html("");
             }
+            var classed_name="";
+            var indexright="index";
             for (var i = 0; i < class_name_array[index].length; i++) {
-                $("#select_class_name").append("class_name_array[index][i]+<input type='checkbox' name='box' value='" + class_name_array[index][i] + "'>");
+                indexright+=i;
+                 classed_name +=" <li>" +
+                     class_name_array[index][i]+
+                     "<input type='checkbox' name='box' value='"+class_name_array[index][i]+"' id='"+indexright+"'/> <label for='"+indexright+"'class='check-box'></label> </li>";
+                     alert(classed_name);
             }
+            $("#select_class_name").append(classed_name);
+            $("li").addClass("li-style");
         }
     }
     var select_class = new Array();
     alert("显示数据前");
     function show(){
         alert("显示数据");
-        var selected_course = $('#select_course_name option:selected').value;
-        alert(sxelected_course);
+        var selected_course =$('#select_course_name option:selected') .val();//选中的值
+//        alert(selected_course);
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
+//        alert(select_checkbox);
         for (var i = 0; i < select_checkbox.length; i++) {
-            if (select_checkbox.checked == true) {
-                select_class[j] = select_checkbox.value;
+            if (select_checkbox[i].checked == true) {
+                select_class[j] = select_checkbox[i].value;
+//                alert(select_class[j]);
                 j++;
             }
         }
+//        alert(select_class.length);
+//        for(var i=0;i<select_class.length;i++)
+//        {
+//            alert(select_class[i]);
+//        }
         if(selected_course=="选择课程")
         {
             alert("请选择课程！");
@@ -498,8 +497,8 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {selected_course: selected_course, select_class: select_class},
                 dataType: "json",
-//                async: false,
                 success: function (data) {
+                    console.log(data);
                     alert("数据请求成功");
                     var numi = 0;
                     var x = 0;
@@ -559,7 +558,7 @@ require_once 'get_user_info.php';
                     for (var i = 0; i < data.length; i++) {
                         series_attendance_rate.push({
                             name: select_class[i],
-                            data: data[i].attendance_rate,
+                            data: data[i]. ,
                             type: 'bar',
                             markPoint: {
                                 data: [
