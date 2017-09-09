@@ -1,3 +1,14 @@
+
+<?php
+//为方便本页面测试 暂时屏蔽
+require_once 'get_user_info.php';
+//echo "<script>console.log('".session_id().$_SESSION['username'].$is_login."'); </script>";
+if(!$is_login){
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+}
+
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,9 +29,6 @@
     }
 </style>
 <body class="body1">
-
-
-
 <div class="form1">
 
          <p><h1>验证码:</h1> <img id="captcha_img" border='1' src='captcha.php?r=echo rand(); ?>' style="width:300px; height:90px" />
@@ -36,6 +44,9 @@
 <script type="text/javascript">
     $(function(){
         setInterval("location.reload()",10000);
+        $.post("auto_newfilecode.php",{userId:<?php echo $_SESSION['userid'];?>},function(data){
+        console.log(data);
+    });
 
         $("#finish").click(function(){
             window.location.href = "resign.php";//进入补签界面

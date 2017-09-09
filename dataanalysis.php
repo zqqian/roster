@@ -203,15 +203,18 @@ require_once 'get_user_info.php';
     <!--课程名及班级容器-->
     <div id="select">
         <span>选择课程名</span>
-        <select id="select_course_name" onChange = "getclass()">
-
-        </select>
-<!--        <select id="cd-dropdown" name="cd-dropdown" class="cd-select" onChange = "getclass()" >-->
-<!--            <option value="-1" selected>树莓</option>-->
-<!--            <option value="1" >计科</option>-->
-<!--            <option value="2">国贸</option>-->
-<!--            <option value="3" >体育</option>-->
+<!--        <select id="select_course_name" onChange = "getclass()">-->
+<!---->
 <!--        </select>-->
+        <select class="dropkick" id="select_course_name" onChange = "getclass()">
+            <option value="">您的职业</option>
+            <option value="A1">前端开发工程师</option>
+            <option value="A2">视觉设计师</option>
+            <option value="A3">UI设计师</option>
+            <option value="A4">交互设计师</option>
+            <option value="A5">网页设计师</option>
+            <option value="A6">数据库工程师</option>
+        </select>
     </div>
     <div id="class">
         <div id="spand">
@@ -247,11 +250,11 @@ require_once 'get_user_info.php';
 <!--<script>-->
 <!--</script>-->
 <script>
-    $( '#cd-dropdown' ).dropdown( {
-        gutter : 5
-    } );
-//        图表，for循环中重新设置
-//        成绩段
+    $('.dropkick').dropkick({
+        change: function(value, label) {
+            alert('您选择了：' + label + '\n\nvalue为：' + value);
+        }
+    });
         var option_score_section = {
             title: {
                 text: '班级成绩段占百分比',

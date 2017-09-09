@@ -1,3 +1,4 @@
+
 <?php
 error_reporting(0);
 require_once 'get_user_info.php';
@@ -9,6 +10,7 @@ if($kc==""&&$bj==""){
     $sql = "SELECT distinct `courseId`\n"
     . " FROM `class_course_user` WHERE `userId` = '$userid' LIMIT 0, 30 ";
 
+<<<<<<< HEAD
     $result=mysqli_query($db,$sql);
     if($result){
 
@@ -34,6 +36,37 @@ if($kc==""&&$bj==""){
 
         }
     }else{
+=======
+$result=mysqli_query($db,$sql);
+$i=0;
+if($result){
+
+	while($row = mysqli_fetch_assoc($result)){
+		$courseid=$row['courseId'];
+		$sql = "SELECT * FROM `course` WHERE `courseId` = '$courseid' LIMIT 0, 30 ";
+		$result2=mysqli_query($db,$sql);
+		$row2= mysqli_fetch_assoc($result2);
+		$coursename=$row2['courseName'];
+		//var_dump($coursename);
+		$sql = "SELECT * FROM `class_course_user` WHERE `courseId` = '$courseid' AND `userId` = '$userid' LIMIT 0, 30 ";
+		$result2=mysqli_query($db,$sql);
+		$j=0;
+		$data[$i]['coursename']=$coursename;
+	while($row2= mysqli_fetch_assoc($result2)){
+		$classid=$row2['classId'];
+		//var_dump($classid);
+		$sql3 = "SELECT * FROM `class` WHERE `classId` = '$classid' LIMIT 0, 30 ";
+		$result3=mysqli_query($db,$sql3);
+		$row3= mysqli_fetch_assoc($result3);
+		
+		//$data[$coursename][$i++]=$row3['className'];
+		$data[$i]['classname'][$j++]=$row3['className'];
+	
+	}
+	$i++;	
+		
+	}
+>>>>>>> 00c4d4d05105edd7183a93757ea427ae944b72d4
 
     }
 
