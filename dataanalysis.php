@@ -17,7 +17,7 @@ require_once 'get_user_info.php';
         padding: 0;
     }
     .up{
-        height:130px;width:100%;background-color:#000000;
+        height:130px;width:100%;background-color:#953b39;
     }
     #select{width:100%;height:70px;}
     #select span{color:#fbf9ee;font-size:20px;margin-left:40%;}
@@ -30,95 +30,154 @@ require_once 'get_user_info.php';
     #spand span{display:block;font-size:17px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}
     ul li{color:#E6F5FF;list-style-type:none;display:inline;margin:4px;}
     #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
-    *,
-    *:after,
-    *::before {
-        -webkit-box-sizing: border-box;
+    #verify-bu1{width:57px;height:30px;}
+    @-moz-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height: 30px;
+        }
+    }
+    @-webkit-keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height: 30px;
+        }
+    }
+    @keyframes dothabottomcheck {
+        0% {
+            height: 0;
+        }
+
+        100% {
+            height:17px;
+            /*第一条对勾长度*/
+        }
+    }
+    @keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+
+        100% {
+            height: 25px;
+            /*另一条对勾的长度*/
+        }
+    }
+    @-webkit-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+
+        100% {
+            height: 60px;
+        }
+    }
+    @-moz-keyframes dothatopcheck {
+        0% {
+            height: 0;
+        }
+
+        50% {
+            height: 0;
+        }
+        100% {
+            height: 60px;
+        }
+    }
+    input[type=checkbox] {
+        display: none;
+    }
+
+    .check-box {
+        height: 20px;
+        width: 20px;
+        background-color: transparent;
+        border: 1px solid black;
+        border-radius: 5px;
+        position: relative;
+        display: inline-block;
         -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         box-sizing: border-box;
-    }
-    .ac-custom {
-        padding: 0 3em;
-        max-width: 900px;
-        margin: 0 auto;
-    }
-    .ac-custom tr {
-        list-style: none;
-        padding: 0;
-        margin: 0 auto;
-        max-width: 800px;
-    }
-    .ac-custom td {
-        margin: 0 auto;
-        padding: 1em 0;
-        position: relative;
-    }
-    .ac-custom label {
-        display: inline-block;
-        position: relative;
-        font-size: 2em;
-        padding: 0 0 0 80px;
-        vertical-align: top;
-        color: rgba(0,0,0,0.2);
-        cursor: pointer;
-        -webkit-transition: color 0.3s;
-        transition: color 0.3s;
-    }
-    .ac-custom input[type="checkbox"],
-    .ac-custom input[type="radio"],
-    .ac-custom label::before {
-        width: 30px;
-        height: 30px;
-        top: 50%;
-        left: 0;
-        margin-top: -25px;
-        position: absolute;
+        -moz-transition: border-color ease 0.2s;
+        -o-transition: border-color ease 0.2s;
+        -webkit-transition: border-color ease 0.2s;
+        transition: border-color ease 0.2s;
         cursor: pointer;
     }
-    .ac-custom input[type="checkbox"],
-    .ac-custom input[type="radio"] {
-        opacity: 0;
-        -webkit-appearance: none;
-        display: inline-block;
-        vertical-align: middle;
-        z-index: 100;
-    }
-    .ac-custom label::before {
-        content: '';
-        border: 4px solid #40AFFE;
-        /*对勾边框*/
-        -webkit-transition: opacity 0.3s;
-        transition: opacity 0.3s;
-    }
-    .ac-radio label::before {
-        border-radius: 50%;
-    }
-    .ac-custom input[type="checkbox"]:checked + label,
-    .ac-custom input[type="radio"]:checked + label {
-        color: #000000;
-        /*label标签颜色*/
-    }
-    .ac-custom input[type="checkbox"]:checked + label::before,
-    .ac-custom input[type="radio"]:checked + label::before {
-        opacity: 0.8;
-    }
-    .ac-custom svg {
+    .check-box::before, .check-box::after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         position: absolute;
-        width: 30px;
-        height: 30px;
-        top: 50%;
-        margin-top: -30px;
-        /*对勾相对复选框的位置*/
-        left: 5px;
-        pointer-events: none;
+        height: 0;
+        width: 2px;
+        background-color: #34b93d;
+        display: inline-block;
+        -moz-transform-origin: left top;
+        -ms-transform-origin: left top;
+        -o-transform-origin: left top;
+        -webkit-transform-origin: left top;
+        transform-origin: left top;
+        border-radius: 5px;
+        content: ' ';
+        -webkit-transition: opacity ease .5;
+        -moz-transition: opacity ease .5;
+        transition: opacity ease .5;
     }
-    .ac-custom svg path {
-        stroke: #40AFFE;
-        /*对勾颜色*/
-        stroke-width: 13px;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        fill: none;
+    .check-box::before {
+        top: 17px;
+        left: 12px;
+        /*另一条对勾相对第一条的距离*/
+        -moz-transform: rotate(-135deg);
+        -ms-transform: rotate(-135deg);
+        -o-transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+        transform: rotate(-135deg);
+    }
+    .check-box::after {
+        top:5px;
+        left: 0px;
+        /*第一条对勾相对方框的距离*/
+        -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
+    input[type=checkbox]:checked + .check-box,
+    .check-box.checked {
+        border-color: #34b93d;
+    }
+    input[type=checkbox]:checked + .check-box::after,
+    .check-box.checked::after {
+        height: 0px;
+        -moz-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -o-animation: dothabottomcheck 0.2s ease 0s forwards;
+        -webkit-animation: dothabottomcheck 0.2s ease 0s forwards;
+        animation: dothabottomcheck 0.2s ease 0s forwards;
+    }
+    input[type=checkbox]:checked + .check-box::before,
+    .check-box.checked::before {
+        height: 50px;
+        -moz-animation: dothatopcheck 0.4s ease 0s forwards;
+        -o-animation: dothatopcheck 0.4s ease 0s forwards;
+        -webkit-animation: dothatopcheck 0.4s ease 0s forwards;
+        animation: dothatopcheck 0.4s ease 0s forwards;
     }
 </style>
 <script type="text/javascript" src="checkbox.js"></script>
@@ -129,8 +188,8 @@ require_once 'get_user_info.php';
     <div id="select">
         <span>选择课程名</span>
         <select id="select_course_name" onChange = "getclass()">
-<!--            <option>c++</option>-->
-<!--            <option>图形学</option>-->
+
+
         </select>
     </div>
     <div id="class">
@@ -138,11 +197,19 @@ require_once 'get_user_info.php';
             <span>选择班级</span>
         </div>
         <div id="select_class_name">
-                        <ul>
-                            <li><input type="checkbox" value="hdw">弧度无</li>
-                            <li><input type="checkbox" value="hdw">觉得</li>
-                            <li><input type="checkbox" value="hdw">euyyd</li>
-                        </ul>
+<!--                        <ul>-->
+<!--                            <li><input type="checkbox" value="hdw">弧度无</li>-->
+<!--                            <li><input type="checkbox" value="hdw">觉得</li>-->
+<!--                            <li><input type="checkbox" value="hdw">euyyd</li>-->
+<!--                        </ul>-->
+            <ul>
+            <li>计科<input type="checkbox" id="classname_two" />
+            <label for="classname_two" class="check-box"></label>
+            </li>
+            <li>树莓<input type="checkbox" id="classname_one" />
+                    <label for="classname_one" class="check-box"></label>
+             </li>
+            </ul>
         </div>
         <div id="buttonsure">
             <input class="button_one white" type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
@@ -344,23 +411,24 @@ require_once 'get_user_info.php';
                 url: "data-analyse.php",
                 data: {},
                 dataType: "json",
-                async: false,
-                success: function (data) {
-                    alert("请求成功");
-                    if (data.status == 1)             //返回课程名，以json数组的形式返回，class_name及对应的班级名
-                    {
+//                async: false,
+                success: function (t) {
+                  alert("请求成功1111");
+                  var data=JSON.parse(t);
+//                    alert(data);
+                    console.log(data);
                         for (var i = 0; i < data.length; i++) {
                             class_name_array[i] = data[i];
                             class_name_array[i] = new Array();
                             for (var j = 0; j < data[i].length; j++) {
-                                class_name_array[i][j] = data[i][j].name;
+                                class_name_array[i][j] = data[i][j];
                             }
                         }
+                    alert("显示数据");
                         for (var i = 0; i < class_name_array.length; i++) {
                             $("#select_course_name").append("<opotion value='" + class_name_array[i] + "'>" + class_name_array[i] + "</opotion>");
                         }
                         $("#select_course_name").append("<opotion value=\"-1\">选择课程</opotion>");
-                    }
                 }
             })
         })
@@ -382,6 +450,7 @@ require_once 'get_user_info.php';
     function show(){
         alert("显示数据");
         var selected_course = $('#select_course_name option:selected').value;
+        alert(selected_course);
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
         for (var i = 0; i < select_checkbox.length; i++) {
@@ -398,13 +467,15 @@ require_once 'get_user_info.php';
             alert("请选择班级！");
         }
         else {
+            alert("请求数据");
             $.ajax({         //返回给后台选中的课程名和班级名返回数据
                 type: "POST",
                 url: "data-analyse.php",
                 data: {selected_course: selected_course, select_class: select_class},
                 dataType: "json",
-                async: false,
+//                async: false,
                 success: function (data) {
+                    alert("数据请求成功");
                     var numi = 0;
                     var x = 0;
                     var centerx = 0.1;

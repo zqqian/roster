@@ -21,7 +21,7 @@ if(!$is_login){
         $(document).ready(function() {
             $("#qrcodeCanvas").qrcode({
                 render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                text :'http://www.baidu.com',   //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
+                text :'http://www.baidu.com? userId=<?php echo $_SESSION['userid'];?>', //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
                 width : "200",               //二维码的宽度
                 height : "200",              //二维码的高度
                 background : "#ffffff",       //二维码的后景色
@@ -102,11 +102,20 @@ if(!$is_login){
     </center>
     <br>
 
-    <h2 style="text-align: center;">已有<span id="havenumtc"></span>人扫描</h2>
+    <h2 style="text-align: center;">已有<span id="havenumtc">0</span>人扫描</h2>
     <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>
 </div>
 
 <script>
+
+    var int=self.setInterval("clock()",1000);
+    function clock()
+    {
+        $.post("visit_counter.php",{userId:<?php echo $_SESSION['userid'];?>},function(data){
+            console.log(data);
+            $("#havenumtc").html(data);
+        });
+    }
 
     function isContains(str,substr){
         return str.indexOf(substr)>=0;
@@ -174,10 +183,11 @@ if(!$is_login){
              var flag=0;
             $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
                 console.log(data);
+                window.location.href = 'identifycode.php ?userId:'+<?php echo $_SESSION['userid'];?>;//进入生成验证码界面
             });
 
 
-            window.location.href = "identifycode.php ? classids="+classids+"&courseName="+course +"&userId="+<?php echo $_SESSION['userid'];?>";//进入生成验证码界面
+
 
         });
 

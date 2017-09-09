@@ -1,25 +1,42 @@
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-    <title>验证码界面</title>
-</head>
+<?php
+session_start();
+header("Content-Type:text/html;charset=UTF-8");
+$userId=$_post['userId'];
 
-<style>
-    .body
-    {
-        text-align:center;
-    }
-    .form1
-    {
-        float:left;
-        margin-left:42%;
-    }
-</style>
-<body class="body">
+$dir = dirname(__FILE__);//找到当前脚本所在路径
+$fileuserid= $dir . "/validation/" . $userId."/".$userId;
 
-    <form method="post" action="formcode.php">
-        <P>请输入验证码:<input type="text" name='authcode' value=''/></p>
-        <p><input type='submit' value='提交' style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'/></p>
-    </form>
-</body>
-</html>
+
+if (!file_exists($fileuserid)){//判断文件夹是否存在，不存在的话就创建这么一个文件夹
+    alert("此二维码已失效！请找老师补签。");
+
+}
+else {
+    $file = $dir . "/validation/" . $userId . "/" . "counter.txt";
+    if (!file_exists($file)) {//判断文件夹是否存在，不存在的话就创建这么一个文件夹
+        $myfile = fopen($file, "a") or die("Unable to open file!");  //w  重写  a追加
+        $txt = "1";
+        fwrite($myfile, $txt);
+        fclose($myfile);
+
+    } else $counter = intval(file_get_contents("counter.txt"));
+    if (!isset($_SESSION['visit'])) {
+        $_SESSION['visit'] = true;
+        $counter++;
+        $fp = fopen("counter.txt", "w");
+        fwrite($fp, $counter);
+        fclose($fp);
+    } else {
+
+    }
+
+    require "idcode_phone.php";
+
+}
+?>
+
+
+
+
+
+
