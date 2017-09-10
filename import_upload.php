@@ -60,7 +60,6 @@ else{
             //连接数据库，并存入文件信息
             require_once 'mysql-connect.php';
 
-
             $db = mysqli_connect("localhost","roster","roster666","roster") or die("连接数据库失败！");
 
             $find_class_inf="select college,academy from user where userId=".$userId;
@@ -77,13 +76,9 @@ else{
                 $class_insert = "insert into class (className,enterYear,classCollege) values('$className',$year,'$classCollege')";
                 $r=mysqli_query($db,$class_insert);
 
-
-
                 if(!$r) exit("插入新班级失败");
                 else
                 $classId=mysqli_insert_id($db);
-
-
 
                 //插入该班全部学生信息
                 date_default_timezone_set("PRC");
@@ -155,7 +150,6 @@ else{
 
             //if($r) echo "Id insert success+$Id<br>";
             //echo $class_insert."<br>".$course_insert."<br>".$id_insert.'<br>';
-
 
             //更新班级的人数
 
