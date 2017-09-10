@@ -11,6 +11,7 @@ if(!$is_login){
     <meta charset="UTF-8">
     <title>导入学生信息</title>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
+    <link rel="stylesheet" href="style/placeholder.css">
 	<script src="js/jquery-3.2.1.js"></script>
 	<style>
         span{
@@ -18,19 +19,20 @@ if(!$is_login){
             font-size: 14px;
         }
         td{
-            height: 35px;
+            height: 45px;
             text-align: center;
             font-size: 16px;
+            vertical-align: inherit;
         }
         #importForm{
             width:500px;
             margin:0 auto;
             display: block;
-            border:pink solid 3px;
             border-radius: 10px;
         }
         #importTable{
             margin:0 auto;
+            width:540px;
         }
         .box{
             width:450px;
@@ -47,6 +49,22 @@ if(!$is_login){
             background: lightgoldenrodyellow;
             border-radius: 10px;
         }
+
+        select{
+            position: relative;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px 15px;
+            background: #fff;
+            border-left: 5px solid grey;
+            cursor: pointer;
+            outline: none;
+        }
+
+        input[type='text']{
+            width:240px;
+        }
+        img{width: 300px;}
 	</style>
 </head>
 <script>
@@ -88,7 +106,13 @@ if(!$is_login){
 
             <tr>
                 <td>所授课程名：</td>
-                <td><input type="text" name="course" id="course" placeholder="请输入完整的课程名"></td>
+
+
+
+                <td>
+                    <input required='' type="text" name="course" id="course" placeholder="请输入完整的课程名">
+                   </label>
+                </td>
             </tr>
 
             <tr>
@@ -96,17 +120,18 @@ if(!$is_login){
                 <td><input type="text" name="className" id="className" placeholder="请输入完整的班级名"></td>
             </tr>
 
+
             <tr>
                 <td>文件上传说明：</td>
                 <td>
-                    <div id="showExample">
-                        <span>*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件<span>
-                                <!--
+                        <span>*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件</span>
+                </td>
+            </tr>
 
-                                这里再加一个有标准格式的Excel文件，加上类似淘宝放大镜的效果用于提示
-
-                                -->
-                    </div>
+            <tr>
+                <td>Excel文件格式：</td>
+                <td>
+                    <img src="img/Excelexample.png">
                 </td>
             </tr>
 
