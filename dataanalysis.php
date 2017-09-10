@@ -14,21 +14,30 @@ require_once 'get_user_info.php';
     body,html {
         margin: 0;
         padding: 0;
+        /*width:100%;*/
+        /*min-width:1000px;*/
+        /*width:expression_r(document.body.clientWidth < 1000 ? "1000px": "auto" );*/
     }
     .up{
-        height:130px;width:100%;background-color:#953b39;
+        height:190px;width:100%;background-color:#4cbeff;
     }
-    #select{width:100%;height:70px;}
-    #select span{color:#fbf9ee;font-size:20px;margin-left:40%;}
-    /*#select_course_name{}*/
-    #select{border-bottom:1px solid #fbf9ee;width:100%;height:70px;line-height:70px;}
-    #class{float:left;}
-    #spand{float:left;width:15%;position:absolute;}
-    #select_class_name{float:left;width:70%;position:absolute;margin-left:15%;text-align:center;line-height:30px;}
-    #buttonsure{float:left;width:15%;position:absolute;margin-left:85%;text-align:center;}
-    #spand span{display:block;font-size:17px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}
-    #buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}
-    #verify-bu1{width:57px;height:30px;}
+    #select span{color:#fbf9ee;font-size:35px;}
+    #select{border-bottom:1px solid #fbf9ee;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;margin-left:20px;}
+    #class{float:left;min-height:80px;height:auto;text-align:center;}
+    /*#spand{text-align:center;line-height:60px;width:15%;margin-left:10px;}*/
+    /*#select_class_name{float:left;width:70%;position:absolute;margin-left:15%;text-align:center;line-height:30px;}*/
+    /*#buttonsure{float:left;width:15%;position:absolute;margin-left:85%;text-align:center;}*/
+    /*#spand span{display:block;font-size:25px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}*/
+    /*#buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}*/
+    /*#class{float:left;}*/
+    #spand{position:absolute;color:#fffdfc;font-size:20px;float:left;width:10%;height:80px;margin-left:0px;text-align:center;
+        white-space: normal !important;//正常，自动换行
+        -webkit-line-clamp: auto;//auto表示自动换行，数字表示指定行数
+        line-height:80px;}
+    #spand span{display:block;margin-top:20px;}
+    #select_class_name{position:absolute;float:left;height:80px;width:80%;margin-left:10%;text-align:center;line-height:80px;}
+    #buttonsure{float:left;position:absolute;height:80px;width:10%;text-align:center;line-height:60px;margin-left:90%;}
+    #verify-bu1{width:57px;height:30px;margin-top:25px;margin-left:2px;}
     #select_course_name{
         /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
         border: solid 2px #40AFFE;
@@ -43,15 +52,16 @@ require_once 'get_user_info.php';
         padding-right: 14px;
         position: relative;
         min-width: 200px;
-        width: auto;
+        width:auto;
+        background-color:#fffdfc;
         font-size:15px;
         margin: 0 auto;
         padding: 10px 15px;
         padding-left:30px;;
-        background-color: #4cbeff;
         border-left: 5px solid deepskyblue;
         cursor: pointer;
         outline: none;
+        height:50px;
     }
     .li-style{list-style-type:none;display:inline;margin:4px;}
     @-moz-keyframes dothabottomcheck {
@@ -203,6 +213,7 @@ require_once 'get_user_info.php';
     }
     #select_course_name option{text-align:center;}
 </style>
+<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
 </head>
 <body>
 <div class="up">
@@ -210,9 +221,7 @@ require_once 'get_user_info.php';
     <div id="select">
         <span>选择课程名</span>
         <select  id="select_course_name" onchange="getclass()">
-<!--            <option value="网工">网工</option>-->
-<!--            <option value="计科">计科</option>-->
-<!--            <option value="树莓">树莓</option>-->
+
         </select>
     </div>
     <div id="class">
@@ -221,9 +230,7 @@ require_once 'get_user_info.php';
         </div>
         <div id="select_class_name">
             <ul>
-<!--            <li>计科<input type="checkbox" id="1" />-->
-<!--            <label for="1" class="check-box"></label>-->
-<!--            </li>-->
+
             </ul>
         </div>
         <div id="buttonsure">
@@ -237,6 +244,12 @@ require_once 'get_user_info.php';
     <div id="pass_rate"  style="width:700px;height:400px;"></div>
     <div id="attendance_rate"  style="width:700px;height:400px;"></div>
 </div>
+<script type="text/javascript">
+    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
+    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
+    /*．．．*/
+    $youziku.draw();
+</script>
 </body>
 <script>
         var option_score_section = {
@@ -474,7 +487,7 @@ require_once 'get_user_info.php';
         for (var i = 0; i < select_checkbox.length; i++) {
             if (select_checkbox[i].checked == true) {
                 select_class[j] = select_checkbox[i].value;
-//                alert(select_class[j]);
+                alert(select_class[j]);
                 j++;
             }
         }
@@ -558,7 +571,7 @@ require_once 'get_user_info.php';
                     for (var i = 0; i < data.length; i++) {
                         series_attendance_rate.push({
                             name: select_class[i],
-                            data: data[i]. ,
+                            data: data[i].attendance_rate ,
                             type: 'bar',
                             markPoint: {
                                 data: [

@@ -1,3 +1,10 @@
+<?php
+require_once 'get_user_info.php';
+//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
+if(!$is_login){
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +25,8 @@
     #find_three{display:block;width:180px;height:35px;}
     #verify_one{display:block;}
     #verify,#verify2{display:block;margin-top:-10px;margin-right:260px;color:#2E2D3C;}
-    #verify1{display:block;margin-top:-10px;margin-right:80px;color:#2E2D3C;}
-    #verify_star,#verify2_star {display:block;color:#6666FF;float:left;margin-right:100px;}
-    #verify1_star {display:block;color:#6666FF;float:left;margin-left:90px;}
+    #verify1{display:block;margin-top:-10px;margin-right:20px;color:#2E2D3C;}
+    /*#verify1_star {display:block;color:#6666FF;float:left;margin-left:90px;}*/
     #find_three{display:block;width:180px;height:35px;}
     #new_password{
         display:block;
@@ -113,7 +119,7 @@
     <input required='' type='text' id="email" >
     <label alt='请输入注册邮箱' placeholder='邮箱'></label>
     <div id="verify_one">
-     <span id="verify_star">*</span> <span id="verify"></span><br/>
+      <span id="verify"></span><br/>
     </div>
 <!--    <input type="button" id="verify-bu" value="验证"><br/>-->
     <input class="button_one white" type="button" id="verify-bu" value="验证" />
@@ -128,7 +134,7 @@
     <input required='' type='text' id="email_code">
     <label alt='请输入邮箱验证码' placeholder='邮箱验证码'></label>
     <div id="verify_two">
-        <span id="verify1_star">*</span> <span id="verify1"></span><br/>
+       <span id="verify1"></span><br/>
     </div>
 <!--    <input type="button" id="verify-bu1" value="发送邮箱验证码">-->
     <input class="button_one white" type="button" id="verify-bu1" value="发送邮箱验证码" />
@@ -143,7 +149,7 @@
 <!--    <span>重新输入</span>-->
     <input type="password" id="renew_password" placeholder="请重新输入新密码">
     <div id="verify_three">
-        <span id="verify2_star">*</span> <span id="verify2"></span>
+        <span id="verify2"></span>
     </div></br>
 <!--    <input type="button" id="find_three" value="确定">-->
     <input class="button_one white" type="button" id="find_three"  value="确定" />
@@ -158,7 +164,6 @@
         $("#verify_one").hide();
         $("#verify_two").hide();
         $("#verify_three").hide();
-//        $("#pop_up").hide();
         var email_verify=0;
         $("#verify-bu").click(function(){
             var username=$("#username").val();
@@ -167,20 +172,19 @@
             {
                $("#verify_one").show();
                $("#verify").html("");
-               $("#verify").html("用户名或邮箱为空");
+               $("#verify").html("*用户名或邮箱为空");
             }
             else {
                 $.post("findpassword.php", {Username: username, Email: email}, function (data) {
                     if (data == "1") {
                         $("#verify_one").hide();
                         document.getElementById('verify-bu').value = '验证通过';
-//                        $("#find_one").removeAttr("disabled");
                         email_verify=1;
                     }
                     else {
                         $("#verify_one").show();
                         $("#verify").html("");
-                        $("#verify").html("用户名或邮箱错误");
+                        $("#verify").html("*用户名或邮箱错误");
                     }
                 })
             }
@@ -194,7 +198,7 @@
             else {
                 $("#verify_one").show();
                 $("#verify").html("");
-                $("#verify").html("请先验证邮箱");
+                $("#verify").html("*请先验证邮箱");
             }
         })
         $("#verify-bu1").click(function(){
@@ -206,13 +210,13 @@
                     document.getElementById('verify-bu1').value='发送成功';
                     $("#verify_two").show();
                     $("#verify1").html("");
-                    $("#verify1").html("请输入邮箱验证码进行验证，未收到验证码，请检查邮箱是否填写正确");
+                    $("#verify1").html("*请输入邮箱验证码进行验证，未收到验证码，请检查邮箱是否填写正确");
                     $("#find_two").removeAttr("disabled");
                 }
                 else{
                     $("#verify_two").show();
                     $("#verify1").html("");
-                    $("#verify1").html("发送失败，请重新发送");
+                    $("#verify1").html("*发送失败，请重新发送");
                 }
             })
         })
@@ -220,7 +224,7 @@
             var email_code=$("#email_code").val();
             if(email_code=="")
             {
-                $("#verify1").html("验证码为空!");
+                $("#verify1").html("*验证码为空!");
             }
             else {
                 $.post("findpassword-two.php", {Email_code:email_code}, function (data) {
@@ -230,7 +234,7 @@
                         $("#find_password_three").show();
                     }
                     else {
-                        $("#verify1").html("验证码错误，请检查验证码或重新发送验证");
+                        $("#verify1").html("*验证码错误，请检查验证码或重新发送验证");
                         document.getElementById('verify-bu1').value='重新发送';
                     }
                 })
@@ -258,14 +262,16 @@
                         if(data=="1") {
                             layer.alert('重置成功，请返回登录', {
                                 icon: 6,
-                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                skin: 'layer-ext-moon'//该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             })
+                            window.location.href="index.php";
                         }
                         else {
                             layer.alert('重置失败，请尝试重新找回', {
                                 icon: 5,
                                 skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             })
+                            window.location.href="find-password.php";
                         }
                 })
             }
