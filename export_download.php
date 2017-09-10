@@ -115,15 +115,15 @@ left outer join class_course_user on
 (definegrade.Id=class_course_user.Id)) as b
 group by b.stuId
 ";
+    $set=mysqli_query($db,$sql_final);
+
+    if(mysqli_num_rows($set)<1) exit('2');//录入的数据不全，无法生成
+
     $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
     $objSheet->setCellValue("C1","考勤分")->setCellValue("D1","考勤总分");
     $objSheet->setCellValue("E1","自定义考核分")->setCellValue("F1","自定义考核总分");
     $objSheet->setCellValue("G1","总平时分")->setCellValue("H1","期末卷面分");
     $objSheet->setCellValue("I1","总期末分")->setCellValue("J1","综合得分 ");
-
-    $set=mysqli_query($db,$sql_final);
-
-    if(mysqli_num_rows($set)<1) exit('2');//录入的数据不全，无法生成
 
     $i=2;
     while($row=mysqli_fetch_assoc($set)){
