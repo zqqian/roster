@@ -5,7 +5,23 @@
  * Date: 2017/8/27
  * Time: 22:07
  */
-require_once "get_user_info.php";
+
+
+session_start();
+require_once 'mysql-connect.php';
+$is_login=false;
+if(isset($_SESSION['username'])){
+    $is_login=true;
+    $username=$_SESSION['username'];
+    $sql = "select userId from user where userName = '$username' ";
+    $result=mysqli_query($db,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $userid=$row['userId'];
+
+    $_SESSION['userid']=$userid;
+    //mysqli_close($db);
+}
+
 error_reporting(1);
 $newpassword=$_POST['Newpassword'];
 $renewpassword=$_POST['Renewpassword'];

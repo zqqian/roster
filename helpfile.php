@@ -68,6 +68,7 @@ if(!$is_login){
             display: block;
             padding-top:60px;
             padding-left:-15px;
+            /*padding:20px;*/
         }
         #nav li{
             display:block;
@@ -77,6 +78,7 @@ if(!$is_login){
             background-color: #84d5ff;
             margin-left:20px;
             border:2px dotted #002DFF;
+            margin-top:10px;
         }
         #nav a{
             color:#000000;
@@ -99,7 +101,14 @@ if(!$is_login){
         }
         #dianming,#chengji,#shuju,#bangzhu{display:none;}
     </style>
+<!--    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>-->
 </head>
+<!--<script type="text/javascript">-->
+<!--    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");-->
+<!--    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/-->
+<!--    /*．．．*/-->
+<!--    $youziku.draw();-->
+<!--</script>-->
 <body>
 <div class="container">
     <ul id="boxList">

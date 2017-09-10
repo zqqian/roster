@@ -264,14 +264,14 @@ if(!$is_login){
                                 icon: 6,
                                 skin: 'layer-ext-moon'//该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             })
-                            window.location.href="index.php";
+//                            window.location.href="index.php";
                         }
                         else {
                             layer.alert('重置失败，请尝试重新找回', {
                                 icon: 5,
                                 skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             })
-                            window.location.href="find-password.php";
+//                            window.location.href="find-password.php";
                         }
                 })
             }
