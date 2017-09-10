@@ -1,16 +1,34 @@
 <?php
+header("Content-Type:text/html;charset=UTF-8");
 /**
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2017/8/27
  * Time: 22:07
  */
-require_once "get_user_info.php";
+
+session_start();
+require_once 'mysql-connect.php';
+$is_login=false;
+if(isset($_SESSION['username'])){
+    $is_login=true;
+    $username=$_SESSION['username'];
+    $sql = "select userId from user where userName = '$username' ";
+    $result=mysqli_query($db,$sql);
+    $row = mysqli_fetch_assoc($result);
+    $userid=$row['userId'];
+
+    $_SESSION['userid']=$userid;
+    //mysqli_close($db);
+}else{
+
+}
+
 error_reporting(1);
 $newpassword=$_POST['Newpassword'];
 $renewpassword=$_POST['Renewpassword'];
 $username=$_POST['Username'];
-if($newpassword==""||$renewpassword==""||$newpassword!=$renewpassword){
+if($newpassword=="" || $renewpassword=="" || $newpassword != $renewpassword ){
     echo "2";
 }
 else {

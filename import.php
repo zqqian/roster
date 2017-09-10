@@ -12,6 +12,7 @@ if(!$is_login){
     <title>导入学生信息</title>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <link rel="stylesheet" href="style/placeholder.css">
+    <script src="js/layer/layer.js"></script>
 	<script src="js/jquery-3.2.1.js"></script>
 	<style>
         span{
