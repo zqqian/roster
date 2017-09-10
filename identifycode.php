@@ -35,7 +35,7 @@ if(!$is_login){
              </br>
          <a href="javascript:void(0)" onclick="document.getElementById('captcha_img').src='captcha.php?r='+Math.random()" style="text-decoration: none;"><h3>换一个?</h3></a>
          </p>
-         <h2> 已有<span id="havecodenum"></span>人签到</h2>
+         <h2> 已有<span id="havecodenum">0</span>人签到</h2>
         <button id="finish" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>结束</button>
 
 
@@ -46,10 +46,18 @@ if(!$is_login){
         setInterval("location.reload()",10000);
         $.post("auto_newfilecode.php",{userId:<?php echo $_SESSION['userid'];?>},function(data){
         console.log(data);
+
     });
 
         $("#finish").click(function(){
-            window.location.href = "resign.php";//进入补签界面
+
+            $.post("phpData/auto_delefilecode.php",{userId:<?php echo $_SESSION['userid'];?>},function(data){
+                console.log(data);
+                window.location.href = "resign.php";//进入补签界面
+            });
+
+
+
         });
     });
 </script>

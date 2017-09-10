@@ -1,15 +1,36 @@
-automaticcall:选择班级产生二维码的界面,之后点击“开始”              按钮后进入：
+automaticcall:选择班级产生二维码的界面,之后点击“开始”              按钮后进入（传userId与courseName）：
 
-identifycode:产生验证码的界面，点击“结束”按钮后进入：
+identifycode:如果二维码未失效就引入产生验证码的界面，点击“结束”按钮后进入；反之zhijie弹出警示框。
 resign:补签界面（还未设计）
 
 其中：
 captcha:产生随机验证码的PHP文件
 
 学生扫描二维码后进入：
-idcophone:输入验证码验证界面，点击“确定”按钮之后，进入autoidname:输入学号姓名界面，点击“确定”之后进入：
+idcophone:如果二维码失效则弹出警示框：此二维码已失效，请找老师补签！，反之进入验证码验证界面，点击“确定”按钮之后，进入autoidname:输入学号姓名界面，点击“确定”之后进入：
 idnameidentify进行验证，确定错误则返回输入验证码界面，             反之成功之后返回百度
 
 
 
-特别的：formcode:判断验证码是否正确
+特别的：formcode:判断手机输入的验证码是否正确
+
+
+
+auto_newfile:判断二维码是否失效，用建立文件夹的方式来判断
+auto_newfilecode:判断验证码是否失效，只建立现有验证码的文件夹
+
+auto_delefile:产生验证码的界面点击结束之后把验证码的文件夹删除
+
+
+
+
+
+idco_phone:产生验证码的界面，点击“结束”按钮后进入：
+
+
+为了防止漏洞，输入验证码的界面与输入学号与学生的界面都必须先判断是否存在18/18文件夹
+
+
+
+
+,classid_s:classid_s,courseName:courseName

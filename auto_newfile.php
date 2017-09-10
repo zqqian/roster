@@ -29,8 +29,11 @@ if($flag==1) {
 }
 else if($flag==0){
     $dir = dirname(__FILE__);//找到当前脚本所在路径
-    $delete_file = $dir . "/validation/" . $userId."/".$userId;
-    rmdir($delete_file);
+    $delete_file1 = $dir . "/validation/" . $userId."/".$userId;
+    rmdir($delete_file1);
+
+    $delete_file2 = $dir . "/validation/" . $userId."/"."counter.txt";
+    @unlink($delete_file2);
     echo "fjdsskjf";
     $_SESSION['lastauthcode']="lwx";
 }

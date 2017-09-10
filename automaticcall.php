@@ -14,22 +14,9 @@ if(!$is_login){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>二维码扫描</title>
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
     <script type="text/javascript" src="js/utf.js"></script>
     <script type="text/javascript" src="js/jquery.qrcode.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#qrcodeCanvas").qrcode({
-                render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                text :'http://www.baidu.com? userId=<?php echo $_SESSION['userid'];?>', //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
-                width : "200",               //二维码的宽度
-                height : "200",              //二维码的高度
-                background : "#ffffff",       //二维码的后景色
-                foreground : "#000000",        //二维码的前景色
-                src: 'img/logo.jpg'             //二维码中间的图片
-            });
-        });
-    </script>
+
 </head>
 <style>
     #twocode
@@ -108,7 +95,8 @@ if(!$is_login){
 
 <script>
 
-    var int=self.setInterval("clock()",1000);
+    var courseName1="";
+    var int=setInterval("clock()",500);
     function clock()
     {
         $.post("visit_counter.php",{userId:<?php echo $_SESSION['userid'];?>},function(data){
@@ -123,6 +111,7 @@ if(!$is_login){
 
     $("#selectcourse").change(function(){
         var courseName = $(this).val();
+
         $("#classlab").html("");
         if("" == courseName){
             $("#selectclass").empty();
@@ -139,7 +128,8 @@ if(!$is_login){
 
     $(function(){
 
-        var classids=[];
+        var classids=new Array();
+       var ID="";
 
         $("#twocode").hide();
 
@@ -155,23 +145,58 @@ if(!$is_login){
         });
 
         $("#classsure").click(function(){
-            $("#selectcourse").prop("disabled",true);
-            $("#selectclass").prop("disabled",true);
-            $("#classok").prop("disabled",true);
-            $("#classsure").prop("disabled",true);
-            $("#twocode").show();
+            //alert("*"+$("#classlab").html()+"*");
+            if($("#classlab").html().trim()=="")
+                alert("请选择课程与班级，之后按下选定！");
+            else {
 
-            var flag=1;
-            var classs=$("#classlab").text();
-            var course=$("#selectcourse").val();
-            $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
-                console.log(data);
-            });
+                $.getJSON("phpData/auto_getId.php",{courseName:$("#selectcourse").val(),classid_s:classids,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                    console.log(data);
+                    for(var i=0;i<data.length;i++){
+                        ID+=data[i]+"_";
+                    }
+
+                    $("#qrcodeCanvas").qrcode({
+                        render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
+                        text :'https://www.q-cs.cn/roster/idcophone.php?  ID='+ID+'&userId='+<?php echo $_SESSION['userid'];?>, //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
+                        width : "200",               //二维码的宽度
+                        height : "200",              //二维码的高度
+                        background : "#ffffff",       //二维码的后景色
+                        foreground : "#000000",        //二维码的前景色
+                        src: 'img/logo.jpg'             //二维码中间的图片
+                    });
+
+                });
+
+
+                //获得Id
+
+
+
+                $("#selectcourse").prop("disabled", true);
+                $("#selectclass").prop("disabled", true);
+                $("#classok").prop("disabled", true);
+                $("#classsure").prop("disabled", true);
+
+
+                $("#twocode").show();
+
+                var flag = 1;
+                var classs = $("#classlab").text();
+                var course = $("#selectcourse").val();
+
+                $.post("auto_newfile.php", {flag: flag, userId:<?php echo $_SESSION['userid'];?>}, function (data) {
+                    console.log(data);
+                });
+
+
+            }
 
             /*var twocodedata="twocode_sucessfully";
             $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php /*echo $_SESSION['userid'];*/?>},function(data){
 
             });*/
+
         });
 
         $("#twocodestart").click(function(){
@@ -192,6 +217,9 @@ if(!$is_login){
         });
 
     });
+
+
+
 </script>
 </body>
 </html>
