@@ -1,11 +1,11 @@
 <?php
+header("Content-Type:text/html;charset=UTF-8");
 /**
  * Created by PhpStorm.
  * User: Administrator
  * Date: 2017/8/27
  * Time: 22:07
  */
-
 
 session_start();
 require_once 'mysql-connect.php';
@@ -20,13 +20,15 @@ if(isset($_SESSION['username'])){
 
     $_SESSION['userid']=$userid;
     //mysqli_close($db);
+}else{
+
 }
 
 error_reporting(1);
 $newpassword=$_POST['Newpassword'];
 $renewpassword=$_POST['Renewpassword'];
 $username=$_POST['Username'];
-if($newpassword==""||$renewpassword==""||$newpassword!=$renewpassword){
+if($newpassword=="" || $renewpassword=="" || $newpassword != $renewpassword ){
     echo "2";
 }
 else {

@@ -1,10 +1,4 @@
-<?php
-require_once 'get_user_info.php';
-//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
-if(!$is_login){
-    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -259,19 +253,28 @@ if(!$is_login){
             else {
                 $("#verify2").html("");
                 $.post("findpassword-three.php", {Newpassword:newpassword,Renewpassword:renewpassword,Username:username}, function (data) {
-                        if(data=="1") {
-                            layer.alert('重置成功，请返回登录', {
-                                icon: 6,
-                                skin: 'layer-ext-moon'//该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                            })
-//                            window.location.href="index.php";
+                    console.log(data);
+                        if(data == "1") {
+                            layer.msg('重置成功，请返回登录', {
+                                time: 0 //不自动关闭
+                                ,icon: 6
+                                ,skin: 'layer-ext-moon'
+                                ,btn: ['确定']
+                                ,yes: function(){
+                                    window.location.href="index.php";
+                                }
+                            });
                         }
-                        else {
-                            layer.alert('重置失败，请尝试重新找回', {
-                                icon: 5,
-                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                            })
-//                            window.location.href="find-password.php";
+                        else{
+                            layer.msg('重置失败，请尝试重新找回', {
+                                time: 0 //不自动关闭
+                                ,icon: 5
+                                ,skin: 'layer-ext-moon'
+                                ,btn: ['确定']
+                                ,yes: function(){
+                                    window.location.href="find-password.php";
+                                }
+                            });
                         }
                 })
             }

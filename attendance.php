@@ -14,34 +14,74 @@ if(!$is_login){
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<!--    <link rel="stylesheet" type="text/css" href="css/style5.css" />-->
-<!--    <script src="modernizr.custom.63321.js"></script>-->
-<!--    <script type="text/javascript" src="jquery.dropdown.js"></script>-->
+    <link rel="stylesheet"  type="text/css" href="http://">
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
+    <style type="text/css">
+        @font-face {font-family: 'LiDeBiao-Xing3';
+            src: url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.gif');
+            src: url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.gif?#iefix') format('embedded-opentype'),url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.bmp') format('woff'),url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.jpg') format('truetype'),     url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.png#LiDeBiao-Xing3') format('svg');   }
+    </style>
 </head>
 <style>
     html,body{margin:0px;padding:0px;}
-    #course_name{display:block;width:100%;height:50px;background-color:#000000;text-align:center;line-height:80px;}
-    #course_name span{font-size:25px;color:#f9f9f9;margin-right:25%;position:absolute;}
+    #course_name span{color:#000000;font-size:35px;}
+    #course_name{background-color:#4cbeff;border:1px solid #fffdfc;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;}
     /*#select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}*/
-    #menuselect{display:block;width:100%;height:60px;margin: 0px;background-color:#000000;
+    #menuselect{border-bottom:1px solid #fffdfc;width:100%;height:60px;margin: 0px;background-color:#000000;
         text-align:center;padding:0px;line-height:85px;}
-    #menuselect ul{background-color:#000000;margin:0px;display:block;padding:0px;}
+    #menuselect ul{border-bottom:1px solid #fffdfc;background-color:#4cbeff;margin:0px;display:block;padding:0px;}
     .showa{font-size: 20px;color: white;}
     ul li{list-style-type:none;display:inline;margin:7%;}
-    #menusure{display:block;width:100%;height:80px;background-color:#E6F5FF;text-align:center;line-height:80px;}
-    #menusure span{font-size:18px;}
+    #menuselect a{color:#000000;}
+    #menusure{display:block;width:100%;height:80px;border-top:1px solid #fffdfc;background-color:#4cbeff;text-align:center;line-height:80px;}
+    #menusure span{font-size:25px;}
     /*#select-class{margin:10px;}*/
     th,tr{text-align: center;}
     /*select{width:auto;min-width: 100px;text-align: center;}*/
     /*清掉默认设置的样式*/
-    a:hover{color: white;}
-    a:active{color: white;}
+    a:hover  {color: white;}
+    a:active {color: white;}
     a:visited{color: white;}
     a:link{color: white;}
+    #select_course{
+        margin-top:30px;
+    }
+    #select-class,#select_course{
+        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+        border: solid 2px #40AFFE;
+        /*很关键：将默认的select选择框样式清除*/
+        /*appearance:none;*/
+        /*-moz-appearance:none;*/
+        /*清除箭头*/
+        /*-webkit-appearance:none;*/
+        /*在选择框的最右侧中间显示小箭头图片*/
+        /*background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;*/
+        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+        padding-right: 14px;
+        position: relative;
+        min-width: 200px;
+        width:auto;
+        background-color:#fffdfc;
+        font-size:15px;
+        margin: 0 auto;
+        padding: 10px 15px;
+        padding-left:30px;;
+        border-left: 5px solid deepskyblue;
+        cursor: pointer;
+        outline: none;
+        height:50px;
+        font-size:17px;
+    }
 </style>
+<script type="text/javascript">
+    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
+    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
+    /*．．．*/
+    $youziku.draw();
+</script>
 <body>
 <div id="course_name">
-<!--    <span>选择课程</span>-->
+    <span>选择课程</span>
     <select id="select_course" onChange = "getcourse()">
         <option value="请选择" selected>选择课程</option>
         <?php

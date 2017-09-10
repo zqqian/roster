@@ -14,9 +14,6 @@ require_once 'get_user_info.php';
     body,html {
         margin: 0;
         padding: 0;
-        /*width:100%;*/
-        /*min-width:1000px;*/
-        /*width:expression_r(document.body.clientWidth < 1000 ? "1000px": "auto" );*/
     }
     .up{
         height:190px;width:100%;background-color:#4cbeff;
@@ -24,12 +21,6 @@ require_once 'get_user_info.php';
     #select span{color:#fbf9ee;font-size:35px;}
     #select{border-bottom:1px solid #fbf9ee;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;margin-left:20px;}
     #class{float:left;min-height:80px;height:auto;text-align:center;}
-    /*#spand{text-align:center;line-height:60px;width:15%;margin-left:10px;}*/
-    /*#select_class_name{float:left;width:70%;position:absolute;margin-left:15%;text-align:center;line-height:30px;}*/
-    /*#buttonsure{float:left;width:15%;position:absolute;margin-left:85%;text-align:center;}*/
-    /*#spand span{display:block;font-size:25px;margin-top:16px;margin-left:30px;color:#fbf9ee;margin-left:30px;}*/
-    /*#buttonsure input{display:block;margin-top:18px;float:right;margin-right:30px;}*/
-    /*#class{float:left;}*/
     #spand{position:absolute;color:#fffdfc;font-size:20px;float:left;width:10%;height:80px;margin-left:0px;text-align:center;
         white-space: normal !important;//正常，自动换行
         -webkit-line-clamp: auto;//auto表示自动换行，数字表示指定行数
