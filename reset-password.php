@@ -1,9 +1,9 @@
 <?php
-require_once 'get_user_info.php';
-//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
-if(!$is_login){
-    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";}
-?>
+//require_once 'get_user_info.php';
+////用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
+//if(!$is_login){
+//    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";}
+//?>
 <!doctype html>
 <html>
 <head>
@@ -11,13 +11,16 @@ if(!$is_login){
     <title>重置密码</title>
     <script src="js/jquery-3.2.1.js"></script>
     <link rel="stylesheet" href="style/button_one.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b56a70f629d81184f0b987.css' rel='stylesheet' type='text/css' />
+    <script src="js/layer/layer.js"></script>
     <style>
         /*为适应低版本的浏览器而设置*/
-
         header,section,footer,aside,nav,main,article,figure
         {display:block;}
         .password{border-left-color:#000;margin:30%;
         }
+        #oldpassword,#newpassword,#renewpassword::-ms-input-placeholder{text-align: center; font-size:16px;}
+        #oldpassword,#newpassword,#renewpassword::-webkit-input-placeholder{text-align: center;font-size:16px;}
        #newpassword,#renewpassword,#oldpassword::-ms-input-placeholder{text-align: center; font-size:16px;}
        #newpassword,#renewpassword,#oldpassword::-webkit-input-placeholder{text-align: center;font-size:16px;}
     </style>
@@ -60,9 +63,12 @@ if(!$is_login){
         width:400px;
         height:55px;
     }
+    #repasswordspan{display:block;margin-top:30px;margin-left:6px;font-size:20px;}
     #tijiao,#chongzhi{
         margin-top:90px;
         margin-left:20px;
+        width:90px;
+        height:35px;
     }
     #tijiao{margin-left:-20px;}
 </style>
@@ -72,11 +78,11 @@ if(!$is_login){
 <input type="password" id="oldpassword" placeholder="请输入旧密码"></br>
 <input type="password" id="newpassword"  placeholder="请输入新密码"></br>
 <input type="password"  id="renewpassword"  placeholder="请重新输入新密码"></br>
-<span id="repasswordspan"></span>
+<span id="repasswordspan" style="font-family:'LiDeBiao-Xing3d11d110091a492';" ></span>
 <!--<button type="button" id="tijiao" value="提交">提交</button>-->
- <input class="button_one white"  id="tijiao" type="button" value="提交" />
+ <input class="button_one white" style="font-family:'LiDeBiao-Xing3d11d110091a492';font-size:20px;"  id="tijiao" type="button" value="提交" />
 <!--<button type="reset" id="chongzhi" value="重置">重置</button>-->
-<input class="button_one white" id="chongzhi" type="button"  value="重置"/>
+<input class="button_one white" style="font-family:'LiDeBiao-Xing3d11d110091a492';font-size:20px;" id="chongzhi" type="button"  value="重置"/>
     </div>
 </center>
 <script>
@@ -113,7 +119,11 @@ if(!$is_login){
                 $.post("repassword.php", {oldpassword: oldpassword,newpassword: newpassword,newpassword2:newpassword2}, function (data) {
                     if (data == "1") {
                         $("#repasswordspan").html("");
-                        alert("重置成功");
+//                        alert("重置成功");
+                        layer.alert('重置成功', {
+                            icon: 6,
+                            skin: 'layer-ext-moon'
+                        });
                     }
                     else {
                         if (data == "2") {
@@ -121,6 +131,15 @@ if(!$is_login){
                             $("#repasswordspan").html("*原密码输入错误");
                         }
                         else {
+                            layer.msg('重置失败，尝试重新重置', {
+                                time: 0 //不自动关闭
+                                , icon: 5
+                                , skin: 'layer-ext-moon'
+                                , btn: ['确定']
+                                , yes: function () {
+                                    window.location.href = "reset-password.php";
+                                }
+                            });
                         }
                     }
                 })
