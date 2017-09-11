@@ -4,7 +4,7 @@ session_start();
 header("Content-Type:text/html;charset=UTF-8");
 
 
-@$ID=$_GET['ID'];
+$ID=$_GET['ID'];
 $userId=$_GET['userId'];
 
 

@@ -165,7 +165,7 @@ if(!$is_login){
                             <!-- 帮助 -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <a  href="helpfile.html" class="panel-title"
+                                    <a  href="helpfile.php" class="panel-title"
                                        data-parent="#menu" target="rightShow">帮助</a>
                                 </div>
 
@@ -182,15 +182,7 @@ if(!$is_login){
                             </div>
                             <!-- 测试界面1 -->
 
-                            <!-- 测试界面2-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a  href="test2.php" class="panel-title"
-                                        data-parent="#menu" target="rightShow">前端页面测试区</a>
-                                </div>
 
-                            </div>
-                            <!-- 测试界面2 -->
 
                         </div>
                         <!--手风琴切换结束-->

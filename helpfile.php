@@ -17,11 +17,11 @@ if(!$is_login){
         .container{perspective: 1300px;-webkit-perspective:1300px;}
         #boxList{position:absolute;width: 500px;height:500px;left:50%;margin-left:-315px; -webkit-transform-style: preserve-3d;transform-style: preserve-3d;
             /*animation: a1 2s 1;*/transition: all 2s;}
-        #odd1 {float: left;width: 150px;height: 150px;margin-left:10px;background: darkcyan;-webkit-transition: all 0.3s;transition: all 0.3s;}
-        #odd2 {float: left;width: 150px;height: 150px;margin-left:160px;background: darkcyan;-webkit-transition: all 0.3s;transition: all 0.3s;}
-        #odd3 {float: left;width: 150px;height: 150px;margin-left:10px;background: darkcyan;-webkit-transition: all 0.3s;transition: all 0.3s;}
-        #odd4 {float: left;width: 150px;height: 150px;margin-left:160px;background: darkcyan;-webkit-transition: all 0.3s;transition: all 0.3s;}
-        #even {float: left;width: 150px;height: 150px;margin-left:165px;margin-right:165px;background: darkcyan;-webkit-transition: all 0.3s;transition: all 0.3s;}
+        #odd1 {float: left;width: 150px;height: 150px;margin-left:10px;background:#AFD0FF;-webkit-transition: all 0.3s;transition: all 0.3s;}
+        #odd2 {float: left;width: 150px;height: 150px;margin-left:160px;background: #AFD0FF;-webkit-transition: all 0.3s;transition: all 0.3s;}
+        #odd3 {float: left;width: 150px;height: 150px;margin-left:10px;background: #AFD0FF;-webkit-transition: all 0.3s;transition: all 0.3s;}
+        #odd4 {float: left;width: 150px;height: 150px;margin-left:160px;background: #AFD0FF;-webkit-transition: all 0.3s;transition: all 0.3s;}
+        #even {float: left;width: 150px;height: 150px;margin-left:165px;margin-right:165px;background: #AFD0FF;-webkit-transition: all 0.3s;transition: all 0.3s;}
         .on li:hover{-webkit-transform: translate3d(0,0,30px);transform: translate3d(0,0,30px);background:deepskyblue;box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.5);}
         .on{webkit-transform: rotateX(75deg) rotateY(0deg) rotateZ(45deg);transform: rotateX(75deg) rotateY(0deg) rotateZ(45deg);}
     </style>
@@ -59,15 +59,16 @@ if(!$is_login){
         }
     </style>
     <style>
-        #help_text{background-color:#A6C7E1;border:2px dotted  #9AA4FF;height:200px;width:94%;clear:both;position:absolute;margin-top:500px;margin-left:3%;margin-right:3%;}
-        #nav{height:200px;width:100px;margin-left:15px;background-color:palevioletred;}
-        #text{height:180px;width:auto;margin-left:130px;margin-right:15px;margin-top:-190px;background-color:palevioletred;}
+        #help_text{background-color:#4cbeff;border:2px solid #40AFFE;border-radius:10px;height:200px;width:94%;clear:both;position:absolute;margin-top:500px;margin-left:3%;margin-right:3%;}
+        #nav{height:200px;width:100px;margin-left:15px;border-right:2px solid #fffdfc;}
+        #text{height:180px;width:auto;margin-left:130px;margin-right:15px;margin-top:-190px;}
         span{display:none;color:#000000;font-size:14px;font-family: "Courier New", Courier, mono;padding-top:20px;
             padding-left:15px;padding-right:10px; }
         #dao,#dianming,#chengji,#shuju,#bangzhu {
             display: block;
-            padding-top:60px;
-            padding-left:-15px;
+            padding-top:50px;
+            /*padding-left:-30px;*/
+            padding-right:20px;
         }
         #nav li{
             display:block;
@@ -76,7 +77,9 @@ if(!$is_login){
             text-align: center;
             background-color: #84d5ff;
             margin-left:20px;
-            border:2px dotted #002DFF;
+            /*border:2px dotted #002DFF;*/
+            margin-top:10px;
+            border-radius:15px;
         }
         #nav a{
             color:#000000;
@@ -87,19 +90,27 @@ if(!$is_login){
             font-kerning: auto;
         }
         #nav li:hover{
-            background-color:#777777;
-            border:2px dotted #E6F5FF;
+            /*background-color:#777777;*/
+            border:2px dotted #fffdfc;
+            border-radius:15px;
         }
         .select{
             background-color:#000000;
-            border:2px dotted #212121;
+            border:2px dotted #84d5ff;
         }
         #nav a:hover{
             color:#ffffff;
         }
         #dianming,#chengji,#shuju,#bangzhu{display:none;}
     </style>
+<!--    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>-->
 </head>
+<!--<script type="text/javascript">-->
+<!--    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");-->
+<!--    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/-->
+<!--    /*．．．*/-->
+<!--    $youziku.draw();-->
+<!--</script>-->
 <body>
 <div class="container">
     <ul id="boxList">
@@ -203,22 +214,22 @@ if(!$is_login){
         $("#text span").fadeOut(1000);
         if(ss=="odd1")
         {
-            $("#dao").show(500);
+            $("#dao").show();
         }
         else if(ss=="odd2")
         {
-            $("#dianming").show(500);
+            $("#dianming").show();
         }
         else if(ss=="even")
         {
-            $("#chengji").show(500);
+            $("#chengji").show();
         }
         else if(ss=="odd3")
         {
-            $("#shuju").show(500);
+            $("#shuju").show();
         }
         else if(ss=="odd4") {
-            $("#bangzhu").show(500);
+            $("#bangzhu").show();
         }
         else{}
     })

@@ -20,6 +20,7 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" href="style/button_one.css">
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
 </head>
 <style>
     .information{display:block;margin-top:10%;}
@@ -28,6 +29,7 @@ echo "<script>console.log('$email.$college.$academy')</script>";
         padding: 0 15px;
         vertical-align: middle;
         margin-top:30px;
+        font-size:25px;
     }
     input{
         outline: none;
@@ -53,9 +55,15 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
     -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
     }
-    #tijiao{margin-right:-5%;}
-    #bianji{margin-right:20px;}
+    #tijiao{margin-right:-5%;width:80px;height:35px;border-radius:10px;}
+    #bianji{margin-right:20px;width:80px;height:35px;border-radius:10px;}
 </style>
+<script type="text/javascript">
+    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
+    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
+    /*．．．*/
+    $youziku.draw();
+</script>
 <body>
 <center>
     <div class="information">

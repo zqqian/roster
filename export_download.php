@@ -1,14 +1,14 @@
 <?php session_start();
 header("Content-Type:text/html;charset=UTF-8");
-//$Class = $_POST['Class'];
-//$course = $_POST['course'];
-//$gradeType = $_POST['gradeType'];
-//$userId = $_POST['userId'];
-
-$Class = 55;
-$course = 39;
-$gradeType = "final";
-$userId = 18;
+$Class = $_POST['Class'];
+$course = $_POST['course'];
+$gradeType = $_POST['gradeType'];
+$userId = $_POST['userId'];
+//
+//$Class = 55;
+//$course = 41;
+//$gradeType = "normal";
+//$userId = 18;
 
 $letter=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q');
 
@@ -31,15 +31,15 @@ if ( "normal" == $gradeType ){//平时成绩
     $field = array();//字段数组
     $sql_nomal = "SELECT * FROM `userdefine` WHERE `Id`=$Id";
     $set = mysqli_query($db,$sql_nomal);
+//    var_dump($set);
+//    echo mysqli_num_rows($set);
+    if(mysqli_num_rows($set)<1) exit('0');//没有自定义字段
+
     while($row=mysqli_fetch_assoc($set)){
         array_push($field,$row['userDefineName']);
     }
 
-    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
-    for($t=0;$t<count($field);$t++){
-        $name = $letter[2+$t]."1";
-        $objSheet->setCellValue($name,$field[$t]);
-    }
+
 
     $sql1 = "SELECT p.stuId,stuCode,stuName,";
     $sql2="";
@@ -61,6 +61,16 @@ if ( "normal" == $gradeType ){//平时成绩
     $sql = $sql1.$sql2.$sql3;
     $set=mysqli_query($db,$sql);
 
+    if(mysqli_num_rows($set)<1) exit('1');//没有自定义字段成绩
+
+
+
+    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
+    for($t=0;$t<count($field);$t++){
+        $name = $letter[2+$t]."1";
+        $objSheet->setCellValue($name,$field[$t]);
+    }
+
     $i=2;
     while($row=mysqli_fetch_assoc($set)){
         $objSheet->setCellValue("A".$i,$row['stuCode'])->setCellValue("B".$i,$row['stuName']);
@@ -70,15 +80,10 @@ if ( "normal" == $gradeType ){//平时成绩
         $i++;
     }
 
-} else if  ( "final" == $gradeType ){//期末成绩
-
-    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
-    $objSheet->setCellValue("C1","考勤分")->setCellValue("D1","考勤总分");
-    $objSheet->setCellValue("E1","自定义考核分")->setCellValue("F1","自定义考核总分");
-    $objSheet->setCellValue("G1","总平时分")->setCellValue("H1","期末卷面分");
-    $objSheet->setCellValue("I1","总期末分")->setCellValue("J1","综合得分 ");
 
 
+}
+else if  ( "final" == $gradeType ){//期末成绩
 
     $sql_final="select b.stuId,b.stuCode,b.stuName,
 b.rate*100 as '考勤分',
@@ -110,8 +115,16 @@ left outer join class_course_user on
 (definegrade.Id=class_course_user.Id)) as b
 group by b.stuId
 ";
-
     $set=mysqli_query($db,$sql_final);
+
+    if(mysqli_num_rows($set)<1) exit('2');//录入的数据不全，无法生成
+
+    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
+    $objSheet->setCellValue("C1","考勤分")->setCellValue("D1","考勤总分");
+    $objSheet->setCellValue("E1","自定义考核分")->setCellValue("F1","自定义考核总分");
+    $objSheet->setCellValue("G1","总平时分")->setCellValue("H1","期末卷面分");
+    $objSheet->setCellValue("I1","总期末分")->setCellValue("J1","综合得分 ");
+
     $i=2;
     while($row=mysqli_fetch_assoc($set)){
         $objSheet->setCellValue("A".$i,$row['stuCode'])->setCellValue("B".$i,$row['stuName']);
@@ -121,13 +134,12 @@ group by b.stuId
         $objSheet->setCellValue("I".$i,$row['期末总分'])->setCellValue("J".$i,$row['综合得分']);
         $i++;
     }
-} else if ( "roster" == $gradeType ){//点名情况
+}
+else if ( "roster" == $gradeType ){//点名情况
     $dateStart = $_POST['start'];
     $dataEnd = $_POST['end'];
 
-    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
-    $objSheet->setCellValue("C1","出勤率")->setCellValue("D1","点名次数");
-    $objSheet->setCellValue("E1","到课次数");
+
 
     $sql_roster="SELECT Id,stuCode,stuName,count(*) as 'sum',count(*)-sum(attendance)  as 'arrive', (count(*)-sum(attendance))/count(*) as 'rate'
 FROM student left outer join sturoster
@@ -136,6 +148,11 @@ on(student.stuId=sturoster.stuId  and Id=$Id and rosterDate between '$dateStart'
 where classId=$Class
 group by student.stuId";
     $set=mysqli_query($db,$sql_roster);
+
+    $objSheet->setCellValue("A1","学号")->setCellValue("B1","姓名");
+    $objSheet->setCellValue("C1","出勤率")->setCellValue("D1","点名次数");
+    $objSheet->setCellValue("E1","到课次数");
+
     $i=2;
     while($row=mysqli_fetch_assoc($set)){
         $objSheet->setCellValue("A".$i,$row['stuCode'])->setCellValue("B".$i,$row['stuName']);
@@ -148,9 +165,10 @@ group by student.stuId";
        }
         $i++;
     }
-} else {
+}
+else {
     //一般情况下不会出现的情况
-    exit('error!');
+    exit('error');
 }
 mysqli_close($db);
 

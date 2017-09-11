@@ -1,11 +1,6 @@
 <?php
 header("Content-Type:text/html;charset=UTF-8");
-/**
- * Created by PhpStorm.
- * User: 卢
- * Date: 2017/8/18
- * Time: 18:48
- */
+
 $classId = $_POST['classId'];
 $userId = $_POST['userId'];
 

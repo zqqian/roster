@@ -11,6 +11,7 @@ if(!$is_login){
     <meta charset="UTF-8">
     <title>成绩查询</title>
     <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -25,6 +26,25 @@ if(!$is_login){
              border: pink solid 3px;
              margin: 0 auto;
          }*/
+
+        #showBtn{
+            margin: 20px auto !important;
+        }
+        select{
+            position: relative;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px 15px;
+            background: #fff;
+            border-left: 5px solid grey;
+            cursor: pointer;
+            outline: none;
+            margin: 10px;
+        }
+
+        input[type='text']{
+            width:240px;
+        }
     </style>
 </head>
 
@@ -110,7 +130,11 @@ if(!$is_login){
             var classId = $("#showClass").val();
             var courseId = $("#showCourse").val();
             if("" == showClass || "" == showCourse || "" == check){
-                alert("请先填写完信息再查询！")
+                //alert("请先填写完信息再查询！")
+                layer.alert('请先填写完信息再查询！', {
+                    icon: 5,
+                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                });
             }else{
                 console.log(classId+" "+courseId+" "+check);
                 $.post("phpData/return_strgrade.php",{classId:classId,courseId:courseId,check:check,userId:<?php echo $_SESSION['userid'];?>},function(data){

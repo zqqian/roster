@@ -11,7 +11,9 @@ if(!$is_login){
     <meta charset="UTF-8">
     <title>导出学生成绩</title>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
+    <link rel="stylesheet" href="style/placeholder.css">
     <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
     <style>
         #exportForm{
             display: block;
@@ -19,11 +21,20 @@ if(!$is_login){
             height: 450px;
             text-align: center;
             line-height: 50px;
-            border: pink solid 3px;
             margin: 0 auto;
         }
         .hide{
             display: none;
+        }
+        select{
+            position: relative;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px 15px;
+            background: #fff;
+            border-left: 5px solid grey;
+            cursor: pointer;
+            outline: none;
         }
     </style>
 </head>
@@ -47,21 +58,24 @@ if(!$is_login){
             ?>
         </select>
         <br>
-        <label for="course">选择课程：</label><select  id="course" name="course" style="width: 200px;">
+        <label for="course">选择课程：</label>
+        <select  id="course" name="course" style="width: 200px;">
             <option value="" selected></option>
+        </select>
 
-        </select><br>
+        <br>
         <label for="gradeType">导出类型：</label>
         <select  id="gradeType" name="gradeType" style="width: 200px;">
             <option value="" selected></option>
-            <option value="nomal" >平时成绩</option>
+            <option value="normal" >平时成绩</option>
             <option value="final" >期末成绩</option>
             <option value="roster" >点名情况</option>
-        </select><br>
+        </select>
 
+        <br>
         <div class="hide">
-        <label for="start">开始日期：</label><input id="start" type="date" value="2014-01-13"/><br>
-        <label for="end" >结束日期：</label><input id="end"  type="date" value="2014-01-13"/>
+        <label for="start">开始日期：</label><input  id="start" type="date" value="2017-09-01"/><br>
+        <label for="end" >结束日期：</label><input  id="end"  type="date" value="2017-09-01"/>
         </div>
 
         <input type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
@@ -70,79 +84,144 @@ if(!$is_login){
 
 <script>
     $(function(){
-
-        $("#gradeType").change(function(){
+        $("#Class").change(function(){//选择班级
             var value=$(this).val();
-            if("" == $("#Class").val() || "" == $("#course").val()){
-                alert("请先填写班级和课程信息");
-                $(this).val("");
-            }else{
-                if ("roster" == value){
-                    $.getJSON("phpData/getDate.php",{class:$("#Class").val(),course:$("#course").val(),userId:<?php echo $_SESSION['userid'];?>},function(data){
-                       var arr;
-                        arr=eval(data);
-                        $("#start").val(arr[0]);
-                        $("#end").val(arr[1])
-                        $(".hide").css("display","block");});//end post
-                }else{
-                    $(".hide").css("display","none");
-                }
-            }//end else
-        });
 
-        $("#Class").change(function(){
-            var value=$(this).val();
+            $("#course").empty();
+            $("#course").append("<option value='' selected></option>");
+            $("#gradeType").val("");
+            $("#start").val("");
+            $("#end").val("");
+            $(".hide").css("display","none");
 
             if ("" != value){
-                $("#course").empty();
-                $("#course").append("<option value='' selected></option>");
-                var classId=$("#course").val();
                 $.post("phpData/return_courses.php",{classId:value,userId:<?php echo $_SESSION['userid'];?>},function(data){
                     $("#course").append(data);
                 });
             }
+
+        });
+        $("#course").change(function(){//选择课程
+            $("#gradeType").val("");
+            $("#start").val("");
+            $("#end").val("");
+            $(".hide").css("display","none");
+        });
+
+        $("#gradeType").change(function(){//选择导出类型
+            var value=$(this).val();
+            if("" == $("#Class").val() || "" == $("#course").val()){
+                //alert("请先填写班级和课程信息");
+                layer.alert('请先填写班级和课程信息!', {
+                    icon: 5,
+                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                });
+                $(this).val("");
+            }
             else{
-                $("#course").empty();
-                $("#course").append("<option value='' selected></option>");
+                if ("roster" == value){
+                    //如果是点名情况
+                    $.getJSON("phpData/getDate.php",{class:$("#Class").val(),course:$("#course").val(),userId:<?php echo $_SESSION['userid'];?>},function(data){
+                       var arr;
+                        arr=eval(data);
+                        if(arr[0] == false && arr[1] == false){
+                            layer.alert('无点名信息！', {
+                                icon: 5,
+                                skin: 'layer-ext-moon', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                yes: function(index){
+                                    layer.close(index);
+                                    $("#gradeType").val("");
+                                    $("#start").val("");
+                                    $("#end").val("");
+                                    $(".hide").css("display","none");
+                                }
+
+                            });
+                        }else {
+                            $("#start").val(arr[0]);
+                            $("#end").val(arr[1]);
+                            $(".hide").css("display","block");
+                        }
+                    });
+                }else
+                    $(".hide").css("display","none");
+
             }
         });
 
 
+
+
         $("#downloadBtn").click(function(){
             var gradeType = $("#gradeType").val();
-            var Class = $("#Class").val();
-            var course = $("#course").val();
+            var Class = $("#Class").val().trim();
+            var course = $("#course").val().trim();
+
 
             if("roster" == gradeType){//如果点击了点名情况
-                $(".hide").css("display","inline");
+                //$(".hide").css("display","inline");
                 var start =  $("#start").val();
                 var end =  $("#end").val();
                 if("" == Class || "" == course || "" == gradeType){
-                    alert("请填写完信息再下载！")
-                }else
+                    //alert("请填写完信息再下载！")
+                    layer.alert('请填写完信息再下载！', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    });
+                }else//信息都为非空时
                 {
                     console.log(Class+" "+course+" "+gradeType);
-                    $.post("export_download.php",{Class:Class,course:course,gradeType:gradeType,
+                    $.post("export_download.php",{Class:Class,course:course,gradeType:"roster",
                         userId:<?php echo $_SESSION['userid'];?>,start:start,end:end},function(data){
-                        //设计三种表格所对应的数据库视图，根据视图填充Excel表格，访问生成Excel表格的地址
                         window.location.href = "tempExcel/"+Class+course+gradeType+".xls";
                     });
                 }
 
-            }else{
+            }
+
+            else{
                 if("" == Class || "" == course || "" == gradeType){
-                    alert("请填写完信息再下载！")
+                    //alert("请填写完信息再下载！")
+                    layer.alert('请填写完信息再下载！', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    });
                 }else
                 {
                     console.log(Class+" "+course+" "+gradeType);
                     $.post("export_download.php",{Class:Class,course:course,gradeType:gradeType,userId:<?php echo $_SESSION['userid'];?>},function(data){
                         //设计三种表格所对应的数据库视图，根据视图填充Excel表格，访问生成Excel表格的地址
+                        if(data=="0")
+                        {
+                            layer.alert('没有自定义字段！', {
+                                icon: 5,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
+                        }
+                        else  if(data=="1")
+                        {
+                            layer.alert('没有录入自定义字段成绩！', {
+                                icon: 5,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
+                        }
+                        else  if(data=="2")
+                        {
+                            layer.alert('录入的数据不足，无法导出Excel！', {
+                                icon: 5,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
+                        }else  if(data=="error")
+                        {
+                            layer.alert('出错啦！请重试！', {
+                                icon: 5,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
+                        }else
                         window.location.href = "tempExcel/"+Class+course+gradeType+".xls";
                     });
                 }
             }
-
-
 
         });//downloadBt
 
