@@ -156,7 +156,7 @@ if(!$is_login){
                     }
                     else  if(data=="1")
                     {
-                        layer.alert('未录入该考核项目的成绩，请先录入成绩再查询！', {
+                        layer.alert('未录入该考核项目的成绩，请先录成绩再查询！', {
                             icon: 5,
                             skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                         });
