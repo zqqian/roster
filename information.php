@@ -20,7 +20,8 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" href="style/button_one.css">
-    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b54708f629d81184f0b96c.css' rel='stylesheet' type='text/css' />
+<!--    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>-->
 </head>
 <style>
     .information{display:block;margin-top:10%;}
@@ -55,27 +56,33 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
     -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
     }
+    #code_fasong{margin-left:45px;}
     #tijiao{margin-right:-5%;width:80px;height:35px;border-radius:10px;}
     #bianji{margin-right:20px;width:80px;height:35px;border-radius:10px;}
+    #username,#email,#school,#academy,#code::-ms-input-placeholder{text-align: center; font-size:16px;}
+    #username,#email,#school,#academy,#code::-webkit-input-placeholder{text-align: center;font-size:16px;}
+    #code,#username::-ms-input-placeholder{text-align: center; font-size:16px;}
+    #code,#username::-webkit-input-placeholder{text-align: center;font-size:16px;}
 </style>
-<script type="text/javascript">
-    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
-    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
-    /*．．．*/
-    $youziku.draw();
-</script>
+<!--<script type="text/javascript">-->
+<!--    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");-->
+<!--    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/-->
+<!--    /*．．．*/-->
+<!--    $youziku.draw();-->
+<!--</script>-->
 <body>
 <center>
     <div class="information">
-        <label for="username">用户名</label><input type="text" class="myinput" id="username" value="<?php echo $username;?>" disabled><br>
-        <label for="email">邮箱</label><input type="text"  class="myinput" id="email" value="<?php echo $email;?>" disabled><br>
-        <label for="school">学校</label><input type="text" class="myinput"  id="school" value="<?php echo $college;?>" disabled><br>
-        <label for="academy">学院</label><input type="text" class="myinput" id="academy" value="<?php echo $academy;?>" disabled><br>
-        <label id="code_lable" for="academy">验证码</label><input type="text" class="myinput" placeholder="请输入验证码"  autoComplete='off' id="code"><br>
-        <input type="button" id="code_fasong" value="发送邮箱验证码">
-        <div id="information_span"></div><br/>
-        <input class="button_one white" type="button" id="bianji"  value="编辑" />
-        <input class="button_one white" type="button" id="tijiao"  value="保存" disabled="disabled"/>
+        <label  style="font-family:'LiDeBiao-Xing3d1146c0811a492';" for="username">用户名</label><input type="text" class="myinput" id="username" value="<?php echo $username;?>" disabled><br>
+        <label  style="font-family:'LiDeBiao-Xing3d1146c0811a492';"for="email">邮箱&nbsp;&nbsp;</label><input type="text"  class="myinput" id="email" value="<?php echo $email;?>" disabled><br>
+        <label style="font-family:'LiDeBiao-Xing3d1146c0811a492';"for="school">学校&nbsp;&nbsp;</label><input type="text" class="myinput"  id="school" value="<?php echo $college;?>" disabled><br>
+        <label  style="font-family:'LiDeBiao-Xing3d1146c0811a492';"for="academy">学院&nbsp;&nbsp;</label><input type="text" class="myinput" id="academy" value="<?php echo $academy;?>" disabled><br>
+        <label style="font-family:'LiDeBiao-Xing3d1146c0811a492';"id="code_lable" for="academy">验证码</label><input type="text" class="myinput" placeholder="请输入验证码"  autoComplete='off' id="code"><br>
+<!--        <input  style="font-family:'LiDeBiao-Xing3d1146c0811a492';" type="button" id="code_fasong" value="发送邮箱验证码">-->
+        <input class="button_one white" id="code_fasong" style="font-family:'LiDeBiao-Xing3d1146c0811a492';height:30px; font-size:18px;"type="button" value="发送邮箱验证码" />
+        <div  style="font-family:'LiDeBiao-Xing3d1146c0811a492';"id="information_span"></div><br/>
+        <input class="button_one white"  style="font-family:'LiDeBiao-Xing3d1146c0811a492';font-size:18px;"type="button" id="bianji"  value="编辑" />
+        <input  class="button_one white" style="font-family:'LiDeBiao-Xing3d1146c0811a492';font-size:18px;"type="button" id="tijiao"  value="保存" disabled="disabled"/>
     </div>
 </center>
 <script>
@@ -88,9 +95,10 @@ echo "<script>console.log('$email.$college.$academy')</script>";
     $("#academy").removeAttr("disabled");
     $("#code").removeAttr("disabled");
     })
+    var sign=1;
     $(function(){
-        $('#code').bind('input propertychange', function() {
-             alert("");
+        $('#email').bind('input propertychange', function() {
+//             alert("");
             $("#code_fasong").show();
             $("#code").show();
             $("#code_lable").show();
@@ -100,48 +108,95 @@ echo "<script>console.log('$email.$college.$academy')</script>";
         });
     })
     $("#tijiao").click(function() {
-        var username=$("#username").val();
+        var username = $("#username").val();
         var email = $("#email").val();
         var school = $("#school").val();
         var academy = $("#academy").val();
         var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
         var codeone = $("#code").val();
-        if (codeone=="") {
-            $("#information_span").html("");
-            $("#information_span").html("验证码不能为空");
-        }
-        else if (!reg.test(email)) {
-            alert("邮箱格式不正确，请重新输入");
-            document.getElementById("email").focus();
-        }
+        if (sign == 1) {
+            if (codeone == "") {
+                $("#information_span").html("");
+                $("#information_span").html("验证码不能为空");
+            }
+            else if (!reg.test(email)) {
+                alert("邮箱格式不正确，请重新输入");
+                document.getElementById("email").focus();
+            }
             else {
-                $.post("information-two.php", {Email_code_reset: codeone,userId:<?php echo $_SESSION['userid'];?>,
-                    email: email,
-                    school: school,
-                    academy: academy}, function (data) {
+                $.post("information-two.php", {Email_code_reset: codeone}, function (data) {
                     if (data == "1") {
                         $("#information_span").html("");
                         $("#information_span").html("验证码填写正确");
-                            layer.alert('修改成功', {
-                                icon: 6,
-                                skin: 'layer-ext-moon'
-                            })
-                            window.location.reload();
-                    }
-                    else if (data=="2")
-                    {
-                            $("#information_span").html("");
-                            $("#information_span").html("验证码错误，请检查验证码填写");
+                        $.post("information-three.php", {
+                            userId:<?php echo $_SESSION['userid'];?>,
+                            email: email,
+                            school: school,
+                            academy: academy
+                        }, function (data) {
+                            if (data == "1") {
+                                layer.msg('个人信息修改成功', {
+                                    time: 0 //不自动关闭
+                                    , icon: 5
+                                    , skin: 'layer-ext-moon'
+                                    , btn: ['确定']
+                                    , yes: function () {
+                                        window.location.href = "information.php";
+                                    }
+                                });
+                            }
+                            else {
+                                layer.msg('个人信息修改失败，尝试重新修改', {
+                                    time: 0 //不自动关闭
+                                    , icon: 5
+                                    , skin: 'layer-ext-moon'
+                                    , btn: ['确定']
+                                    , yes: function () {
+                                        window.location.href = "information.php";
+                                    }
+                                });
+                            }
+                        })
                     }
                     else {
-                        layer.alert('修改失败，请尝试重新修改', {
-                            icon: 5,
-                            skin: 'layer-ext-moon'
-                        })
+                        $("#information_span").html("");
+                        $("#information_span").html("验证码填写错误，请检查邮箱收到的验证码重新填写");
                     }
                 })
             }
-        })
+        }
+        else {
+            $.post("update_inf.php", {
+                userId:<?php echo $_SESSION['userid'];?>,
+                email: email,
+                school: school,
+                academy: academy
+            }, function (data) {
+                if (data == "1") {
+                    layer.msg('个人信息修改成功', {
+                        time: 0 //不自动关闭
+                        , icon: 5
+                        , skin: 'layer-ext-moon'
+                        , btn: ['确定']
+                        , yes: function () {
+                            window.location.href = "information.php";
+                        }
+                    });
+                }
+                else {
+                    layer.msg('个人信息修改失败，尝试重新修改', {
+                        time: 0 //不自动关闭
+                        , icon: 5
+                        , skin: 'layer-ext-moon'
+                        , btn: ['确定']
+                        , yes: function () {
+                            window.location.href = "information.php";
+                        }
+                    });
+                }
+            })
+        }
+    })
     $("#code_fasong").click(function(){
         var username=$("#username").val();
         var email = $("#email").val();
