@@ -28,7 +28,8 @@ if(!$is_login){
         }
         select{
             position: relative;
-            width: 200px;
+            min-width: 200px;
+            width:auto;
             margin: 0 auto;
             padding: 10px 15px;
             background: #fff;

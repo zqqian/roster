@@ -32,14 +32,14 @@ if(!$is_login){
         }
         select{
             position: relative;
-            width: 200px;
-            margin: 0 auto;
+            min-width: 200px;
+            width: auto;
+            margin: 10px auto;
             padding: 10px 15px;
             background: #fff;
             border-left: 5px solid grey;
             cursor: pointer;
             outline: none;
-            margin: 10px;
         }
 
         input[type='text']{

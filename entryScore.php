@@ -10,27 +10,55 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>成绩录入</title>
+
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
-    
+    <link rel="stylesheet" href="style/placeholder.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
     <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
     <style>
         body{text-align: center;}
-        select{width:200px;}
+        select{
+            position: relative;
+            min-width: 200px;
+            width: auto;
+            margin: 10px auto;
+            padding: 10px 15px;
+            background: #fff;
+            border-left: 5px solid grey;
+            cursor: pointer;
+            outline: none;
+        }
 
-        #show{width: 100%;height:auto;background: rgba(255, 192, 203, 0.48);}
-
-        #normal{width: 600px;height:auto;border:pink solid 1px;margin: 10px auto;/*display:none;*/}
+        #show{
+            width: 100%;
+            height:auto;
+            /*background: rgba(255, 192, 203, 0.48);*/
+        }
+        #normal{
+            width: 600px;
+            height:auto;
+            border:pink solid 1px;
+            margin: 10px auto;
+            display:none;
+        }
         .xiang{
             width:400px;
             height: 50px;
-            border:red solid 1px;
+            /*border:red solid 1px;*/
 
         }
         #normalAdd{
             float: right;font-size: 18px;display: block;border-radius: 5px;width:30px !important;
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
-            box-shadow: none;}
+            box-shadow: none;
+            margin: 5px;
+        }
 
         #normalAdd:active {
             -webkit-box-shadow:none;
@@ -44,6 +72,7 @@ if(!$is_login){
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
             box-shadow: none;
+            margin:0 auto;
         }
 
         .deleteBtn:active {
@@ -52,21 +81,61 @@ if(!$is_login){
             box-shadow: none;
         }
 
-        #table{margin: 25px auto;clear: both;}
-        #table td{background:greenyellow;margin: 25px auto;}
-        #table td input{text-align: center;}
+        #table{
+            margin: 25px auto;
+            clear: both;
+        }
 
-        #Grade{border: red solid 1px;width: 350px;height: 300px;left:500px;text-align: center;margin: 10px auto; display: none;}
+        #Grade{
+            border: grey solid 3px;
+            border-radius: 35px;
+            width: 400px;
+            height: 300px;
+            left: 500px;
+            text-align: center;
+            margin: 10px auto;
+            display: none;
+            margin-top: 25px;
+        }
 
-        #percent{width:100%;height:80px;border:red solid 1px;margin:10px auto;line-height: 80px;display: none;}
+        #Grade p{
+            margin:10px;
+            font-size: 20px;
+        }
 
-        #anniu{width:100%;height:50px;border:red solid 1px;margin:10px auto;line-height: 50px;display: none;}
+        #percent{
+            width:100%;
+            height:80px;
+            /*border:red solid 1px;*/
+            margin:10px auto;
+            line-height: 80px;
+            display: none;
+        }
+        #percent span{
+            display: inline;
+        }
+
+        #anniu{
+            width:100%;
+            height:50px;
+            /*border:red solid 1px;*/
+            margin:10px auto;
+            line-height: 50px;
+            display: none;
+        }
         #anniu input[type="button"]{display: inline;}
 
-        #inputFen{width:100%;height:auto;border: 1px solid red;margin: 10px auto;
-            line-height: 40px;}
+        #inputFen{
+            width:100%;
+            height:auto;
+            /*border: 1px solid red;*/
+            margin: 10px auto;
+            line-height: 40px;
+        }
 
-        #yes{margin: 20px auto !important;}
+        #yes{
+            margin: 20px auto !important;
+        }
 
         #prev, #next {
             display: inline;
@@ -74,7 +143,54 @@ if(!$is_login){
             margin: 20px;
         }
 
+        input[type='text']{
+            width:150px;
+            height:20px;
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+        }
 
+        th{text-align: center;}
+
+        #table td{
+            height: 29px;
+            padding: 0px;
+            vertical-align: middle;
+            margin: 0px;
+        }
+
+        #entryNormal,#entryFinal{
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        #range{
+            display: inline;
+            width:200px;
+        }
+
+        #attendance{
+            margin:0px;
+        }
+
+        button[disabled]{color:red;}
+        input[type='button'][disabled]{color:red;}
+
+        input[type='text'][disabled]{color: gray;
+            background: rgba(128, 128, 128, 0.32);
+        }
+
+        button[disabled][required]:focus {
+            border-color: rgba(128, 128, 128, 0.32);
+        }
+        input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+
+        button[disabled][required]:focus + label[placeholder]:before {
+            color: rgba(128, 128, 128, 0.32);
+        }
+        input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
 
 
 
@@ -123,10 +239,12 @@ if(!$is_login){
         <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         </div>
 
-        <div id="normal" >
+        <!--<div id="normal" class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
             <button id="normalAdd" title="添加考核项目">+</button>
 
-                <table id="table">
+                <table  class="table table-bordered table-hover table-condensed" id="table">
                     <tr>
                         <th>是否勾选</th>
                         <th>考核项目名称</th>
@@ -139,9 +257,39 @@ if(!$is_login){
 
                     </tr>
                 </table>
+                </div>
+            </div>
             <input type="button" id="yes" value="保存并开始录入"/>
 
-        </div>
+        </div>-->
+
+            <div  id="normal" class="container">
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+
+                        <button id="normalAdd" title="添加考核项目">+</button>
+
+                        <table class="table table-bordered table-hover table-condensed" id="table">
+                            <thead>
+                            <tr>
+                                <th>是否勾选</th>
+                                <th>考核项目名称</th>
+                                <th colspan="2">平时成绩占比（%）</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="check" disabled/></td>
+                                <td><input type="text" name="field" value="出勤率" disabled/></td>
+                                <td><input type="text" name="percent" id="attendance" value=""/></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <input type="button" id="yes" value="保存并开始录入"/>
+                    </div>
+                </div>
+            </div>
 
 
         <div id="Grade">
