@@ -109,29 +109,50 @@ if(!$is_login){
         return str.indexOf(substr)>=0;
     }
 
-    $("#selectcourse").change(function(){
-        var courseName = $(this).val();
-
-        $("#classlab").html("");
-        if("" == courseName){
-            $("#selectclass").empty();
-            $("#selectclass").append("<option value='' selected></option>");
-        }else{
-            $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
-                $("#selectclass").empty();
-                $("#selectclass").append("<option value='' selected></option>");
-                $("#selectclass").append(data);
-            });
-
-        }
-    });//end change
 
     $(function(){
 
         var classids=new Array();
        var ID="";
 
+        function getNowFormatDate() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+            return currentdate;
+        }
+
         $("#twocode").hide();
+
+
+        $("#selectcourse").change(function(){
+            var courseName = $(this).val();
+
+            $("#classlab").html("");
+            classids.splice(0,classids.length);
+            if("" == courseName){
+                $("#selectclass").empty();
+                $("#selectclass").append("<option value='' selected></option>");
+            }else{
+                $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
+                    $("#selectclass").empty();
+                    $("#selectclass").append("<option value='' selected></option>");
+                    $("#selectclass").append(data);
+                });
+
+            }
+        });//end change
 
         $("#classok").click(function(){
             var classid=$("#selectclass").val();
@@ -164,6 +185,12 @@ if(!$is_login){
                         background : "#ffffff",       //二维码的后景色
                         foreground : "#000000",        //二维码的前景色
                         src: 'img/logo.jpg'             //二维码中间的图片
+                    });
+
+                    var myDate = new Date();
+                    myDate= getNowFormatDate();
+                    $.post("phpData/auto_initialclassstu.php",{myDate:myDate,ID:ID},function(data){
+                       console.log(data);
                     });
 
                 });
