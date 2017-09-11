@@ -8,17 +8,18 @@
     <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" href="style/placeholder.css">
     <link rel="stylesheet" href="style/button_one.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b53f33f629d81184f0b95e.css' rel='stylesheet' type='text/css' />
 </head>
 <style>
     #find_password_two{display:none;margin-top:20%;}
     #find_password_three{display:none;margin-top:15%;}
     #find_password_one{display:block;margin-top:15%;}
     #username,#email,#email_code{display:block;width:450px;height:50px;}
-    #verify-bu{display:block;width:180px;height:35px;}
-    #verify-bu1{display:block;width:180px;height:35px;}
-    #find_three{display:block;width:180px;height:35px;}
+    #verify-bu{display:block;width:180px;height:45px;}
+    #verify-bu1{display:block;width:180px;height:45px;}
+    #find_three{display:block;width:180px;height:45px;}
     #verify_one{display:block;}
-    #verify,#verify2{display:block;margin-top:-10px;margin-right:260px;color:#2E2D3C;}
+    #verify,#verify2{display:block;margin-top:-10px;margin-right:50px;color:#2E2D3C;}
     #verify1{display:block;margin-top:-10px;margin-right:20px;color:#2E2D3C;}
     /*#verify1_star {display:block;color:#6666FF;float:left;margin-left:90px;}*/
     #find_three{display:block;width:180px;height:35px;}
@@ -100,6 +101,10 @@
         position: relative;
         top: 6px;
     }
+   #new_password,#renew_password::-ms-input-placeholder{text-align: center; font-size:16px;}
+   #new_password,#renew_password::-webkit-input-placeholder{text-align: center;font-size:16px;}
+    #renew_password,#new_password::-ms-input-placeholder{text-align: center; font-size:16px;}
+    #renew_password,#new_password,::-webkit-input-placeholder{text-align: center;font-size:16px;}
 </style>
 <body>
 <center>
@@ -113,12 +118,12 @@
     <input required='' type='text' id="email" >
     <label alt='请输入注册邮箱' placeholder='邮箱'></label>
     <div id="verify_one">
-      <span id="verify"></span><br/>
+      <span  style="font-family:'LiDeBiao-Xing3d11282aea1a492';" id="verify"></span><br/>
     </div>
 <!--    <input type="button" id="verify-bu" value="验证"><br/>-->
-    <input class="button_one white" type="button" id="verify-bu" value="验证" />
+    <input  style="font-family:'LiDeBiao-Xing3d11282aea1a492';font-size:20px;" class="button_one white" type="button" id="verify-bu" value="验证" />
 <!--    <input type="button" id="find_one" value="下一步"  disabled="disabled">-->
-        <a class="next_a" id="find_one">下一步</a>
+        <a  style="font-family:'LiDeBiao-Xing3d11282aea1a492';" class="next_a" id="find_one">下一步</a>
 </div>
 </center>
 <center>
@@ -128,12 +133,12 @@
     <input required='' type='text' id="email_code">
     <label alt='请输入邮箱验证码' placeholder='邮箱验证码'></label>
     <div id="verify_two">
-       <span id="verify1"></span><br/>
+       <span style="font-family:'LiDeBiao-Xing3d11282aea1a492';"  id="verify1"></span><br/>
     </div>
 <!--    <input type="button" id="verify-bu1" value="发送邮箱验证码">-->
-    <input class="button_one white" type="button" id="verify-bu1" value="发送邮箱验证码" />
+    <input  style="font-family:'LiDeBiao-Xing3d11282aea1a492';font-size:20px;" class="button_one white" type="button" id="verify-bu1" value="发送邮箱验证码" />
 <!--    <input type="button" id="find_two" value="下一步"  disabled="disabled">-->
-     <a class="next_a" id="find_two">下一步</a>
+     <a  style="font-family:'LiDeBiao-Xing3d11282aea1a492';"  class="next_a" id="find_two">下一步</a>
 </div>
 </center>
 <center>
@@ -143,10 +148,10 @@
 <!--    <span>重新输入</span>-->
     <input type="password" id="renew_password" placeholder="请重新输入新密码">
     <div id="verify_three">
-        <span id="verify2"></span>
+        <span  style="font-family:'LiDeBiao-Xing3d11282aea1a492';" id="verify2"></span>
     </div></br>
 <!--    <input type="button" id="find_three" value="确定">-->
-    <input class="button_one white" type="button" id="find_three"  value="确定" />
+    <input  style="font-family:'LiDeBiao-Xing3d11282aea1a492';font-size:20px;height:45px;" class="button_one white" type="button" id="find_three"  value="确定" />
     <!--    <input type="button" id="find_one" value="下一步"  disabled="disabled">-->
     </div>
 </center>

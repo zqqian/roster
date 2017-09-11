@@ -18,8 +18,8 @@ while(strlen($email_code_reset)<$pw_length) {
 }
 $_SESSION['re_email_code']= $email_code_reset;
 $title="云点名邮箱验证";
-$content= "亲爱的".$username.":<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;本次重设密码的邮箱验证码为:".$email_code_reset."<br/><br/>注:验证码仅在本次有效
-，请在重设密码页面填入验证码验证您的邮箱。<br/><br/><p style='text-align:right'>--------云点名</p>";
+$content= "亲爱的".$username.":<br/><br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;本次修改邮箱邮箱验证码为:".$email_code_reset."<br/><br/>注:验证码仅在本次有效
+，请在修改邮箱页面填入验证码验证您的邮箱。<br/><br/><p style='text-align:right'>--------云点名</p>";
 $flag = sendMail($email,$title,$content);
 if($flag){
     echo "1";

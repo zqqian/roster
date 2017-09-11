@@ -32,14 +32,14 @@ if(!$is_login){
         }
         select{
             position: relative;
-            width: 200px;
-            margin: 0 auto;
+            min-width: 200px;
+            width: auto;
+            margin: 10px auto;
             padding: 10px 15px;
             background: #fff;
             border-left: 5px solid grey;
             cursor: pointer;
             outline: none;
-            margin: 10px;
         }
 
         input[type='text']{
@@ -89,6 +89,10 @@ if(!$is_login){
         //班级变动后，课程随之改变
         $("#showClass").change(function(){
             var value=$(this).val();
+
+            $("#check").val("");
+            $("#showTable").empty();
+
             if ("" != value){
                 $("#showCourse").empty();
                 $("#showCourse").append("<option value='' selected></option>");
@@ -103,6 +107,8 @@ if(!$is_login){
                 $("#showCourse").append("<option value='' selected></option>");
             }
         });
+
+
         //课程变动后，查询内容随之改变
         $("#showCourse").change(function(){
             var courseId=$(this).val();
@@ -135,13 +141,31 @@ if(!$is_login){
                     icon: 5,
                     skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                 });
-            }else{
+            }
+            else{//数据都填充完毕时
                 console.log(classId+" "+courseId+" "+check);
                 $.post("phpData/return_strgrade.php",{classId:classId,courseId:courseId,check:check,userId:<?php echo $_SESSION['userid'];?>},function(data){
                     //处理并显示返回来的学生成绩
                     console.log(data);
-                    $("#showTable").empty();
-                    $("#showTable").append(data);
+                    if(data=="0")
+                    {
+                        layer.alert('该班未录入期末成绩，请先录入期末成绩再查询！', {
+                            icon: 5,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                        });
+                    }
+                    else  if(data=="1")
+                    {
+                        layer.alert('未录入该考核项目的成绩，请先录成绩再查询！', {
+                            icon: 5,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                        });
+                    }
+                    else {
+                        $("#showTable").empty();
+                        $("#showTable").append(data);
+                    }
+
                 });
 
             }

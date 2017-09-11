@@ -15,12 +15,7 @@ if(!$is_login){
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet"  type="text/css" href="http://">
-    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
-    <style type="text/css">
-        @font-face {font-family: 'LiDeBiao-Xing3';
-            src: url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.gif');
-            src: url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.gif?#iefix') format('embedded-opentype'),url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.bmp') format('woff'),url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.jpg') format('truetype'),     url('//cdn.wf.youziku.com/webfonts/css/youziku/45803/45803.png#LiDeBiao-Xing3') format('svg');   }
-    </style>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b53de8f629d81184f0b95c.css' rel='stylesheet' type='text/css' />
 </head>
 <style>
     html,body{margin:0px;padding:0px;}
@@ -34,7 +29,7 @@ if(!$is_login){
     ul li{list-style-type:none;display:inline;margin:7%;}
     #menuselect a{color:#000000;}
     #menusure{display:block;width:100%;height:80px;border-top:1px solid #fffdfc;background-color:#4cbeff;text-align:center;line-height:80px;}
-    #menusure span{font-size:25px;}
+    #menusure span{font-size:25px;font-family:'LiDeBiao-Xing3d11231b241a492';}
     /*#select-class{margin:10px;}*/
     th,tr{text-align: center;}
     /*select{width:auto;min-width: 100px;text-align: center;}*/
@@ -65,7 +60,7 @@ if(!$is_login){
         font-size:15px;
         margin: 0 auto;
         padding: 10px 15px;
-        padding-left:30px;;
+        padding-left:30px;
         border-left: 5px solid deepskyblue;
         cursor: pointer;
         outline: none;
@@ -73,15 +68,9 @@ if(!$is_login){
         font-size:17px;
     }
 </style>
-<script type="text/javascript">
-    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
-    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
-    /*．．．*/
-    $youziku.draw();
-</script>
 <body>
 <div id="course_name">
-    <span>选择课程</span>
+    <span style="font-family:'LiDeBiao-Xing3d11231b241a492';" >选择课程</span>
     <select id="select_course" onChange = "getcourse()">
         <option value="请选择" selected>选择课程</option>
         <?php
@@ -96,12 +85,12 @@ if(!$is_login){
 </div>
 <div id="menuselect">
     <ul>
-        <li> <a href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
-        <li> <a href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
+        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';" href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
+        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';"  href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
     </ul>
 </div>
 <div id="menusure">
-    <span>选择查询方式</span>
+    <span style="font-family:'LiDeBiao-Xing3d11231b241a492';" >选择查询方式</span>
     <select id="select-class" onChange = "attendance_data()">
         <!--        <option>国贸</option>-->
         <!--        <option>计科</option>-->

@@ -1,6 +1,6 @@
 <?php
-require_once 'get_user_info.php';
-?>
+//require_once 'get_user_info.php';
+//?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +10,7 @@ require_once 'get_user_info.php';
 <script src="js/Echarts/echarts.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="style/button_one.css">
+<link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b53c8df629d81184f0b959.css' rel='stylesheet' type='text/css' />
 <style type="text/css">
     body,html {
         margin: 0;
@@ -38,7 +39,7 @@ require_once 'get_user_info.php';
         /*清除箭头*/
         -webkit-appearance:none;
         /*在选择框的最右侧中间显示小箭头图片*/
-        background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+        background: url("img/arrow.png") no-repeat scroll right center transparent;
         /*为下拉小箭头留出一点位置，避免被文字覆盖*/
         padding-right: 14px;
         position: relative;
@@ -204,20 +205,19 @@ require_once 'get_user_info.php';
     }
     #select_course_name option{text-align:center;}
 </style>
-<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js?"></script>
 </head>
 <body>
 <div class="up">
     <!--课程名及班级容器-->
     <div id="select">
-        <span>选择课程名</span>
+        <span style="font-family:'LiDeBiao-Xing3d111dd2a91a492';" >选择课程名</span>
         <select  id="select_course_name" onchange="getclass()">
 
         </select>
     </div>
     <div id="class">
         <div id="spand">
-            <span>选择班级</span>
+            <span style="font-family:'LiDeBiao-Xing3d111dd2a91a492';" >选择班级</span>
         </div>
         <div id="select_class_name">
             <ul>
@@ -225,7 +225,7 @@ require_once 'get_user_info.php';
             </ul>
         </div>
         <div id="buttonsure">
-            <input class="button_one white" type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
+            <input class="button_one white" style="font-family:'LiDeBiao-Xing3d111dd2a91a492';"  type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
         </div>
     </div>
 </div>
@@ -236,10 +236,6 @@ require_once 'get_user_info.php';
     <div id="attendance_rate"  style="width:700px;height:400px;"></div>
 </div>
 <script type="text/javascript">
-    $youziku.load("body", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");
-    /*$youziku.load("#id1,.class1,h1", "5c53e5d5d6be4b5496148084e1523f1c", "LiDeBiao-Xing3");*/
-    /*．．．*/
-    $youziku.draw();
 </script>
 </body>
 <script>
