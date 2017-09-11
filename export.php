@@ -195,14 +195,14 @@ if(!$is_login){
                         //设计三种表格所对应的数据库视图，根据视图填充Excel表格，访问生成Excel表格的地址
                         if(data=="0")
                         {
-                            layer.alert('没有自定义字段！', {
+                            layer.alert('没有平时成绩！', {//没有自定义字段！
                                 icon: 5,
                                 skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             });
                         }
                         else  if(data=="1")
                         {
-                            layer.alert('没有录入自定义字段成绩！', {
+                            layer.alert('没有平时成绩！', {//没有录入自定义字段成绩！
                                 icon: 5,
                                 skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
                             });

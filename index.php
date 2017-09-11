@@ -94,7 +94,10 @@
                                             <input type="text" class="form-control" id="Racademy" maxlength="30"
                                                    name="Racademy" placeholder="请输入所属学院">
                                             <div class="modal-auth-code" id="modal-auth-code">
-                                            <input type="text"  class="form-control" id="auth-code" maxlength="10" name="auth-code"  placeholder="请输入验证码">
+
+                                                <input type="text"  class="form-control" id="auth-code" maxlength="10" name="auth-code"  placeholder="请输入验证码"
+                                                style="margin: 15px auto;">
+
                                             <input type="button" id="auth-code-bu" value="发送邮箱验证码">
                                             </div>
                                             <span class="help-block" id="registerSpan" style="color:red;">*除学校学院，其余都为必填项</span>
