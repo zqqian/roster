@@ -34,8 +34,9 @@ if(!$is_login){
             position: relative;
             min-width: 200px;
             width: auto;
+            height:40px;
             margin: 10px auto;
-            padding: 10px 15px;
+            padding: 0px;
             background: #fff;
             border-left: 5px solid grey;
             cursor: pointer;
@@ -75,7 +76,7 @@ if(!$is_login){
 
     <input type="button" id="showBtn" value="查询">
 </form>
-<hr>
+
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
