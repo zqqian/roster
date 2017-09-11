@@ -12,8 +12,8 @@ if(!$is_login){
     <title>导入学生信息</title>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <link rel="stylesheet" href="style/placeholder.css">
-    <script src="js/layer/layer.js"></script>
 	<script src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
 	<style>
         span{
             color: red;
@@ -53,7 +53,8 @@ if(!$is_login){
 
         select{
             position: relative;
-            width: 200px;
+            min-width: 200px;
+            width:auto;
             margin: 0 auto;
             padding: 10px 15px;
             background: #fff;
@@ -93,7 +94,7 @@ if(!$is_login){
     <form id="importForm" action="#"  method="post" enctype="multipart/form-data">
         <table id="importTable">
             <tr>
-            <td>入学年份：</td>
+            <td><label for="enterYear">入学年份：</label></td>
             <td>
                 <select name="year" id="enterYear" >
                      <option value="" selected></option>
@@ -106,18 +107,17 @@ if(!$is_login){
             </tr>
 
             <tr>
-                <td>所授课程名：</td>
+                <td><label for="course">所授课程名：</label></td>
 
 
 
                 <td>
                     <input required='' type="text" name="course" id="course" placeholder="请输入完整的课程名">
-                   </label>
                 </td>
             </tr>
 
             <tr>
-                <td>所授班级名：</td>
+                <td><label for="className">所授班级名：</label></td>
                 <td><input type="text" name="className" id="className" placeholder="请输入完整的班级名"></td>
             </tr>
 
@@ -162,7 +162,11 @@ if(!$is_login){
         var course = $("#course").val().trim();
         var className = $("#className").val().trim();
         if("" == year || "" == course || "" == className){
-            alert("请填写完整信息再上传学生信息表！");
+           // alert("请填写完整信息再上传学生信息表！");
+            layer.alert('请填写完整信息再上传学生信息表！', {
+                icon: 5,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            });
         } else {
             e.preventDefault();//阻止浏览器对元素的默认处理方式
 
@@ -170,7 +174,12 @@ if(!$is_login){
             //fileList.length 用来获取上传文件的长度，因为这里设定是一次上传一个班的信息，所以规定只能上传一个
 
             if(fileList.length!=1){
-                alert("仅支持一次上传一个Excel文件");
+                //alert("仅支持一次上传一个Excel文件!");
+                layer.alert('仅支持一次上传一个Excel文件！', {
+                    icon: 5,
+                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                });
+
             }else{
             xhr = new XMLHttpRequest();
             xhr.open("post", "import_upload.php", true);
@@ -195,7 +204,17 @@ if(!$is_login){
                     *
                     *
                     * */
-                    alert(xhr.responseText);
+                    //alert(xhr.responseText);
+                    if(xhr.responseText=="上传成功")
+                    layer.alert(xhr.responseText, {
+                        icon: 6,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    });
+                    else
+                        layer.alert(xhr.responseText, {
+                            icon: 5,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                        });
 
                 }
             };

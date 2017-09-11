@@ -185,9 +185,9 @@
                         $("#verify").html("");
                         $("#verify").html("*用户名或邮箱错误");
                     }
-                })
+                });
             }
-        })
+        });
         $("#find_one").click(function(){
             if(email_verify==1)
             {
@@ -199,7 +199,7 @@
                 $("#verify").html("");
                 $("#verify").html("*请先验证邮箱");
             }
-        })
+        });
         $("#verify-bu1").click(function(){
             var username=$("#username").val();
             var email=$("#email").val();
@@ -218,7 +218,7 @@
                     $("#verify1").html("*发送失败，请重新发送");
                 }
             })
-        })
+        });
         $("#find_two").click(function(){
             var email_code=$("#email_code").val();
             if(email_code=="")
@@ -238,7 +238,7 @@
                     }
                 })
             }
-        })
+        });
         $("#find_three").click(function(){
             var newpassword=$("#new_password").val();
             var renewpassword=$("#renew_password").val();
@@ -280,8 +280,9 @@
                                     window.location.href="find-password.php";
                                 }
                             });
+
                         }
-                })
+                });
             }
         })
     })

@@ -32,7 +32,7 @@ if(isset($classid_s)&&isset($userid)&&isset($num_of_manuallcall)) {
     {
 
         $sql = "select stuCode,stuName,stuId from student\n"
-            . "where classId=$classid_s[$j] LIMIT 0, 30 ";
+            . "where classId=".$classid_s[$j] ;
         $result = mysqli_query($db, $sql);
         if ($result) {
             while($row=mysqli_fetch_assoc($result)){

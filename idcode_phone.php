@@ -60,7 +60,7 @@ else*/
 
                 if (data == 1) {
 //                    window.location.href = 'autoidname.php? userId='<?php //echo $userId."&ID=".$ID;?>//;
-                    window.location.href = 'autoidname.php? userId=<?php echo $userId;?>,ID=<?php echo $ID;?>';
+                    window.location.href = 'autoidname.php?userId=<?php echo $userId;?>&ID=<?php echo $ID;?>';
                 }
                 else if (data == 0) {
                     alert('验证码不正确，请重新输入！');
