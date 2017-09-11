@@ -7,7 +7,6 @@ header("Content-Type:text/html;charset=UTF-8");
 $ID=$_GET['ID'];
 $userId=$_GET['userId'];
 
-
 /*$dir = dirname(__FILE__);//找到当前脚本所在路径
 $fileuserid= $dir . "/validation/" . $userId."/".$userId;
 
@@ -24,28 +23,51 @@ else*/
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
     <title>签到界面</title>
-
+    <script src="js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="style/placeholder.css">
+    <link rel="stylesheet" href="style/button_one.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b66284f629db133c19ab74.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b6647cf629db133c19ab77.css' rel='stylesheet' type='text/css' />
 </head>
-
 <style>
-    .body
-    {
-        text-align:center;
-    }
+    #autoidname_text{margin-top:80px;}
+    #text1{margin-top:100px;width:400px;height:70px;}
+    #text2{margin-top:25px;width:400px;height:70px;}
+     #yes{margin-top:40px;}
+    #autoid_text{width:100%;height:50px;background-color:#40AFFE;margin:0px;paddind:0px;text-align:center;line-height:50px;}
+    #stuid,#stuname::-ms-input-placeholder{text-align: center; font-size:16px;}
+    #stuid,#stuname::-webkit-input-placeholder{text-align: center;font-size:16px;}
+    #stuname,#stuid::-ms-input-placeholder{text-align: center; font-size:16px;}
+    #stuname,#stuid::-webkit-input-placeholder{text-align: center;font-size:16px;}
 </style>
-
-<body class="body">
-<div>
-    <h2>请输入学号与姓名</h2>
-    <P>学号:   <input type="text" id='stuid' value=''/></p>
-    <P>姓名:   <input type="text" id='stuname' value=''/></p>
-    <p><input type="button" id="yes" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>
-
+<body>
+<center>
+    <div id="autoid_text">
+     <span style="font-family:'LiDeBiao-Xing3d15a1cfe31a492';font-size:25px;" >云点名学生信息录入页</span>
+    </div>
+<div id="autoidname_text">
+    <span   style="font-family:'LiDeBiao-Xing3d159a1c741a492';font-size:30px;" >输入学号与姓名</span></br>
+    <div id="text1">
+        <span   style="font-family:'LiDeBiao-Xing3d159a1c741a492';font-size:20px;" >
+<!--            <input type="text" id='stuid' value=''/>-->
+            <input required='' type='text' id='stuid'>
+       <label alt='学号' placeholder='学号'></label>
+        </span></br>
+    </div>
+    <div id="text2">
+    <span  style="font-family:'LiDeBiao-Xing3d159a1c741a492';font-size:20px;" >
+<!--        <input type="text" id='stuname' value=''/>-->
+            <input required='' type='text' id='stuname'>
+       <label alt='姓名' placeholder='姓名'></label>
+    </span></br>
+    </div>
+        <!--    <input  style="font-family:'LiDeBiao-Xing3d157e98241a492';width:120px;height:35px;border-radius:20px;" type="button" id="yes" value="提交"></span>-->
+    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d159a1c741a492';width:120px;height:35px;border-radius:20px;font-size:25px;"  type="button" id="yes"  value="提交"/>
 </div>
+</center>
 </body>
-
 <script>
-    alert("jjjjjjjjjjjj");
+//    alert("jjjjjjjjjjjj");
     var stuCode="";
     var stuName="";
     function checkUserid(){

@@ -14,6 +14,7 @@ if(!$is_login){
     <link rel="stylesheet" href="style/placeholder.css">
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b66f6ff629db133c19ab7b.css' rel='stylesheet' type='text/css' />
     <style>
         #exportForm{
             display: block;
@@ -27,6 +28,7 @@ if(!$is_login){
             display: none;
         }
         select{
+            border-radius:10px;
             position: relative;
             min-width: 200px;
             width:auto;
@@ -37,6 +39,9 @@ if(!$is_login){
             cursor: pointer;
             outline: none;
         }
+        #exportForm{margin-top:50px;}
+        #downloadBtn{margin-top:40px;height:35px;font-size:20px;}
+        select{margin-top:20px;}
     </style>
 </head>
 <script>
@@ -45,7 +50,7 @@ if(!$is_login){
 <body>
     <form  id="exportForm" name="exportForm" >
 
-        <label for="Class">选择班级：</label><select id="Class" name="Class" style="width: 200px;">
+        <label  style="font-family:'LiDeBiao-Xing3d15cc927c1a492';font-size:25px;" for="Class">选择班级</label><select id="Class" name="Class" style="width: 200px;">
             <option value="" selected></option>
             <?php
             $userid = $_SESSION['userid'];
@@ -59,29 +64,27 @@ if(!$is_login){
             ?>
         </select>
         <br>
-        <label for="course">选择课程：</label>
+        <label  style="font-family:'LiDeBiao-Xing3d15cc927c1a492';font-size:25px" for="course">选择课程</label>
         <select  id="course" name="course" style="width: 200px;">
             <option value="" selected></option>
         </select>
 
         <br>
-        <label for="gradeType">导出类型：</label>
+        <label  style="font-family:'LiDeBiao-Xing3d15cc927c1a492';font-size:25px;" for="gradeType">导出类型</label>
         <select  id="gradeType" name="gradeType" style="width: 200px;">
             <option value="" selected></option>
             <option value="normal" >平时成绩</option>
             <option value="final" >期末成绩</option>
             <option value="roster" >点名情况</option>
         </select>
-
         <br>
         <div class="hide">
-        <label for="start">开始日期：</label><input  id="start" type="date" value="2017-09-01"/><br>
-        <label for="end" >结束日期：</label><input  id="end"  type="date" value="2017-09-01"/>
+        <label for="start">开始日期</label><input  id="start" type="date" value="2017-09-01"/><br>
+        <label for="end" >结束日期</label><input  id="end"  type="date" value="2017-09-01"/>
         </div>
 
-        <input type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
+        <input  style="font-family:'LiDeBiao-Xing3d15cc927c1a492';margin-left:180px;"  type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
     </form>
-
 
 <script>
     $(function(){
@@ -149,9 +152,6 @@ if(!$is_login){
 
             }
         });
-
-
-
 
         $("#downloadBtn").click(function(){
             var gradeType = $("#gradeType").val();
@@ -225,9 +225,7 @@ if(!$is_login){
             }
 
         });//downloadBt
-
     });//document.onload
-
 </script>
 </body>
 </html>

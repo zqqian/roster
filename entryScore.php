@@ -18,8 +18,8 @@ if(!$is_login){
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
-
+    <script src="js/layer/layer.js"></script>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b6725bf629db133c19ab7c.css' rel='stylesheet' type='text/css' />
     <style>
         body{text-align: center;}
         select{
@@ -192,23 +192,12 @@ if(!$is_login){
         }
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
 
-
-
-
-
-
-
-
-
-
-
-
     </style>
 
 </head>
 
 <body>
-        <label for="selectcourse" >选择课程：</label>
+        <label style="font-family:'LiDeBiao-Xing3d15d7fce81a492';font-size:25px;"for="selectcourse" >选择课程：</label>
         <select id="selectcourse" name="course">
             <option  value="" selected></option>
             <?php
@@ -220,7 +209,7 @@ if(!$is_login){
             ?>
         </select>
         <br>
-        <label for="selectclass">选择班级：</label>
+        <label style="font-family:'LiDeBiao-Xing3d15d7fce81a492';font-size:25px;" for="selectclass">选择班级：</label>
         <select id="selectclass" >
             <option  value="" selected></option>
         </select>
@@ -229,14 +218,14 @@ if(!$is_login){
         <div id="show">
 
             <div id="percent">
-        <span>平时成绩<span id="norPer">(30%)</span></span>
+        <span style="font-family:'LiDeBiao-Xing3d15d7fce81a492';">平时成绩<span id="norPer">(30%)</span></span>
         <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
-        <span>期末成绩<span id="finPer">(70%)</span></span>
+        <span style="font-family:'LiDeBiao-Xing3d15d7fce81a492';">期末成绩<span id="finPer">(70%)</span></span>
         </div>
 
         <div id="anniu">
-        <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
-        <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
+        <input type="button" style="font-family:'LiDeBiao-Xing3d15d7fce81a492';"value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
+        <input type="button" style="font-family:'LiDeBiao-Xing3d15d7fce81a492';"value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         </div>
 
         <!--<div id="normal" class="container">

@@ -31,6 +31,7 @@
     #buttonsure{float:left;position:absolute;height:80px;width:10%;text-align:center;line-height:60px;margin-left:90%;}
     #verify-bu1{width:57px;height:30px;margin-top:25px;margin-left:2px;}
     #select_course_name{
+        border-radius:20px;
         /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
         border: solid 2px #40AFFE;
         /*很关键：将默认的select选择框样式清除*/
@@ -225,7 +226,7 @@
             </ul>
         </div>
         <div id="buttonsure">
-            <input class="button_one white" style="font-family:'LiDeBiao-Xing3d111dd2a91a492';"  type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
+            <input class="button_one white" style="font-family:'LiDeBiao-Xing3d111dd2a91a492';height:35px;width:80px;font-size:18px;"  type="button" id="verify-bu1"  value="确定"  onclick="show()"/>
         </div>
     </div>
 </div>

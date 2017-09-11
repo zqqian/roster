@@ -42,6 +42,7 @@ if(!$is_login){
         margin-top:30px;
     }
     #select-class,#select_course{
+        border-radius:20px;
         /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
         border: solid 2px #40AFFE;
         /*很关键：将默认的select选择框样式清除*/

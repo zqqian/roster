@@ -12,13 +12,18 @@ if(!$is_login){
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>二维码扫描</title>
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
     <script type="text/javascript" src="js/utf.js"></script>
     <script type="text/javascript" src="js/jquery.qrcode.js"></script>
     <link rel="stylesheet" href="style/button_one.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b5e41ff629d8133c486a1f.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b62102f629db133c19ab18.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b666e6f629db133c19ab78.css' rel='stylesheet' type='text/css' />
 </head>
 <style>
+    body,html{margin:0px;padding:0px;}
     #selectcourse,#selectclass{
+        border-radius:20px;
         /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
         border: solid 2px #40AFFE;
         /*很关键：将默认的select选择框样式清除*/
@@ -43,23 +48,27 @@ if(!$is_login){
         outline: none;
         height:50px;
     }
-    #explain_matical{width:100%;height:70px;background-color:#40AFFE;}
-    #matical_select_course{margin-top:30px;}
+    #explain_matical{width:100%;height:70px;background-color:#40AFFE;text-align:center;line-height:70px;}
+    #explain_matical span{display:padding-top:20px;}
+    #matical_select_course{margin-top:70px;}
     #matical_select_class{margin-top:20px;}
     #classok{margin-top:30px;margin-left:120px;}
-    #classlab{display:block;margin-top:20px;font-size:18px;margin-left:90px;}
-    #classsure{margin-top:20px;margin-left:120px;}
-    /*#twocode{width:300px;height:300px;background-color:#40AFFE;}*/
+    #classlab{display:block;margin-top:30px;font-size:16px;margin-left:30px;}
+    #classsure{margin-top:20px;margin-left:30px;}
+    #twocode{margin-top:10px;margin-left:30px;width:400px;height:300px;border:1px solid #0a0809;text-align:center;line-height:50px;};
+    #qrcodeCanvas{margin-top:20px;margin-left:20px;display:block;}
+    #canvas_span{margin-top:20px;}
+    #twocodestart{margin-top:20px;}
 </style>
 <body>
 <center>
     <center>
     <div id="explain_matical">
-        <span></span>
+        <span  style="font-family:'LiDeBiao-Xing3d15ab3b921a492';font-size:25px;">自动点名页，请学生扫描下方验证码</span>
     </div>
     </center>
                 <div id="matical_select_course">
-                    <label for="selectcourse" style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';font-size:30px;">选择课程</label>
+                    <label for="selectcourse" style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';font-size:25px;">选择课程</label>
                     <select id="selectcourse" name="course">
                         <option  value="选择点名课程" selected>选择课程</option>
                         <?php
@@ -76,7 +85,7 @@ if(!$is_login){
                     </select>
                 </div>
                 <div id="matical_select_class">
-                    <label for="selectclass" style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';font-size:30px;">选择班级</label>
+                    <label for="selectclass" style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';font-size:25px;">选择班级</label>
                     <select id="selectclass" >
                         <option  value="选择点名班级" selected>选择班级</option>
                     </select>
@@ -84,18 +93,18 @@ if(!$is_login){
 <!--    <center>-->
 <!--    <input style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:130px;height:45px;font-size:18px;border-radius:20px;" class="button_one white" type="button" id="classok"  value="选定班级"/>-->
 <!--    </center>-->
-             <span id="classlab">测试中啦啦啦啦啦啦请点击确定开始点名</span>
+             <span id="classlab"></span>
 <!--    <button id="classsure"style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;float: left;margin-left: 94px;'>确定</button>-->
     <center>
     <input style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:18px;width:100px;height:40px;font-size:18px;border-radius:20px;" class="button_one white" type="button"  id="classsure"  value="确定"/>
     </center>
     <div id="twocode">
-         <span style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:18px;">该扫描该二维码</span>
+         <span style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:25px;">请扫描该二维码</span>
          <div id="qrcodeCanvas"></div>
-         <span style="text-align: center;font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:18px;"">已有<span id="havenumtc">0</span>人扫描</h2>
-</div>
+         <span id="canvas_span" style="text-align: center;font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:30px;"">已有<span id="havenumtc">0</span>人扫描</span>
+    </div>
 <!--<button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>-->
-    <input style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';width:80px;height:33px;font-size:18px;width:150px;height:45px;font-size:18px;border-radius:20px;" class="button_one white" type="button" id="twocodestart"   value="开始"/>
+    <input style="font-family:'LiDeBiao-Xing3d13ac64ab1a492';margin-left:30px;font-size:18px;width:150px;height:45px;font-size:18px;border-radius:20px;" class="button_one white" type="button" id="twocodestart" value="开始"/>
 </center>
 <script>
     var courseName1="";
@@ -119,7 +128,7 @@ if(!$is_login){
         }else{
             $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
                 $("#selectclass").empty();
-                $("#selectclass").append("<option value='' selected></option>");
+                $("#selectclass").append("<option value='选择点名班级' selected>选择班级</option>");
                 $("#selectclass").append(data);
             });
         }
@@ -129,25 +138,6 @@ if(!$is_login){
         var classids=new Array();
        var ID="";
         $("#twocode").hide();
-//        $("#classok").click(function(){
-//            var classid=$("#selectclass").val();
-//            if(classids.indexOf(classid)<0){
-//                classids.push(classid);
-//                var classs=$("#selectclass option:selected").text();
-//                if(classs=="选择班级")
-//                {
-//                    $("#classlab").html("");
-//                    $("#classlab").append("*请选择班级！");
-//                    setTimeout(function(){$("#classlab").hide();},2000);//2秒后执行该方法
-//                }
-//                else
-//                {
-//                    $("#classlab").html("");
-//                    $("#classlab").append("选定"+classs + "，点击确定开始自动点名！");
-//                    setTimeout(function(){$("#classlab").hide();},2000);//2秒后执行该方法
-//                }
-//            };
-//        });
         $("#classsure").click(function(){
             var classid=$("#selectclass").val();
             if(classids.indexOf(classid)<0){
@@ -157,13 +147,13 @@ if(!$is_login){
                 {
                     $("#classlab").html("");
                     $("#classlab").append("*请选择班级！");
-                    setTimeout(function(){$("#classlab").hide();},2000);//2秒后执行该方法
+//                    setTimeout(function(){$("#classlab").hide();},2000);//2秒后执行该方法
                 }
                 else
                 {
                     $("#classlab").html("");
-                    $("#classlab").append("选定"+classs + "，点击确定开始自动点名！");
-                    setTimeout(function(){$("#classlab").hide();},2000);//2秒后执行该方法
+                    $("#classlab").append("已选定"+classs+",请扫描二维码开始点名");
+//                    setTimeout(function(){$("#classlab").fadeOut(100);},2000);//2秒后执行该方法
                 }
             };
             if($("#classlab").html().trim()=="")
@@ -191,8 +181,6 @@ if(!$is_login){
                 $("#selectclass").prop("disabled", true);
                 $("#classok").prop("disabled", true);
                 $("#classsure").prop("disabled", true);
-
-
                 $("#twocode").show();
 
                 var flag = 1;
@@ -214,13 +202,22 @@ if(!$is_login){
         });
 
         $("#twocodestart").click(function(){
-            var classs=$("#classlab").text();
+            var classs=$("#classlab").val();
             var course=$("#selectcourse").val();
              var flag=0;
-            $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
-                console.log(data);
-                window.location.href = 'identifycode.php ?userId:'+<?php echo $_SESSION['userid'];?>;//进入生成验证码界面
-            });
+            if(classs==""||course=="选择点名课程")
+            {
+                layer.alert('请先选择课程和班级', {
+                    icon: 5,
+                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                })
+            }
+            else {
+                $.post("auto_newfile.php", {flag: flag, userId:<?php echo $_SESSION['userid'];?>}, function (data) {
+                    console.log(data);
+                    window.location.href = 'identifycode.php ?userId:' +<?php echo $_SESSION['userid'];?>;//进入生成验证码界面
+                });
+            }
         });
 
     });
