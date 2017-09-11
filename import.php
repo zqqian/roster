@@ -55,8 +55,9 @@ if(!$is_login){
             position: relative;
             min-width: 200px;
             width:auto;
+            height:40px;
             margin: 0 auto;
-            padding: 10px 15px;
+            padding: 0px;
             background: #fff;
             border-left: 5px solid grey;
             cursor: pointer;

@@ -25,9 +25,10 @@ if(!$is_login){
         select{
             position: relative;
             min-width: 200px;
+            height:40px;
             width: auto;
             margin: 10px auto;
-            padding: 10px 15px;
+            padding: 0px;
             background: #fff;
             border-left: 5px solid grey;
             cursor: pointer;
@@ -296,11 +297,6 @@ if(!$is_login){
         </div>
         <script>
 
-
-
-
-
-
             var flagtype = "final";
             var re_percentInf = new Array();
             var field = null;
@@ -319,7 +315,7 @@ if(!$is_login){
 
             //删除字段按钮的js代码
             function  Delete(obj){
-                var temp = $(obj).parent().parent().prevAll().length;//DOM元素转化成jQuery对象
+                var temp = $(obj).parent().parent().prevAll().length+1;//DOM元素转化成jQuery对象
                 //alert(temp);
                 var deleteTr =  $("#table tr:eq("+temp+")");
 
@@ -327,13 +323,23 @@ if(!$is_login){
                 var trId = deleteTr.attr("id");
 
                 if(trId != undefined){
-                 $.post(
-                     "phpData/entryScore6.php",
-                     {trId:trId.match(reg)[0]},
-                     function(data){
-                        //输出结果正常情况下为1
-                        // alert(data);
-                     });
+                    trId=trId.match(reg)[0];
+                    layer.msg('确定删除该考核项目及该考核项目录入的成绩吗？', {
+                        time: 0 //不自动关闭
+                        ,icon: 3
+                        ,skin: 'layer-ext-moon'
+                        ,btn: ['确定','取消']
+                        ,yes: function(index){
+                            $.post(
+                                "phpData/entryScore6.php",//插入新的自定义字段
+                                {trId:trId},
+                                function(data){
+                                    //输出结果正常情况下为1（供测试使用）
+                                    //alert("删除自定义字段的js代码"+data);
+                                });
+                            layer.close(index);
+                        }
+                    });
                 }else{
                     //
                 }
@@ -381,7 +387,6 @@ if(!$is_login){
                         $.post("phpData/entryScore1.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>,classId:classid},function(data){
                             var json = JSON.parse(data);
                             //console.log(json);
-
 
                             re_percentInf = json.percentInf;
 
@@ -481,7 +486,11 @@ if(!$is_login){
                         }
                         }
                     else {
-                        alert("当前学生已为该班第一个！");
+                        //alert("当前学生已为该班第一个！");
+                        layer.alert("当前学生已为该班第一个！", {
+                            icon: 7,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                        });
                         re_stuInf_index = 0;
                         $(this).attr('disabled', true);
                     }}else{
@@ -493,7 +502,11 @@ if(!$is_login){
                             $("#grade").val(re_stuInf[re_stuInf_index]["finalGrade"]);
                         }
                         else {
-                            alert("当前学生已为该班第一个！");
+                            //alert("当前学生已为该班第一个！");
+                            layer.alert("当前学生已为该班第一个！", {
+                                icon: 7,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
                             re_stuInf_index = 0;
                             $(this).attr('disabled', true);
                         }
@@ -535,8 +548,17 @@ if(!$is_login){
                                         userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
                                     function(data){console.log(data);});
                                 //提示录入完成，刷新本页面
-                                alert("录入平时成绩完毕,信息已保存！");
-                                window.location.reload();
+                               // alert("录入平时成绩完毕,信息已保存！");
+                                layer.msg('录入期末成绩完毕,信息已保存！', {
+                                    time: 0 //不自动关闭
+                                    ,icon: 6
+                                    ,skin: 'layer-ext-moon'
+                                    ,btn: ['确定']
+                                    ,yes: function(){
+                                        window.location.reload();
+                                    }
+                                });
+
                         }
                     }else{
 
@@ -554,10 +576,21 @@ if(!$is_login){
                             $.post(
                                 "phpData/entryScore4.php",
                                 {flag:"final",student_inf:re_stuInf,courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
-                                function(){});
+                                function(){
+
+                                });
                             //提示录入完成，刷新本页面
-                            alert("录入期末成绩完毕,信息已保存！");
-                            window.location.reload();
+//                            alert("录入期末成绩完毕,信息已保存！");
+                            layer.msg('录入期末成绩完毕,信息已保存！', {
+                                time: 0 //不自动关闭
+                                ,icon: 6
+                                ,skin: 'layer-ext-moon'
+                                ,btn: ['确定']
+                                ,yes: function(){
+                                    window.location.reload();
+                                }
+                            });
+
                         }
 
                 }
@@ -579,8 +612,8 @@ if(!$is_login){
                         "<td><button class='deleteBtn' onclick='Delete(this)' title='删除该考核项目'>X</button></td>"+
                         "</tr>";
                     $("#table").append(str);
-                    alert(str);
-                    alert($("#table").find("tr").length);
+                    //alert(str);
+                    //alert($("#table").find("tr").length);
                 });
 
 
@@ -621,14 +654,14 @@ if(!$is_login){
 
                     if(flag){
                         if(seePer.toFixed(2) == 1.00){//判断百分比和是否为100%
-                            alert("yes");
+                            //alert("yes");
 
                             //把选中的字段
                             $("#inputFen").empty();
                             var str="";
                             var num=0;
 
-                            alert(field.length);
+                            //alert(field.length);
                             for(var j=0;j<field.length;j++)
                             {
                                 if(true == field[j].isChecked)
@@ -650,7 +683,7 @@ if(!$is_login){
                                     }
                                     else{
                                         var hangTr = $("#table tr:eq("+a+")");//$("div").eq(0).attr('id')
-                                        alert(hangTr.attr("id"));
+                                        //alert(hangTr.attr("id"));
                                         var trId = hangTr.attr("id");
 
                                         var name = hangTr.find(":text").eq(0).val();
@@ -706,16 +739,28 @@ if(!$is_login){
                                     });
 
                             }else{
-                                alert('请至少选择一项需要录入成绩的考核项目！');
+                                //alert('请至少选择一项需要录入成绩的考核项目！');
+                                layer.alert('请至少选择一项需要录入成绩的考核项目！', {
+                                    icon: 7,
+                                    skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                                });
                             }
 
                         }
                         else{
-                            alert("平时成绩占比百分率和不为100%！");
+                            //alert("平时成绩占比百分率和不为100%！");
+                            layer.alert('平时成绩占比百分率和不为100%！', {
+                                icon: 7,
+                                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                            });
                         }
                     }
                     else{
-                        alert("请填写完信息再开始录入！");
+                        //alert("请填写完信息再开始录入！");
+                        layer.alert('请填写完信息再开始录入！', {
+                            icon: 7,
+                            skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                        });
                     }
                 });
 
