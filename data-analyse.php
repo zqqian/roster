@@ -60,8 +60,9 @@ if($result){
 else{
 	$post2=json_decode($post);
 	$num = count($post2);
+	$kc=$post2['course'];
 	for(int $ii=0;$ii<$num;$ii++){
-		$kc=$post2[$ii]['course'];
+		
 		$bj=$post2[$ii]['class'];
 	$sql = "SELECT * FROM `grade_statistics` WHERE `userId` = '$userid' AND `className` = \"$bj\" AND `courseName` = \"$kc\" LIMIT 0, 30 ";
 $result=mysqli_query($db,$sql);
