@@ -16,7 +16,7 @@ if(!$is_login){
     <!--//加文本框的样式-->
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7f8fdf629d80cf06cb9df.css' rel='stylesheet' type='text/css' />
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/summarycss.css">-->
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <!--按钮的样式-->
 
 </head>
@@ -82,6 +82,54 @@ if(!$is_login){
         cursor: pointer;
         outline: none;
     }
+    #classlab{
+        display: block;
+        margin: 10px auto;
+    }
+    #classok{
+        width:70px;
+        display: inline;
+    }
+    th label{
+        font-size: 25px;
+    }
+    #btn1{
+        margin: 0 auto;
+    }
+    #submit3 th button{
+        width: 70px;
+        margin: 10px;
+    }
+
+    button[disabled][required]:focus {
+        border-color: rgba(128, 128, 128, 0.32);
+    }
+    input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+
+    button[disabled][required]:focus + label[placeholder]:before {
+        color: rgba(128, 128, 128, 0.32);
+    }
+    input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+    input[type='text'][disabled]{color: gray;
+        background: rgba(128, 128, 128, 0.32);
+    }
+
+    button[type='button'][disabled]:active {
+        -webkit-transition: none;
+        -moz-transition: none;
+        -ms-transition: none;
+        -o-transition: none;
+        transition: none;
+
+    }
+    input[type='button'][disabled]:active {
+        -webkit-transition: none;
+        -moz-transition: none;
+        -ms-transition: none;
+        -o-transition: none;
+        transition: none;
+
+    }
 
 </style>
 <body class="body">
@@ -90,8 +138,8 @@ if(!$is_login){
 
         <tr>
 
-            <th>
-                <div>
+            <th style="vertical-align:top;">
+               <!-- <div>-->
                     <label class="cssd1bcde6dd1a492" for="selectcourse" >选择课程：</label>
                     <select id="selectcourse" name="course">
                         <option  value="" selected></option>
@@ -107,13 +155,13 @@ if(!$is_login){
                         }
                         ?>
                     </select>
-                </div>
+               <!-- </div>-->
 
             </th>
 
             <th  style="vertical-align:top;">
 
-                <div>
+               <!-- <div>-->
                     <label  class="cssd1bcde6dd1a492" for="selectclass">选择班级：</label>
                     <select id="selectclass" >
                         <option  value="" selected></option>
@@ -121,23 +169,24 @@ if(!$is_login){
 
                     <button id="classok">确定</button>
                     <br>
-                    <label id="classlab"></label>
-                </div>
+
+               <!-- </div>-->
 
             </th>
 
             <th style="vertical-align:top;">
 
-                <div>
+              <!--  <div>-->
                     <label class="cssd1bcde6dd1a492" for="selectnum">点名人数：</label>
                     <input type="text"  style="display:inline-block;width:100px;"id="selectnum" name="callnum" placeholder="点名人数">
-                </div>
+               <!-- </div>-->
 
             </th>
 
         </tr>
 
     </table>
+<label id="classlab"></label>
     <br>
     <button id="btn1">开始点名</button>
 
@@ -149,12 +198,12 @@ if(!$is_login){
     </div>
 
     <div  class="name-num">
-        <label class="cssd1bcde6dd1a492" for="selectl">学生学号</label>
+        <label  for="selectl">学生学号</label>
         <span id="stunum"></span>
     </div>
 
     <div  class="name-num">
-        <label class="cssd1bcde6dd1a492" for="selectl">学生姓名</label>
+        <label  for="selectl">学生姓名</label>
         <span id="stuname"></span>
     </div>
 
