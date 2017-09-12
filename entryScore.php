@@ -178,14 +178,10 @@ if(!$is_login){
             margin:0px;
         }
 
-        button[disabled]{color:red;}
-        input[type='button'][disabled]{color:red;}
 
-        input[type='text'][disabled]{color: gray;
-            background: rgba(128, 128, 128, 0.32);
-        }
 
-        button[disabled][required]:focus {
+
+    /*    button[disabled][required]:focus {
             border-color: rgba(128, 128, 128, 0.32);
         }
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
@@ -193,7 +189,7 @@ if(!$is_login){
         button[disabled][required]:focus + label[placeholder]:before {
             color: rgba(128, 128, 128, 0.32);
         }
-        input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+        input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}*/
 
         .ziti{
             font-family:'LiDeBiao-Xing3d1bd97d5c1a492';
