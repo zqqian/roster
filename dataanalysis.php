@@ -425,7 +425,7 @@
                 data: {},
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
+//                    console.log(data);
                       for (var i = 0; i < data.length; i++) {
                             course_name_array[i] = data[i].coursename;
                             class_name_array[i]=new Array();
@@ -493,14 +493,13 @@
         }
         else {
             alert("请求数据");
-            $.ajax({         //返回给后台选中的课程名和班级名返回数据
-                type: "POST",
-                url: "data-analyse.php",
-                data: {selected_course: selected_course, select_class: select_class},
-                dataType: "json",
-                success: function (data) {
-                    console.log(data);
+            alert(selected_course);
+            var str = '{'selected_course':"selected_course"}';
+            var obj = JSON.parse(str); // --> parse error
+            alert(str);
+            $.post("data-analyse.php",{selected_course: selected_course, select_class: select_class},function (data){
                     alert("数据请求成功");
+                    console.log(data);
                     var numi = 0;
                     var x = 0;
                     var centerx = 0.1;
@@ -582,8 +581,7 @@
                         xAxis: xAxis_attendance_rate
                     })
                     Chart_attendance_rate.showLoading();
-                }
-            })
+                })
         }
     }
    //    图表随容器自适应

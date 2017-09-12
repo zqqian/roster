@@ -17,13 +17,14 @@
     <style>
         /*为适应低版本的浏览器而设置的*/
         header, section, footer, aside, nav, main, article, figure {display: block;}
+        #index-log{background-color:white;}
     </style>
 </head>
 <body>
 <div class="container" style="margin: 70px auto;">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+            <nav  id="index-log" class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="sr-only">Toggle navigation</span>
