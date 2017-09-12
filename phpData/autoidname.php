@@ -45,7 +45,7 @@ else*/
 </body>
 
 <script>
-
+    alert("jjjjjjjjjjjj");
     var stuCode="";
     var stuName="";
     function checkUserid(){

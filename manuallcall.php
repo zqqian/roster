@@ -12,6 +12,12 @@ if(!$is_login){
     <meta charset="utf-8">
     <title>手动点名</title>
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="style/placeholder.css">
+    <!--//加文本框的样式-->
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7f8fdf629d80cf06cb9df.css' rel='stylesheet' type='text/css' />
+
+    <!-- <link rel="stylesheet" type="text/css" href="css/summarycss.css">-->
+    <!--按钮的样式-->
 
 </head>
 <style>
@@ -63,6 +69,20 @@ if(!$is_login){
         float: left;
         width: 100%;
     }
+    select{
+        border-radius:10px;
+        position: relative;
+        min-width: 200px;
+        width:auto;
+        height:40px;
+        margin: 0 auto;
+        padding: 0px;
+        background: #fff;
+        border-left: 5px solid grey;
+        cursor: pointer;
+        outline: none;
+    }
+
 </style>
 <body class="body">
 
@@ -72,7 +92,7 @@ if(!$is_login){
 
             <th>
                 <div>
-                    <label for="selectcourse" >选择课程：</label>
+                    <label class="cssd1bcde6dd1a492" for="selectcourse" >选择课程：</label>
                     <select id="selectcourse" name="course">
                         <option  value="" selected></option>
                         <?php
@@ -94,7 +114,7 @@ if(!$is_login){
             <th  style="vertical-align:top;">
 
                 <div>
-                    <label for="selectclass">选择班级：</label>
+                    <label  class="cssd1bcde6dd1a492" for="selectclass">选择班级：</label>
                     <select id="selectclass" >
                         <option  value="" selected></option>
                     </select>
@@ -109,7 +129,7 @@ if(!$is_login){
             <th style="vertical-align:top;">
 
                 <div>
-                    <label for="selectnum">点名人数：</label>
+                    <label class="cssd1bcde6dd1a492" for="selectnum">点名人数：</label>
                     <input type="text"  style="display:inline-block;width:100px;"id="selectnum" name="callnum" placeholder="点名人数">
                 </div>
 
@@ -129,12 +149,12 @@ if(!$is_login){
     </div>
 
     <div  class="name-num">
-        <label for="selectl">学生学号</label>
+        <label class="cssd1bcde6dd1a492" for="selectl">学生学号</label>
         <span id="stunum"></span>
     </div>
 
     <div  class="name-num">
-        <label for="selectl">学生姓名</label>
+        <label class="cssd1bcde6dd1a492" for="selectl">学生姓名</label>
         <span id="stuname"></span>
     </div>
 

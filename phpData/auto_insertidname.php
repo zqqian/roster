@@ -9,10 +9,10 @@ session_start();
 header("Content-Type:text/html;charset=UTF-8");
 
 
-//$userId=$_POST['userId'];
-//$ID1=$_POST['ID'];
-//$stuCode=$_POST['stuCode'];
-//$stuName=$_POST['stuName'];
+$userId=$_POST['userId'];
+$ID1=$_POST['ID'];
+$stuCode=$_POST['stuCode'];
+$stuName=$_POST['stuName'];
 
 
 /*$dir = dirname(__FILE__);//找到当前脚本所在路径
@@ -27,13 +27,15 @@ if (!file_exists($fileuserid)){//判断文件夹是否存在，不存在的话�
 }
 else*/
 
-$userId=18;
+/*$userId=18;
 $ID1="52_53_";
 $stuCode="20151845602";
 $stuName="卢二";
+*/
 $ID = explode('_',$ID1);
+
 $len=count($ID);
-echo $stuName;
+//echo $stuName;
 
 require "../mysql-connect.php";
 
@@ -58,7 +60,7 @@ if ($i==0) {//判断文件夹是否存在，不存在的话就创建这么一个
 }
 else {
 
-    if ($stuCode == "" || $stuName = "") {
+    if ($stuCode == "" || $stuName == "") {
         echo "3";//"<script> alert ('请把信息填齐全！'); </script>";
     } else {
 
@@ -68,17 +70,19 @@ else {
 
             if ($result1) {
                 $row1 = mysqli_fetch_assoc($result1);
-                echo $row1['classId'];
+//                echo $row1['classId']."<br>";
                 $sql3 = "select stuId from student where classId='$row1[classId]'and stuCode='$stuCode'and stuName='$stuName'";
-                echo $sql3;
+//                echo $sql3;
                 $result3 = mysqli_query($db, $sql3);
-                if ($result3) {
-                    $row3 = mysqli_fetch_assoc($result3);
+                $row3 = mysqli_fetch_assoc($result3);
+                if ($row3) {
+
                     $sql4 = "update `roster`.`sturoster` set attendance=0 where stuId=" . $row3['stuId'];
 //                    echo $sql4;
                     $result4 = mysqli_query($db, $sql4);
                     echo "1";//"<script> alert ('签到成功！'); </script>";
-                } else echo "2";//"<script> alert ('姓名或者学号不正确！'); </script>";
+                }
+                else echo "2";//"<script> alert ('姓名或者学号不正确！'); </script>";
 
             }
         }
