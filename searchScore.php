@@ -10,11 +10,12 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>成绩查询</title>
+    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7ff17f629d80cf06cb9e2.css' rel='stylesheet' type='text/css' />
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/summarycss.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
         body,th{text-align: center;}
         /* #entryForm{
@@ -31,6 +32,7 @@ if(!$is_login){
             margin: 20px auto !important;
         }
         select{
+            border-radius:10px;
             position: relative;
             min-width: 200px;
             width: auto;
@@ -46,12 +48,16 @@ if(!$is_login){
         input[type='text']{
             width:240px;
         }
+        .font{
+            font-size: 25px;
+            font-family:'LiDeBiao-Xing3d1be5bb441a492';
+        }
     </style>
 </head>
 
 <body>
 <form  id="entryForm" name="entryForm" >
-    <label for="showClass">选择班级：</label><select id="showClass" name="showClass" style="width: 200px;">
+    <label for="showClass" class="font">选择班级：</label><select id="showClass" name="showClass" style="width: 200px;">
         <option value="" selected></option>
         <?php
         $userid = $_SESSION['userid'];
@@ -65,11 +71,11 @@ if(!$is_login){
 
     </select>
     <br>
-    <label for="showCourse">选择课程：</label><select  id="showCourse" name="showCourse" style="width: 200px;">
+    <label for="showCourse" class="font">选择课程：</label><select  id="showCourse" name="showCourse" style="width: 200px;">
         <option value="" selected></option>
     </select> <br>
 
-    <label for="check">查询项目：</label><select  id="check" name="check" style="width: 200px;">
+    <label for="check" class="font">查询项目：</label><select  id="check" name="check" style="width: 200px;">
         <option value="" selected></option>
 
     </select> <br>

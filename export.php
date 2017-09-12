@@ -15,6 +15,7 @@ if(!$is_login){
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b66f6ff629db133c19ab7b.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7f3e3f629d80cf06cb9de.css' rel='stylesheet' type='text/css' />
     <style>
         #exportForm{
             display: block;
@@ -43,6 +44,70 @@ if(!$is_login){
         #exportForm{margin-top:50px;}
         #downloadBtn{margin-top:40px;height:35px;font-size:20px;}
         select{margin-top:20px;}
+
+        label{margin-right: 10px;}
+        label span{font-size: 25px;}
+
+        input[type="date"] {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 100%;
+            height: -webkit-calc(3em + 2px);
+            height: calc(3em + 2px);
+            margin: 0 0 1em;
+            padding: 1em;
+            border: 1px solid #cccccc;
+            border-radius: 1.5em;
+            background: #fff;
+            resize: none;
+            outline: none;
+            display: inline;
+            width: 200px;
+            margin: 15px;
+        }
+        input[type="date"][required]:focus {
+            border-color: #00bafa;
+        }
+        input[type="date"][required]:focus + label[placeholder]:before {
+            color: #00bafa;
+        }
+        input[type="date"][required]:focus + label[placeholder]:before,
+        input[type="date"][required]:valid + label[placeholder]:before {
+            -webkit-transition-duration: .2s;
+            transition-duration: .2s;
+            -webkit-transform: translate(0, -1.5em) scale(0.9, 0.9);
+            -ms-transform: translate(0, -1.5em) scale(0.9, 0.9);
+            transform: translate(0, -1.5em) scale(0.9, 0.9);
+        }
+        input[type="date"][required]:invalid + label[placeholder][alt]:before {
+            content: attr(alt);
+        }
+        input[type="date"][required] + label[placeholder] {
+            display: inline;
+            pointer-events: none;
+            line-height: 2.3em;
+            margin-bottom: -webkit-calc((3em - 1em) + 2px);
+            margin-bottom: calc((3em - 1em) + 2px);
+        }
+        input[type="date"][required] + label[placeholder]:before {
+            content: attr(placeholder);
+            display: inline;
+            margin: 0 -webkit-calc(1em + 2px);
+            margin: 0 calc(1em + 2px);
+            padding: 0 2px;
+            color: #898989;
+            white-space: nowrap;
+            -webkit-transition: 0.3s ease-in-out;
+            transition: 0.3s ease-in-out;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+            background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+            background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+            -webkit-background-size: 100% 5px;
+            background-size: 100% 5px;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
     </style>
 </head>
 <script>
@@ -80,11 +145,11 @@ if(!$is_login){
         </select>
         <br>
         <div class="hide">
-        <label for="start">开始日期</label><input  id="start" type="date" value="2017-09-01"/><br>
-        <label for="end" >结束日期</label><input  id="end"  type="date" value="2017-09-01"/>
+        <label for="start" ><span class="cssd1bb9f6eb1a492">开始日期</span></label><input  id="start" type="date" value="2017-09-01"/><br>
+        <label for="end"><span class="cssd1bb9f6eb1a492">结束日期</span></label><input  id="end"  type="date" value="2017-09-01"/>
         </div>
 
-        <input  style="font-family:'LiDeBiao-Xing3d15cc927c1a492';margin-left:180px;"  type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
+        <input  style="margin-left:180px;"  type="button" id="downloadBtn" value="下载" style="margin: 20px auto;">
     </form>
 
 <script>
