@@ -30,10 +30,12 @@ if($flag==1) {
 else if($flag==0){
     $dir = dirname(__FILE__);//找到当前脚本所在路径
     $delete_file1 = $dir . "/validation/" . $userId."/".$userId;
-    rmdir($delete_file1);
+    if(file_exists($delete_file1))
+        rmdir($delete_file1);
 
     $delete_file2 = $dir . "/validation/" . $userId."/"."counter.txt";
-    @unlink($delete_file2);
+    if(file_exists($delete_file2))
+         @unlink($delete_file2);
     echo "fjdsskjf";
     $_SESSION['lastauthcode']="lwx";
 }

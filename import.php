@@ -12,18 +12,16 @@ if(!$is_login){
     <title>导入学生信息</title>
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
     <link rel="stylesheet" href="style/placeholder.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7e61ff629d80cf06cb9db.css' rel='stylesheet' type='text/css' />
 	<script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
 	<style>
-        span{
-            color: red;
-            font-size: 14px;
-        }
         td{
             height: 45px;
             text-align: center;
             font-size: 16px;
             vertical-align: inherit;
+            width:200px;
         }
         #importForm{
             width:500px;
@@ -53,6 +51,7 @@ if(!$is_login){
 
         select{
             position: relative;
+            border-radius: 10px;
             min-width: 200px;
             width:auto;
             height:40px;
@@ -95,7 +94,7 @@ if(!$is_login){
     <form id="importForm" action="#"  method="post" enctype="multipart/form-data">
         <table id="importTable">
             <tr>
-            <td><label for="enterYear">入学年份：</label></td>
+            <td><label for="enterYear" class="cssd1b84334f1a492" style="font-size: 25px;">入学年份：</label></td>
             <td>
                 <select name="year" id="enterYear" >
                      <option value="" selected></option>
@@ -108,7 +107,7 @@ if(!$is_login){
             </tr>
 
             <tr>
-                <td><label for="course">所授课程名：</label></td>
+                <td><label for="course" class="cssd1b84334f1a492" style="font-size: 25px;">所授课程名：</label></td>
 
 
 
@@ -118,20 +117,20 @@ if(!$is_login){
             </tr>
 
             <tr>
-                <td><label for="className">所授班级名：</label></td>
+                <td><label for="className" class="cssd1b84334f1a492" style="font-size: 25px;">所授班级名：</label></td>
                 <td><input type="text" name="className" id="className" placeholder="请输入完整的班级名"></td>
             </tr>
 
 
             <tr>
-                <td>文件上传说明：</td>
+                <td><span class="cssd1b84334f1a492" style="font-size: 25px;">文件上传说明：</span></td>
                 <td>
-                        <span>*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件</span>
+                        <span class="cssd1b84334f1a492" style="color: red;font-size: 25px;">*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件</span>
                 </td>
             </tr>
 
             <tr>
-                <td>Excel文件格式：</td>
+                <td class="cssd1b84334f1a492" style="font-size: 25px;">Excel文件格式：</td>
                 <td>
                     <img src="img/Excelexample.png">
                 </td>
@@ -140,8 +139,8 @@ if(!$is_login){
             <tr>
                 <td colspan="2"><!--拖拽框-->
                     <center>
-                        <div class="box" id="target_box">
-                        拖拽文件到此区自动上传
+                        <div class="box" id="target_box" >
+                        <span class="cssd1b84334f1a492" style="font-size: 25px;color: red;">拖拽文件到此区自动上传</span>
                         </div>
                     </center>
                 </td>

@@ -46,33 +46,33 @@ else*/
 </style>
 <body class="body">
 
-    <P>请输入验证码:<input type="text" id="textvalue" value=''/></p>
-    <p><input type="button" id="sucess" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>
+<P>请输入验证码:<input type="text" id="textvalue" value=''/></p>
+<p><input type="button" id="sucess" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>
 </body>
 <script>
 
     $(function(){
-    $("#sucess").click(function(){
+        $("#sucess").click(function(){
 //        alert("ddd");
-        var textvalue=$("#textvalue").val().trim();
-        if(textvalue!="") {
-            $.post("phpData/formcode.php", {textvalue: textvalue,userId:<?php echo $userId;?>}, function (data) {
+            var textvalue=$("#textvalue").val().trim();
+            if(textvalue!="") {
+                $.post("phpData/formcode.php", {textvalue: textvalue,userId:<?php echo $userId;?>}, function (data) {
 
-                if (data == 1) {
+                    if (data == 1) {
 //                    window.location.href = 'autoidname.php? userId='<?php //echo $userId."&ID=".$ID;?>//;
-                    window.location.href = 'autoidname.php?userId=<?php echo $userId;?>&ID=<?php echo $ID;?>';
-                }
-                else if (data == 0) {
-                    alert('验证码不正确，请重新输入！');
-                }
-                else {
-                }
-            });
+                        window.location.href = 'autoidname.php?userId=<?php echo $userId;?>&ID=<?php echo $ID;?>';
+                    }
+                    else if (data == 0) {
+                        alert('验证码不正确，请重新输入！');
+                    }
+                    else {
+                    }
+                });
 
-        }
-        else alert("请输入验证码！");
+            }
+            else alert("请输入验证码！");
 
-    });
+        });
 
     });
 </script>

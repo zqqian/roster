@@ -12,17 +12,18 @@ if(!$is_login){
     <title>成绩录入</title>
 
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
-    <link rel="stylesheet" href="style/placeholder.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7fbf5f629d80cf06cb9e0.css' rel='stylesheet' type='text/css' />
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/layer/layer.js"></script>
-    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b6725bf629db133c19ab7c.css' rel='stylesheet' type='text/css' />
+    <script src="js/layer/layer.js"></script><link rel="stylesheet" href="style/placeholder.css">
+
     <style>
         body{text-align: center;}
         select{
+            border-radius: 10px;
             position: relative;
             min-width: 200px;
             height:40px;
@@ -46,6 +47,7 @@ if(!$is_login){
             border:pink solid 1px;
             margin: 10px auto;
             display:none;
+            border-radius: 10px;
         }
         .xiang{
             width:400px;
@@ -100,7 +102,7 @@ if(!$is_login){
         }
 
         #Grade p{
-            margin:10px;
+            margin:25px;
             font-size: 20px;
         }
 
@@ -193,12 +195,17 @@ if(!$is_login){
         }
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
 
+        .ziti{
+            font-family:'LiDeBiao-Xing3d1bd97d5c1a492';
+            font-size: 25px;
+        }
+
     </style>
 
 </head>
 
 <body>
-        <label style="font-family:'LiDeBiao-Xing3d15d7fce81a492';font-size:25px;"for="selectcourse" >选择课程：</label>
+        <label for="selectcourse" class="ziti">选择课程：</label>
         <select id="selectcourse" name="course">
             <option  value="" selected></option>
             <?php
@@ -210,7 +217,7 @@ if(!$is_login){
             ?>
         </select>
         <br>
-        <label style="font-family:'LiDeBiao-Xing3d15d7fce81a492';font-size:25px;" for="selectclass">选择班级：</label>
+        <label  class="ziti" for="selectclass">选择班级：</label>
         <select id="selectclass" >
             <option  value="" selected></option>
         </select>
@@ -219,14 +226,14 @@ if(!$is_login){
         <div id="show">
 
             <div id="percent">
-        <span style="font-family:'LiDeBiao-Xing3d15d7fce81a492';">平时成绩<span id="norPer">(30%)</span></span>
+        <span class="ziti">平时成绩<span id="norPer">(30%)</span></span>
         <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
-        <span style="font-family:'LiDeBiao-Xing3d15d7fce81a492';">期末成绩<span id="finPer">(70%)</span></span>
+        <span class="ziti">期末成绩<span id="finPer">(70%)</span></span>
         </div>
 
         <div id="anniu">
-        <input type="button" style="font-family:'LiDeBiao-Xing3d15d7fce81a492';"value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
-        <input type="button" style="font-family:'LiDeBiao-Xing3d15d7fce81a492';"value="录入期末成绩" id="entryFinal" name="entryFinal"/>
+        <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
+        <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         </div>
 
         <!--<div id="normal" class="container">
@@ -330,20 +337,23 @@ if(!$is_login){
                         ,skin: 'layer-ext-moon'
                         ,btn: ['确定','取消']
                         ,yes: function(index){
+
                             $.post(
-                                "phpData/entryScore6.php",//插入新的自定义字段
-                                {trId:trId},
-                                function(data){
-                                    //输出结果正常情况下为1（供测试使用）
-                                    //alert("删除自定义字段的js代码"+data);
-                                });
+                             "phpData/entryScore6.php",//插入新的自定义字段
+                             {trId:trId},
+                             function(data){
+                             //输出结果正常情况下为1（供测试使用）
+                             //alert("删除自定义字段的js代码"+data);
+
+                                 deleteTr.remove();
+                             });
                             layer.close(index);
                         }
                     });
                 }else{
-                    //
+                    deleteTr.remove();
                 }
-                deleteTr.remove();
+                //deleteTr.remove();
             }
 
              $(function(){

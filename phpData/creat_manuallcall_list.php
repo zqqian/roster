@@ -98,6 +98,7 @@ if(isset($classid_s)&&isset($userid)&&isset($num_of_manuallcall)) {
 
 
 }
+mysqli_close($db);
 
 
 
