@@ -6,120 +6,75 @@ if(!$is_login){
 	echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>"; 
 }
 ?>
+
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <title>手动点名</title>
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-    <link rel="stylesheet" href="style/button_one.css">
+
 </head>
 <style>
-    /*.body*/
-    /*{*/
-        /*text-align: center;*/
-        /*font-size:100%;*/
-    /*}*/
-    /*#selectclass*/
-    /*{*/
-        /*width:130px;*/
-    /*}*/
-    /*#tablel*/
-    /*{*/
-        /*border:0;*/
-        /*vertical-align:top;*/
-        /*!*background-color:red;*!*/
-        /*width:100%;*/
-    /*}*/
-    /*.trangle*/
-    /*{*/
+    .body
+    {
+        text-align: center;
+        font-size:100%;
+    }
+    #selectclass
+    {
+        width:130px;
+    }
+    #tablel
+    {
+        border:0;
+        vertical-align:top;
+        /*background-color:red;*/
+        width:100%;
+    }
+    .trangle
+    {
 
-        /*height:300px;*/
-        /*width:400px;*/
-        /*text-align:center;*/
-        /*border-radius: 10px;*/
-        /*margin-left: 35%;*/
-        /*margin-top: 50px;*/
-        /*border: 1px solid #50ffe4;*/
-       /*!* background-color: antiquewhite;*!*/
-    /*}*/
-    /*#numth*/
-    /*{*/
-       /*!* background-color: aqua;*!*/
-        /*border:none;*/
-        /*height:100px;*/
-    /*}*/
-    /*.name-num*/
-    /*{*/
-        /*float:left;*/
-        /*margin-top:10px;*/
-        /*margin-left:20%;*/
-    /*}*/
-    /*#submit3*/
-    /*{*/
-        /*height:100px;*/
-       /*!* background-color: aqua;*!*/
-        /*text-align: center;*/
-        /*float: left;*/
-        /*width: 100%;*/
-    /*}*/
-    #selectcourse,#selectclass{
-        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-        border: solid 2px #40AFFE;
-        /*很关键：将默认的select选择框样式清除*/
-        appearance:none;
-        -moz-appearance:none;
-        /*清除箭头*/
-        -webkit-appearance:none;
-        /*在选择框的最右侧中间显示小箭头图片*/
-        background: url("img/arrow.png") no-repeat scroll right center transparent;
-        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-        padding-right: 14px;
-        position: relative;
-        min-width: 250px;
-        width:auto;
-        background-color:#fffdfc;
-        font-size:17px;
-        margin: 0 auto;
-        padding: 10px 15px;
-        padding-left:30px;;
-        border-left: 5px solid deepskyblue;
-        cursor: pointer;
-        outline: none;
-        height:50px;
+        height:300px;
+        width:400px;
+        text-align:center;
+        border-radius: 10px;
+        margin-left: 35%;
+        margin-top: 50px;
+        border: 1px solid #50ffe4;
+       /* background-color: antiquewhite;*/
     }
-    #selectnum{
-        display:block;
-        transition:all 0.30s ease-in-out;
-        -webkit-transition: all 0.30s ease-in-out;
-        -moz-transition: all 0.30s ease-in-out;
-        border:#35a5e5 1px solid;
-        border-radius:15px;
-        outline:none;
-        width:150px;
-        height:40px;
-        margin-top:5px;
+    #numth
+    {
+       /* background-color: aqua;*/
+        border:none;
+        height:100px;
     }
-    #selectnum:focus{
-        box-shadow:0 0 5px rgba(81, 203, 238, 1);
-        -webkit-box-shadow:0 0 5px rgba(81, 203, 238, 1);
-        -moz-box-shadow:0 0 5px rgba(81, 203, 238, 1);
-        width:150px;
-        height:43px;
+    .name-num
+    {
+        float:left;
+        margin-top:10px;
+        margin-left:20%;
     }
-    #manuallselect{margin-top:50px;}
-    #manucalcourse{margin-top:30px;}
-    #manucalclass{margin-top:30px;}
-    #classok{margin-top:30px;}
-    #nucall-num{margin-top:30px;}
-    #btn1{margin-top:40px;}
+    #submit3
+    {
+        height:100px;
+       /* background-color: aqua;*/
+        text-align: center;
+        float: left;
+        width: 100%;
+    }
 </style>
 <body class="body">
-<center>
-<div id="manuallselect" >
-                <div id="manucalcourse">
-                    <span for="selectcourse" >选择课程</span>
+
+<table id="tablel" >
+
+        <tr>
+
+            <th>
+                <div>
+                    <label for="selectcourse" >选择课程：</label>
                     <select id="selectcourse" name="course">
-                        <option  value="" selected>选择课程</option>
+                        <option  value="" selected></option>
                         <?php
                         $sql = "select distinct(courseId) from class_course_user where userId = '$userid' ";
                         $result=mysqli_query($db,$sql);
@@ -133,29 +88,41 @@ if(!$is_login){
                         ?>
                     </select>
                 </div>
-<!--            <th  style="vertical-align:top;">-->
-                <div id="manucalclass">
-                    <span for="selectclass">选择班级</span>
-                    <select id="selectclass" >
-                        <option  value="" selected>选择班级</option>
-                    </select>
-                </div>
-<!--    <button id="classok">确定</button>-->
-    <input class="button_one white" style="font-size:10px;border-radius:10px;height:35px;width:80px;font-size:18px;"  type="button" id="classok"  value="确定"/>
-    <span id="classlab"></span>
-<!--            <th style="vertical-align:top;">-->
-                <div id="nucall-num">
-                    <span for="selectnum">点名人数：</span>
-                    <input type="text"  style="display:inline-block;width:150px;"id="selectnum" name="callnum" placeholder="输入点名人数">
-                </div>
-    </div>
-</center>
 
-<!--    <button id="btn1">开始点名</button>-->
-<center>
-<input class="button_one white" style="font-size:20px;border-radius:20px;height:45px;width:150px;font-size:18px;"  type="button" id="btn1" value="开始点名"/>
-</center>
+            </th>
+
+            <th  style="vertical-align:top;">
+
+                <div>
+                    <label for="selectclass">选择班级：</label>
+                    <select id="selectclass" >
+                        <option  value="" selected></option>
+                    </select>
+
+                    <button id="classok">确定</button>
+                    <br>
+                    <label id="classlab"></label>
+                </div>
+
+            </th>
+
+            <th style="vertical-align:top;">
+
+                <div>
+                    <label for="selectnum">点名人数：</label>
+                    <input type="text"  style="display:inline-block;width:100px;"id="selectnum" name="callnum" placeholder="点名人数">
+                </div>
+
+            </th>
+
+        </tr>
+
+    </table>
+    <br>
+    <button id="btn1">开始点名</button>
+
 <div id="hidetrangle" class="trangle">
+
     <div id="numth">
         <h2>第<span id="tranglenum"
             style="display:inline-block;width:50px;border:none;text-align:center;font-size: 1.0em; margin: .75em 0;" name="num"  disabled>1</span>个</h2>
@@ -210,12 +177,12 @@ if(!$is_login){
                 $("#classlab").html("");
                 if("" == courseName){
                     $("#selectclass").empty();
-                    $("#selectclass").append("<option value='' selected>选择课程</option>");
+                    $("#selectclass").append("<option value='' selected></option>");
                 }else{
 
                     $.post("phpData/return_class.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>},function(data){
                         $("#selectclass").empty();
-                        $("#selectclass").append("<option value='' selected>选择课程</option>");
+                        $("#selectclass").append("<option value='' selected></option>");
                         $("#selectclass").append(data);
                     });
 
@@ -333,7 +300,9 @@ if(!$is_login){
                 }
             });
 
+
         });
+
     </script>
 </body>
 </html>
