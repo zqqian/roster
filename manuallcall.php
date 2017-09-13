@@ -96,9 +96,13 @@ if(!$is_login){
     #btn1{
         margin: 0 auto;
     }
-    #submit3 th button{
+    #submit3 th input[type='button']{
         width: 70px;
         margin: 10px;
+    }
+
+    input[type='text'][disabled]{color: gray;
+        background: rgba(128, 128, 128, 0.32);
     }
 
     button[disabled][required]:focus {
@@ -110,9 +114,7 @@ if(!$is_login){
         color: rgba(128, 128, 128, 0.32);
     }
     input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
-    input[type='text'][disabled]{color: gray;
-        background: rgba(128, 128, 128, 0.32);
-    }
+
 
     button[type='button'][disabled]:active {
         -webkit-transition: none;
@@ -120,6 +122,7 @@ if(!$is_login){
         -ms-transition: none;
         -o-transition: none;
         transition: none;
+        position:static;
 
     }
     input[type='button'][disabled]:active {
@@ -128,7 +131,7 @@ if(!$is_login){
         -ms-transition: none;
         -o-transition: none;
         transition: none;
-
+        position:static;
     }
 
 </style>
@@ -167,7 +170,7 @@ if(!$is_login){
                         <option  value="" selected></option>
                     </select>
 
-                    <button id="classok">确定</button>
+                    <input type="button" value="确定" id="classok"/>
                     <br>
 
                <!-- </div>-->
@@ -188,7 +191,7 @@ if(!$is_login){
     </table>
 <label id="classlab"></label>
     <br>
-    <button id="btn1">开始点名</button>
+    <input type="button" value="开始点名" id="btn1"/>
 
 <div id="hidetrangle" class="trangle">
 
@@ -210,16 +213,16 @@ if(!$is_login){
     <table id="submit3">
         <tr>
             <th>
-                <button id="last" >上一个</button>
+                <input type="button" value="上一个" id="last" />
             </th>
             <th>
-                <button id="haveto" >已到</button>
+                <input type="button" value="已到" id="haveto" >
             </th>
             <th>
-                <button id="skip" >跳过</button>
+                <input type="button" value="跳过" id="skip" >
             </th>
             <th>
-                <button id="absence">缺勤</button>
+                <input type="button" value="缺勤" id="absence">
             </th>
         </tr>
     </table>

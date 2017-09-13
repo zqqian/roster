@@ -35,6 +35,11 @@ idco_phone:产生验证码的界面，点击“结束”按钮后进入：
 
 
 
+如果手动点名的人数超了或者是非正整数，要警示。
+自动点名如果没有缺勤的，则利用flag显示无缺勤人员。
+
+
+
 ,classid_s:classid_s,courseName:courseName
 
 

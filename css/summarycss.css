@@ -39,3 +39,36 @@ input[type="button"]:active {
     position: relative;
     top: 6px;
 }
+
+input[type='text'][disabled]{color: gray;
+    background: rgba(128, 128, 128, 0.32);
+}
+
+button[disabled][required]:focus {
+    border-color: rgba(128, 128, 128, 0.32);
+}
+input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+
+button[disabled][required]:focus + label[placeholder]:before {
+    color: rgba(128, 128, 128, 0.32);
+}
+input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}
+
+
+button[type='button'][disabled]:active {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    position:static;
+
+}
+input[type='button'][disabled]:active {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    position:static;
+}
