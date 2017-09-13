@@ -17,7 +17,7 @@
     <style>
         /*为适应低版本的浏览器而设置的*/
         header, section, footer, aside, nav, main, article, figure {display: block;}
-        #index-log{background-color:white;}
+        #index-log{background-color:#000000;}
     </style>
 </head>
 <body>

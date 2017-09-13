@@ -425,7 +425,6 @@
                 data: {},
                 dataType: "json",
                 success: function (data) {
-//                    console.log(data);
                       for (var i = 0; i < data.length; i++) {
                             course_name_array[i] = data[i].coursename;
                             class_name_array[i]=new Array();
@@ -438,7 +437,7 @@
                         for (var i = 0; i < course_name_array.length; i++) {
                          appendstr +="<option value='"+course_name_array[i] +"'>"+course_name_array[i]+"</option>";
                         }
-                        alert(appendstr);
+//                        alert(appendstr);
                         $("#select_course_name").append(appendstr);
                 }
             })
@@ -450,14 +449,16 @@
             if ($("#select_class_name") != "") {
                 $("#select_class_name").html("");
             }
+            index=index-1;
             var classed_name="";
             var indexright="index";
+            alert( class_name_array[index].length);
             for (var i = 0; i < class_name_array[index].length; i++) {
+                alert(class_name_array[index][i]);
                 indexright+=i;
                  classed_name +=" <li>" +
                      class_name_array[index][i]+
                      "<input type='checkbox' name='box' value='"+class_name_array[index][i]+"' id='"+indexright+"'/> <label for='"+indexright+"'class='check-box'></label> </li>";
-                     alert(classed_name);
             }
             $("#select_class_name").append(classed_name);
             $("li").addClass("li-style");
