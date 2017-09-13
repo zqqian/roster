@@ -494,10 +494,22 @@
         else {
             alert("请求数据");
             alert(selected_course);
-            var str = '{'selected_course':"selected_course"}';
-            var obj = JSON.parse(str); // --> parse error
-            alert(str);
-            $.post("data-analyse.php",{selected_course: selected_course, select_class: select_class},function (data){
+            var select_xinxi='{"' ;
+            for(var i=0;i<select_class.length;i++)
+            {
+                var classnum="class"+i;
+                select_xinxi+=
+                    classnum +
+                    '":"' +
+                    select_class[i] +
+                    '","';
+            }
+            select_xinxi+='course":"' +
+                selected_course +
+                '"}';
+            var bToObj=JSON.parse( select_xinxi);
+//            console.log(bToObj);
+            $.post("data-analyse.php",{select:bToObj},function (data){
                     alert("数据请求成功");
                     console.log(data);
                     var numi = 0;

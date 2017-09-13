@@ -62,8 +62,8 @@ else{
 	$num = count($post2);
 	$kc=$post2['course']-1;
 	for( $ii=0;$ii<$num;$ii++){
-		
-		$bj=$post2[$ii]['class'];
+		$classnum="class"+$ii;
+		$bj=$post2[$classnum];
 	$sql = "SELECT * FROM `grade_statistics` WHERE `userId` = '$userid' AND `className` = \"$bj\" AND `courseName` = \"$kc\" LIMIT 0, 30 ";
 $result=mysqli_query($db,$sql);
 if($result){
