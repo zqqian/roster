@@ -15,6 +15,7 @@ if(!$is_login){
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7fbf5f629d80cf06cb9e0.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba13d3f629d815106db579.css' rel='stylesheet' type='text/css' />
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -108,6 +109,7 @@ if(!$is_login){
 
         #percent{
             width:100%;
+            min-width: 555px;
             height:80px;
             /*border:red solid 1px;*/
             margin:10px auto;
@@ -120,13 +122,17 @@ if(!$is_login){
 
         #anniu{
             width:100%;
+            min-width: 555px;
             height:50px;
             /*border:red solid 1px;*/
             margin:10px auto;
             line-height: 50px;
             display: none;
         }
-        #anniu input[type="button"]{display: inline;}
+        #anniu input[type="button"]{
+            display: inline;
+            width: 170px;
+        }
 
         #inputFen{
             width:100%;
@@ -222,9 +228,9 @@ if(!$is_login){
         <div id="show">
 
             <div id="percent">
-        <span class="ziti">平时成绩<span id="norPer">(30%)</span></span>
+        <span class="cssd2406ba6f1a492" style="font-size: 25px;">平时成绩<span id="norPer">(30%)</span></span>
         <input type="range" step="5" value="30" min="0" max="100" name="range" id="range"/>
-        <span class="ziti">期末成绩<span id="finPer">(70%)</span></span>
+        <span class="cssd2406ba6f1a492" style="font-size: 25px;">期末成绩<span id="finPer">(70%)</span></span>
         </div>
 
         <div id="anniu">
@@ -374,7 +380,7 @@ if(!$is_login){
                             $("#selectclass").empty();
                             $("#selectclass").append("<option value='' selected></option>");
                             $("#selectclass").append(data);
-                            console.log(data);
+                            console.log("return_class "+data);
                         });
                     }
                 });//end change
@@ -392,7 +398,7 @@ if(!$is_login){
                         //发送post请求得出期末与平时的比例和平时成绩中分布（名字和比例）
                         $.post("phpData/entryScore1.php",{courseName:courseName,userId:<?php echo $_SESSION['userid'];?>,classId:classid},function(data){
                             var json = JSON.parse(data);
-                            //console.log(json);
+                            console.log("entryScore1 "+json);
 
                             re_percentInf = json.percentInf;
 
@@ -454,11 +460,13 @@ if(!$is_login){
                     $("#entryNormal").attr('disabled', true);
                     $("#inputFen input:eq(0)").focus();
 
+                    alert($("#selectcourse").val()+" "+$("#selectclass").val());
                     $.post("phpData/entryScore3.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
                         function(data){
+
                             var json = JSON.parse(data);
 
-                            console.log(json);
+                            console.log("entrySorce3"+json);
                             re_stuInf = json;
                             re_stuInf_sum=re_stuInf.length-1;
 
@@ -719,7 +727,7 @@ if(!$is_login){
                                 $.post("phpData/entryScore2.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val(),field:find_field},
                                     function(data){
                                         var json = JSON.parse(data);
-                                       console.log(data);
+                                       console.log("entryScore2"+data);
                                         console.log(json);
                                         re_stuInf = json;
                                         re_stuInf_sum=re_stuInf.length-1;
