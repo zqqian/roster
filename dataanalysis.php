@@ -422,7 +422,7 @@
             $.ajax({
                 type: "POST",
                 url: "data-analyse.php",
-                data: {},
+                data: {select:""},
                 dataType: "json",
                 success: function (data) {
                       for (var i = 0; i < data.length; i++) {
@@ -508,7 +508,7 @@
             select_xinxi+='course":"' +
                 selected_course +
                 '"}';
-            var bToObj=JSON.parse( select_xinxi);
+            var bToObj=JSON.parse(select_xinxi);
 //            console.log(bToObj);
             $.post("data-analyse.php",{select:bToObj},function (data){
                     alert("数据请求成功");

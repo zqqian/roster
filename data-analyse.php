@@ -66,8 +66,8 @@ if($result){
 else{
 //	var_dump($post) ;
 
-	//$post2=json_decode($post);
-//	echo "post2:".$post2;
+//	$post2=json_decode($post);
+//	var_dump($post2);
 
 	//传过来数组总长度
 	$num = count($post);
