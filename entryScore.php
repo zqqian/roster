@@ -15,11 +15,7 @@ if(!$is_login){
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7fbf5f629d80cf06cb9e0.css' rel='stylesheet' type='text/css' />
-<<<<<<< HEAD
-    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b9fbf4f629d815106db569.css' rel='stylesheet' type='text/css' />
-=======
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba13d3f629d815106db579.css' rel='stylesheet' type='text/css' />
->>>>>>> dc223a543959d68f1cc1dc2e6aa23094461ddce1
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -202,7 +198,7 @@ if(!$is_login){
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}*/
 
         .ziti{
-            font-family:'LiDeBiao-Xing3d23a97b381a492';
+            font-family:'LiDeBiao-Xing3d1bd97d5c1a492';
             font-size: 25px;
         }
 
