@@ -460,7 +460,7 @@ if(!$is_login){
                     $("#entryNormal").attr('disabled', true);
                     $("#inputFen input:eq(0)").focus();
 
-                    alert($("#selectcourse").val()+" "+$("#selectclass").val());
+                    //alert($("#selectcourse").val()+" "+$("#selectclass").val());
                     $.post("phpData/entryScore3.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
                         function(data){
 
