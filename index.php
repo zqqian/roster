@@ -7,18 +7,76 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="keywords" content="云点名系统">
     <meta name="description" content="云点名系统">
-    <meta name="author" content="创意武装H5团队">
+    <meta name="author" con-tent="创意武装H5团队">
     <title>云点名系统主页</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba0697f629d815106db575.css' rel='stylesheet' type='text/css' />
     <style>
         /*为适应低版本的浏览器而设置的*/
         header, section, footer, aside, nav, main, article, figure {display: block;}
-        #index-log{background-color:#000000;}
+        #index-log{background-color:#0a0e0a}
+        h2 {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 3em;
+            letter-spacing: 0.1em;
+            color: #000000;
+            animation: rotate 2s ease-in-out alternate infinite;
+        }
+        h2:before {
+            content: attr(data-shadow);
+            color: transparent;
+            text-shadow: 0 0 15px #000000;
+            position: absolute;
+            z-index: -1;
+            margin: -0.1em 0 0 0;
+            animation: skew 2s ease-in-out alternate infinite;
+            transform-origin: bottom;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotateY(-10deg);
+                text-shadow:  1px -1px #000000,
+                2px -1px #8c8c8e,
+                3px -2px #8c8c8e,
+                4px -2px #8c8c8e,
+                5px -3px #8c8c8e,
+                6px -3px #8c8c8e;
+            }
+            to {
+                transform: rotateY(10deg);
+                text-shadow:  -1px -1px #000000,
+                -2px -1px #8c8c8e,
+                -3px -2px #8c8c8e,
+                -4px -2px #8c8c8e,
+                -5px -3px #8c8c8e,
+                -6px -3px #8c8c8e;
+            }
+        }
+        @keyframes skew {
+            from {
+                transform: scaleY(0.3) skewX(-15deg);
+            }
+            to {
+                transform: scaleY(0.3) skewX(-20deg);
+            }
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            font-size: 13px;
+            background:#000000;
+            padding: 5px 10px;
+            margin: 5px;
+        }
     </style>
+    <script src="js/prefixfree.min.js"></script>
+    <script src='js/jquery.js'></script>
 </head>
 <body>
 <div class="container" style="margin: 70px auto;">
@@ -118,7 +176,7 @@
                 </div>
             </nav>
             <div class="jumbotron well">
-                <h2>云点名 让点名更便捷</h2>
+                <h2 style="font-family:'LiDeBiao-Xing3d23d308da1a492';" >云点名 让点名更便捷</h2>
             </div>
 
             <div class="carousel slide" id="carousel-274985" style="margin:40px auto">
@@ -129,14 +187,14 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="item">
-                        <img alt="" src="img/1.jpg" />
+                        <img alt="" src="img/云点名2.jpg" />
                     </div>
                     <div class="item">
-                        <img alt="" src="img/2.jpg" />
+                        <img alt="" src="img/云点名1.jpg" />
 
                     </div>
                     <div class="item active">
-                        <img alt="" src="img/3.jpg" />
+                        <img alt="" src="img/云点名.jpg" />
                     </div>
                 </div>
                 <a class="left carousel-control" href="#carousel-274985" data-slide="prev">

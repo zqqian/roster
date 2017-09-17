@@ -14,7 +14,6 @@ if($post==""){
 $result=mysqli_query($db,$sql);
 $i=0;
 if($result){
-
 	while($row = mysqli_fetch_assoc($result)){
 		$courseid=$row['courseId'];
 		$sql = "SELECT * FROM `course` WHERE `courseId` = '$courseid' LIMIT 0, 30 ";
@@ -37,13 +36,9 @@ if($result){
 		$data[$i]['classname'][$j++]=$row3['className'];
 	
 	}
-	$i++;	
-		
+	$i++;
 	}
-
-
     }
-
     //var_dump($data);
 
     echo json_encode($data);

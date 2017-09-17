@@ -24,24 +24,30 @@ else*/
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
     <title>签到界面</title>
-
-</head>
-
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba3899f629d815106db5bc.css' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="style/button_one.css"></head>
+    <link rel="stylesheet" href="style/placeholder.css">
 <style>
-    .body
-    {
-        text-align:center;
-    }
+    #stuid{width:500px;margin-top:50px;}
+    #stuname{width:500px;}
+    #yes{margin-top:40px;}
 </style>
 
 <body class="body">
+<center>
 <div>
-    <h2>请输入学号与姓名</h2>
-    <P>学号:   <input type="text" id='stuid' value=''/></p>
-    <P>姓名:   <input type="text" id='stuname' value=''/></p>
-    <p><input type="button" id="yes" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>
+    <h2 style="font-family:'LiDeBiao-Xing3d24965ffd1a492';">请输入学号与姓名</h2>
 
+        <input required='' type='text' id='stuid'  value='' >
+        <label alt='请输入学号' placeholder='学号'></label>
+        <!--    <span>邮箱</span>-->
+        <!--    <input type="text" id="email" placeholder="请输入注册邮箱">-->
+        <input required='' type='text'  id='stuname' value='' >
+        <label alt='请输入姓名' placeholder='姓名'></label>
+<!--    <p><input style="font-family:'LiDeBiao-Xing3d24965ffd1a492';" type="button" id="yes" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>-->
 </div>
+    <input class="button_one white"  style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:25px;color:#000000;padding-left:15px; height:35px;width:80px;" type="button" id="yes" value="提交" />
+</center>
 </body>
 
 <script>

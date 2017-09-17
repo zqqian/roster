@@ -16,38 +16,55 @@ if(!$is_login){
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="js/utf.js"></script>
     <script type="text/javascript" src="js/jquery.qrcode.js"></script>
-
+    <link rel="stylesheet" href="style/button_one.css">
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba2a2cf629d815106db5a0.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba2acaf629d815106db5a1.css' rel='stylesheet' type='text/css' />
 </head>
 <style>
-    #twocode
-    {
-        text-align:center;
+
+    #selectcourse,#selectclass{
+        border-radius:20px;
+        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+        border: solid 2px #40AFFE;
+        /*很关键：将默认的select选择框样式清除*/
+        appearance:none;
+        -moz-appearance:none;
+        /*清除箭头*/
+        -webkit-appearance:none;
+        /*在选择框的最右侧中间显示小箭头图片*/
+        background: url("img/arrow.png") no-repeat scroll right center transparent;
+        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+        padding-right: 14px;
+        position: relative;
+        min-width: 200px;
+        width:auto;
+        background-color:#fffdfc;
+        font-size:15px;
+        margin: 0 auto;
+        padding: 10px 15px;
+        padding-left:30px;;
+        border-left: 5px solid deepskyblue;
+        cursor: pointer;
+        outline: none;
+        height:50px;
     }
-    .select2
-    {
-        float:left;
-        margin-left:42%;
+    #autocourse{
+    margin-top:50px;
     }
-    #tablel
-    {
-        border: 0;
-        vertical-align: top;
-       /* background-color: red;*/
-        width: 195%;
-        float: left;
-        margin-left: -240px;
-    }
-    #selectclass{
-        width:130px;
-    }
+    #autoclass{margin-top:15px;margin-left:80px;}
+    #classlab{display:block;margin-top:30px;margin-left:80px;}
+    #classok{dislay:block;}
+    #classsure{margin-left:100px;margin-top:35px;}
+    #twocode{width:500px;height:350px;border:1px solid #000000;margin-top:-20px;margin-left:100px;}
+    #auto-code{display:block;margin-top:-20px;}
+    #qrcodeCanvas{margin-top:15px;}
+    #twocodestart{margin-left:100px;}
 </style>
-
 <body>
-
 <div class="select2">
-
-                <div>
-                    <label for="selectcourse" >选择课程：</label>
+    <center>
+                <div id="autocourse">
+                    <label for="selectcourse" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择课程</label>
                     <select id="selectcourse" name="course">
                         <option  value="" selected></option>
                         <?php
@@ -63,38 +80,40 @@ if(!$is_login){
                         ?>
                     </select>
                 </div>
-
-                <div>
-                    <label for="selectclass">选择班级：</label>
+    </center>
+    <center>
+                <div id="autoclass">
+                    <label for="selectclass" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择班级</label>
                     <select id="selectclass" >
                         <option  value="" selected></option>
                     </select>
-
-                    <button id="classok">选定</button>
-                    <br>
-                    <label id="classlab"></label>
-                    </br>
-                    <button id="classsure"style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;float: left;margin-left: 94px;'>确定</button>
+                    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;width:80px;height:30px;" type="button" id="classok"  value="选定"/>
                 </div>
-
+    <span id="classlab"></span>
+    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;height:35px;width:80px;border-radius:10px;"  type="button" id="classsure"  value="确定"/>
+    </center>
 </div>
 </br>
 </br>
+<center>
 <div id="twocode">
     <br>
     <br>
     <center >
-         <h2>请扫描该二维码</h2>
+         <h2 style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:30px;"id="auto-code" >请扫描该二维码</h2>
          <div id="qrcodeCanvas"></div>
     </center>
     <br>
 
-    <h2 style="text-align: center;">已有<span id="havenumtc">0</span>人扫描</h2>
-    <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>
+    <span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:30px;">已有<span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:25px;"id="havenumtc">0</span>人扫描</span>
+<!--    <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>-->
 </div>
-
-<script>
-
+</center>
+<center>
+<input class="button_one white" style="font-family:'LiDeBiao-Xing3d246070301a492';border-radius:20px;font-size:20px;width:100px;height:40px;" type="button" id="twocodestart"  value="开始"/>
+</center>
+    <script>
+$("#twocodestart").hide();
     var courseName1="";
     var int=setInterval("clock()",10000);
     function clock()
@@ -167,11 +186,12 @@ if(!$is_login){
         });
 
         $("#classsure").click(function(){
+
             //alert("*"+$("#classlab").html()+"*");
             if($("#classlab").html().trim()=="")
                 alert("请选择课程与班级，之后按下选定！");
             else {
-
+                $("#twocodestart").show();
                 $.getJSON("phpData/auto_getId.php",{courseName:$("#selectcourse").val(),classid_s:classids,userId:<?php echo $_SESSION['userid'];?>},function(data){
                     console.log(data);
                     for(var i=0;i<data.length;i++){
