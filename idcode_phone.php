@@ -18,7 +18,7 @@ $userId=$_GET['userId'];
 //$courseName = iconv("gbk","utf-8",$courseName1);
 
 
-/*$dir = dirname(__FILE__);//找到当前脚本所在路径
+$dir = dirname(__FILE__);//找到当前脚本所在路径
 $fileuserid= $dir . "/validation/" . $userId."/".$userId;
 
 
@@ -28,7 +28,7 @@ if (!file_exists($fileuserid)){//判断文件夹是否存在，不存在的话�
         location.href='http://www.baidu.com';
     </script>";
 }
-else*/
+else
 ?>
 <html>
 <head>

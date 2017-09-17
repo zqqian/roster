@@ -22,6 +22,7 @@ $restuName=array();
 $reattendance=array();
 $restuId=array();
 $restu=array();
+$stuID=array();
 
 if(isset($userId)&&isset($ID)&&isset($myDate)) {
 
@@ -49,6 +50,7 @@ if(isset($userId)&&isset($ID)&&isset($myDate)) {
 
                 array_push($restuCode, $row3['stuCode']);
                 array_push($restuName, $row3['stuName']);
+                array_push($stuID,  $ID[$i]);
 
 
             }
@@ -62,12 +64,13 @@ if($count==0)
     echo 0;
 else {
     for ($i = 0; $i < $count; $i++) {
-        $restu[$i] = array(array_shift($reclass), array_shift($restuCode), array_shift($restuName), array_shift($reattendance), array_shift($restuId));
+        $restu[$i] = array(array_shift($reclass), array_shift($restuCode), array_shift($restuName), array_shift($reattendance), array_shift($restuId),array_shift($stuID));
         //0：入学年份+班级
         //1：学号
         //2：姓名
         //3：状态
         //4：stuId
+        //5：ID
     }
 //    echo $restu[0][0],$restu[0][1],$restu[0][2],$restu[0][3],$restu[0][4];
     echo json_encode($restu);
