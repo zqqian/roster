@@ -44,7 +44,7 @@ $myDate=$_GET['myDate'];
 <div class="form1">
          <p><h1 style="font-size:40px;font-family:'LiDeBiao-Xing3d38ab3e831a492';">验证码</h1> <img id="captcha_img" border='1' src='captcha.php?r=echo rand(); ?>' style="width:300px; height:90px" />
              </br>
-         <a href="javascript:void(0)" onclick="document.getElementById('captcha_img').src='captcha.php?r='+Math.random()" style="text-decoration: none;"><h3 style="font-family:'LiDeBiao-Xing3d38ab3e831a492';">换一个?</h3></a>
+         <a href="javascript:void(0)" onclick="document.getElementById('captcha_img').src='captcha.php?r='+Math.random()" style="text-decoration: none;"><h3 style="font-family:'LiDeBiao-Xing3d38ab3e831a492';">每10秒中更新一次</h3></a>
          </p>
          <h2 id="idcodeh2"; style="font-family:'LiDeBiao-Xing3d38ab3e831a492';"> 已有<span id="havecodenum" style="font-family:'LiDeBiao-Xing3d38ab3e831a492';">0</span>人签到</h2>
         <input type="button" value="结束"class="button_one white" id="finish" style='font-family:LiDeBiao-Xing3d38ab3e831a492;border-radius:20px;width:120px;height:40px;font-size:25px;padding: 6px 17px;color:#000000;font-family:'LiDeBiao-Xing3d38ab3e831a492'>

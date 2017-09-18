@@ -1,6 +1,10 @@
 <?php
-//require_once 'get_user_info.php';
-//?>
+require_once 'get_user_info.php';
+//用于检测是否登录，测试本页面时可暂时屏蔽以下几行php代码
+if(!$is_login){
+    echo "<script> alert('Please login...');parent.location.href='./index.php'; </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

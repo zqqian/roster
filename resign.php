@@ -51,7 +51,6 @@ $myDate=$_GET['myDate'];
         <div class="col-md-12 column">
             <table class="table table-bordered table-hover table-condensed" id="showTable" style="text-align: center;">
                 <thead class="ziti"><tr><th >班级</th><th>学号</th><th>姓名</th><th>状态</th></tr></thead><tbody>
-
             </table>
         </div>
 
@@ -84,7 +83,7 @@ $myDate=$_GET['myDate'];
             ,yes: function(index){
                 alert(arr);
                 $.getJSON("phpData/auto_updateresign.php",{temp:temp,arr:arr,rosterDate:'<?php echo $myDate ?>'},function(data){
-                        console.log(data);
+//                        console.log(data);
                         arr =eval(data);
 
                 });
@@ -95,49 +94,6 @@ $myDate=$_GET['myDate'];
             }
 
         });
-
-      /*  var temp = $(obj).parent().parent().prevAll().length+1;//DOM元素转化成jQuery对象
-        alert(temp);
-        var deleteTr =  $("#showTable tr:eq("+temp+")");
-        alert(deleteTr);
-
-        var reg=/\d+/;//.match(reg);
-        var trId = deleteTr.attr("id");
-
-
-            alert("11");
-            trId=trId.match(reg)[0];
-
-            layer.msg('确定该学生已到？', {
-                time: 0 //不自动关闭
-                ,icon: 3
-                ,skin: 'layer-ext-moon'
-                ,btn: ['确定','取消']
-                ,yes: function(index){
-
-
-                    deleteTr.remove();
-
-                    layer.close(index);
-                }
-
-            });*/
-
-//        var trId = this.attr("btn");
-//        alert(this);
-//       var btnvalue= btn.val();
- //       alert(btnvalue);
-//        alert(btnvalue=="缺勤");
-//            if(btnvalue=="缺勤")
-//            {
-//                btnvalue=="已到";
-//                this.("#btn").val(btnvalue);
-////                $(obj).(btnvalue);
-//
-//            }
-//            else if(btnvalue=="已到")
-//                btnvalue=="缺勤";
-//            else{}
     }
 
     $(function(){

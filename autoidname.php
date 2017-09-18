@@ -26,6 +26,7 @@ else*/
     <title>签到界面</title>
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba3899f629d815106db5bc.css' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="style/button_one.css"></head>
+    <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" href="style/placeholder.css">
 <style>
     #stuid{width:500px;margin-top:50px;}
@@ -80,23 +81,43 @@ else*/
             {
                  var inf = xmlhttp.responseText;//接受PHP的返回值 
                 console.log(inf);
-                 if(inf==0){ alert ('此时已无法签到，请找老师补签！');}
-                else  if(inf==1){ alert ('签到成功！'); }
-                else if(inf==2){alert ('姓名或者学号不正确！');}
-                else if(inf==3){alert ('请把信息填齐全！');}
-                else {alert ('0000000000000');}
+                 if(inf==0){
+//                     alert ('此时已无法签到，请找老师补签！');
+                     layer.alert('此时已无法签到，请找老师补签！', {
+                         icon: 5,
+                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                     })
+                 }
+                else  if(inf==1){
+                     layer.alert('签到成功！', {
+                         icon: 6,
+                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                     })
+                 }
+                else if(inf==2){
+//                     alert ('姓名或者学号不正确！');
+                     layer.alert('姓名或者学号不正确！', {
+                         icon: 5,
+                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                     })
+                 }
+                else if(inf==3){
+//                     alert ('请把信息填齐全！');
+                     layer.alert('请把信息填齐全！', {
+                         icon: 5,
+                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                     })
+                 }
+                else {}
                                      
 
 
             }
-            else { /*$("#checkUsername").text("正在检查");*/}
+            else {}
 
         };//接受返回值  
         xmlhttp.open("POST","phpData/auto_insertidname.php",true);//这个页面便是你要进行选择查询的PHP页面 
-       // xmlhttp.send({ID:"51_",uerId:18,stuCode:stuCode,stuName:stuName});
-
         xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-
         var formData = new FormData();
         formData.append('ID', '<?php echo $ID;?>');
         formData.append('userId',<?php echo $userId;?>);
@@ -117,8 +138,6 @@ else*/
      $.post("phpData/auto_insertidname.php",{ID:<?php /*echo $ID;*/?>,uerId:<?php /*echo $_SESSION['userid'];*/?>,stuCode:stuCode,stuName:stuName},function
      (data){
      console.log(data);
-
-
 
 
      });

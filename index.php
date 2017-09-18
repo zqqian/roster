@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style/button_one.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba0697f629d815106db575.css' rel='stylesheet' type='text/css' />
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59bfaf6ff629d80f5860547f.css' rel='stylesheet' type='text/css' />
     <style>
         /*为适应低版本的浏览器而设置的*/
         header, section, footer, aside, nav, main, article, figure {display: block;}
@@ -41,21 +42,21 @@
         @keyframes rotate {
             from {
                 transform: rotateY(-10deg);
-                text-shadow:  1px -1px #000000,
-                2px -1px #8c8c8e,
-                3px -2px #8c8c8e,
-                4px -2px #8c8c8e,
-                5px -3px #8c8c8e,
-                6px -3px #8c8c8e;
+                text-shadow:  1px -1px #92A1AC,
+                2px -1px #92A1AC,
+                3px -2px #92A1AC,
+                4px -2px #92A1AC,
+                5px -3px #92A1AC,
+                6px -3px #92A1AC;
             }
             to {
                 transform: rotateY(10deg);
                 text-shadow:  -1px -1px #000000,
-                -2px -1px #8c8c8e,
-                -3px -2px #8c8c8e,
-                -4px -2px #8c8c8e,
-                -5px -3px #8c8c8e,
-                -6px -3px #8c8c8e;
+                -2px -1px #92A1AC,
+                -3px -2px #92A1AC,
+                -4px -2px #92A1AC,
+                -5px -3px #92A1AC,
+                -6px -3px #92A1AC;
             }
         }
         @keyframes skew {
@@ -90,7 +91,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button> <a class="navbar-brand" href="index.php">云点名系统</a>
+                    </button> <a  style="font-family:'LiDeBiao-Xing3d39ee948f1a492';font-size:25px;" class="navbar-brand" href="index.php">云点名系统</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
