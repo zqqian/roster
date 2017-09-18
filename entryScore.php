@@ -197,6 +197,11 @@ if(!$is_login){
         }
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}*/
 
+        .ziti{
+            font-family:'LiDeBiao-Xing3d1bd97d5c1a492';
+            font-size: 25px;
+        }
+
     </style>
 
 </head>
@@ -433,7 +438,7 @@ if(!$is_login){
                     $("#entryNormal").attr('disabled', true);
                     $("#inputFen input:eq(0)").focus();
 
-                    alert($("#selectcourse").val()+" "+$("#selectclass").val());
+                    //alert($("#selectcourse").val()+" "+$("#selectclass").val());
                     $.post("phpData/entryScore3.php",{courseName:$("#selectcourse").val(),userId:<?php echo $_SESSION['userid'];?>,classId:$("#selectclass").val()},
                         function(data){
 
