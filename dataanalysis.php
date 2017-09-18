@@ -437,7 +437,6 @@
                         for (var i = 0; i < course_name_array.length; i++) {
                          appendstr +="<option value='"+course_name_array[i] +"'>"+course_name_array[i]+"</option>";
                         }
-//                        alert(appendstr);
                         $("#select_course_name").append(appendstr);
                 }
             })
@@ -468,11 +467,10 @@
     alert("显示数据前");
     function show(){
         alert("显示数据");
+        $("#canvasDiv").html();
         var selected_course =$('#select_course_name option:selected') .val();//选中的值
-//        alert(selected_course);
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
-//        alert(select_checkbox);
         for (var i = 0; i < select_checkbox.length; i++) {
             if (select_checkbox[i].checked == true) {
                 select_class[j] = select_checkbox[i].value;
@@ -480,11 +478,6 @@
                 j++;
             }
         }
-//        alert(select_class.length);
-//        for(var i=0;i<select_class.length;i++)
-//        {
-//            alert(select_class[i]);
-//        }
         if(selected_course=="选择课程")
         {
             alert("请选择课程！");
@@ -509,11 +502,10 @@
                 selected_course +
                 '"}';
             var bToObj=JSON.parse(select_xinxi);
-//            console.log(bToObj);
             $.post("data-analyse.php",{select:bToObj},function (data){
-                    alert("数据请求成功");
+                   alert("数据请求成功");
+                   data=JSON.parse(data);
                     console.log(data);
-                    data=JSON.parse(data);
                     var numi = 0;
                     var x = 0;
                     var centerx = 0.1;
@@ -561,11 +553,13 @@
                             ]
                         })
                     }
+                    Chart_score_section.hideLoading();
                     Chart_score_section.setOption({
                         series: series_score_section
                     });
+                    Chart_pass_rate.hideLoading();
                     Chart_pass_rate.setOption({series: series_pass_rate});
-                    Chart_pass_rate.showLoading();
+
                     //出勤率是折线图
                     var series_attendance_rate = [];
                     var xAxis_attendance_rate = [];
@@ -594,7 +588,7 @@
                         series: series_attendance_rate,
                         xAxis: xAxis_attendance_rate
                     })
-                    Chart_attendance_rate.showLoading();
+                    Chart_attendance_rate.hideLoading();
                 })
         }
     }
