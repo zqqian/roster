@@ -9,6 +9,7 @@
 </head>
 <script src="js/Echarts/echarts.js"></script>
 <script src="js/jquery-3.2.1.js"></script>
+<script src="js/layer/layer.js"></script>
 <link rel="stylesheet" href="style/button_one.css">
 <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b53c8df629d81184f0b959.css' rel='stylesheet' type='text/css' />
 <style type="text/css">
@@ -17,44 +18,31 @@
         padding: 0;
     }
     .up{
-        height:190px;width:100%;background-color:#4cbeff;
+        height:190px;width:100%;
     }
-    #select span{color:#fbf9ee;font-size:35px;}
-    #select{border-bottom:1px solid #fbf9ee;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;margin-left:20px;}
+    #select span{font-size:30px;}
+    #select{border-bottom:1px solid #92A1AC;width:100%;min-height:80px;height:auto;line-height:80px;text-align:center;margin-left:20px;}
     #class{float:left;min-height:80px;height:auto;text-align:center;}
-    #spand{position:absolute;color:#fffdfc;font-size:20px;float:left;width:10%;height:80px;margin-left:0px;text-align:center;
+    #spand{position:absolute;font-size:20px;float:left;width:20%;height:80px;margin-left:0px;text-align:center;
         white-space: normal !important;//正常，自动换行
         -webkit-line-clamp: auto;//auto表示自动换行，数字表示指定行数
         line-height:80px;}
-    #spand span{display:block;margin-top:20px;}
-    #select_class_name{position:absolute;float:left;height:80px;width:80%;margin-left:10%;text-align:center;line-height:80px;}
+    #spand span{font-size:26px;display:block;margin-top:20px;}
+    #select_class_name{position:absolute;float:left;height:80px;width:70%;margin-left:10%;text-align:center;line-height:80px;}
     #buttonsure{float:left;position:absolute;height:80px;width:10%;text-align:center;line-height:60px;margin-left:90%;}
     #verify-bu1{width:57px;height:30px;margin-top:25px;margin-left:2px;}
     #select_course_name{
-        border-radius:20px;
-        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-        border: solid 2px #40AFFE;
-        /*很关键：将默认的select选择框样式清除*/
-        appearance:none;
-        -moz-appearance:none;
-        /*清除箭头*/
-        -webkit-appearance:none;
-        /*在选择框的最右侧中间显示小箭头图片*/
-        background: url("img/arrow.png") no-repeat scroll right center transparent;
-        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-        padding-right: 14px;
+        border-radius:10px;
         position: relative;
         min-width: 200px;
         width:auto;
-        background-color:#fffdfc;
-        font-size:15px;
+        height:40px;
         margin: 0 auto;
-        padding: 10px 15px;
-        padding-left:30px;;
-        border-left: 5px solid deepskyblue;
+        padding: 0px;
+        background: #fff;
+        border-left: 5px solid grey;
         cursor: pointer;
         outline: none;
-        height:50px;
     }
     .li-style{list-style-type:none;display:inline;margin:4px;}
     @-moz-keyframes dothabottomcheck {
@@ -205,6 +193,8 @@
         animation: dothatopcheck 0.4s ease 0s forwards;
     }
     #select_course_name option{text-align:center;}
+    #score_section{margin-top:70px;text-align:center;}
+    #attendance_rate{margin-top:50px;text-align:center;}
 </style>
 </head>
 <body>
@@ -233,7 +223,7 @@
 <div class="down" id="canvasDiv">
     <!--画布-->
     <div id="score_section" style="width:700px;height:400px;"></div>
-    <div id="pass_rate"  style="width:700px;height:400px;"></div>
+<!--    <div id="pass_rate"  style="width:700px;height:400px;"></div>-->
     <div id="attendance_rate"  style="width:700px;height:400px;"></div>
 </div>
 <script type="text/javascript">
@@ -279,92 +269,6 @@
         var Chart_score_section = echarts.init(document.getElementById('score_section'));
         Chart_score_section.setOption(option_score_section);
         Chart_score_section.showLoading();
-        //及格率
-        var labelTop = {
-            normal: {
-                label: {
-                    show: true,
-                    position: 'center',
-                    formatter: '{b}',
-                    textStyle: {
-                        baseline: 'bottom'
-                    }
-                },
-                labelLine: {
-                    show: true
-                }
-            }
-        };
-        var labelFromatter = {
-            normal: {
-                label: {
-
-                    formatter: function (params) {
-                        return 100 - params.value + '%'
-                    },
-                    textStyle: {
-                        baseline: 'top'
-                    }
-                }
-            },
-        }
-        var labelBottom = {
-            normal: {
-                color: '#ccc',
-                label: {
-                    show: true,
-                    position: 'center'
-                },
-                labelLine: {
-                    show: true
-                }
-            },
-            emphasis: {
-                color: 'rgba(0,0,0,0)'
-            }
-        };
-        var radius = [40, 55];
-        var option_pass_rate = {
-            title: {
-                text: '班级及格率',
-                subtext: '本学期',
-                x: 'center'
-            },
-            toolbox: {
-                show: true,
-                feature: {
-                    dataView: {show: true, readOnly: false},
-                    magicType: {
-                        show: true,
-                        type: ['pie', 'funnel'],
-                        option: {
-                            funnel: {
-                                width: '20%',
-                                height: '30%',
-                                itemStyle: {
-                                    normal: {
-                                        label: {
-                                            formatter: function (params) {
-                                                return 'other\n' + params.value + '%\n'
-                                            },
-                                            textStyle: {
-                                                baseline: 'middle'
-                                            }
-                                        }
-                                    },
-                                }
-                            }
-                        }
-                    },
-                    restore: {show: true},
-                    saveAsImage: {show: true}
-                }
-            },
-            series: []
-        };
-        var Chart_pass_rate = echarts.init(document.getElementById('pass_rate'));
-        Chart_pass_rate.setOption(option_pass_rate);
-        Chart_pass_rate.showLoading();    //数据加载完之前先显示一段简单的loading动画
         //出勤率
         var option_attendance_rate = {
             title: {
@@ -397,7 +301,7 @@
                 {
                     type: 'value',
                     axisLabel: {
-                        formatter: '{value} °C'
+                        formatter: '{value}'
                     }
                 }
             ],
@@ -416,9 +320,9 @@
         var course_name = "course-name";
         var course_name_array = new Array();
         var class_name_array = new Array();
-        alert("请求前");
+//        alert("请求前");
         $(document).ready(function() {
-            alert("请求后");
+//            alert("请求后");
             $.ajax({
                 type: "POST",
                 url: "data-analyse.php",
@@ -433,10 +337,11 @@
                             }
                         }
                     var appendstr="";
-                       $("#select_course_name").append("<option value=\"-1\">选择课程</option>");
+                       $("#select_course_name").append("<option value='选择课程'>选择课程</option>");
                         for (var i = 0; i < course_name_array.length; i++) {
                          appendstr +="<option value='"+course_name_array[i] +"'>"+course_name_array[i]+"</option>";
                         }
+//                        alert(appendstr);
                         $("#select_course_name").append(appendstr);
                 }
             })
@@ -451,9 +356,7 @@
             index=index-1;
             var classed_name="";
             var indexright="index";
-            alert( class_name_array[index].length);
             for (var i = 0; i < class_name_array[index].length; i++) {
-                alert(class_name_array[index][i]);
                 indexright+=i;
                  classed_name +=" <li>" +
                      class_name_array[index][i]+
@@ -464,30 +367,34 @@
         }
     }
     var select_class = new Array();
-    alert("显示数据前");
     function show(){
-        alert("显示数据");
-        $("#canvasDiv").html();
         var selected_course =$('#select_course_name option:selected') .val();//选中的值
         var j = 0;
         var select_checkbox = document.getElementsByName("box");
         for (var i = 0; i < select_checkbox.length; i++) {
             if (select_checkbox[i].checked == true) {
                 select_class[j] = select_checkbox[i].value;
-                alert(select_class[j]);
                 j++;
             }
         }
         if(selected_course=="选择课程")
         {
-            alert("请选择课程！");
+//            alert("请选择课程！");
+            layer.alert('请选择课程！', {
+                icon: 5,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            })
         }
-        else if(select_class.length< 0) {
-            alert("请选择班级！");
+        else if(select_class.length==0) {
+//            alert("请选择班级！");
+            layer.alert('请选择班级！', {
+                icon: 5,
+                skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            })
         }
         else {
-            alert("请求数据");
-            alert(selected_course);
+//            alert("请求数据");
+//            alert(selected_course);
             var select_xinxi='{"' ;
             for(var i=0;i<select_class.length;i++)
             {
@@ -503,26 +410,10 @@
                 '"}';
             var bToObj=JSON.parse(select_xinxi);
             $.post("data-analyse.php",{select:bToObj},function (data){
-                   alert("数据请求成功");
-                   data=JSON.parse(data);
-                    console.log(data);
-                    var numi = 0;
-                    var x = 0;
-                    var centerx = 0.1;
-                    var centery = 0.3;
-                    var positiony = 0;
+                    data=JSON.parse(data);
                     var series_score_section = [];
                     var series_pass_rate = [];
                     for (var i = 0; i < data.length; i++) {
-                        numi++;
-                        centerx += 0.2;
-                        x += 0.2;
-                        if (numi % 6 == 0) {
-                            centery += 0.4;
-                            positiony = 0.55;
-                            x = 0;
-                            centerx = 0.1;
-                        }
                         series_score_section.push({
                             name: select_class[i],
                             data: data[i].score_percent,
@@ -539,28 +430,40 @@
                                 ]
                             }
                         });
-
-                        series_pass_rate.push({
-                            type: 'pie',
-                            radius: radius,
-                            itemStyle: labelFromatter,
-                            center: [centerx, centery],
-                            x: x, // for funnel
-                            y: positiony,
-                            data: [
-                                {name: 'other', value: 100 - data[i].score_pass_rate, itemStyle: labelBottom},
-                                {name: select_class[i], value: data[i].score_pass_rate, itemStyle: labelTop}
-                            ]
-                        })
+//                        series_pass_rate.push({
+//                            name: select_class[i],
+//                            data: data[i].score_pass_rate,
+//                            type: 'bar',
+//                            markPoint: {
+//                                data: [
+//                                    {type: 'max', name: '最大值'},
+//                                    {type: 'min', name: '最小值'}
+//                                ]
+//                            },
+//                            markLine: {
+//                                data: [
+//                                    {type: 'average', name: '平均值'}
+//                                ]
+//                            }
+//                        })
+//                        series_pass_rate.push({
+//                            type: 'pie',
+//                            radius: radius,
+//                            itemStyle: labelFromatter,
+//                            center: [centerx, centery],
+//                            x: x, // for funnel
+//                            y: positiony,
+//                            data: [
+//                                {name: 'other', value:(100-Number(data[i].score_pass_rate)).toString(), itemStyle: labelBottom},
+//                                {name: select_class[i], value:data[i].score_pass_rate, itemStyle: labelTop}
+//                            ]
+//                        })
                     }
                     Chart_score_section.hideLoading();
                     Chart_score_section.setOption({
                         series: series_score_section
                     });
-                    Chart_pass_rate.hideLoading();
-                    Chart_pass_rate.setOption({series: series_pass_rate});
-
-                    //出勤率是折线图
+//                    出勤率是折线图
                     var series_attendance_rate = [];
                     var xAxis_attendance_rate = [];
                     for (var i = 0; i < data.length; i++) {
@@ -580,29 +483,47 @@
                                 ]
                             }
                         })
+//                        series_pass_rate.push({
+//                            name: select_class[i],
+//                            data: data[i].score_pass_rate ,
+//                            type: 'bar',
+//                            markPoint: {
+//                                data: [
+//                                    {type: 'max', name: '最大值'},
+//                                    {type: 'min', name: '最小值'}
+//                                ]
+//                            },
+//                            markLine: {
+//                                data: [
+//                                    {type: 'average', name: '平均值'}
+//                                ]
+//                            }
+//                        })
                     }
                     xAxis_attendance_rate.push({
                         data: data[0].attendance_date,
                     })
+                    Chart_attendance_rate.hideLoading();
                     Chart_attendance_rate.setOption({
                         series: series_attendance_rate,
                         xAxis: xAxis_attendance_rate
                     })
-                    Chart_attendance_rate.hideLoading();
+//                Chart_pass_rate.hideLoading();
+//                Chart_pass_rate.setOption({series: series_pass_rate,  xAxis:select_class});
                 })
         }
     }
    //    图表随容器自适应
-    var worldMapContainer1 = document.getElementById('score_section');
-    var worldMapContainer2 = document.getElementById('pass_rate');
-    var worldMapContainer3 = document.getElementById('attendance_rate');
-    var Chart_score_section = echarts.init(worldMapContainer1);
-    var Chart_pass_rate = echarts.init(worldMapContainer2);
-    var Chart_attendance_rate = echarts.init(worldMapContainer3);
-    window.onresize = function () {
-        Chart_attendance_rate.resize();
-        Chart_pass_rate.resize();
-        Chart_score_section.resize();
-    }
+//    var worldMapContainer1 = document.getElementById('score_section');
+//    var worldMapContainer2 = document.getElementById('pass_rate');
+//    var worldMapContainer3 = document.getElementById('attendance_rate');
+//    var Chart_score_section = echarts.init(worldMapContainer1);
+//    var Chart_pass_rate = echarts.init(worldMapContainer2);
+//    var Chart_attendance_rate = echarts.init(worldMapContainer3);
+//    window.onresize = function () {
+//        Chart_attendance_rate.resize();
+//        Chart_pass_rate.resize();
+//        Chart_score_section.resize();
+//    }
 </script>
 </html>
