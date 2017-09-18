@@ -88,7 +88,7 @@ AND className in (";//'计算机科学与技术1','计算机科学与技术2'
 			$all .= "'".$bj."',";
 //		echo $all."<br>";
 	}
-echo $all."<br>";
+//echo $all."<br>";
 
 	$all= $sql.$all.")";
 //	echo "<br>".$all;

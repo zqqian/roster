@@ -513,6 +513,7 @@
             $.post("data-analyse.php",{select:bToObj},function (data){
                     alert("数据请求成功");
                     console.log(data);
+                    data=JSON.parse(data);
                     var numi = 0;
                     var x = 0;
                     var centerx = 0.1;
