@@ -52,12 +52,13 @@ if(!$is_login){
             font-size: 25px;
             font-family:'LiDeBiao-Xing3d1be5bb441a492';
         }
+        .col-md-12{margin-top:50px;}
     </style>
 </head>
 
 <body>
 <form  id="entryForm" name="entryForm" >
-    <label for="showClass" class="font">选择班级：</label><select id="showClass" name="showClass" style="width: 200px;">
+    <label for="showClass" class="font">选择班级</label><select id="showClass" name="showClass" style="width: 200px;">
         <option value="" selected></option>
         <?php
         $userid = $_SESSION['userid'];
@@ -71,11 +72,11 @@ if(!$is_login){
 
     </select>
     <br>
-    <label for="showCourse" class="font">选择课程：</label><select  id="showCourse" name="showCourse" style="width: 200px;">
+    <label for="showCourse" class="font">选择课程</label><select  id="showCourse" name="showCourse" style="width: 200px;">
         <option value="" selected></option>
     </select> <br>
 
-    <label for="check" class="font">查询项目：</label><select  id="check" name="check" style="width: 200px;">
+    <label for="check" class="font">查询项目</label><select  id="check" name="check" style="width: 200px;">
         <option value="" selected></option>
 
     </select> <br>

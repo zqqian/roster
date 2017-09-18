@@ -37,7 +37,7 @@ if(!$is_login){
             width:450px;
             height:150px;
             line-height: 150px;
-            border: orangered solid 5px;
+            border:#777778 solid 5px;
             margin: 0 auto;
             border-radius: 10px;
         }
@@ -66,7 +66,7 @@ if(!$is_login){
         input[type='text']{
             width:240px;
         }
-        img{width: 300px;}
+        img{width: 300px;border:1px solid #92A1AC;}
 	</style>
 </head>
 <script>
@@ -125,7 +125,7 @@ if(!$is_login){
             <tr>
                 <td><span class="cssd1b84334f1a492" style="font-size: 25px;">文件上传说明：</span></td>
                 <td>
-                        <span class="cssd1b84334f1a492" style="color: red;font-size: 25px;">*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件</span>
+                        <span class="cssd1b84334f1a492" style="color:#777777;font-size: 25px;">*上传文件必须是一个扩展名为.xls或.xlsx的Excel文件</span>
                 </td>
             </tr>
 
@@ -140,7 +140,7 @@ if(!$is_login){
                 <td colspan="2"><!--拖拽框-->
                     <center>
                         <div class="box" id="target_box" >
-                        <span class="cssd1b84334f1a492" style="font-size: 25px;color: red;">拖拽文件到此区自动上传</span>
+                        <span class="cssd1b84334f1a492" style="font-size: 25px;color:#777777;">拖拽文件到此区自动上传</span>
                         </div>
                     </center>
                 </td>

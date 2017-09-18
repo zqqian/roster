@@ -31,12 +31,13 @@ else*/
     #stuid{width:500px;margin-top:50px;}
     #stuname{width:500px;}
     #yes{margin-top:40px;}
+    #autospan{display:block;margin-top:90px;}
 </style>
 
 <body class="body">
 <center>
 <div>
-    <h2 style="font-family:'LiDeBiao-Xing3d24965ffd1a492';">请输入学号与姓名</h2>
+    <span id="autospan" style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:30px;">请输入学号与姓名</span>
 
         <input required='' type='text' id='stuid'  value='' >
         <label alt='请输入学号' placeholder='学号'></label>

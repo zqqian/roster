@@ -10,21 +10,16 @@ if(!$is_login){
 <head>
     <meta charset="UTF-8">
     <title>成绩录入</title>
-
     <link rel="stylesheet" type="text/css" href="css/summarycss.css">
-
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7fbf5f629d80cf06cb9e0.css' rel='stylesheet' type='text/css' />
-<<<<<<< HEAD
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b9fbf4f629d815106db569.css' rel='stylesheet' type='text/css' />
-=======
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba13d3f629d815106db579.css' rel='stylesheet' type='text/css' />
->>>>>>> dc223a543959d68f1cc1dc2e6aa23094461ddce1
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/layer/layer.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/layer/layer.js"></script><link rel="stylesheet" href="style/placeholder.css">
-
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59bf9768f629d80f58605471.css' rel='stylesheet' type='text/css' />
     <style>
         body{text-align: center;}
         select{
@@ -187,8 +182,9 @@ if(!$is_login){
         #attendance{
             margin:0px;
         }
-
-
+        #entrycourse{margin-top:50px;}
+        #entryclass{margin-top:-5px;}
+        #normal{margin-top:80px;}
 
 
     /*    button[disabled][required]:focus {
@@ -201,17 +197,13 @@ if(!$is_login){
         }
         input[type='button'][disabled]{color:rgba(128, 128, 128, 0.32);}*/
 
-        .ziti{
-            font-family:'LiDeBiao-Xing3d23a97b381a492';
-            font-size: 25px;
-        }
-
     </style>
 
 </head>
 
 <body>
-        <label for="selectcourse" class="ziti">选择课程：</label>
+<div id="entrycourse">
+        <label  for="selectcourse"  style="font-family:'LiDeBiao-Xing3d3990b88b1a492';font-size:30px;">选择课程</label>
         <select id="selectcourse" name="course">
             <option  value="" selected></option>
             <?php
@@ -222,12 +214,14 @@ if(!$is_login){
             }
             ?>
         </select>
+</div>
+<div id="entryclass">
         <br>
-        <label  class="ziti" for="selectclass">选择班级：</label>
+        <label  for="selectclass" style="font-family:'LiDeBiao-Xing3d3990b88b1a492';font-size:30px;">选择班级</label>
         <select id="selectclass" >
             <option  value="" selected></option>
         </select>
-
+</div>
 
         <div id="show">
 
@@ -241,31 +235,6 @@ if(!$is_login){
         <input type="button" value="录入平时成绩" id="entryNormal" name="entryNormal" style="margin-right: 30px;"/>
         <input type="button" value="录入期末成绩" id="entryFinal" name="entryFinal"/>
         </div>
-
-        <!--<div id="normal" class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-            <button id="normalAdd" title="添加考核项目">+</button>
-
-                <table  class="table table-bordered table-hover table-condensed" id="table">
-                    <tr>
-                        <th>是否勾选</th>
-                        <th>考核项目名称</th>
-                        <th colspan="2">平时成绩占比（%）</th>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="check" disabled/></td>
-                        <td><input type="text" name="field" value="出勤率" disabled/></td>
-                        <td><input type="text" name="percent" id="attendance" value=""/></td>
-
-                    </tr>
-                </table>
-                </div>
-            </div>
-            <input type="button" id="yes" value="保存并开始录入"/>
-
-        </div>-->
-
             <div  id="normal" class="container">
                 <div class="row clearfix">
                     <div class="col-md-12 column">

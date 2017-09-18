@@ -41,7 +41,7 @@ $myDate=$_GET['myDate'];
 </head>
 
 <body style="text-align: center;">
-<span class="ziti">补签界面</span>
+<span class="ziti" style="font-size:35px;">补签界面</span>
 </br>
 </br>
 

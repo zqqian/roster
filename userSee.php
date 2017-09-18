@@ -17,7 +17,7 @@ if(!$is_login){
     <title>云点名用户界面</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59bfaf6ff629d80f5860547f.css' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <style>
         /*为适应低版本的浏览器而设置的*/
@@ -69,7 +69,7 @@ if(!$is_login){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="userSee.php">云点名系统</a>
+                    <a  style="font-family:'LiDeBiao-Xing3d39ee948f1a492';font-size:20px;"class="navbar-brand" href="userSee.php">云点名系统</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
@@ -189,7 +189,7 @@ if(!$is_login){
 
                     </div>
                      <div class="col-md-6 column" id="right">
-                         <iframe src="https://www.runoob.com/" name="rightShow" frameborder="no" align="center" seamless>
+                         <iframe src="helpfile.php" name="rightShow" frameborder="no" align="center" seamless>
                              <p>您的浏览器不支持iframe 标签。</p>
                          </iframe>
                      </div>

@@ -23,30 +23,17 @@ if(!$is_login){
 <style>
 
     #selectcourse,#selectclass{
-        border-radius:20px;
-        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-        border: solid 2px #40AFFE;
-        /*很关键：将默认的select选择框样式清除*/
-        appearance:none;
-        -moz-appearance:none;
-        /*清除箭头*/
-        -webkit-appearance:none;
-        /*在选择框的最右侧中间显示小箭头图片*/
-        background: url("img/arrow.png") no-repeat scroll right center transparent;
-        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-        padding-right: 14px;
         position: relative;
+        border-radius: 10px;
         min-width: 200px;
         width:auto;
-        background-color:#fffdfc;
-        font-size:15px;
+        height:40px;
         margin: 0 auto;
-        padding: 10px 15px;
-        padding-left:30px;;
-        border-left: 5px solid deepskyblue;
+        padding: 0px;
+        background: #fff;
+        border-left: 5px solid grey;
         cursor: pointer;
         outline: none;
-        height:50px;
     }
     #autocourse{
     margin-top:50px;

@@ -13,22 +13,22 @@ if(!$is_login){
     <title>点名信息查询</title>
     <script src="js/jquery-3.2.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet"  type="text/css" href="http://">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b53de8f629d81184f0b95c.css' rel='stylesheet' type='text/css' />
-</head>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59bf958cf629d80f5860546d.css' rel='stylesheet' type='text/css' /></head>
 <style>
-    html,body{margin:0px;padding:0px;}
+    html,body{margin-top:0px;padding-top:0px;}
     #course_name span{color:#000000;font-size:35px;}
-    #course_name{background-color:#4cbeff;border:1px solid #fffdfc;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;}
+    #course_name{border:1px solid #fffdfc;width:100%;min-height:100px;height:auto;line-height:100px;text-align:center;}
     /*#select_course{height:25px;text-align:center;margin-top:20px;margin-left:160px;margin-bottom: 20px;}*/
-    #menuselect{border-bottom:1px solid #fffdfc;width:100%;height:60px;margin: 0px;background-color:#000000;
-        text-align:center;padding:0px;line-height:85px;}
-    #menuselect ul{border-bottom:1px solid #fffdfc;background-color:#4cbeff;margin:0px;display:block;padding:0px;}
+    #menuselect{border-bottom:1px solid #fffdfc;width:100%;height:20px;margin: 0px;color:#92A1AC; text-align:center;padding:0px;line-height:20px;}
+    #menuselect ul{border-bottom:1px solid #fffdfc;margin-top:-10px;display:block;padding:0px;}
     .showa{font-size: 20px;color: white;}
-    ul li{list-style-type:none;display:inline;margin:7%;}
+    ul li{list-style-type:none;display:inline;margin:4%;}
     #menuselect a{color:#000000;}
-    #menusure{display:block;width:100%;height:80px;border-top:1px solid #fffdfc;background-color:#4cbeff;text-align:center;line-height:80px;}
+    #menusure{display:block;width:100%;height:70px;border-top:1px solid #fffdfc;text-align:center;line-height:70px;}
     #menusure span{font-size:25px;font-family:'LiDeBiao-Xing3d11231b241a492';}
     /*#select-class{margin:10px;}*/
     th,tr{text-align: center;}
@@ -42,36 +42,23 @@ if(!$is_login){
         margin-top:30px;
     }
     #select-class,#select_course{
-        border-radius:20px;
-        /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
-        border: solid 2px #40AFFE;
-        /*很关键：将默认的select选择框样式清除*/
-        /*appearance:none;*/
-        /*-moz-appearance:none;*/
-        /*清除箭头*/
-        /*-webkit-appearance:none;*/
-        /*在选择框的最右侧中间显示小箭头图片*/
-        /*background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;*/
-        /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-        padding-right: 14px;
+        border-radius:10px;
         position: relative;
         min-width: 200px;
         width:auto;
-        background-color:#fffdfc;
-        font-size:15px;
+        height:40px;
         margin: 0 auto;
-        padding: 10px 15px;
-        padding-left:30px;
-        border-left: 5px solid deepskyblue;
+        padding: 0px;
+        background: #fff;
+        border-left: 5px solid grey;
         cursor: pointer;
         outline: none;
-        height:50px;
-        font-size:17px;
     }
+    #showdata{margin-top:60px;}
 </style>
 <body>
 <div id="course_name">
-    <span style="font-family:'LiDeBiao-Xing3d11231b241a492';" >选择课程</span>
+    <span style="font-family:'LiDeBiao-Xing3d11231b241a492';font-size:30px;" >选择课程</span>
     <select id="select_course" onChange = "getcourse()">
         <option value="请选择" selected>选择课程</option>
         <?php
@@ -86,12 +73,12 @@ if(!$is_login){
 </div>
 <div id="menuselect">
     <ul>
-        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';" href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
-        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';"  href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
+        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';color:grey" href="#" class="showa" id="showaone" onclick="searchdate()">按日期查询</a></li>
+        <li> <a style="font-family:'LiDeBiao-Xing3d11231b241a492';color:grey"  href="#" class="showa" id="showatwo" onclick="searchclass()">按班级查询</a></li>
     </ul>
 </div>
 <div id="menusure">
-    <span style="font-family:'LiDeBiao-Xing3d11231b241a492';" >选择查询方式</span>
+    <span style="font-family:'LiDeBiao-Xing3d398973181a492';font-size:30px;" >选择班级</span>
     <select id="select-class" onChange = "attendance_data()">
         <!--        <option>国贸</option>-->
         <!--        <option>计科</option>-->

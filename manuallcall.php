@@ -12,6 +12,7 @@ if(!$is_login){
     <meta charset="utf-8">
     <title>手动点名</title>
     <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+    <script src="js/layer/layer.js"></script>
     <link rel="stylesheet" href="style/placeholder.css">
     <!--//加文本框的样式-->
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59b7f8fdf629d80cf06cb9df.css' rel='stylesheet' type='text/css' />
@@ -46,7 +47,7 @@ if(!$is_login){
         border-radius: 10px;
         margin-left: 35%;
         margin-top: 50px;
-        border: 1px solid #50ffe4;
+        border: 1px solid #92A1AC;
        /* background-color: antiquewhite;*/
     }
     #numth
@@ -133,17 +134,18 @@ if(!$is_login){
         transition: none;
         position:static;
     }
-
+    #manucourse{margin-top:50px;margin-left:-70px;}
+    #manuclass{margin-top:30px;}
+    #manunum{margin-top:30px;margin-left:-50px;}
+    #hidetrangle{margin-top:40px;margin-left:200px;}
 </style>
 <body class="body">
 
 <table id="tablel" >
-
-        <tr>
-
-            <th style="vertical-align:top;">
                <!-- <div>-->
-                    <label class="cssd1bcde6dd1a492" for="selectcourse" >选择课程：</label>
+                <center>
+                    <div id="manucourse">
+                    <label class="cssd1bcde6dd1a492" for="selectcourse" style="font-size:25px;">选择课程</label>
                     <select id="selectcourse" name="course">
                         <option  value="" selected></option>
                         <?php
@@ -158,40 +160,28 @@ if(!$is_login){
                         }
                         ?>
                     </select>
+                    </div>
+                </center>
                <!-- </div>-->
 
-            </th>
-
-            <th  style="vertical-align:top;">
-
                <!-- <div>-->
-                    <label  class="cssd1bcde6dd1a492" for="selectclass">选择班级：</label>
+    <div id="manuclass">
+                    <label  class="cssd1bcde6dd1a492" for="selectclass" style="font-size:25px;">选择班级</label>
                     <select id="selectclass" >
                         <option  value="" selected></option>
                     </select>
 
                     <input type="button" value="确定" id="classok"/>
-                    <br>
-
+    </div>
                <!-- </div>-->
-
-            </th>
-
-            <th style="vertical-align:top;">
-
-              <!--  <div>-->
-                    <label class="cssd1bcde6dd1a492" for="selectnum">点名人数：</label>
+       <div id="manunum">
+                    <label class="cssd1bcde6dd1a492" for="selectnum"style="font-size:20px;">点名人数：</label>
                     <input type="text"  style="display:inline-block;width:100px;"id="selectnum" name="callnum" placeholder="点名人数">
-               <!-- </div>-->
-
-            </th>
-
-        </tr>
-
+       </div>
     </table>
 <label id="classlab"></label>
     <br>
-    <input type="button" value="开始点名" id="btn1"/>
+    <input type="button" value="开始点名" id="btn1" style="height:35px;width:150px;"/>
 
 <div id="hidetrangle" class="trangle">
 
@@ -276,10 +266,29 @@ if(!$is_login){
                 var classs=$("#classlab").text();
               var course=$("#selectcourse").val();
               var number=$("#selectnum").val();
-                if(""==course) alert("请选择课程");
-                else  if(""==classs) alert("请选择班级");
-                else if(""==number)alert("请输入点名数字")
-                else if(number<=0 ||isNaN(number)) alert("请输入有效点名数字");
+                if(""==course)
+                    layer.alert('请选择课程', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
+                else  if(""==classs)
+//                    alert("请选择班级");
+                    layer.alert('请选择班级', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
+                else if(""==number)
+//                    alert("请输入点名数字")
+                    layer.alert('请输入点名数字', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
+                else if(number<=0 ||isNaN(number))
+//                    alert("请输入有效点名数字");
+                    layer.alert('请输入有效点名数字', {
+                        icon: 5,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
                 else {
                     $("#classok").prop("disabled",true);
                     $("#selectclass").prop("disabled", true);
@@ -320,7 +329,11 @@ if(!$is_login){
                         console.log(data);
                     });
 
-                    alert("点名完成");
+//                    alert("点名完成");
+                    layer.alert('点名完成', {
+                        icon: 6,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
                     window.location.reload();
 
                 }
@@ -341,7 +354,10 @@ if(!$is_login){
                         console.log(data);
                     });
 
-                    alert("点名完成");
+                    layer.alert('点名完成', {
+                        icon: 6,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
                     window.location.reload();
                 }
                 else {
@@ -360,7 +376,10 @@ if(!$is_login){
                         console.log(data);
                     });
 
-                    alert("点名完成");
+                    layer.alert('点名完成', {
+                        icon: 6,
+                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                    })
                     window.location.reload();
                 }
                 else {

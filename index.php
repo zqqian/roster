@@ -14,6 +14,7 @@
 	<script type="text/javascript" src="js/md5.js"></script>
     <script src="https://use.fontawesome.com/2957044126.js"></script>/*add awesome font */
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/button_one.css">
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba0697f629d815106db575.css' rel='stylesheet' type='text/css' />
     <style>
         /*为适应低版本的浏览器而设置的*/
@@ -132,7 +133,6 @@
                                             <center><h4 class="modal-title" id="myModalLabel1">注册</h4></center>
                                         </div>
 
-
                                         <div class="modal-body" id="modal-body">
                                             <center><h1 id="registerShow">显示注册信息</h1></center>
                                             <div class="input-group" id="DuserName">
@@ -156,7 +156,8 @@
                                                 <input type="text"  class="form-control" id="auth-code" maxlength="10" name="auth-code"  placeholder="请输入验证码"
                                                 style="margin: 15px auto;">
 
-                                            <input type="button" id="auth-code-bu" value="发送邮箱验证码">
+<!--                                            <input type="button" class="button_one white" id="auth-code-bu" value="发送邮箱验证码">-->
+                                                <input  style="font-size:15px;height:35px;width:100px;" class="button_one white" type="button" id="auth-code-bu" value="发送邮箱验证码"/>
                                             </div>
                                             <span class="help-block" id="registerSpan" style="color:red;">*除学校学院，其余都为必填项</span>
                                             <!--这里是帮助文本-->
@@ -388,7 +389,6 @@
                 });
            }
         }
-
     })
     $("#RuserName").blur(function(){checkUserid();});
 //  发送验证码

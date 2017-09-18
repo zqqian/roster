@@ -15,14 +15,14 @@
     #find_password_three{display:none;margin-top:15%;}
     #find_password_one{display:block;margin-top:15%;}
     #username,#email,#email_code{display:block;width:450px;height:50px;}
-    #verify-bu{display:block;width:180px;height:45px;}
-    #verify-bu1{display:block;width:180px;height:45px;}
+    #verify-bu{display:block;width:120px;height:40px;border-radius:20px;}
+    #verify-bu1{display:block;width:180px;height:45px;border-radius:20px;}
     #find_three{display:block;width:180px;height:45px;}
     #verify_one{display:block;}
-    #verify,#verify2{display:block;margin-top:-10px;margin-right:50px;color:#2E2D3C;}
-    #verify1{display:block;margin-top:-10px;margin-right:20px;color:#2E2D3C;}
+    #verify,#verify2{display:block;margin-top:-10px;margin-right:20px;color:red;font-size:20px;}
+    #verify1{display:block;margin-top:-10px;margin-right:20px;color:#2E2D3C;color:red;border-radius:20px;}
     /*#verify1_star {display:block;color:#6666FF;float:left;margin-left:90px;}*/
-    #find_three{display:block;width:180px;height:35px;}
+    #find_three{display:block;width:180px;height:35px;border-radius:20px;}
     #new_password{
         display:block;
         border-radius:5px;
@@ -118,7 +118,7 @@
     <input required='' type='text' id="email" >
     <label alt='请输入注册邮箱' placeholder='邮箱'></label>
     <div id="verify_one">
-      <span  style="font-family:'LiDeBiao-Xing3d11282aea1a492';" id="verify"></span><br/>
+      <span  style="font-family:'LiDeBiao-Xing3d11282aea1a492';font-size:15px;" id="verify"></span><br/>
     </div>
 <!--    <input type="button" id="verify-bu" value="验证"><br/>-->
     <input  style="font-family:'LiDeBiao-Xing3d11282aea1a492';font-size:20px;" class="button_one white" type="button" id="verify-bu" value="验证" />
