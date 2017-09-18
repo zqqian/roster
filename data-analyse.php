@@ -6,10 +6,7 @@ header("Content-Type:text/html;charset=UTF-8");
 require_once 'get_user_info.php';
 $post=$_POST['select'];
 
-//$post=array ('class0'=> "计算机科学与技术1"/*, 'class1'=> "计算机科学与技术2"*/,'course'=> "数据库");
-
-
-
+//$post=array ('class0'=> "计算机科学与技术1", 'class1'=> "计算机科学与技术2",'course'=> "数据库");
 
 //$userid=18;
 if($post==""){
@@ -74,7 +71,7 @@ else{
 	//过来的课程名
 	$courseName = $post['course'];
 //	echo "课程名".$courseName."<br>";
-
+	$data;
 	$all="";
 
 	$sql="SELECT * FROM grade_statistics WHERE userId = $userid  AND courseName = '$courseName'
@@ -88,10 +85,10 @@ AND className in (";//'计算机科学与技术1','计算机科学与技术2'
 		if($q==$kc-1)
 			$all .= "'".$bj."'";
 		else
-			$all .= "'".$bj.",'";
+			$all .= "'".$bj."',";
 //		echo $all."<br>";
 	}
-
+echo $all."<br>";
 
 	$all= $sql.$all.")";
 //	echo "<br>".$all;
@@ -100,7 +97,7 @@ AND className in (";//'计算机科学与技术1','计算机科学与技术2'
 
 	$kc=0;
 	while($row = mysqli_fetch_assoc($result)){
-		$data2[$kc]['score_percent']=$row['rosterDate'];
+		//$data2[$kc]['score_percent']=$row['rosterDate'];
 		$data2[$kc]['score_percent'][0]=$row['0-59'];
 		$data2[$kc]['score_percent'][1]=$row['60-69'];
 		$data2[$kc]['score_percent'][2]=$row['70-79'];
