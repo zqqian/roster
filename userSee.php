@@ -172,18 +172,6 @@ if(!$is_login){
                             </div>
                             <!-- 帮助 -->
 
-                            <!-- 测试界面1-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <a  href="test.php" class="panel-title"
-                                        data-parent="#menu" target="rightShow">测试界面</a>
-                                </div>
-
-                            </div>
-                            <!-- 测试界面1 -->
-
-
-
                         </div>
                         <!--手风琴切换结束-->
 

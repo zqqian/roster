@@ -106,7 +106,7 @@
                                             <center> <h4 class="modal-title" id="myModalLabel">登录</h4></center>
                                         </div>
                                             <div class="modal-body">
-												<span>评审账号：     用户名：321 密码：321321</span>
+												<span>用户名：321 密码：321321</span>
                                                 <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"><br>
                                                 <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码"><br>
                                                 <span class="help-block" id="loginSpan" style="color:red;"></span><!--这里是帮助文本-->
