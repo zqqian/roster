@@ -36,7 +36,7 @@ if(!$is_login){
         outline: none;
     }
     #autocourse{
-    margin-top:50px;
+        margin-top:50px;
     }
     #autoclass{margin-top:15px;margin-left:80px;}
     #classlab{display:block;margin-top:30px;margin-left:80px;}
@@ -50,57 +50,57 @@ if(!$is_login){
 <body>
 <div class="select2">
     <center>
-                <div id="autocourse">
-                    <label for="selectcourse" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择课程</label>
-                    <select id="selectcourse" name="course">
-                        <option  value="" selected></option>
-                        <?php
-                        $sql = "select distinct(courseId) from class_course_user where userId = '$userid' ";
-                        $result=mysqli_query($db,$sql);
-                        while($row = mysqli_fetch_assoc($result)){
-                            $courseid=$row['courseId'];
-                            $sql2 = "select courseName from course where courseId = '$courseid' ";
-                            $result2=mysqli_query($db,$sql2);
-                            $row2 = mysqli_fetch_assoc($result2);
-                            echo "<option value=".$row2['courseName'].">".$row2['courseName']."</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
+        <div id="autocourse">
+            <label for="selectcourse" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择课程</label>
+            <select id="selectcourse" name="course">
+                <option  value="" selected></option>
+                <?php
+                $sql = "select distinct(courseId) from class_course_user where userId = '$userid' ";
+                $result=mysqli_query($db,$sql);
+                while($row = mysqli_fetch_assoc($result)){
+                    $courseid=$row['courseId'];
+                    $sql2 = "select courseName from course where courseId = '$courseid' ";
+                    $result2=mysqli_query($db,$sql2);
+                    $row2 = mysqli_fetch_assoc($result2);
+                    echo "<option value=".$row2['courseName'].">".$row2['courseName']."</option>";
+                }
+                ?>
+            </select>
+        </div>
     </center>
     <center>
-                <div id="autoclass">
-                    <label for="selectclass" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择班级</label>
-                    <select id="selectclass" >
-                        <option  value="" selected></option>
-                    </select>
-                    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;width:80px;height:30px;" type="button" id="classok"  value="选定"/>
-                </div>
-    <span id="classlab"></span>
-    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;height:35px;width:80px;border-radius:10px;"  type="button" id="classsure"  value="确定"/>
+        <div id="autoclass">
+            <label for="selectclass" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:25px;">选择班级</label>
+            <select id="selectclass" >
+                <option  value="" selected></option>
+            </select>
+            <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;width:80px;height:30px;" type="button" id="classok"  value="选定"/>
+        </div>
+        <span id="classlab"></span>
+        <input class="button_one white" style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:20px;height:35px;width:80px;border-radius:10px;"  type="button" id="classsure"  value="确定"/>
     </center>
 </div>
 </br>
 </br>
 <center>
-<div id="twocode">
-    <br>
-    <br>
-    <center >
-         <h2 style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:30px;"id="auto-code" >请扫描该二维码</h2>
-         <div id="qrcodeCanvas"></div>
-    </center>
-    <br>
+    <div id="twocode">
+        <br>
+        <br>
+        <center >
+            <h2 style="font-family:'LiDeBiao-Xing3d245e05e61a492';font-size:30px;"id="auto-code" >请扫描该二维码</h2>
+            <div id="qrcodeCanvas"></div>
+        </center>
+        <br>
 
-    <span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:30px;">已有<span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:25px;"id="havenumtc">0</span>人扫描</span>
-<!--    <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>-->
-</div>
+        <span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:30px;">已有<span style="font-family:'LiDeBiao-Xing3d246070301a492';font-size:25px;"id="havenumtc">0</span>人扫描</span>
+        <!--    <button id="twocodestart" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'>开始</button>-->
+    </div>
 </center>
 <center>
-<input class="button_one white" style="font-family:'LiDeBiao-Xing3d246070301a492';border-radius:20px;font-size:20px;width:100px;height:40px;" type="button" id="twocodestart"  value="开始"/>
+    <input class="button_one white" style="font-family:'LiDeBiao-Xing3d246070301a492';border-radius:20px;font-size:20px;width:100px;height:40px;" type="button" id="twocodestart"  value="开始"/>
 </center>
-    <script>
-$("#twocodestart").hide();
+<script>
+    $("#twocodestart").hide();
     var courseName1="";
     var int=setInterval("clock()",10000);
     function clock()
@@ -119,7 +119,7 @@ $("#twocodestart").hide();
     $(function(){
 
         var classids=new Array();
-       var ID="";
+        var ID="";
         var myDate = new Date();
 
         function getNowFormatDate() {
@@ -187,7 +187,7 @@ $("#twocodestart").hide();
 
                     $("#qrcodeCanvas").qrcode({
                         render : "canvas",    //设置渲染方式，有table和canvas，使用canvas方式渲染性能相对来说比较好
-                        text :'https://www.q-cs.cn/roster/idcophone.php?  ID='+ID+'&userId='+<?php echo $_SESSION['userid'];?>, //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
+                        text :'http://www.dm.q-cs.cn/idcophone.php?  ID='+ID+'&userId='+<?php echo $_SESSION['userid'];?>, //扫描了二维码后的内容显示,在这里也可以直接填一个网址，扫描二维码后
                         width : "200",               //二维码的宽度
                         height : "200",              //二维码的高度
                         background : "#ffffff",       //二维码的后景色
@@ -198,7 +198,7 @@ $("#twocodestart").hide();
 
                     myDate= getNowFormatDate();
                     $.post("phpData/auto_initialclassstu.php",{myDate:myDate,ID:ID},function(data){
-                       console.log(data);
+                        console.log(data);
                     });
 
                 });
@@ -228,9 +228,9 @@ $("#twocodestart").hide();
             }
 
             /*var twocodedata="twocode_sucessfully";
-            $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php /*echo $_SESSION['userid'];*/?>},function(data){
+             $.post("phpData/twocode_database.php",{twocodata:twocodedata,userId:<?php /*echo $_SESSION['userid'];*/?>},function(data){
 
-            });*/
+             });*/
 
         });
 
@@ -240,7 +240,7 @@ $("#twocodestart").hide();
             var classs=$("#classlab").text();
             var course=$("#selectcourse").val();
 
-             var flag=0;
+            var flag=0;
             $.post("auto_newfile.php",{flag:flag,userId:<?php echo $_SESSION['userid'];?>},function(data){
                 console.log(data);
 

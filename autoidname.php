@@ -26,8 +26,8 @@ else*/
     <title>签到界面</title>
     <link href='http://cdn.webfont.youziku.com/webfonts/nomal/107666/45803/59ba3899f629d815106db5bc.css' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="style/button_one.css"></head>
-    <script src="js/layer/layer.js"></script>
-    <link rel="stylesheet" href="style/placeholder.css">
+<script src="js/layer/layer.js"></script>
+<link rel="stylesheet" href="style/placeholder.css">
 <style>
     #stuid{width:500px;margin-top:50px;}
     #stuname{width:500px;}
@@ -37,8 +37,8 @@ else*/
 
 <body class="body">
 <center>
-<div>
-    <span id="autospan" style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:30px;">请输入学号与姓名</span>
+    <div>
+        <span id="autospan" style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:30px;">请输入学号与姓名</span>
 
         <input required='' type='text' id='stuid'  value='' >
         <label alt='请输入学号' placeholder='学号'></label>
@@ -46,9 +46,11 @@ else*/
         <!--    <input type="text" id="email" placeholder="请输入注册邮箱">-->
         <input required='' type='text'  id='stuname' value='' >
         <label alt='请输入姓名' placeholder='姓名'></label>
-<!--    <p><input style="font-family:'LiDeBiao-Xing3d24965ffd1a492';" type="button" id="yes" value="提交" style='padding: 6px 17px;background-color: #3c00ff4d;color: blue;'></p>-->
-</div>
-    <input class="button_one white"  style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:25px;color:#000000;padding-left:15px; height:35px;width:80px;" type="button" id="yes" value="提交" />
+        <!--    <p><input style="font-family:'LiDeBiao-Xing3d24965ffd1a492';" type="button" id="yes" value="提交" style='padding: 6px 17px;background-color:
+        #3c00ff4d;color: blue;'></p>-->
+    </div>
+    <input class="button_one white"  style="font-family:'LiDeBiao-Xing3d24965ffd1a492';font-size:25px;color:#000000;padding-left:15px;
+height:35px;width:80px;" type="button" id="yes" value="提交" />
 </center>
 </body>
 
@@ -57,8 +59,8 @@ else*/
     var stuCode="";
     var stuName="";
     function checkUserid(){
-         stuCode=document.getElementById("stuid").value;
-         stuName=document.getElementById("stuname").value;
+        stuCode=document.getElementById("stuid").value;
+        stuName=document.getElementById("stuname").value;
 
         var xmlhttp=null;
         if (window.XMLHttpRequest)
@@ -79,37 +81,39 @@ else*/
 
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                 var inf = xmlhttp.responseText;//接受PHP的返回值 
+                var inf = xmlhttp.responseText;//接受PHP的返回值 
                 console.log(inf);
-                 if(inf==0){
-//                     alert ('此时已无法签到，请找老师补签！');
-                     layer.alert('此时已无法签到，请找老师补签！', {
-                         icon: 5,
-                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                     })
-                 }
+                if(inf==0){
+                     alert ('此时已无法签到，请找老师补签！');
+//                    layer.alert('此时已无法签到，请找老师补签！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
+                }
                 else  if(inf==1){
-                     layer.alert('签到成功！', {
-                         icon: 6,
-                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                     })
-                 }
+                    alert ('签到成功！');
+//                    layer.alert('签到成功！', {
+//                        icon: 6,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
+                }
                 else if(inf==2){
-//                     alert ('姓名或者学号不正确！');
-                     layer.alert('姓名或者学号不正确！', {
-                         icon: 5,
-                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                     })
-                 }
+                     alert ('姓名或者学号不正确！');
+//                    layer.alert('姓名或者学号不正确！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
+                }
                 else if(inf==3){
-//                     alert ('请把信息填齐全！');
-                     layer.alert('请把信息填齐全！', {
-                         icon: 5,
-                         skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                     })
-                 }
-                else {}
-                                     
+                     alert ('请把信息填齐全！');
+//                    layer.alert('请把信息填齐全！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
+                }
+                else {
+                }
+
 
 
             }
