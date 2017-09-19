@@ -84,39 +84,34 @@ height:35px;width:80px;" type="button" id="yes" value="提交" />
                 var inf = xmlhttp.responseText;//接受PHP的返回值 
                 console.log(inf);
                 if(inf==0){
-//                     alert ('此时已无法签到，请找老师补签！');
-                    layer.alert('此时已无法签到，请找老师补签！', {
-                        icon: 5,
-                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                    })
+                     alert ('此时已无法签到，请找老师补签！');
+//                    layer.alert('此时已无法签到，请找老师补签！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
                 }
                 else  if(inf==1){
-                    layer.alert('签到成功！', {
-                        icon: 6,
-                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                    })
+                    alert ('签到成功！');
+//                    layer.alert('签到成功！', {
+//                        icon: 6,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
                 }
                 else if(inf==2){
-//                     alert ('姓名或者学号不正确！');
-                    layer.alert('姓名或者学号不正确！', {
-                        icon: 5,
-                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                    })
+                     alert ('姓名或者学号不正确！');
+//                    layer.alert('姓名或者学号不正确！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
                 }
                 else if(inf==3){
-//                     alert ('请把信息填齐全！');
-                    layer.alert('请把信息填齐全！', {
-                        icon: 5,
-                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                    })
+                     alert ('请把信息填齐全！');
+//                    layer.alert('请把信息填齐全！', {
+//                        icon: 5,
+//                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+//                    })
                 }
-                else if(inf==4){
-
-//                     alert ('请通过正规的渠道进入签到界面！');
-                    layer.alert('请通过正规的渠道进入签到界面！', {
-                        icon: 5,
-                        skin: 'layer-ext-moon' //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
-                    })
+                else {
                 }
 
 
