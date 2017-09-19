@@ -15,10 +15,7 @@ $fileuserid= $dir . "/validation/" . $userId."/".$userId;
 
 
 if (!file_exists($fileuserid)){//判断文件夹是否存在，不存在的话就表明未扫二维码就直接进入，所以弹出警示框，并跳转至白度。
-    echo "<script>
-        alert('请通过正规的渠道进入签到界面！');
-        location.href='http://www.baidu.com';
-    </script>";
+    echo "4";
 }
 else {
 
